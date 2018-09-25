@@ -1,0 +1,179 @@
+{
+    "requests":
+    {
+        "2768498102000":{
+            "requestId": "48849тест" ,
+            "requestNumber" : "48849" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28772" ,    
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа з/у  50:27:0000000:132554"
+        },
+
+        "2768498256000":{
+            "requestId": "2768498256000" ,
+            "requestNumber" : "48867" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28780" ,    
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа з/у  50:27:0000000:132628"
+        },
+
+        "2768498269000":{
+            "requestId": "2768498269000" ,
+            "requestNumber" : "48868" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28901" ,
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа зем. участка  50:27:0000000:132596"
+        },
+
+        "2768498282000":{
+            "requestId": "2768498282000" ,
+            "requestNumber" : "48869" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28876" ,
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа зем. участка  50:27:0000000:132610"
+        },
+
+        "2768498298000":{
+            "requestId": "2768498298000" ,
+            "requestNumber" : "48870" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28845" ,
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа зем. участка  50:27:0000000:132613"
+        },
+
+        "2768498307000":{
+            "requestId": "2768498307000" ,
+            "requestNumber" : "48870" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28842" ,
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа зем. участка  50:27:0000000:132615"
+        },
+
+        "2768498315000":{
+            "requestId": "2768498315000" ,
+            "requestNumber" : "48871" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28842" ,
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа зем. участка  50:27:0000000:132615"
+        },
+
+
+        
+        "27684981020001":{
+            "requestId": "48849тест" ,
+            "requestNumber" : "48849" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28772" ,    
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа з/у  50:27:0000000:132554"
+        },
+
+        "27684982560001":{
+            "requestId": "2768498256000" ,
+            "requestNumber" : "48867" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28780" ,    
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа з/у  50:27:0000000:132628"
+        },
+
+        "27684982690001":{
+            "requestId": "2768498269000" ,
+            "requestNumber" : "48868" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28901" ,
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа зем. участка  50:27:0000000:132596"
+        },
+
+        "27684982820001":{
+            "requestId": "2768498282000" ,
+            "requestNumber" : "48869" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28876" ,
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа зем. участка  50:27:0000000:132610"
+        },
+
+        "27684982980001":{
+            "requestId": "2768498298000" ,
+            "requestNumber" : "48870" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28845" ,
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа зем. участка  50:27:0000000:132613"
+        },
+
+        "27684983070001":{
+            "requestId": "2768498307000" ,
+            "requestNumber" : "48870" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28842" ,
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа зем. участка  50:27:0000000:132615"
+        },
+
+        "27684983150001":{
+            "requestId": "2768498315000" ,
+            "requestNumber" : "48871" ,
+            "customerName" : "Каскад",
+            "transactionParticipant" : "ООО 'Бережки'",
+            "address" : "Подольский район, с/п Лаговское," ,
+            "docTypeNameName" : "акт приема-передачи" ,
+            "receiptNumber" : "50-50/001-50/001/010/2018-28842" ,
+            "fromRegistrationPlanDate" : "20.09.2018" ,
+            "notice" : "Акт выкупа зем. участка  50:27:0000000:132615"
+        }
+        
+
+    }
+}
+
+
+ 
