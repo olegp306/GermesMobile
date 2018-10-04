@@ -8,7 +8,9 @@ import {
     Image,
     Button,
     TouchableOpacity,
-    Keyboard
+    Keyboard,
+    CheckBox,
+    KeyboardAvoidingView
 } from 'react-native';
 
 //import { CheckBox } from 'react-native-elements';
@@ -25,6 +27,10 @@ export default class LoginComponent extends Component {
         //const { isLogging } = this.props.session
 
         return (
+            <KeyboardAvoidingView
+        behavior='padding'
+        keyboardVerticalOffset={-65}
+      >
             <View style={styles.screenContainer}>
                 <View style={styles.logoContainer}>
                     <Image
@@ -68,7 +74,7 @@ export default class LoginComponent extends Component {
                                 style={styles.input}
                                 // onChange={e => this.props.changePassword(e.nativeEvent.text)}
                                 autoCapitalize='none'
-                                placeholder='Введите пароль'
+                                placeholder='Введите пароль '
                                 autoCorrect={false}
                                 value={this.props.password}
                                 disabled={this.props.disabled}
@@ -95,28 +101,29 @@ export default class LoginComponent extends Component {
                         <TouchableOpacity
                             onPress={() => {
                                 Keyboard.dismiss();
-                                this.props.logIn();
+                                // this.props.logIn();
                             }}
                             >
                             <View style={styles.enterButton}>
                                 <Text style={styles.enterText}>Войти</Text>
                             </View>
                         </TouchableOpacity>
-
-                        {/* <CheckBox
+                        <Text>Здесь чекбокс</Text>
+                        <CheckBox
                             title='Запомнить меня'
                             onPress={this.props.changeRemember}
                             containerStyle={styles.checkboxContainer}
                             textStyle={styles.checkboxText}
                             checkedColor='black'
                             checked={this.props.remember}
-                        /> */}
+                        />
                     </View>
                 </View>
             
 
 
             </View>
+            </KeyboardAvoidingView>
         )
     }   
 
