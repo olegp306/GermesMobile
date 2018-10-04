@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Picker } from 'react-native';
+import { View, Text, FlatList ,StyleSheet } from 'react-native';
 import { Colors, Images, Metrics } from '../theme';
-import RequestComponent from './RequestComponent.js';
-import testData from '../middleware/TestData.json';
 
-import DatePicker from 'react-native-datepicker'
-
+import RequestComponent from './RequestComponent';
 
 export default class RequestListComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        
     };
-  }  
+  }
 
-   getRequestArray=()=>{
+  getRequestArray=()=>{
     let requestsArray= new Array;
     
-    for (let prop in testData.requests)
+    for (let prop in this.props.requests)
     {
-        let request=testData.requests[prop];        
-        requestsArray.push(testData.requests[prop]);
+        let request=this.props.requests[prop];        
+        requestsArray.push(this.props.requests[prop]);
     }
     
     return requestsArray;
@@ -29,54 +25,12 @@ export default class RequestListComponent extends Component {
 
   render() {
     return (
-        <View style={styles.screenContainer}>
-            <View style={styles.headContainer}>
-
-                <View  style={styles.filterDateContainer} >
-                    {/* <Text style={styles.filterDateLable}> Выдача до: </Text>                 */}
-                    <DatePicker
-                        style={{width: 175}}
-                        date={this.state.date}
-                        mode="date"
-                        placeholder="select date"
-                        format="YYYY-MM-DD"
-                        minDate="2016-05-01"
-                        
-                        //maxDate="2016-06-01"
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                        
-                        customStyles={{
-                            dateIcon: {
-                                width: 0
-                            },
-                            dateInput: {
-                                borderRadius: 20,
-                                borderWidth: 0.5,
-                                backgroundColor: '#C9C8C7'
-                            }
-                        }}
-                        
-                        onDateChange={(date) => {this.setState({date: date})}}
-                    />
-
-                    {/* <Text  style={styles.filterOrgLable} >Приемная: Обручева</Text> */}
-                <Picker
-                    selectedValue={this.state.language}
-                    style={{ height: 50, width: 175 }}
-                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                    <Picker.Item label="Обручева" value="Обручева" />
-                    <Picker.Item label="Автозаводская" value="Автозаводская" />
-                    <Picker.Item label="Нагатинская" value="Нагатинская" />
-                    <Picker.Item label="Орликов" value="Орликов" />
-                </Picker>
-            </View>
-                
-            </View>
-          <FlatList style={styles.list}
+      <View>
+        <FlatList 
             data={this.getRequestArray()}
             renderItem={({item}) =>                           
                 <RequestComponent
+                    style={styles.listitem} 
                     key={item.requestId}
                     requestId = {item.requestId}
                     requestNumber= {item.requestNumber} 
@@ -91,60 +45,14 @@ export default class RequestListComponent extends Component {
                 
             }
           />
-          
-        </View>     
-       
+      </View>
     );
   }
 }
-const styles = StyleSheet.create({
-    screenContainer: {
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        backgroundColor: Colors.backgroundColor
-    },
-    headContainer:{
-        marginTop: 30,
-
-
-    },
-
+const styles = StyleSheet.create({   
     list:{
-        backgroundColor: Colors.backgroundColor
-    },
+        backgroundColor: Colors.backgroundColor,        
+    }   
 
-    filterDateContainer:{
-        flexDirection:'row'
-    },
-
-    filterDateLable:{
-        // fontSize: 20,
-        textAlignVertical: 'center',
-        
-    },
-
-    filterOrgLable:{
-       // fontSize: 20,
-       textAlignVertical: 'center',
-    },
-
-    contentContainer: {
-        //height: 80,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'stretch',
-        backgroundColor:'#f6f6f6',
-
-    },
-    receiptNumber:{
-        textAlign:'center',
-        fontWeight:'500',
-        fontSize: 20,
-    },
-    notice:{
-        fontStyle:'italic'
-    },
+    
 });
