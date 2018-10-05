@@ -5,7 +5,7 @@ import { SearchBar } from 'react-native-elements'
 import { connect } from 'react-redux'
 
 import TicketsList from '../components/TicketsList'
-import { Metrics } from '../theme'
+import { Metrics } from '../../theme'
 import { fetch } from '../middleware/redux/actions/Tickets'
 import { update, dismiss } from '../middleware/redux/actions/Ticket'
 import { getTickets, getTicket } from '../middleware/redux/selectors'

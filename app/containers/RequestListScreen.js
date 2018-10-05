@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, Picker } from 'react-native';
 import { Colors, Images, Metrics } from '../theme';
 
-import RequestList from './RequestListComponent';
+import RequestList from '../components/RequestListComponent';
 
 import testData from '../middleware/TestData.json';
 
@@ -16,8 +16,6 @@ export default class RequestListScreen extends Component {
         
     };
   }  
-
-   
 
   render() {
     return (
@@ -52,7 +50,7 @@ export default class RequestListScreen extends Component {
                         onDateChange={(date) => {this.setState({date: date})}}
                     />
 
-                    {/* <Text  style={styles.filterOrgLable} >Приемная: Обручева</Text> */}
+                    {/* <Text  style={styles.filterOrgLable} >Приемная: </Text> */}
                 <Picker
                     selectedValue={this.state.language}
                     style={{ height: 50, width: 175 }}
