@@ -7,6 +7,10 @@ import {
     Vibration 
  } from 'react-native';
 
+ import testData from '../middleware/TestData.json';
+
+ import _values from 'lodash/values';
+
  import { Colors, Images, Metrics } from '../theme';
  import BarCodeScannerComponent from './BarCodeScannerComponent.js';
 
@@ -14,31 +18,24 @@ export default class BarCodeScannerScreen extends Component {
   constructor(props) {
     console.log("constructor");
     super(props);
+    testData.barcodes
     this.state = {
-      lastBarCodesAr: [
-        {codeText: "50-50/001-50/001/010/2018-28772"},
-        {codeText: "50-50/001-50/001/010/2018-28780"},
-        {codeText: "50-50/001-50/001/010/2018-28901"}        
-      ]
+      barcodes: testData.barcodes
     };
   }
 
   scanBarCodeHandler=(barcode)=>{
-    
-    const newAr=this.state.lastBarCodesAr;
-    //newAr.lastBarCodesAr.push({codeText : barcode.data});
     var isBarCodeExist=false;
 
-    for (let index = 0; index < this.state.lastBarCodesAr.length; index++) {
-      const element = this.state.lastBarCodesAr[index];
-      console.log("element: "+element+"   barcode.data: "+ barcode.data)
+    for (let id in this.state.barcodes){
+      let element=this.state.barcodes[id];
       if(element.codeText==barcode.data)
       {
         isBarCodeExist=true;
         break;
       }
     }
-    
+
     if(isBarCodeExist)
     {
       Vibration.vibrate(1000);
@@ -46,16 +43,23 @@ export default class BarCodeScannerScreen extends Component {
     else
     {
       Vibration.vibrate(200);    
-      console.log(barcode.data);
+      //console.log(barcode.data);
+      const newBarcode= {
+        "id" : "45",
+        "codeText":barcode.data,
+        "scanDateTime":new Date(),
+        "isSelected": true
+        };
     
       this.setState({
-        lastBarCodesAr : [{codeText: barcode.data},... this.state.lastBarCodesAr]
+        barcodes : {newBarcode ,... this.state.barcodes}
       })
   }
 
   }
 
   render() {
+    console.log(_values(this.state.barcodes));
     return (
       <View style={styles.screenContainer}>
 
@@ -66,10 +70,12 @@ export default class BarCodeScannerScreen extends Component {
         <View style={styles.barCodeListContainer}>
             <Text style={styles.barCodeItem}> Здесь будут появляються отсканированные коды</Text>
             
-            <FlatList style={styles.list}            
-            data={this.state.lastBarCodesAr}
-            keyExtractor={(item, index) => item.codeText}
+            <FlatList 
+            style={styles.list}            
+            data={_values(this.state.barcodes)}            
+            keyExtractor={(item, index) => item.id}
             renderItem={({item}) =>
+            
             <View style={styles.barCodeTextConteiner}>
               <Text style={styles.barCodeText}>{item.codeText}</Text>
             </View>
