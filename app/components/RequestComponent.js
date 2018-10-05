@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { 
     View,
     Text,
-    StyleSheet
+    StyleSheet ,
+    CheckBox   
  } from 'react-native';
+//  import { CheckBox } from 'react-native-elements';
+
 
  import { Colors, Images, Metrics } from '../theme';
 
@@ -14,26 +17,28 @@ export default class RequestComponent extends Component {
     };
   }
 
-
-//   "2768498102000":{
-//     "requestId": "2768498102000" ,
-//     "requestNumber" : "48849" ,
-//     "customerName" : "Каскад",
-//     "transactionParticipant" : "ООО 'Бережки'",
-//     "address" : "Подольский район, с/п Лаговское," ,
-//     "docTypeNameName" : "акт приема-передачи" ,
-//     "receiptNumber" : "50-50/001-50/001/010/2018-28772" ,    
-//     "fromRegistrationPlanDate" : "20.09.2018" ,
-//     "notice" : "Акт выкупа з/у  50:27:0000000:132554"
-// },
-
   render() {
     return (
       <View style={styles.contentContainer}>
         <Text style={styles.receiptNumber}> {this.props.receiptNumber} </Text>
         <Text>  {this.props.requestNumber + " " + this.props.address}  </Text>
-        <Text>  {this.props.customerName} </Text>
-        <Text>  {this.props.transactionParticipant} </Text>        
+        <View style={styles.middleContainer}>
+          <View style={weight= '70%' }>
+            <Text>  {this.props.customerName} </Text>
+            <Text>  {this.props.transactionParticipant} </Text>        
+          </View>
+          <View style={weight= '30%' }>
+            <CheckBox
+              title='сканирована'
+              onPress={this.props.changeRemember}
+              containerStyle={styles.checkboxContainer}
+              textStyle={styles.checkboxText}
+              checkedColor='black'
+              checked={this.props.remember}
+            />
+          </View>
+        </View>
+
         <Text style={styles.notice}>  {this.props.notice} </Text>        
       </View>
     );
@@ -56,12 +61,19 @@ const styles = StyleSheet.create({
 
     },
     receiptNumber:{
-        textAlign:'center',
-        fontWeight:'500',
-        fontSize: 20,
+      textAlign:'center',
+      fontWeight:'500',
+      fontSize: 20,
     },
+
     notice:{
-        fontStyle:'italic'
+      fontStyle:'italic'
+    },
+
+    middleContainer:{
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'stretch'
     }
 });
 

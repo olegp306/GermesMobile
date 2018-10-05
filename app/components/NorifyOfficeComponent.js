@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,TouchableOpacity,Button} from 'react-native';
+import { View, Text, StyleSheet,TouchableOpacity,Button,Alert} from 'react-native';
 import { Colors, Images, Metrics } from '../theme';
 import RequestListComponent from './RequestListComponent';
 
@@ -12,12 +12,20 @@ export default class NorifyOfficeComponent extends Component {
     };
   }
 
+  onLongPressRequest=()=>{
+    console.log("onLongPressRequest");
+    Alert.alert('LongPress','longlongpress');
+  }
+
   render() {
     return (
       <View style={styles.screenContainer}>
         <View style={styles.requestsContainer}>
-            <Text> NorifyOfficeComponent </Text>
-            <RequestListComponent requests={testData.requests} />
+            <Text> NorifyOfficeComponent3</Text>
+            <RequestListComponent 
+              requests={testData.requests}
+              onLongPressRequest={this.onLongPressRequest}
+              />
             </View>
             <Button
                     title=" Уведомить офис о полученных документах111 "
