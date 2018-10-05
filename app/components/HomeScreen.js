@@ -62,6 +62,12 @@ export default class HomeScreen extends Component {
            onPress={() => this.props.navigation.navigate('NorifyOffice')}
          />
 
+         {/* <Text> Уведомить офис о получении документов</Text> */}
+         <Button
+           title="CheboxTest"
+           onPress={() => this.props.navigation.navigate('CheckBoxExample')}
+         />
+
 
         
          {/* <LoginComponent /> */}
