@@ -21,17 +21,17 @@ export default class NorifyOfficeComponent extends Component {
     return (
       <View style={styles.screenContainer}>
         <View style={styles.requestsContainer}>
-            <Text> NorifyOfficeComponent3</Text>
-            <RequestListComponent 
-              requests={testData.requests}
-              onLongPressRequest={this.onLongPressRequest}
-              />
-            </View>
-            <Button
-                    title=" Уведомить офис о полученных документах111 "
-                    buttonStyle={{width: 300,height:145}} 
-                    onPress={() => this.props.navigation.navigate('Home')}
+          <RequestListComponent 
+            requests={testData.requests}
+            onLongPressRequest={this.onLongPressRequest}
             />
+        </View>
+        <View style={styles.bottomContainer}>
+          <Button
+            title=" Уведомить офис о полученных документах "            
+            onPress={() => this.props.navigation.navigate('Home')}
+          />
+        </View>
       </View>
     );
   }
@@ -48,9 +48,15 @@ const styles = StyleSheet.create({
   },
   requestsContainer: {
       width: '100%',
-      height: '80%',
+      height: '85%',
       justifyContent: 'center',
       alignItems: 'center'
-  }
+  },
+  bottomContainer: {
+    width: '100%',
+    height: '15%',
+    justifyContent: 'center',
+    alignItems: 'center'
+},
   
 });
