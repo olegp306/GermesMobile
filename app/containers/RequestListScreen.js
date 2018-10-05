@@ -21,7 +21,6 @@ export default class RequestListScreen extends Component {
     return (
         <View style={styles.screenContainer}>
             <View style={styles.headContainer}>
-
                 <View  style={styles.filterDateContainer} >
                     {/* <Text style={styles.filterDateLable}> Выдача до: </Text>                 */}
                     <DatePicker
@@ -51,20 +50,20 @@ export default class RequestListScreen extends Component {
                     />
 
                     {/* <Text  style={styles.filterOrgLable} >Приемная: </Text> */}
-                <Picker
-                    selectedValue={this.state.language}
-                    style={{ height: 50, width: 175 }}
-                    onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                    <Picker.Item label="Обручева" value="Обручева" />
-                    <Picker.Item label="Автозаводская" value="Автозаводская" />
-                    <Picker.Item label="Нагатинская" value="Нагатинская" />
-                    <Picker.Item label="Орликов" value="Орликов" />
-                </Picker>
+                    <Picker
+                        selectedValue={this.state.language}
+                        style={{ height: 50, width: 175 }}
+                        onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                        <Picker.Item label="Обручева" value="Обручева" />
+                        <Picker.Item label="Автозаводская" value="Автозаводская" />
+                        <Picker.Item label="Нагатинская" value="Нагатинская" />
+                        <Picker.Item label="Орликов" value="Орликов" />
+                    </Picker>
+                </View>
             </View>
-                
+            <View style={styles.listContainer}>
+                <RequestList requests={testData.requests} />
             </View>
-
-        <RequestList requests={testData.requests} />
           
         </View>     
        
@@ -81,9 +80,12 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.backgroundColor
     },
     headContainer:{
-        marginTop: 30,
+        marginTop: 15,
+        height: '10%',
+    },
 
-
+    listContainer:{        
+        height: '85%',
     },
 
     list:{
