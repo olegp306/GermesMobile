@@ -34,11 +34,9 @@ export default class RequestListComponent extends Component {
             data={this.getRequestArray()}
             renderItem={({item}) =>
                 <TouchableOpacity 
-                style={styles.button}
                 onPress={this.onPress}
                 onLongPress={e => this.props.onLongPressRequest(e.nativeEvent.text)}>                         
                     <RequestComponent
-                        style={styles.listitem} 
                         key={item.requestId}
                         requestId = {item.requestId}
                         requestNumber= {item.requestNumber} 
@@ -51,7 +49,6 @@ export default class RequestListComponent extends Component {
                         notice={item.notice}
                     />
                 </TouchableOpacity>  
-                
             }
           />
       </View>
