@@ -8,7 +8,7 @@ import { login } from '../middleware/redux/actions/Session'
 import { getSession } from '../middleware/redux/selectors'
 import { storeCredentials, loadCredentials } from '../middleware/utils/AsyncStorage'
 
-import LoginComponent from '../components/LoginComponent'
+import LoginComponent from '../../components/LoginComponent'
 
 
 @connect(

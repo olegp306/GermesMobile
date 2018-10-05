@@ -3,11 +3,19 @@ import { View, Text, Button, StyleSheet,Image } from 'react-native';
 import { Colors, Images, Metrics } from '../theme';
 
 export default class HomeScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
+    constructor(props) {
+        super(props);
+        this.state = {
+        };
+    }
+  
+    // static navigationOptions=({navigation})=>{
+    //     let headerTitle='Main';
+    //     let headerTitleStyle={color:'red'};
+
+    //     return{headerTitle, headerTitleStyle};
+    // }
+
 
   render() {
     return (

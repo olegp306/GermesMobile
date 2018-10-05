@@ -12,7 +12,7 @@ import {
  import _values from 'lodash/values';
 
  import { Colors, Images, Metrics } from '../theme';
- import BarCodeScannerComponent from './BarCodeScannerComponent.js';
+ import BarCodeScannerComponent from '../components/BarCodeScannerComponent';
 
 export default class BarCodeScannerScreen extends Component {
   constructor(props) {
