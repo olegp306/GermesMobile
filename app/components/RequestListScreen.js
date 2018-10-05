@@ -9,7 +9,7 @@ import testData from '../middleware/TestData.json';
 import DatePicker from 'react-native-datepicker'
 
 
-export default class RequestListComponent extends Component {
+export default class RequestListScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
