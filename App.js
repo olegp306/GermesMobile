@@ -3,20 +3,25 @@ import  {Text, View, Button,KeyboardAvoidingView} from 'react-native';
 import { createStackNavigator } from 'react-navigation'
 
 import LoginComponent from './app/components/LoginComponent.js';
+import RequestListScreen from './app/components/RequestListScreen.js';
 import RequestListComponent from './app/components/RequestListComponent.js';
 import NorifyOfficeComponent from './app/components/NorifyOfficeComponent.js';
 import BarCodeScannerScreen from './app/components/BarCodeScannerScreen.js';
 import AddCommentScreen from './app/components/AddCommentScreen.js';
 import HomeScreen from './app/components/HomeScreen.js'
+import CheckBoxExampleComponent from './app/components/CheckBoxExampleComponent.js'
+
+CheckBoxExampleComponent
 
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
     Login: LoginComponent,
-    RequestList: RequestListComponent,
+    RequestList: RequestListScreen,
     AddComment: AddCommentScreen,
     BarCodeScanner: BarCodeScannerScreen,
     NorifyOffice: NorifyOfficeComponent,
+    CheckBoxExample: CheckBoxExampleComponent
   },
   {
     initialRouteName: 'Home',
