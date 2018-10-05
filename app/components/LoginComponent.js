@@ -20,6 +20,8 @@ import { Colors, Images, Metrics } from '../theme';
 
 
 export default class LoginComponent extends Component {
+    static navigationOptions= { header: null };    
+    
     state = { user: '', password: '', remember: false}
 
     render = () => {
@@ -29,7 +31,7 @@ export default class LoginComponent extends Component {
         return (
             <KeyboardAvoidingView
         behavior='padding'
-        keyboardVerticalOffset={-65}
+        // keyboardVerticalOffset={-65}
       >
             <View style={styles.screenContainer}>
                 <View style={styles.logoContainer}>
@@ -83,9 +85,9 @@ export default class LoginComponent extends Component {
                             />
                         </View>
 
-                        <TouchableOpacity style={styles.forgotContainer}>
+                        {/* <TouchableOpacity style={styles.forgotContainer}>
                             <Text style={styles.forgotText}>Забыли пароль?</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
 
                     {
@@ -108,7 +110,7 @@ export default class LoginComponent extends Component {
                                 <Text style={styles.enterText}>Войти</Text>
                             </View>
                         </TouchableOpacity>
-                        <Text>Здесь чекбокс</Text>
+                        {/* <Text>Здесь чекбокс</Text>
                         <CheckBox
                             title='Запомнить меня'
                             onPress={this.props.changeRemember}
@@ -116,7 +118,7 @@ export default class LoginComponent extends Component {
                             textStyle={styles.checkboxText}
                             checkedColor='black'
                             checked={this.props.remember}
-                        />
+                        /> */}
                     </View>
                 </View>
             
