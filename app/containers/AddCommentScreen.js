@@ -10,7 +10,7 @@ import {
 
 import { Colors, Images, Metrics } from '../theme';
 import { MaterialIcons } from '@expo/vector-icons';
-import RequestComponentBig from './RequestComponentBig';
+import RequestComponentBig from '../components/RequestComponentBig';
 
 export default class AddCommentScreen extends Component {
   constructor(props) {
@@ -47,6 +47,7 @@ export default class AddCommentScreen extends Component {
       <KeyboardAvoidingView
       style={styles.container}
       behavior="padding"
+      keyboardVerticalOffset={+80}      
     >
       <View style={styles.screenContainer}>
 
@@ -60,6 +61,7 @@ export default class AddCommentScreen extends Component {
           notice={this.state.request.notice}
           />
         </View>
+        <View style={styles.horizontalDivider} />
 
         {/* <View style={styles.commentsContainer}> */}
           {/* <Text> Здесь будут появляються новые комментарии</Text> */}
@@ -116,12 +118,14 @@ const styles = StyleSheet.create({
     
     requestContainer: {
         width: '100%',
-        height: '35%',
+        height: '25%',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop:10
     },
-    
+    horizontalDivider: {
+        height: 5
+    },
     commentsContainer:{
       // backgroundColor:'white',
       width: '90%',
