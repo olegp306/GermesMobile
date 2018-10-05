@@ -28,10 +28,10 @@ export default class BarCodeScannerComponent extends Component {
     if(this.props.onScanBarCode){
       this.props.onScanBarCode(data)
     }
-    Alert.alert(
-      'Отсканирован штрих код',
-      JSON.stringify(data)
-    );
+    // Alert.alert(
+    //   'Отсканирован штрих код',
+    //   JSON.stringify(data)
+    // );
   };
 
   render() {
