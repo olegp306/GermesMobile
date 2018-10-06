@@ -50,7 +50,9 @@ const styles = StyleSheet.create({
       width: '100%',
       height: '85%',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      marginTop:  4
+      ,
   },
   bottomContainer: {
     width: '100%',
