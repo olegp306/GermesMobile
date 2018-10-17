@@ -53,7 +53,7 @@ export default class LoginComponent extends Component {
 
                             <TextInput
                                 style={styles.input}
-                                // onChange={e => this.props.changeUser(e.nativeEvent.text)}
+                                onChange={e => this.props.changeUser(e.nativeEvent.text)}
                                 autoCapitalize='none'
                                 placeholder='Введите имя пользователя'
                                 value={this.props.user}
@@ -74,7 +74,7 @@ export default class LoginComponent extends Component {
 
                             <TextInput
                                 style={styles.input}
-                                // onChange={e => this.props.changePassword(e.nativeEvent.text)}
+                                onChange={e => this.props.changePassword(e.nativeEvent.text)}
                                 autoCapitalize='none'
                                 placeholder='Введите пароль '
                                 autoCorrect={false}
@@ -103,7 +103,7 @@ export default class LoginComponent extends Component {
                         <TouchableOpacity
                             onPress={() => {
                                 Keyboard.dismiss();
-                                // this.props.logIn();
+                                this.props.logIn();
                             }}
                             >
                             <View style={styles.enterButton}>
@@ -204,6 +204,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'        
 
     },
+    
     enterButton: {
         justifyContent: 'center',
         backgroundColor: '#53565A',

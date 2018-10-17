@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import  {Text, View, Button,KeyboardAvoidingView,StyleSheet} from 'react-native';
 import { createStackNavigator } from 'react-navigation'
+//import { MaterialIcons  } from '@expo/vector-icons';
 
 import HomeScreen from './app/containers/HomeScreen.js';
-import LoginScreen from './app/components/LoginComponent.js';
+import LoginScreen from './app/containers/LoginScreen.js';
 import RequestListScreen from './app/containers/RequestListScreen.js';
 import AddCommentScreen from './app/containers/AddCommentScreen.js';
 import BarCodeScannerScreen from './app/containers/BarCodeScannerScreen.js';
 import NorifyOfficeComponent from './app/components/NorifyOfficeComponent.js';
 import CheckBoxExampleComponent from './app/components/CheckBoxExampleComponent.js'
+
 
 const styles = StyleSheet.create({
   back: { 
@@ -38,7 +40,17 @@ const RootStack = createStackNavigator(
     RequestList: {
       screen: RequestListScreen,
       navigationOptions:{
-        headerTitle: 'Заявки'
+        headerTitle: 'Заявки',
+        headerRight: (
+          <View style={styles.iconContainer}>
+            {/* <MaterialIcons  
+            name='barcode'
+            size={28}
+            //color='#53565A'
+            //onPress={() => alert('This is a button!')}
+             /> */}
+          </View>          
+        ),
        }
    },
 

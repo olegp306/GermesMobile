@@ -9,7 +9,7 @@ import {
  } from 'react-native';
 
 import { Colors, Images, Metrics } from '../theme';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons  } from '@expo/vector-icons';
 import RequestComponentBig from '../components/RequestComponentBig';
 
 export default class AddCommentScreen extends Component {
@@ -79,7 +79,7 @@ export default class AddCommentScreen extends Component {
 
           <View style={styles.inputFieldContainer}>
                             <View style={styles.iconContainer}>
-                                <MaterialIcons name='camera' size={30} color='#53565A' />
+                                <Ionicons  name='camera' size={30} color='#53565A' />
                             </View>
 
                             <View style={styles.verticalDivider} />
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
 
     leftCommentContainer:{
       borderWidth: 1,
-      //backgroundColor: 'white',
+      backgroundColor: 'white',
       borderRadius: 7,
       alignItems:"flex-start",
       marginTop:10,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     
     rightCommentContainer:{
       borderWidth: 1,
-      backgroundColor: '#399dcc',
+      backgroundColor: '#88c9e8',
       borderRadius: 7,
       alignItems:"flex-end",
       marginTop:10,

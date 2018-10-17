@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, FlatList ,StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors, Images, Metrics } from '../theme';
 
+
 import RequestComponent from './RequestComponent';
 
 export default class RequestListComponent extends Component {
@@ -23,19 +24,32 @@ export default class RequestListComponent extends Component {
     return requestsArray;
    }
 
-   onLongPressRequest=(e)=>{
-       console.log("onLongPressRequest "+ e);
-   }
+   _handleShortPress=(request)=>{    
+    this.props.onShortPressRequest(request);
+  }
+
+  _handleLongPress=(request)=>{
+    this.props.onLongPressRequest(request);
+  }
+
+  _isSelected=(request)=>{
+    this.props.selectedItems[request.requestId] ? this.props.selectedItems[request.requestId].isSelected: false
+  }
 
   render() {
+      //console.log("list component" + (this.props.selectedItems["27684982560003"] ? this.props.selectedItems["2768498256000"].isSelected: false) );
+      //console.log("list component2" + this.props.selectedItems["27684983150001"]==undefined ? this.props.selectedItems["27684983150001"]: false );
+      //console.log("list component2" + this.props.selectedItems["27684983150001"]==undefined ? this.props.selectedItems["27684983150001"]: false );
+      //27684983150001
     return (
       <View>
         <FlatList 
             data={this.getRequestArray()}
             renderItem={({item}) =>
-                <TouchableOpacity 
-                onPress={this.onPress}
-                onLongPress={e => this.props.onLongPressRequest(e.nativeEvent.text)}>                         
+                // <TouchableOpacity 
+                // // onPress={this.onPress}
+                // // onLongPress={e => this.props.onLongPressRequest(e.nativeEvent.text)}
+                // >                         
                     <RequestComponent
                         key={item.requestId}
                         requestId = {item.requestId}
@@ -47,8 +61,14 @@ export default class RequestListComponent extends Component {
                         receiptNumber={item.receiptNumber}
                         fromRegistrationPlanDate={item.fromRegistrationPlanDate}
                         notice={item.notice}
+
+                        isSelected={this.props.selectedItems[item.requestId] ? (this.props.selectedItems[item.requestId].isSelected): false}      
+                        
+                        onShortPressRequest={this._handleShortPress}
+                        onLongPressRequest={ this._handleLongPress}    
                     />
-                </TouchableOpacity>  
+                    // <Text>this.props.selectedItems[item.requestId] {this.props.selectedItems[item.requestId] }</Text>
+                // </TouchableOpacity>  
             }
           />
       </View>
