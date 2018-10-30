@@ -12,68 +12,66 @@ import {
  import { Colors, Images, Metrics } from '../theme';
 
 export default class RequestComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //   };
+  // }
 
   _handleShortPress=()=>{
     //console.log(this.props.onShortPressRequest);
-    this.props.onShortPressRequest(this.props.requestId);
+    this.props.onShortPressRequest(this.props);
   }
 
   _handleLongPress=()=>{
     this.props.onLongPressRequest(this.props.requestId);
   }
+  
+  _handleOnChangeRequestCheckBox=(requestId)=>{
+    this.props.onChangeRequestCheckBox(this.props.requestId)
+  }
 
-  render() {
-    //console.log("Request component is Selected requestId:"+ this.props.requestId + " isSelected:" +  this.props.isSelected)
+
+  render() {    
     return (
       <TouchableOpacity 
         onPress={this._handleShortPress}
         onLongPress={this._handleLongPress}
                   >    
         <View style={ this.props.isSelected==true ? styles.selectedContentContainer: styles.unselectedContentContainer}>
-        {/* <View style={  styles.selectedContentContainer}> */}
-          <Text style={styles.receiptNumber}> {this.props.receiptNumber} </Text>
-          <Text>  {this.props.requestNumber + " " + this.props.address}  </Text>
+          <View style={ styles.receiptNumberContainer}>        
+            <Text style={styles.receiptNumber}> {this.props.receiptNumber} </Text>
+          </View>
+          
+          
           <View style={styles.middleContainer}>
-            
-            <View style={styles.leftMiddle} >
-              <Text>  {this.props.customerName} </Text>
-              <Text>  {this.props.transactionParticipant} </Text>        
+            <View style={styles.leftMiddleContainer} >
+              <Text>{this.props.requestNumber + " " + this.props.address}</Text>              
+              <Text>{this.props.transactionParticipant}</Text>    
+              <Text style={styles.notice}>  {this.props.notice} </Text>     
             </View>
 
-            <View style={styles.rightMiddle} >
+            <View style={styles.rightMiddleContainer} >
               <CheckBox              
                 value={this.props.isSelected}
-                onValueChange ={this._handleLongPress}
+                onValueChange ={this._handleOnChangeRequestCheckBox}
                />
             </View>
           </View>
 
-          <Text style={styles.notice}>  {this.props.notice} </Text>  
+          
+          
+
           <View style={styles.bottomContainer}>
-              
-              <View style={styles.leftCheckbox}>
-                <Text >Получена </Text>
-                {/* <CheckBox              
-                checked={this.props.isSelected}     
-                title='Получена'           
-                /> */}
-              </View>
             {
-              this.props.isSelected ?
+              this.props.isBarcodeExist ?
               (
-              <View style={styles.rightCheckbox}>
-                
-                <Text>Выбрано для смены статуса</Text>                
+              <View style={styles.leftCheckbox}>
+                <Text >Прочитан баркод </Text>                
               </View>
-               ) : null
-            }
-            </View>      
-          {/* <Text style={styles.notice}>  isSelected:{this.props.isSelected==true ? "ЧЕКАНЫЙ": "ЧИТСЫЙ" } </Text>         */}
+              ):null
+            }            
+            </View>                
         </View>
       </TouchableOpacity>
     );
@@ -81,54 +79,54 @@ export default class RequestComponent extends Component {
 }
 const styles = StyleSheet.create({
     
-  unselectedContentContainer: {
-        
+  unselectedContentContainer: {        
         width: '100 %', 
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'stretch',        
-        
+        justifyContent: 'flex-start',
+        alignItems: 'stretch',
         borderColor: '#252828',
-        
-        borderWidth: 1,
+        borderWidth: 2,
         backgroundColor: 'white',
         borderRadius: 7,
-        padding:0,
-        //marginTop:1,
+        //paddingLeft:5,        
         marginBottom:2,
-
+        
     },
     selectedContentContainer: {
       //height: 80,
       
       flexDirection: 'column',
-      justifyContent: 'space-between',
+      justifyContent: 'flex-start',
       alignItems: 'stretch',
       borderColor: '#252828',
       // borderColor: '#6DC9E7',
       // borderColor: '#07ef00',
-      borderWidth: 3,
+      borderWidth: 2,
       backgroundColor: '#C9C8C7',
       borderRadius: 7,
-      padding:0,
+      //paddingLeft:5,
       //marginTop:1,
       marginBottom:2,
       
 
   },
-    receiptNumber:{
-      textAlign:'center',
+    receiptNumberContainer:{
+      backgroundColor: Colors.baseBackgroundColor
+    },
+    receiptNumber:{      
       fontWeight:'500',
-      fontSize: 20,
+      fontSize: 17,
+      marginLeft: 10,
     },
 
     leftCheckbox:{     
       flexDirection: 'row',
       alignItems: 'flex-end',
-      borderColor: '#252828',
+      borderRadius: 7,
+      //borderColor: '#252828',
       // borderColor: '#6DC9E7',
       // borderColor: '#07ef00',
-      borderWidth: 1,
+      //borderWidth: 1,
       backgroundColor: '#4ef235',
     },
 
@@ -145,15 +143,15 @@ const styles = StyleSheet.create({
     middleContainer:{
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'stretch'
+      alignItems: 'stretch',
+      marginLeft: 10,
+    },
+    leftMiddleContainer:{
+      width: '85%'
     },
 
-    leftMiddle:{
-      width: '75%'
-    },
-
-    rightMiddle:{
-      width: '25%',
+    rightMiddleContainer:{
+      width: '15%',
       alignItems: 'center'
     },
     

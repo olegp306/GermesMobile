@@ -202,11 +202,10 @@
         }
     },
 
-
     "selectedItems":{
         "2768259949000":{
-            "requestId": "2768259949000" ,
-            "isSelected":true
+            "requestId": "2768259949000" 
+            ,"isSelected":true          
             
         },
 
@@ -224,7 +223,10 @@
             "requestId": "2768519728000" ,
             "isSelected":true
         }
-    }
+    },
+
+    "filterDate":"2018-10-20",
+    "filterReceptionId":"1213212314"
 }
 
 

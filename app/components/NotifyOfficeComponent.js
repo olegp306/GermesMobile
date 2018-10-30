@@ -5,7 +5,7 @@ import RequestListComponent from './RequestListComponent';
 
 import testData from '../middleware/TestData.json';
 
-export default class NorifyOfficeComponent extends Component {
+export default class NotifyOfficeComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,6 +24,7 @@ export default class NorifyOfficeComponent extends Component {
           <RequestListComponent 
             requests={testData.requests}
             onLongPressRequest={this.onLongPressRequest}
+            
             />
         </View>
         <View style={styles.bottomContainer}>

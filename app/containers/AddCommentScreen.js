@@ -9,25 +9,25 @@ import {
  } from 'react-native';
 
 import { Colors, Images, Metrics } from '../theme';
-import { Ionicons  } from '@expo/vector-icons';
+import { MaterialIcons  } from '@expo/vector-icons';
 import RequestComponentBig from '../components/RequestComponentBig';
 
 export default class AddCommentScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      request:
-      {
-        "requestId": "2768498269000" ,
-        "requestNumber" : "48868" ,
-        "customerName" : "Каскад",
-        "transactionParticipant" : "ООО 'Бережки'",
-        "address" : "Подольский район, с/п Лаговское," ,
-        "docTypeNameName" : "акт приема-передачи" ,
-        "receiptNumber" : "50-50/001-50/001/010/2018-28901" ,
-        "fromRegistrationPlanDate" : "20.09.2018" ,
-        "notice" : "Акт выкупа зем. участка  50:27:0000000:132596"
-      },
+      // request:
+      // {
+      //   "requestId": "2768498269000" ,
+      //   "requestNumber" : "48868" ,
+      //   "customerName" : "Каскад",
+      //   "transactionParticipant" : "ООО 'Бережки'",
+      //   "address" : "Подольский район, с/п Лаговское," ,
+      //   "docTypeNameName" : "акт приема-передачи" ,
+      //   "receiptNumber" : "50-50/001-50/001/010/2018-28901" ,
+      //   "fromRegistrationPlanDate" : "20.09.2018" ,
+      //   "notice" : "Акт выкупа зем. участка  50:27:0000000:132596"
+      // },
       comments:[
         {commentId:"1", text : "Сказали что нет подписи", author: "Косокуков А", isMyComment : true},
         {commentId:"2", text : "Неправильный номер паспорта", author: "Чехов А", isMyComment : false},
@@ -43,6 +43,14 @@ export default class AddCommentScreen extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
+
+    const receiptNumber = navigation.getParam('receiptNumber', '');
+    const requestNumber = navigation.getParam('requestNumber', '');
+    const address = navigation.getParam('address', '');    
+    const customerName = navigation.getParam('customerName', '');
+    const transactionParticipant = navigation.getParam('transactionParticipant', '');
+    const notice = navigation.getParam('notice', '');
     return (
       <KeyboardAvoidingView
       style={styles.container}
@@ -53,12 +61,18 @@ export default class AddCommentScreen extends Component {
 
         <View style={styles.requestContainer}>
           <RequestComponentBig
-          receiptNumber={this.state.request.receiptNumber}
-          requestNumber={this.state.request.requestNumber}
-          address={this.state.request.address}
-          customerName={this.state.request.customerName}
-          transactionParticipant={this.state.request.transactionParticipant}
-          notice={this.state.request.notice}
+           receiptNumber={receiptNumber}
+           requestNumber={requestNumber}
+           address={address}
+           customerName={customerName}
+           transactionParticipant={transactionParticipant}
+           notice={notice}
+          // receiptNumber={this.props.receiptNumber}
+          // requestNumber={this.props.requestNumber}
+          // address={this.props.address}
+          // customerName={this.props.customerName}
+          // transactionParticipant={this.props.transactionParticipant}
+          // notice={this.props.notice}
           />
         </View>
         <View style={styles.horizontalDivider} />
@@ -79,7 +93,7 @@ export default class AddCommentScreen extends Component {
 
           <View style={styles.inputFieldContainer}>
                             <View style={styles.iconContainer}>
-                                <Ionicons  name='camera' size={30} color='#53565A' />
+                                <MaterialIcons  name='camera' size={30} color='#53565A' />
                             </View>
 
                             <View style={styles.verticalDivider} />

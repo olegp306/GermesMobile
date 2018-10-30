@@ -1,91 +1,104 @@
 import React, { Component } from 'react'
 import { View, Alert } from 'react-native'
-import api from '../middleware/api'
-// import { connect } from 'react-redux'
-import { NavigationActions } from 'react-navigation'
+import { connect } from 'react-redux'
+import { NavigationActions, StackActions  } from 'react-navigation'
 //import OneSignal from 'react-native-onesignal'
 
-// import { login } from '../middleware/redux/actions/Session'
-// import { getSession } from '../middleware/redux/selectors'
-// import { storeCredentials, loadCredentials } from '../middleware/utils/AsyncStorage'
+import { login } from '../middleware/redux/actions/Session'
+import { getSession } from '../middleware/redux/selectors'
+import { storeCredentials, loadCredentials } from '../middleware/utils/AsyncStorage'
 
 import LoginComponent from '../components/LoginComponent'
 
 
-// @connect(
-    // (store) => ({ session: getSession(store)}),
-    // (dispatch) => ({ login: (user, password) => dispatch(login(user, password)) })
-// )
+const mapStateToProps = store => {   
+    return {
+        session: store.session.toJS(),                
+  }
+}
 
+ const mapDispatchToProps = dispatch =>{
+     return {
+         loginAction: (user, password) => dispatch(login(user, password))
+        }
+ } 
+@connect( mapStateToProps, mapDispatchToProps )
 export default class LoginScreen extends Component {
     state = { user: '', password: '', remember: false}
 
     componentDidMount = async () => {
-        // const { remember, user, password } = await loadCredentials()
-        // if (remember && user && password)
-        //     this.setState({remember, user, password})
+        console.log('LoginScreen componentDidMount');
+        const { remember, user, password } = await loadCredentials()
+        if (remember && user && password)
+            this.setState({remember, user, password})
     }
 
     componentWillReceiveProps = async (nextProps) => {
-        // const { logged, error, userId, roles } = nextProps.session
-        // const { dispatch } = this.props.navigation
+        console.log('LoginScreen componentWillReceiveProps');
+        const { logged, error, userId, roles } = nextProps.session
+        const { dispatch } = this.props.navigation
     
-        // if (logged) {
-        //     const { remember, user, password } = this.state
+        if (logged) {
+            console.log('LoginScreen componentWillReceiveProps logged=' + logged);
+            const { remember, user, password } = this.state
             
-        //     if (remember)
-        //         await storeCredentials(user, password)      
+            if (remember)
+                await storeCredentials(user, password)      
         
-        //     //OneSignal.configure({})
-        //     //OneSignal.sendTag('userId', userId)
+            //OneSignal.configure({})
+            //OneSignal.sendTag('userId', userId)
             
-        //     const resetAction = NavigationActions.reset({
-        //         index: 0,
-        //         actions: [
-        //             NavigationActions.navigate({ routeName: 'Main'})
-        //         ],
-        //         key: null
-        //     })
-        //     dispatch(resetAction)
-        // }
+            const resetAction = StackActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({ routeName: 'RequestList'})
+                ],
+                key: null
+            })
+            dispatch(resetAction)
+        }
 
-        // if (error) {
-        //     Alert.alert( 'Ошибка', error, [ {text: 'Закрыть', onPress: () => { }} ])
-        // }
+        if (error) {
+            Alert.alert( 'Ошибка', error, [ {text: 'Закрыть', onPress: () => { }} ])
+        }
     }
 
     _handleUserChange = (user) => this.setState({user})
 
     _handlePasswordChange = (password) => this.setState({password})
 
-    // _handleRememberChange = () => {
-    //     const { remember } = this.state
-    //     this.setState({remember: !remember})
-    // }
+    _handleRememberChange = () => {
+        const { remember } = this.state
+        this.setState({remember: !remember})
+    }
 
     _handleLogInClick = () => {
-      const { user, password } = this.state
-      // console.log("user:" + user + " password:"+ password)
-      if (!user || !password)
-          Alert.alert( 'Ошибка', 'Необходимо заполнить имя пользователя и пароль', [ {text: 'Закрыть', onPress: () => { }} ])
-     //else this.props.login(user, password)
-     else api.login(user, password)
-  }
+        console.log("_handleLogInClick");
+        const { user, password } = this.state
+        if (!user || !password)
+            Alert.alert( 'Ошибка', 'Необходимо заполнить имя пользователя и пароль', [ {text: 'Закрыть', onPress: () => { }} ])
+        else this.props.loginAction(user, password);
+    }
+
+    _quickLogIn=()=>{
+        this.props.loginAction('psnapi', 'iRo0e0CCFkxjVLQ');
+    }
 
     render = () => {
-        // const { user, password, remember } = this.state
-        // const { isLogging } = this.props.session
+        const { user, password, remember } = this.state
+        const { isLogging } = this.props.session
 
         return (
             <LoginComponent
-                // user={user}
-                // password={password}
-                // disabled={isLogging}
-                // remember={remember}
+                user={user}
+                password={password}
+                disabled={isLogging}
+                remember={remember}
                 changeUser={this._handleUserChange}
                 changePassword={this._handlePasswordChange}
-                // changeRemember={this._handleRememberChange}
+                changeRemember={this._handleRememberChange}
                 logIn={this._handleLogInClick}
+                quickLogIn={this._quickLogIn}
             />
         )
     }

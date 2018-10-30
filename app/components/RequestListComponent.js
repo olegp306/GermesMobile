@@ -6,11 +6,6 @@ import { Colors, Images, Metrics } from '../theme';
 import RequestComponent from './RequestComponent';
 
 export default class RequestListComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
 
   getRequestArray=()=>{
     let requestsArray= new Array;
@@ -24,32 +19,31 @@ export default class RequestListComponent extends Component {
     return requestsArray;
    }
 
-   _handleShortPress=(request)=>{    
-    this.props.onShortPressRequest(request);
+   _handleShortPress=(requestId)=>{    
+    this.props.onShortPressRequest(requestId);
   }
 
-  _handleLongPress=(request)=>{
-    this.props.onLongPressRequest(request);
+  _handleLongPress=(requestId)=>{
+    this.props.onLongPressRequest(requestId);
+  }
+
+  _handleOnChangeRequestCheckBox=(requestId)=>{
+    this.props.onChangeRequestCheckBox(requestId)
   }
 
   _isSelected=(request)=>{
     this.props.selectedItems[request.requestId] ? this.props.selectedItems[request.requestId].isSelected: false
   }
+  _keyExtractor=(item,index) => item.requestId;
 
   render() {
-      //console.log("list component" + (this.props.selectedItems["27684982560003"] ? this.props.selectedItems["2768498256000"].isSelected: false) );
-      //console.log("list component2" + this.props.selectedItems["27684983150001"]==undefined ? this.props.selectedItems["27684983150001"]: false );
-      //console.log("list component2" + this.props.selectedItems["27684983150001"]==undefined ? this.props.selectedItems["27684983150001"]: false );
-      //27684983150001
-    return (
+    console.log('RequestListComponent');
+     return(
       <View>
         <FlatList 
-            data={this.getRequestArray()}
-            renderItem={({item}) =>
-                // <TouchableOpacity 
-                // // onPress={this.onPress}
-                // // onLongPress={e => this.props.onLongPressRequest(e.nativeEvent.text)}
-                // >                         
+            data={this.getRequestArray().sort()}
+            keyExtractor={this._keyExtractor}
+            renderItem={({item}) =>                                         
                     <RequestComponent
                         key={item.requestId}
                         requestId = {item.requestId}
@@ -62,17 +56,17 @@ export default class RequestListComponent extends Component {
                         fromRegistrationPlanDate={item.fromRegistrationPlanDate}
                         notice={item.notice}
 
-                        isSelected={this.props.selectedItems[item.requestId] ? (this.props.selectedItems[item.requestId].isSelected): false}      
+                        isSelected={this.props.selectedItems.hasOwnProperty(item.requestId)}
+                        isBarcodeExist={this.props.barcodes.items.hasOwnProperty(item.receiptNumber)}      
                         
-                        onShortPressRequest={this._handleShortPress}
-                        onLongPressRequest={ this._handleLongPress}    
-                    />
-                    // <Text>this.props.selectedItems[item.requestId] {this.props.selectedItems[item.requestId] }</Text>
-                // </TouchableOpacity>  
+                        onShortPressRequest={ this._handleShortPress }
+                        onLongPressRequest={ this._handleLongPress }
+                        onChangeRequestCheckBox ={ this._handleOnChangeRequestCheckBox }   
+                    />   
             }
           />
       </View>
-    );
+     )
   }
 }
 const styles = StyleSheet.create({   

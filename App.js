@@ -1,23 +1,61 @@
 import React, { Component } from 'react';
 import  {Text, View, Button,KeyboardAvoidingView,StyleSheet} from 'react-native';
 import { createStackNavigator } from 'react-navigation'
-//import { MaterialIcons  } from '@expo/vector-icons';
+
+// import store from './app/middleware/redux'
+import { Provider } from 'react-redux'
+import { store } from './app/middleware/redux'
+
+import { MaterialIcons  } from '@expo/vector-icons';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from './app/containers/HomeScreen.js';
-import LoginScreen from './app/containers/LoginScreen.js';
+import LoginScreen from './app/containers/LoginScreen';
 import RequestListScreen from './app/containers/RequestListScreen.js';
 import AddCommentScreen from './app/containers/AddCommentScreen.js';
 import BarCodeScannerScreen from './app/containers/BarCodeScannerScreen.js';
-import NorifyOfficeComponent from './app/components/NorifyOfficeComponent.js';
+import NotifyOfficeComponent from './app/components/NotifyOfficeComponent.js';
 import CheckBoxExampleComponent from './app/components/CheckBoxExampleComponent.js'
+
+import './ReactotronConfig'
+
+
 
 
 const styles = StyleSheet.create({
   back: { 
-      backgroundColor: '#C9C8C7'
+    backgroundColor: '#C9C8C7'
   }, 
-  title: { color: '#53565A', fontSize: 18 }
+  title:
+   {
+     color: '#53565A',
+     fontSize: 18
+   },
+   headButtonsContainer:{
+    flexDirection: 'row',
+   },
+   
+   iconContainer: {
+    width: 45,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 })
+// const Navigation = StackNavigator({
+//   Login: { screen: LoginScreen, navigationOptions: { header: null } }, 
+//   Main: { screen: MainScreen, navigationOptions: { header: null } },
+//   Tickets: { screen: TicketsScreen },
+//   Ticket: { screen: TicketScreen }
+// }, {
+//   initialRouteName: 'Login',
+//   navigationOptions: {
+//       headerStyle: styles.back,
+//       headerTitleStyle: styles.title,
+//       headerTintColor: '#53565A'
+//   }
+// })
 
 const RootStack = createStackNavigator(
   {
@@ -27,34 +65,14 @@ const RootStack = createStackNavigator(
        navigationOptions: { header: null }
     }
     ,
-    Login: {screen: LoginScreen},
-    // Login: {
-    //   screen: LoginScreen,
-    //   navigationOptions:{
-    //     headerTitle: 'вход'
-    //    }
-   //}
-   //,
+    Login: {screen: LoginScreen,  navigationOptions: { header: null }},
 
-    // RequestList: RequestListScreen,
+    
     RequestList: {
       screen: RequestListScreen,
-      navigationOptions:{
-        headerTitle: 'Заявки',
-        headerRight: (
-          <View style={styles.iconContainer}>
-            {/* <MaterialIcons  
-            name='barcode'
-            size={28}
-            //color='#53565A'
-            //onPress={() => alert('This is a button!')}
-             /> */}
-          </View>          
-        ),
-       }
+      
    },
 
-    // AddComment: AddCommentScreen,
     AddComment: {
       screen: AddCommentScreen,
       navigationOptions:{
@@ -62,7 +80,7 @@ const RootStack = createStackNavigator(
        }
    },
 
-    // BarCodeScanner: BarCodeScannerScreen,
+    
     BarCodeScanner: {
       screen: BarCodeScannerScreen,
       navigationOptions:{
@@ -70,24 +88,18 @@ const RootStack = createStackNavigator(
        }
    },
 
-    // NorifyOffice: NorifyOfficeComponent,
-    NorifyOffice: {
-      screen: NorifyOfficeComponent,
+  
+    NotifyOffice: {
+      screen: NotifyOfficeComponent,
       navigationOptions:{
         headerTitle: 'Уведомить о получении '
        }
    },
 
-    // CheckBoxExample: CheckBoxExampleComponent
-    CheckBoxExample: {
-      screen: CheckBoxExampleComponent,
-      navigationOptions:{
-        headerTitle: 'примеры Чекбоксов'
-       }
-   }
+  
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
 
     navigationOptions: {
             headerStyle: styles.back,
@@ -97,15 +109,18 @@ const RootStack = createStackNavigator(
   }
 );
 
-
+//Назначение функции connect вытекает из названия: подключи React компонент к Redux store.
+// Результат работы функции connect - новый присоединенный компонент, который оборачивает переданный компонент.
+// У нас был компонент <App />, а на выходе получился <Connected(App)>. В этом не трудно убедиться, если взглянуть в react dev tools.
 
 export default class HelloWorld extends Component{
   render(){
-
     return (
-      <RootStack />
+      <Provider store={store}>
+        <RootStack />
+        {/* <RequestListScreen /> */}
+        {/* <TestComponent /> */}
+      </Provider>
     )
-    
-
   }
 }

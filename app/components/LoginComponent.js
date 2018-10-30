@@ -9,30 +9,19 @@ import {
     Button,
     TouchableOpacity,
     Keyboard,
-    CheckBox,
     KeyboardAvoidingView
 } from 'react-native';
 
-//import { CheckBox } from 'react-native-elements';
+import { CheckBox } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 
 import { Colors, Images, Metrics } from '../theme';
 
-
-export default class LoginComponent extends Component {
-    static navigationOptions= { header: null };    
-    
-    state = { user: '', password: '', remember: false}
-
-    render = () => {
-        //const { user, password, remember } = this.state
-        //const { isLogging } = this.props.session
-
+class LoginComponent extends Component {
+    render() {
         return (
             <KeyboardAvoidingView
-        behavior='padding'
-        // keyboardVerticalOffset={-65}
-      >
+            behavior='padding'>
             <View style={styles.screenContainer}>
                 <View style={styles.logoContainer}>
                     <Image
@@ -46,7 +35,7 @@ export default class LoginComponent extends Component {
                     <View style={styles.inputsContainer}>
                         <View style={styles.inputFieldContainer}>
                             <View style={styles.iconContainer}>
-                                <MaterialIcons name='person' size={28} color='#53565A' />
+                                <MaterialIcons name='person' size={28} color='#53565A' onLongPress={this.props.quickLogIn}/>
                             </View>
 
                             <View style={styles.verticalDivider} />
@@ -76,7 +65,7 @@ export default class LoginComponent extends Component {
                                 style={styles.input}
                                 onChange={e => this.props.changePassword(e.nativeEvent.text)}
                                 autoCapitalize='none'
-                                placeholder='Введите пароль '
+                                placeholder='Введите пароль'
                                 autoCorrect={false}
                                 value={this.props.password}
                                 disabled={this.props.disabled}
@@ -85,9 +74,9 @@ export default class LoginComponent extends Component {
                             />
                         </View>
 
-                        {/* <TouchableOpacity style={styles.forgotContainer}>
+                        <TouchableOpacity style={styles.forgotContainer}>
                             <Text style={styles.forgotText}>Забыли пароль?</Text>
-                        </TouchableOpacity> */}
+                        </TouchableOpacity>
                     </View>
 
                     {
@@ -110,7 +99,7 @@ export default class LoginComponent extends Component {
                                 <Text style={styles.enterText}>Войти</Text>
                             </View>
                         </TouchableOpacity>
-                        {/* <Text>Здесь чекбокс</Text>
+
                         <CheckBox
                             title='Запомнить меня'
                             onPress={this.props.changeRemember}
@@ -118,18 +107,17 @@ export default class LoginComponent extends Component {
                             textStyle={styles.checkboxText}
                             checkedColor='black'
                             checked={this.props.remember}
-                        /> */}
+                        />
                     </View>
                 </View>
-            
-
-
             </View>
             </KeyboardAvoidingView>
-        )
-    }   
+        );
+    }
+}
 
-};
+export default LoginComponent;
+
 const styles = StyleSheet.create({
     screenContainer: {
         flexDirection: 'column',
@@ -149,7 +137,7 @@ const styles = StyleSheet.create({
         width: 250
     },
     contentContainer: {
-        height: '45%',
+        height: '50%',
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'stretch'
@@ -201,18 +189,14 @@ const styles = StyleSheet.create({
         color: 'gray'
     },
     enterContainer: {
-        alignItems: 'center'        
-
+        alignItems: 'center'
     },
-    
     enterButton: {
         justifyContent: 'center',
         backgroundColor: '#53565A',
         minWidth: 245,
         minHeight: 45,
-        borderRadius: 30,
-        
-    
+        borderRadius: 30
     },
     enterText: {
         fontSize: 24,

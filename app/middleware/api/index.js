@@ -2,7 +2,9 @@ import axios from 'axios'
 import querystring from 'querystring'
 
 
-export const API_SERVER_URL = 'http://192.168.1.66/ApiService/germes/v1/'
+//export const API_SERVER_URL = 'http://192.168.1.66/ApiService/germes/v1/'
+export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
+
 
 // export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1/'
 //export const FILE_SERVER_URL = 'https://saas.claris.su/UserSettings/9323/Docs/'
@@ -13,7 +15,7 @@ const conf = {
     timeout: 35000
 }
 
-const accessToken=`1r1OLkinn0RnlitYoJmb7E1fvR_u1YXs4ZHW2Xjv0mjg9KESc5RS8mfZ1eNtiwsfOhFBK7uwvaS3L1g5b1TBxz9VDW37DlosavCKPhC1xryqSXhFh2xKY2mZbTMGbwzZC-KAOiVW-SFFwQNCBIQi7dcMBDxFPEQ9JocuJzFtsMxtXm5Z1Dc5DJVtGXjybd7rTa4q0-cd8i1KZ0k67fKT1ZnMkdJs08MI287nvIXOMNcmmWDqIdr58Xj78xsXL0h2Gv6mYdyu6wFZS6aZu_FhzsPbGHUN4IFVZFN2DbuuhD713Af5ZMA-zpFpqh8BHL6WkdEEQuH1Js4FvoBCowjgAzAfrxwa5sHxlPlnJGVkkWOf4i7l5IgcyYqFc7TdEfzVdtBEWELiMU8L4O-N8ihXNg`;
+//const accessToken=`Ex2xbK2ZuCsj0ZeDfU83FUVPLZxrXc0LFcCWjorRc7u8EZRbsB3cwxB1XwS6kI2GIFMyIWFICWcuiQW4uOlfHyLqO7_pmAgdcnajnB_fedDo6al__FRvnrwKYasjgvGxyg8GIjR5EDRm8W6aDGoGCnevlmq5lazPflfM2GPnstY0uRNmbBeRKbKz3GAdfVCsmBkFHw_SnMKxPaZSmkkh6AI4lJF9q_5w22vhbys9Ax8AxFxoajzXAUex5b1WkBOtpS5nfwo5Q1qFNPvoyInEkeeb4aS4TaiBO_Z5jaeT3Zi8Bhs_TOgXp3ipa9lIC68mZbLsb8kTytGeJO30i8TgWpbL9LBZ_FjhUFffrVRpuJTaI2D--wtkRTV_cSDG-Brrs00rIJ2hHy6Qc-t8wlaxgg`;
 
 
 const instance = axios.create(conf)
@@ -44,7 +46,7 @@ instance.interceptors.response.use(response => {
 
 const onError = (error) => {
     if (error.response) {
-        //console.warn('axios onError', error.response)
+        console.warn('axios onError', error.response)
 
         if (error.response.status === 400) {
             throw Error('Не верный логин или пароль')
@@ -97,10 +99,10 @@ const setAuthHeader = (token) => instance.defaults.headers.authorization = `Bear
 
 
 const fetchRequests = (fromRegistrationPlanDate,receptionId) =>{
-    setAuthHeader(accessToken);
+    //setAuthHeader(accessToken);
     //instance.defaults.headers.common['Authorization'] = `Bearer ${this.accessToken}`;
 
-    //console.log("api.fetchRequests start");
+    //console.log("api.fetchRequests start fromRegistrationPlanDate:" + fromRegistrationPlanDate +" receptionId:" + receptionId);
     console.log(API_SERVER_URL+'requestsgermes/mobile?fromRegistrationPlanDate='+fromRegistrationPlanDate+'&receptionId='+receptionId) ;
 
     return instance.get('requestsgermes/mobile?fromRegistrationPlanDate='+fromRegistrationPlanDate+'&receptionId='+receptionId).catch(onError)

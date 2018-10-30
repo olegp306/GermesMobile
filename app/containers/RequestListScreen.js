@@ -1,104 +1,161 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Picker } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Picker ,Alert } from 'react-native';
 import { Colors, Images, Metrics } from '../theme';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import DatePicker from 'react-native-datepicker'
 
 import RequestList from '../components/RequestListComponent';
+import Loader from '../components/Loader'
 
-import testData from '../middleware/TestData.json';
+import { connect } from 'react-redux'
 
-import api from '../middleware/api'
+import { setFilterDate, setReception } from '../middleware/redux/actions/Filter'
+import { fetchRequests } from '../middleware/redux/actions/Requests'
+import { selectItem, unSelectItem, clearSelectedItems } from '../middleware/redux/actions/SelectedItems'
 
-import DatePicker from 'react-native-datepicker'
+
 
 const avtozavodskayaId=123906749000;
 const obruchevaId=754498388000;
 const nagatinskayaId=2157440701000;
 const orlikov17Id=2768516261000;
 
-
-Date.prototype.formatMMDDYYYY = function(){
-    return this.getDate() + 
-    "." +  (this.getMonth() + 1) +
-    "." +  this.getFullYear();
+Date.prototype.formatDDMMYYYY = function(){   
+    return (this.getFullYear() +
+    "." +  (this.getMonth() + 1)+
+    "." + this.getDate() )
 }
 
+// если @connect наверху то mapStateToProps уже должен быть объявлен перед @connect
+// приклеиваем данные из store
+const mapStateToProps = store => {    
+    //console.log("mapStateToProps");
+    console.log("store.requests.toJS()");
+    console.log(store.requests.toJS());
+    return {
+        filterDate: store.filter.get("filterDate"),
+        filterReceptionId: store.filter.get("filterReceptionId"),        
+        requests: store.requests.toJS(),
+        selectedItems: store.selectedItems.toJS(),
+        barcodes: store.barcodes.toJS()
+    }
+  }
+
+ const mapDispatchToProps = dispatch =>{
+     return {
+         setFilterDateAction : date => dispatch (setFilterDate(date)),
+         setReceptionIdAction : receptionId => dispatch (setReception(receptionId)),
+         fetchRequestsAction: ( filterDate, filterReceptionId ) => dispatch(fetchRequests( { filterDate, filterReceptionId } )),
+
+         selectItemAction : requestId=>dispatch(selectItem(requestId)),
+         unSelectItemAction : requestId=>dispatch(unSelectItem(requestId)),
+         clearSelectedItemAction : ()=>dispatch(clearSelectedItems()),
+
+         addBarcodeAction : barcode=> dispatch (addBarcode(barcode)),
+         clearBarcodesAction : ()=> dispatch (clearBarcodes()),
+
+     }
+ } 
+
+@connect( mapStateToProps, mapDispatchToProps )
 export default class RequestListScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        filterDate: new Date().formatMMDDYYYY (),
-        receptionId:123906749000 ,
-        requests:{},  
-        selectedItems: testData.selectedItems,
-        barcodes:{}
-    };
-    
-    this._handleUpdateRequest();
-  }  
+  // Ovveride базовый navigationOptions и дополнил кнопками в хедере
+  static navigationOptions=({ navigation, navigationOptions })=>{
+    const { params } = navigation.state;
+
+    return {
+        title: 'Заявки',
+        headerRight: 
+           <View style={styles.headButtonsContainer}>
+                <View style={styles.iconContainer}>
+                <Icon
+                    name='barcode'
+                    size={40}
+                    color={Colors.actionItemColor}
+                    onPress={() => navigation.navigate('BarCodeScanner')}
+                />          
+                </View>
+                <View style={styles.iconContainer}>
+                <Icon
+                    name='send'
+                    size={37}
+                    color={Colors.actionItemColor}
+                    onPress={() =>{ 
+                        //navigation.navigate('NotifyOffice')
+                        Alert.alert(
+                            'Внимание',
+                            'Отправить данные о полученных документах ?  (тест)',
+                            [                              
+                              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                              {text: 'OK', onPress: () => {
+                                  console.log('OK Pressed');
+                                  navigation.state.params.dispatch(clearSelectedItemAction());
+                                  navigation.state.params.dispatch(clearBarcodesAction());
+                                }
+                            },
+                            ],
+                            { cancelable: false }
+                          )
+                        
+
+                    }}
+                />          
+                </View>     
+            </View>                  
+            }
+  }
+  
+  //_handleFilterDateChange = (filterDate) => { this.setState({filterDate: filterDate },this._handleUpdateRequest )}
+  _handleFilterDateChange = (filterDate) => {      
+      this.props.setFilterDateAction(filterDate);
+      this.props.fetchRequestsAction(); //параметры забиру из store
+     };
+
+
+  _handleReceptoionChange = (receptionId) => {
+    this.props.setReceptionIdAction(receptionId);
+    this.props.fetchRequestsAction(); //параметры забиру из store
+    }
+
+  _handleLongPressRequest = (requestId) =>{        
+    (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
+  }
+
+  _handleShortPressRequest = (request) =>{    
+    this.props.navigation.navigate('AddComment',request )
+  }
+  
+  _handleOnChangeRequestCheckBox = (requestId) =>{        
+    (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
+  }
+
+  _geNТumberOfMatches=(array1, arrya2)=>{
+    let amount=0;
+    for(key in array1)
+    {
+        if(arrya2.hasOwnProperty(key))
+        {
+            amount++;
+        }
+
+    }
+    return amount;
+  }
   
 
-  _handleFilterDateChange = (filterDate) => { this.setState({filterDate: filterDate },this._handleUpdateRequest )}
-
-  _handleReceptoionChange = (receptionId) => { this.setState({receptionId: receptionId},this._handleUpdateRequest) }
-
-
-  _handleLongPressRequest = (requestId) =>{ 
-    let newSelectedItems=this.state.selectedItems; 
-    //console.log("REquest SCRENN   _handleLongPressRequest request:" + requestId);
-    if(this.state.selectedItems[requestId])
-    {
-        // console.log("REquest SCRENN  Exist _handleLongPressRequest request:" + requestId);           
-        newSelectedItems[requestId].isSelected = !(newSelectedItems[requestId].isSelected);
-        this.setState(
-            { selectedItems : newSelectedItems }
-            );
-    }
-    else
-    {
-        // console.log("REquest SCRENN  not Exist _handleLongPressRequest request:" + requestId);        
-        newSelectedItems[requestId]= { requestId:requestId, isSelected:  true };
-
-        this.setState(
-        { selectedItems: newSelectedItems }
-        );
-   }
+ 
+  componentDidMount() {
+      this.props.fetchRequestsAction(); //параметры забиру из store
+      this.props.navigation.setParams({dispatch: this.dispatch });
   }
-  _handleShortPressRequest = (request) =>{ 
-        console.log(" REquest SCRENN  _handleShortPressRequest request:" + request);
-        console.log("ОТкрываем форму комменатарий request:" + request);
-  }
-
-  _handleOnScanBarcode=(barcode)=>{
-    let newBarcodes=this.state.barcodes; 
-    console.log("_handleOnScanBarcode" + barcode.codeText);
-    if(this.state.barcodes[barcode.codeText])
-    {
-        console.log("Такой баркод уже отсканирован");           
-     }
-    else
-    {
-        // console.log("REquest SCRENN  not Exist _handleLongPressRequest request:" + requestId);        
-        newBarcodes[barcode.codeText]= { codeText:barcode.codeText, scanDateTime:  new Date() };
-
-        this.setState(
-        { barcodes: newBarcodes }
-        );
-   }
-  }
-
-  _handlePasswordChange = (password) => this.setState({password})
-
-  _handleUpdateRequest =()=>{
-    //console.log("_handleUpdateRequest");
-    api.fetchRequests(this.state.filterDate,this.state.receptionId)
-    .then((response)=>{
-        this.setState({requests: api.toAssociativeArray(response.data,"requestId")});
-    })
-  }
-
-
+  
 
   render() {
+    //console.log('RequestListScreen');
+    //console.log(this.props);    
+    const { isFetching ,items }=this.props.requests;
+    const { filterDate, filterReceptionId, selectedItems, barcodes }=this.props;
+
     return (
         <View style={styles.screenContainer}>
             <View style={styles.headContainer}>
@@ -107,10 +164,10 @@ export default class RequestListScreen extends Component {
                         <Text style={styles.filterLable}> Выдача до: </Text>                
                         <DatePicker
                             style={{width: 175}}
-                            date={this.state.filterDate}
+                            date={filterDate}
                             mode="date"
                             placeholder="select date"
-                            format="YYYY-MM-DD"
+                            format="DD-MM-YYYY"
                             minDate="2018-10-01"
                             
                             //maxDate="2016-06-01"
@@ -143,8 +200,8 @@ export default class RequestListScreen extends Component {
                         <Text  style={styles.filterLable} >Приемная: </Text>
                         <View  style={styles.pickerContainer}>
                             <Picker
-                                value={this.state.filterDate}    
-                                selectedValue={this.state.receptionId}                            
+                                //value={this.state.filterDate}    
+                                selectedValue={filterReceptionId}                            
                                 prompt="Выберите приемную"
                                 onValueChange={(itemValue, itemIndex) => this._handleReceptoionChange(itemValue)}>
                 
@@ -161,23 +218,41 @@ export default class RequestListScreen extends Component {
             <View styles={styles.horizontalDivider}>
                 {/* <Text>[ЧыК ЧЫК]></Text> */}
             </View>
-
+            
             <View style={styles.listContainer}>
-                <RequestList 
-                    requests={this.state.requests} 
-                    selectedItems={this.state.selectedItems} 
-                    onShortPressRequest={ this._handleShortPressRequest} 
-                    onLongPressRequest={ this._handleLongPressRequest}/>
+                {/* <Loader message='Обновление заявок' isLoading={false}> */}
+                <Loader message='Обновление заявок' isLoading={isFetching}>
+                    <RequestList                         
+                        requests={items} 
+                        onShortPressRequest={ this._handleShortPressRequest} 
+                        onLongPressRequest={ this._handleLongPressRequest}
+                        onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox} 
+
+                        // selectedItems={selectedItems} 
+                        selectedItems={selectedItems}
+                        barcodes = { barcodes }
+                    />
+                 </Loader>
+            </View>            
+            <View style={styles.bottomContainer}>
+                <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>                
+                <View styles={styles.bottomRowContainer}>
+                    <Text style={styles.bottomSmallLable}>C прочитанными баркодами: { this._geNТumberOfMatches(barcodes,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>Выделено на отправку: { this._geNТumberOfMatches(selectedItems,items)} шт.</Text>
+                </View>
             </View>
-            <View styles={styles.bottomContainer}>
-                <Text style={styles.bottomLable}>Всего: { Object.keys(this.state.requests).length} шт.</Text>
-            </View>
+            
           
         </View>     
        
     );
   }
 }
+
+
+
+
+
 const styles = StyleSheet.create({
     screenContainer: {
         flexDirection: 'column',
@@ -206,82 +281,65 @@ const styles = StyleSheet.create({
 
     listContainer:{        
         height: '80%',
-        width:'98%'
+        width:'98%',
+        
     },
 
-    bottomContainer:{        
-        height: '5%',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'stretch',
+    bottomContainer:{
+        height: '8%',
+        width:'98%',
+        flexDirection: 'row',
+        // flex: -1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    bottomRowContainer:{      
+        flexDirection: 'column',  
+        justifyContent: 'space-between',
+        alignItems: 'center',        
     },
         
         
     bottomLable:{
-        textAlign:'left',
-        fontSize: 15
+        color: Colors.baseColor,
+        //textAlign:'left',
+        fontSize: 17
     },
-
-    
-    
-
+    bottomSmallLable:{
+        color: Colors.baseColor,
+        //textAlign:'left',
+        fontSize: 13
+    },
     horizontalDivider: {
         height: 15,
         borderWidth:1,
         borderColor : 'black'
     },
-    
-    
-
-
-    // list:{
-    //     backgroundColor: Colors.backgroundColor
-    // },
-
-    
-
     pickerContainer:{
         height: 40,
         width: 175,
         borderRadius: 5,
         borderWidth: 1 ,
-        backgroundColor: '#91d1ff' ,
-        //fontSize: 20,
+        backgroundColor: '#91d1ff' ,       
         borderColor: Colors.touchableBorderColor,        
     },
-
-
-    // filterDateLable:{
-    //     // fontSize: 20,
-    //     textAlignVertical: 'center',
-        
-    // },
-
-    // filterOrgLable:{
-    //    // fontSize: 20,
-    //    textAlignVertical: 'center',
-    // },
-
-    // contentContainer: {
-    //     //height: 80,
-    //     flexDirection: 'column',
-    //     justifyContent: 'space-between',
-    //     alignItems: 'stretch',
-    //     backgroundColor:'#f6f6f6',
-
-    // },
-    // receiptNumber:{
-    //     textAlign:'center',
-    //     fontWeight:'500',
-    //     fontSize: 20,
-    // },
-    // notice:{
-    //     fontStyle:'italic'
-    // },
-
-    
-
     filterLable:{
         fontSize:10
-    }
+    },
+
+    headButtonsContainer:{
+        flexDirection: 'row',        
+       },
+       
+       iconContainer: {
+        width: 45,
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 25,
+
+      }
+
 });
+
+

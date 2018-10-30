@@ -6,84 +6,80 @@ import {
     FlatList,
     Vibration 
  } from 'react-native';
-
- import testData from '../middleware/TestData.json';
+ import { connect } from 'react-redux'
 
  import _values from 'lodash/values';
 
  import { Colors, Images, Metrics } from '../theme';
+ import { addBarcode, clearBarcodes } from '../middleware/redux/actions/Barcodes'
+ import { selectItemByBarcode } from '../middleware/redux/actions/SelectedItems'
+
  import BarCodeScannerComponent from '../components/BarCodeScannerComponent';
 
-export default class BarCodeScannerScreen extends Component {
-  constructor(props) {
-    console.log("constructor");
-    super(props);
-    testData.barcodes
-    this.state = {
-      barcodes: testData.barcodes
-    };
+ const mapStateToProps = store => {    
+  
+  return {      
+      barcodes: store.barcodes.toJS()
   }
+}
 
-  scanBarCodeHandler=(barcode)=>{
-    var isBarCodeExist=false;
+const mapDispatchToProps = dispatch =>{
+   return {
+       addBarcodeAction : barcode=> dispatch (addBarcode(barcode.data)),
+       clearBarcodesAction : ()=> dispatch (clearBarcodes()),
+       selectItemAction: ()=> dispatch(selectItemByBarcode(barcode.data))
+   }
+} 
 
-    for (let id in this.state.barcodes){
-      let element=this.state.barcodes[id];
-      if(element.codeText==barcode.data)
-      {
-        isBarCodeExist=true;
-        break;
-      }
-    }
 
-    if(isBarCodeExist)
+
+@connect( mapStateToProps, mapDispatchToProps )
+export default class BarCodeScannerScreen extends Component {
+  
+
+  _handlerScanBarcode=(barcode)=>{    
+    
+    if(this.props.barcodes.items.hasOwnProperty(barcode.data))
     {
-      Vibration.vibrate(1000);
+       Vibration.vibrate(1000);
     }
     else
     {
-      Vibration.vibrate(200);    
-      //console.log(barcode.data);
-      const newBarcode= {
-        "id" : "45",
-        "codeText":barcode.data,
-        "scanDateTime":new Date(),
-        "isSelected": true
-        };
-    
-      this.setState({
-        barcodes : {newBarcode ,... this.state.barcodes}
-      })
+      Vibration.vibrate(200);      
+    }
+    this.props.addBarcodeAction(barcode);
   }
 
-  }
 
-  render() {
-    console.log(_values(this.state.barcodes));
+
+  // _handlerScanBarcode=(barcode)=>{ 
+  //   this.props.addBarcodeAction(barcode);
+  //   //this.props.selectItemAction(barcode);    
+  // };
+  
+
+  render() { 
+    //const { isFetching ,items }=this.props.requests;
+    const {items} = this.props.barcodes;  
     return (
       <View style={styles.screenContainer}>
 
         <View style={styles.barCodeScannerContainer}>
-          <BarCodeScannerComponent onScanBarCode={this.scanBarCodeHandler} />
+          <BarCodeScannerComponent onScanBarCode={this._handlerScanBarcode} />
         </View>
         
-        <View style={styles.barCodeListContainer}>
-            <Text style={styles.barCodeItem}> Здесь будут появляються отсканированные коды</Text>
-            
-            <FlatList 
-            style={styles.list}            
-            data={_values(this.state.barcodes)}            
-            keyExtractor={(item, index) => item.id}
-            renderItem={({item}) =>
+        <View>
+            <Text style={styles.barCodeItem}> Здесь будут появляються отсканированные коды</Text>            
+            <FlatList               
+              data={_values(items)}            
+              keyExtractor={(item, index) => item.codeText}
+              renderItem={({item}) =>
             
             <View style={styles.barCodeTextConteiner}>
               <Text style={styles.barCodeText}>{item.codeText}</Text>
             </View>
-            }
-            
-          />
-          
-                
+            }            
+          />   
          </View>
 
        </View>
@@ -107,17 +103,20 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    barCodeListContainer: {
-      width: '100%',
-      height: '50%',
-      justifyContent: 'center',
-      alignItems: 'center'
-  },   
+    
 
     barCodeTextConteiner:{
-      backgroundColor:'white',
-      width: '100%',
-      marginTop: 10
+      width: '100 %', 
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignItems: 'stretch',
+      borderColor: '#252828',
+      borderWidth: 2,
+      backgroundColor: 'white',
+      borderRadius: 7,
+      padding:0,        
+      marginBottom:2
+
     },
 
     barCodeText:{

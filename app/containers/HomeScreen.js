@@ -67,7 +67,7 @@ export default class HomeScreen extends Component {
          {/* <Text> Уведомить офис о получении документов</Text> */}
          <Button
            title="Уведомить офис о получении документов "
-           onPress={() => this.props.navigation.navigate('NorifyOffice')}
+           onPress={() => this.props.navigation.navigate('NotifyOffice')}
          />
 
          {/* <Text> Уведомить офис о получении документов</Text> */}
