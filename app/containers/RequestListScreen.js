@@ -10,7 +10,7 @@ import Loader from '../components/Loader'
 import { connect } from 'react-redux'
 
 import { setFilterDate, setReception } from '../middleware/redux/actions/Filter'
-import { fetchRequests } from '../middleware/redux/actions/Requests'
+import { fetchRequests, startRequestsStatusChange } from '../middleware/redux/actions/Requests'
 import { selectItem, unSelectItem, clearSelectedItems } from '../middleware/redux/actions/SelectedItems'
 
 
@@ -53,6 +53,7 @@ const mapStateToProps = store => {
 
          addBarcodeAction : barcode=> dispatch (addBarcode(barcode)),
          clearBarcodesAction : ()=> dispatch (clearBarcodes()),
+         startRequestsStatusChangeAction: ()=> dispatch(startRequestsStatusChange())
 
      }
  } 
@@ -81,6 +82,7 @@ export default class RequestListScreen extends Component {
                     size={37}
                     color={Colors.actionItemColor}
                     onPress={() =>{ 
+                        startRequestsStatusChange
                         //navigation.navigate('NotifyOffice')
                         Alert.alert(
                             'Внимание',
@@ -89,8 +91,10 @@ export default class RequestListScreen extends Component {
                               {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                               {text: 'OK', onPress: () => {
                                   console.log('OK Pressed');
-                                  navigation.state.params.dispatch(clearSelectedItemAction());
-                                  navigation.state.params.dispatch(clearBarcodesAction());
+                                  //this.props.startRequestsStatusChangeAction()
+                                  navigation.state.params.startRequestsStatusChangeAction()
+                                  //navigation.state.params.dispatch(clearSelectedItemAction());
+                                  //navigation.state.params.dispatch(clearBarcodesAction());
                                 }
                             },
                             ],
@@ -147,13 +151,14 @@ export default class RequestListScreen extends Component {
   componentDidMount() {
       this.props.fetchRequestsAction(); //параметры забиру из store
       this.props.navigation.setParams({dispatch: this.dispatch });
+      this.props.navigation.setParams({startRequestsStatusChangeAction: this.props.startRequestsStatusChangeAction });
   }
   
 
   render() {
     //console.log('RequestListScreen');
     //console.log(this.props);    
-    const { isFetching ,items }=this.props.requests;
+    const { isFetching ,items, isStatusChanging }=this.props.requests;
     const { filterDate, filterReceptionId, selectedItems, barcodes }=this.props;
 
     return (
@@ -221,7 +226,7 @@ export default class RequestListScreen extends Component {
             
             <View style={styles.listContainer}>
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
-                <Loader message='Обновление заявок' isLoading={isFetching}>
+                <Loader message='Обновление заявок' isLoading={isFetching || isStatusChanging} >
                     <RequestList                         
                         requests={items} 
                         onShortPressRequest={ this._handleShortPressRequest} 
