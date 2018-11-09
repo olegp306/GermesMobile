@@ -6,7 +6,7 @@ import { NavigationActions, StackActions  } from 'react-navigation'
 
 import { login } from '../middleware/redux/actions/Session'
 import { getSession } from '../middleware/redux/selectors'
-import { storeCredentials, loadCredentials } from '../middleware/utils/AsyncStorage'
+import { storeCredentials, storeCredentialsHide, loadCredentials } from '../middleware/utils/AsyncStorage'
 
 import LoginComponent from '../components/LoginComponent'
 
@@ -19,7 +19,7 @@ const mapStateToProps = store => {
 
  const mapDispatchToProps = dispatch =>{
      return {
-         loginAction: (user, password) => dispatch(login(user, password))
+         loginAction: (user, password) => dispatch(login(user, password))         
         }
  } 
 @connect( mapStateToProps, mapDispatchToProps )
@@ -42,8 +42,14 @@ export default class LoginScreen extends Component {
             console.log('LoginScreen componentWillReceiveProps logged=' + logged);
             const { remember, user, password } = this.state
             
-            if (remember)
-                await storeCredentials(user, password)      
+            if (remember){
+                await storeCredentials(user, password)  
+            }
+            else
+            {                
+                await storeCredentialsHide(user, password)  
+            }
+
         
             //OneSignal.configure({})
             //OneSignal.sendTag('userId', userId)
