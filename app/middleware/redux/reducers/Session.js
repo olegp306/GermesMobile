@@ -21,7 +21,7 @@ const reducer = (state = initialState, action) => {
       return initialState
 
     case IS_LOGGING:
-      return state.merge({ isLogging: true })
+      return state.merge({ isLogging: true, error: null })
 
     case LOGGED:
       const { token, userId, user, companyId, accountId, account, roles } = action.payload      
@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
     case LOGIN_FAILED: 
       return state.merge({
         isLogging: false,
-        error: action.payload
+        error: action.payload.message
       })
 
     default: 

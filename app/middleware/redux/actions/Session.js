@@ -1,7 +1,7 @@
 export const LOGIN_REQUEST = 'loginRequest'
 export const IS_LOGGING = 'isLogging'
 export const LOGGED = 'logged'
-export const LOGIN_FAILED = 'loginFailure'
+export const LOGIN_FAILED = 'loginFailed'
 
 import api from '../../api'
 
@@ -20,17 +20,17 @@ export const login = (user, password) => {
             api.setAuthHeader(data.data.accessToken);
             dispatch(logged(session));            
         })
-        .catch(error=>loginFailed(error))
+        .catch( error=>dispatch(loginFailed(error)) )
     }
     
 
-    return {
-        type: LOGIN_REQUEST,
-        payload: {
-            user, 
-            password
-        }
-    }
+    // return {
+    //     type: LOGIN_REQUEST,
+    //     payload: {
+    //         user, 
+    //         password
+    //     }
+    // }
 }
 
 export const isLogging = (isLogging) => {
