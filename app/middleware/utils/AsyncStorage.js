@@ -12,6 +12,16 @@ export const storeCredentials = async (user, password) => {
     }
 }
 
+export const storeCredentialsHide = async (user, password) => {
+    try {
+        await AsyncStorage.setItem('@bcmobileapp:remember', 'false')
+        await AsyncStorage.setItem('@bcmobileapp:user', user)
+        await AsyncStorage.setItem('@bcmobileapp:password', password)
+    } catch (error) {
+        console.warn('error occured while saving user info', error)
+    }
+}
+
 export const loadCredentials = async () => {
     try {
         const r = await AsyncStorage.getItem('@bcmobileapp:remember')
