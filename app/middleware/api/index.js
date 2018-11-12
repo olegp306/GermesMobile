@@ -6,9 +6,13 @@ import { storeCredentials, storeCredentialsHide, loadCredentials } from '../util
 
 
 //export const API_SERVER_URL = 'http://192.168.1.66/ApiService/germes/v1/'
-export const API_SERVER_URL = 'http://192.168.0.121/ApiService/germes/v1/'
 
-//export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
+//Local api service
+//export const API_SERVER_URL = 'http://192.168.0.121/ApiService/germes/v1/'
+
+
+//Germes real apiservice url
+export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
 
 //export const CLARIS_SERVER_URL='http://test.allwingroup.ru:3652'
 
@@ -22,8 +26,6 @@ const apiConf = {
     timeout: 35000
 }
 
-
-//const accessToken=`Ex2xbK2ZuCsj0ZeDfU83FUVPLZxrXc0LFcCWjorRc7u8EZRbsB3cwxB1XwS6kI2GIFMyIWFICWcuiQW4uOlfHyLqO7_pmAgdcnajnB_fedDo6al__FRvnrwKYasjgvGxyg8GIjR5EDRm8W6aDGoGCnevlmq5lazPflfM2GPnstY0uRNmbBeRKbKz3GAdfVCsmBkFHw_SnMKxPaZSmkkh6AI4lJF9q_5w22vhbys9Ax8AxFxoajzXAUex5b1WkBOtpS5nfwo5Q1qFNPvoyInEkeeb4aS4TaiBO_Z5jaeT3Zi8Bhs_TOgXp3ipa9lIC68mZbLsb8kTytGeJO30i8TgWpbL9LBZ_FjhUFffrVRpuJTaI2D--wtkRTV_cSDG-Brrs00rIJ2hHy6Qc-t8wlaxgg`;
 
 
 const apiInstance = axios.create(apiConf)
