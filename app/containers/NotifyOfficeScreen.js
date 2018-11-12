@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Picker ,Alert } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Picker ,Alert ,Button} from 'react-native';
 import { Colors, Images, Metrics } from '../theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DatePicker from 'react-native-datepicker'
@@ -59,47 +59,85 @@ const mapStateToProps = store => {
  } 
 
 @connect( mapStateToProps, mapDispatchToProps )
-export default class RequestListScreen extends Component {
+export default class NotifyOfficeScreen extends Component {
   // Ovveride базовый navigationOptions и дополнил кнопками в хедере
   static navigationOptions=({ navigation, navigationOptions })=>{
     const { params } = navigation.state;
 
     return {
-        title: 'Заявки',
+        title: 'Уведомить офис',
         headerRight: 
-           <View style={styles.headButtonsContainer}>
+           <View style={styles.headButtonsContainer}>                
                 <View style={styles.iconContainer}>
-                <Icon
-                    name='barcode'
-                    size={40}
-                    color={Colors.actionItemColor}
-                    onPress={() => navigation.navigate('BarCodeScanner')}
-                />          
-                </View>
-                <View style={styles.iconContainer}>
-                <Icon
+                {/* <Icon
                     name='send'
                     size={37}
                     color={Colors.actionItemColor}
-                    onPress={() => navigation.navigate('NotifyOffice')}
-                    
-                />          
+                    onPress={() =>{ 
+                        startRequestsStatusChange
+                        //navigation.navigate('NotifyOffice')
+                        Alert.alert(
+                            'Внимание',
+                            'Отправить данные о полученных документах ?  (тест)',
+                            [                              
+                              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                              {text: 'OK', onPress: () => {
+                                  console.log('OK Pressed');
+                                  //this.props.startRequestsStatusChangeAction()
+                                  navigation.state.params.startRequestsStatusChangeAction()
+                                  //navigation.state.params.dispatch(clearSelectedItemAction());
+                                  //navigation.state.params.dispatch(clearBarcodesAction());
+                                }
+                            },
+                            ],
+                            { cancelable: false }
+                          )
+                        
+
+                    }}
+                />           */}
                 </View>     
             </View>                  
             }
+            
   }
   
   //_handleFilterDateChange = (filterDate) => { this.setState({filterDate: filterDate },this._handleUpdateRequest )}
-  _handleFilterDateChange = (filterDate) => {      
-      this.props.setFilterDateAction(filterDate);
-      this.props.fetchRequestsAction(); //параметры забиру из store
-     };
+//   _handleFilterDateChange = (filterDate) => {      
+//       this.props.setFilterDateAction(filterDate);
+//       this.props.fetchRequestsAction(); //параметры забиру из store
+//      };
 
 
-  _handleReceptoionChange = (receptionId) => {
-    this.props.setReceptionIdAction(receptionId);
-    this.props.fetchRequestsAction(); //параметры забиру из store
+//   _handleReceptoionChange = (receptionId) => {
+//     this.props.setReceptionIdAction(receptionId);
+//     this.props.fetchRequestsAction(); //параметры забиру из store
+//     }
+// Наша функция сравнения
+compareRequests=(request1, request2) =>{
+    if(barcodes.items[request1] && barcodes.items[request2])
+    {
+        return barcodes.items[request1].scanDateTime - barcodes.items[request2].scanDateTime;
     }
+
+    if(barcodes.items[request1] && barcodes.items[request2]==undefined)
+    {
+        return 1;
+    }
+    if(barcodes.items[request1]==undefined && barcodes.items[request2])
+    {
+        return -1;
+    }
+
+    if(barcodes.items[request1]==undefined && barcodes.items[request2]==undefined)
+    {
+        return request1.requestId- request2.requestId
+    }
+  }
+  
+  
+  
+
 
   _handleLongPressRequest = (requestId) =>{        
     (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
@@ -143,63 +181,6 @@ export default class RequestListScreen extends Component {
 
     return (
         <View style={styles.screenContainer}>
-            <View style={styles.headContainer}>
-                <View  style={styles.filterDateContainer} >
-                    <View style={styles.filterItem}>
-                        <Text style={styles.filterLable}> Выдача до: </Text>                
-                        <DatePicker
-                            style={{width: 175}}
-                            date={filterDate}
-                            mode="date"
-                            placeholder="select date"
-                            format="DD-MM-YYYY"
-                            minDate="2018-10-01"
-                            
-                            //maxDate="2016-06-01"
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            
-                            customStyles={{
-                                dateIcon: {
-                                    width: 0
-                                },
-                                dateInput: {
-                                    borderRadius: 5,
-                                    borderWidth: 1,
-                                    borderColor: Colors.touchableBorderColor,
-                                    backgroundColor: '#91d1ff',
-                                    // fontSize:15
-                                },
-                                dateText:{
-                                    //color: '#c7c8ca',
-                                    fontSize:20,
-                                    justifyContent: 'flex-start'
-                                }
-                            }}
-                            
-                            onDateChange={(date) => this._handleFilterDateChange(date)}
-                        />
-                    </View>
-                    
-                    <View style={styles.filterItem}>
-                        <Text  style={styles.filterLable} >Приемная: </Text>
-                        <View  style={styles.pickerContainer}>
-                            <Picker
-                                //value={this.state.filterDate}    
-                                selectedValue={filterReceptionId}                            
-                                prompt="Выберите приемную"
-                                onValueChange={(itemValue, itemIndex) => this._handleReceptoionChange(itemValue)}>
-                
-                                <Picker.Item label="Обручева" value="754498388000" />
-                                <Picker.Item label="Автозаводская" value="123906749000" />
-                                <Picker.Item label="Нагатинская" value="2157440701000" />
-                                <Picker.Item label="Орликов" value="2768516261000" />
-                            </Picker>
-                        </View>
-                    </View>
-                </View>
-            </View>
-            
             <View styles={styles.horizontalDivider}>
                 {/* <Text>[ЧыК ЧЫК]></Text> */}
             </View>
@@ -208,7 +189,8 @@ export default class RequestListScreen extends Component {
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
                 <Loader message='Обновление заявок' isLoading={isFetching || isStatusChanging} >
                     <RequestList                         
-                        requests={items} 
+                        requests={ items} 
+                        // requests={ items.sort(this.compareRequests)} 
                         onShortPressRequest={ this._handleShortPressRequest} 
                         onLongPressRequest={ this._handleLongPressRequest}
                         onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox} 
@@ -222,10 +204,39 @@ export default class RequestListScreen extends Component {
             <View style={styles.bottomContainer}>
                 <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>                
                 <View styles={styles.bottomRowContainer}>
-                    <Text style={styles.bottomSmallLable}>C прочитанными баркодами: { this._geNТumberOfMatches(barcodes,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>C баркодами: { this._geNТumberOfMatches(barcodes,items)} шт.</Text>
                     <Text style={styles.bottomSmallLable}>Выделено на отправку: { this._geNТumberOfMatches(selectedItems,items)} шт.</Text>
                 </View>
             </View>
+
+            <Button
+           title="Уведомить офис "
+           onPress={() =>{ 
+            //startRequestsStatusChange
+            //navigation.navigate('NotifyOffice')
+            Alert.alert(
+                'Внимание',
+                'Отправить данные о полученных документах ?  (тест)',
+                [                              
+                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                  {text: 'OK', onPress: () => {
+                      console.log('OK Pressed');
+                      //this.props.startRequestsStatusChangeAction()
+                      navigation.state.params.startRequestsStatusChangeAction()
+                      //navigation.state.params.dispatch(clearSelectedItemAction());
+                      //navigation.state.params.dispatch(clearBarcodesAction());
+                    }
+                },
+                ],
+                { cancelable: false }
+              )
+            
+
+        }}
+         />
+
+
+            
             
           
         </View>     
@@ -265,7 +276,7 @@ const styles = StyleSheet.create({
     },
 
     listContainer:{        
-        height: '80%',
+        height: '85%',
         width:'98%',
         
     },

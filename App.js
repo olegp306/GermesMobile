@@ -15,7 +15,8 @@ import LoginScreen from './app/containers/LoginScreen';
 import RequestListScreen from './app/containers/RequestListScreen.js';
 import AddCommentScreen from './app/containers/AddCommentScreen.js';
 import BarCodeScannerScreen from './app/containers/BarCodeScannerScreen.js';
-import NotifyOfficeComponent from './app/components/NotifyOfficeComponent.js';
+//import NotifyOfficeComponent from './app/components/NotifyOfficeComponent.js';
+import NotifyOfficeScreen from './app/containers/NotifyOfficeScreen';
 import CheckBoxExampleComponent from './app/components/CheckBoxExampleComponent.js'
 
 import './ReactotronConfig'
@@ -43,19 +44,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 })
-// const Navigation = StackNavigator({
-//   Login: { screen: LoginScreen, navigationOptions: { header: null } }, 
-//   Main: { screen: MainScreen, navigationOptions: { header: null } },
-//   Tickets: { screen: TicketsScreen },
-//   Ticket: { screen: TicketScreen }
-// }, {
-//   initialRouteName: 'Login',
-//   navigationOptions: {
-//       headerStyle: styles.back,
-//       headerTitleStyle: styles.title,
-//       headerTintColor: '#53565A'
-//   }
-// })
 
 const RootStack = createStackNavigator(
   {
@@ -90,7 +78,7 @@ const RootStack = createStackNavigator(
 
   
     NotifyOffice: {
-      screen: NotifyOfficeComponent,
+      screen: NotifyOfficeScreen,
       navigationOptions:{
         headerTitle: 'Уведомить о получении '
        }

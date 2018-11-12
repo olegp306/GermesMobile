@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { CheckBox } from 'react-native-elements';
 import { 
     View,
     Text,
-    StyleSheet ,
-    CheckBox,
+    StyleSheet ,    
     TouchableOpacity
  } from 'react-native';
 //import { CheckBox } from 'react-native-elements';
@@ -52,10 +52,20 @@ export default class RequestComponent extends Component {
             </View>
 
             <View style={styles.rightMiddleContainer} >
-              <CheckBox              
+            <CheckBox
+              //title='Запомнить меня'
+              onPress={this._handleOnChangeRequestCheckBox}
+              containerStyle={styles.checkboxContainer}
+              //textStyle={styles.checkboxText}
+              checkedColor='green'
+              checked={this.props.isSelected}
+              />
+              {/* <CheckBox              
                 value={this.props.isSelected}
-                onValueChange ={this._handleOnChangeRequestCheckBox}
-               />
+                //onValueChange =
+                onPress={this._handleOnChangeRequestCheckBox}
+                checkedColor='black'
+               /> */}
             </View>
           </View>
 
@@ -92,6 +102,10 @@ const styles = StyleSheet.create({
         marginBottom:2,
         
     },
+    checkboxContainer: {
+      backgroundColor: 'transparent',
+      borderWidth: 0
+  },
     selectedContentContainer: {
       //height: 80,
       
