@@ -74,9 +74,9 @@ class LoginComponent extends Component {
                             />
                         </View>
 
-                        <TouchableOpacity style={styles.forgotContainer}>
+                        {/* <TouchableOpacity style={styles.forgotContainer}>
                             <Text style={styles.forgotText}>Забыли пароль?</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
 
                     {
