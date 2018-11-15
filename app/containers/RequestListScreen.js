@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import { setFilterDate, setReception } from '../middleware/redux/actions/Filter'
 import { fetchRequests, startRequestsStatusChange } from '../middleware/redux/actions/Requests'
 import { selectItem, unSelectItem, clearSelectedItems } from '../middleware/redux/actions/SelectedItems'
-
+import _ from 'lodash'
 
 
 const avtozavodskayaId=123906749000;
@@ -208,7 +208,8 @@ export default class RequestListScreen extends Component {
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
                 <Loader message='Обновление заявок' isLoading={isFetching || isStatusChanging} >
                     <RequestList                         
-                        requests={items} 
+                        requests={_.sortBy(items,'requestId') } 
+                        //requests={ items} 
                         onShortPressRequest={ this._handleShortPressRequest} 
                         onLongPressRequest={ this._handleLongPressRequest}
                         onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox} 

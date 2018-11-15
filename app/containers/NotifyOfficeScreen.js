@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import { setFilterDate, setReception } from '../middleware/redux/actions/Filter'
 import { fetchRequests, startRequestsStatusChange } from '../middleware/redux/actions/Requests'
 import { selectItem, unSelectItem, clearSelectedItems } from '../middleware/redux/actions/SelectedItems'
-
+import _ from 'lodash'
 
 
 const avtozavodskayaId=123906749000;
@@ -116,24 +116,34 @@ export default class NotifyOfficeScreen extends Component {
 // Наша функция сравнения
 
 compareRequests=(request1, request2) =>{
-    if(barcodes.items[request1] && barcodes.items[request2])
+    const barcodes=this.props.barcodes;
+    const barcode1=barcodes.items[request1.receiptNumber];
+    const barcode2=barcodes.items[request2.receiptNumber];
+
+    if(barcode1 && barcode2)
     {
-        return barcodes.items[request1].scanDateTime - barcodes.items[request2].scanDateTime;
+        var dateA = new Date(barcode1.scanDateTime);
+        var dateB = new Date(barcode2.scanDateTime);
+        //return barcodes.items[request1.receiptNumber].scanDateTime - barcodes.items[request2.receiptNumber].scanDateTime;
+        return  dateB - dateA;
     }
 
-    if(barcodes.items[request1] && barcodes.items[request2]==undefined)
-    {
-        return 1;
-    }
-    if(barcodes.items[request1]==undefined && barcodes.items[request2])
+     if(barcode1 && barcode2==undefined)
     {
         return -1;
     }
 
-    if(barcodes.items[request1]==undefined && barcodes.items[request2]==undefined)
+     if(barcode1==undefined && barcode2)
     {
-        return request1.requestId- request2.requestId
+        return 1;
     }
+
+     if(barcode1==undefined && barcode2==undefined)
+    {
+        return request1.requestId-request2.requestId;
+    }
+
+
   }
   
   
@@ -152,7 +162,7 @@ compareRequests=(request1, request2) =>{
     (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
   }
 
-  _geNТumberOfMatches=(array1, arrya2)=>{
+  _getNumberOfMatches=(array1, arrya2)=>{
     let amount=0;
     for(key in array1)
     {
@@ -179,6 +189,13 @@ compareRequests=(request1, request2) =>{
     //console.log(this.props);    
     const { isFetching ,items, isStatusChanging }=this.props.requests;
     const { filterDate, filterReceptionId, selectedItems, barcodes }=this.props;
+    //const customSortItemsArray = _.orderBy(items, ['requestId'],['asc']).sort(this.compareRequests)
+    const customItemsArray = _.values(items)
+    const customSortItemsArray = customItemsArray.sort(this.compareRequests)
+
+//chars = _.orderBy(chars, ['name'],['asc']); // Use Lodash to sort array by 'name'
+
+ //this.setState({characters: chars})
 
     return (
         <View style={styles.screenContainer}>
@@ -190,7 +207,7 @@ compareRequests=(request1, request2) =>{
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
                 <Loader message='Обновление заявок' isLoading={isFetching || isStatusChanging} >
                     <RequestList                         
-                        requests={ items} 
+                        requests={ customSortItemsArray} 
                         // requests={ items.sort(this.compareRequests)} 
                         onShortPressRequest={ this._handleShortPressRequest} 
                         onLongPressRequest={ this._handleLongPressRequest}
@@ -205,8 +222,8 @@ compareRequests=(request1, request2) =>{
             <View style={styles.bottomContainer}>
                 <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>                
                 <View styles={styles.bottomRowContainer}>
-                    <Text style={styles.bottomSmallLable}>C баркодами: { this._geNТumberOfMatches(barcodes,items)} шт.</Text>
-                    <Text style={styles.bottomSmallLable}>Выделено: { this._geNТumberOfMatches(selectedItems,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>C баркодами: { this._getNumberOfMatches(barcodes,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>Выделено: { this._getNumberOfMatches(selectedItems,items)} шт.</Text>
                 </View>
             </View>
 

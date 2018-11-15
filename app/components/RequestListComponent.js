@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList ,StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors, Images, Metrics } from '../theme';
+import _ from 'lodash'
 
 
 import RequestComponent from './RequestComponent';
@@ -35,13 +36,15 @@ export default class RequestListComponent extends Component {
     this.props.selectedItems[request.requestId] ? this.props.selectedItems[request.requestId].isSelected: false
   }
   _keyExtractor=(item,index) => item.requestId;
+  
+  //
 
   render() {
     console.log('RequestListComponent');
      return(
       <View>
         <FlatList 
-            data={this.getRequestArray().sort()}
+            data={this.props.requests}
             keyExtractor={this._keyExtractor}
             renderItem={({item}) =>                                         
                     <RequestComponent
