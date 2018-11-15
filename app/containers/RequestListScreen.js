@@ -222,8 +222,8 @@ export default class RequestListScreen extends Component {
             <View style={styles.bottomContainer}>
                 <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>                
                 <View styles={styles.bottomRowContainer}>
-                    <Text style={styles.bottomSmallLable}>C прочитанными баркодами: { this._geNТumberOfMatches(barcodes,items)} шт.</Text>
-                    <Text style={styles.bottomSmallLable}>Выделено на отправку: { this._geNТumberOfMatches(selectedItems,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>C баркодами: { this._geNТumberOfMatches(barcodes,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>Выделено: { this._geNТumberOfMatches(selectedItems,items)} шт.</Text>
                 </View>
             </View>
             

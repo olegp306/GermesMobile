@@ -114,6 +114,7 @@ export default class NotifyOfficeScreen extends Component {
 //     this.props.fetchRequestsAction(); //параметры забиру из store
 //     }
 // Наша функция сравнения
+
 compareRequests=(request1, request2) =>{
     if(barcodes.items[request1] && barcodes.items[request2])
     {
@@ -205,7 +206,7 @@ compareRequests=(request1, request2) =>{
                 <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>                
                 <View styles={styles.bottomRowContainer}>
                     <Text style={styles.bottomSmallLable}>C баркодами: { this._geNТumberOfMatches(barcodes,items)} шт.</Text>
-                    <Text style={styles.bottomSmallLable}>Выделено на отправку: { this._geNТumberOfMatches(selectedItems,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>Выделено: { this._geNТumberOfMatches(selectedItems,items)} шт.</Text>
                 </View>
             </View>
 

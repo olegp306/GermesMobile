@@ -64,7 +64,7 @@ const RootStack = createStackNavigator(
     AddComment: {
       screen: AddCommentScreen,
       navigationOptions:{
-        headerTitle: 'Комментарии по заявке'
+        headerTitle: 'Чат по заявке'
        }
    },
 
