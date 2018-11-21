@@ -7,10 +7,14 @@
     "slug": "germes",    
     "privacy": "public",
     "ios": {
-      "bundleIdentifier": "com.altsoft.germes"
+      "bundleIdentifier": "com.altsoft.germes",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan barcodes on requests and also to take foto for chat."
+      }
     },
     "android": {
       "package": "com.altsoft.germes"
     }
+    
   }  
 }
