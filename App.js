@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation'
 
 // import store from './app/middleware/redux'
 import { Provider } from 'react-redux'
-import { store } from './app/middleware/redux'
+import { store } from './app/store/index.js'
 
 import { MaterialIcons  } from '@expo/vector-icons';
 

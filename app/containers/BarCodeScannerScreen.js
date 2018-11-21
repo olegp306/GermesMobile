@@ -11,8 +11,8 @@ import {
  import _values from 'lodash/values';
 
  import { Colors, Images, Metrics } from '../theme';
- import { addBarcode, clearBarcodes } from '../middleware/redux/actions/Barcodes'
- import { selectItemByBarcode } from '../middleware/redux/actions/SelectedItems'
+ import { addBarcode, clearBarcodes } from '../store/germes/barcodes/actions.js'
+ import { selectItemByBarcode } from '../store/germes/selectedItems/actions.js'
 
  import BarCodeScannerComponent from '../components/BarCodeScannerComponent';
 

@@ -1,7 +1,7 @@
 import { 
   SET_FILTER_DATE,
   SET_RECEPTION
- } from '../actions/Filter'
+ } from './actions'
 
 import { Map } from 'immutable';
 

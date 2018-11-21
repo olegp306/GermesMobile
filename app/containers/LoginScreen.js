@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { NavigationActions, StackActions  } from 'react-navigation'
 //import OneSignal from 'react-native-onesignal'
 
-import { login } from '../middleware/redux/actions/Session'
-import { getSession } from '../middleware/redux/selectors'
+import { login } from '../store/session/actions.js'
+//import { getSession } from '../store/selectors/index.js'
 import { storeCredentials, storeCredentialsHide, loadCredentials } from '../middleware/utils/AsyncStorage'
 
 import LoginComponent from '../components/LoginComponent'

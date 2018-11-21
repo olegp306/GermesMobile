@@ -9,7 +9,7 @@ import {
     REQUESTS_STATUS_CHANGE_ERROR
 
 
-} from '../actions/Requests'
+} from './actions.js'
 
 
  const initialState =new Map({

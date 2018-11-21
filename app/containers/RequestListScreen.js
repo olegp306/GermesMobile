@@ -9,9 +9,9 @@ import Loader from '../components/Loader'
 
 import { connect } from 'react-redux'
 
-import { setFilterDate, setReception } from '../middleware/redux/actions/Filter'
-import { fetchRequests, startRequestsStatusChange } from '../middleware/redux/actions/Requests'
-import { selectItem, unSelectItem, clearSelectedItems } from '../middleware/redux/actions/SelectedItems'
+import { setFilterDate, setReception } from '../store/germes/filter/actions'
+import { fetchRequests, startRequestsStatusChange } from '../store/germes/requests/actions'
+import { selectItem, unSelectItem, clearSelectedItems } from '../store/germes/selectedItems/actions'
 import _ from 'lodash'
 
 
@@ -234,8 +234,6 @@ export default class RequestListScreen extends Component {
     );
   }
 }
-
-
 
 
 

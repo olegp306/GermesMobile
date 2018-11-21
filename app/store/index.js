@@ -1,7 +1,7 @@
 import { createStore , applyMiddleware } from 'redux'
 
-import Reactotron from '../../../ReactotronConfig'
-import { rootReducer  } from './reducers'
+import Reactotron from '../../ReactotronConfig.js'
+import { rootReducer  } from './reducers.js'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 

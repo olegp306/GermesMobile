@@ -1,5 +1,5 @@
 import { Map } from 'immutable'
-import { LOGIN_REQUEST, IS_LOGGING, LOGGED, LOGIN_FAILED } from '../actions/Session'
+import { LOGIN_REQUEST, IS_LOGGING, LOGGED, LOGIN_FAILED } from './actions.js'
 
 const initialState = Map({
   token: null,

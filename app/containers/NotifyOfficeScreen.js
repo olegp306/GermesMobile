@@ -9,9 +9,9 @@ import Loader from '../components/Loader'
 
 import { connect } from 'react-redux'
 
-import { setFilterDate, setReception } from '../middleware/redux/actions/Filter'
-import { fetchRequests, startRequestsStatusChange } from '../middleware/redux/actions/Requests'
-import { selectItem, unSelectItem, clearSelectedItems } from '../middleware/redux/actions/SelectedItems'
+import { setFilterDate, setReception } from '../store/germes/filter/actions.js'
+import { fetchRequests, startRequestsStatusChange } from '../store/germes/requests/actions.js'
+import { selectItem, unSelectItem, clearSelectedItems } from '../store/germes/selectedItems/actions.js'
 import _ from 'lodash'
 
 
@@ -68,52 +68,14 @@ export default class NotifyOfficeScreen extends Component {
         title: 'Уведомить офис',
         headerRight: 
            <View style={styles.headButtonsContainer}>                
-                <View style={styles.iconContainer}>
-                {/* <Icon
-                    name='send'
-                    size={37}
-                    color={Colors.actionItemColor}
-                    onPress={() =>{ 
-                        startRequestsStatusChange
-                        //navigation.navigate('NotifyOffice')
-                        Alert.alert(
-                            'Внимание',
-                            'Отправить данные о полученных документах ?  (тест)',
-                            [                              
-                              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                              {text: 'OK', onPress: () => {
-                                  console.log('OK Pressed');
-                                  //this.props.startRequestsStatusChangeAction()
-                                  navigation.state.params.startRequestsStatusChangeAction()
-                                  //navigation.state.params.dispatch(clearSelectedItemAction());
-                                  //navigation.state.params.dispatch(clearBarcodesAction());
-                                }
-                            },
-                            ],
-                            { cancelable: false }
-                          )
-                        
-
-                    }}
-                />           */}
+                <View style={styles.iconContainer}>               
                 </View>     
             </View>                  
             }
             
-  }
-  
-  //_handleFilterDateChange = (filterDate) => { this.setState({filterDate: filterDate },this._handleUpdateRequest )}
-//   _handleFilterDateChange = (filterDate) => {      
-//       this.props.setFilterDateAction(filterDate);
-//       this.props.fetchRequestsAction(); //параметры забиру из store
-//      };
+  }  
 
-
-//   _handleReceptoionChange = (receptionId) => {
-//     this.props.setReceptionIdAction(receptionId);
-//     this.props.fetchRequestsAction(); //параметры забиру из store
-//     }
-// Наша функция сравнения
+// функция сравнения для фильрации
 
 compareRequests=(request1, request2) =>{
     const barcodes=this.props.barcodes;
@@ -251,12 +213,7 @@ compareRequests=(request1, request2) =>{
             
 
         }}
-         />
-
-
-            
-            
-          
+         />     
         </View>     
        
     );
@@ -316,12 +273,10 @@ const styles = StyleSheet.create({
         
     bottomLable:{
         color: Colors.baseColor,
-        //textAlign:'left',
         fontSize: 17
     },
     bottomSmallLable:{
         color: Colors.baseColor,
-        //textAlign:'left',
         fontSize: 13
     },
     horizontalDivider: {

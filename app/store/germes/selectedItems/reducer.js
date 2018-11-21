@@ -5,7 +5,7 @@ import {
   CLEAR_SELECTED_ITEMS,
   ADD_SELECTED_ITEM,
   TOGGLE_SELECTED_ITEM  
- } from '../actions/SelectedItems'
+ } from './actions.js'
 
 import { Map } from 'immutable';
 

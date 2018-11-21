@@ -1,7 +1,7 @@
 import {
   ADD_BARCODE,
   CLEAR_BARCODES 
- } from '../actions/Barcodes'
+ } from './actions.js'
 
 import { Map } from 'immutable';
 

@@ -10,7 +10,7 @@ export const REQUESTS_STATUS_CHANGE_ERROR = 'REQUESTS_STATUS_CHANGE_ERROR'
 
 
 import _keyBy from 'lodash'
-import api from '../../api'
+import api from '../../../middleware/api'
 
 export const fetchRequests = () => {
     return (dispatch, getState)=>{        
