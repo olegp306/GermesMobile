@@ -16,7 +16,7 @@ import { storeCredentials, storeCredentialsHide, loadCredentials } from '../util
 //Germes real apiservice url
 export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
 
-
+https://service.allwingroup.ru/germes/v1/requestsgermes/mobile/changestatus/2768555610000
 
 // export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1/'
 //export const FILE_SERVER_URL = 'https://saas.claris.su/UserSettings/9323/Docs/'
@@ -95,8 +95,10 @@ const fetchRequests = (fromRegistrationPlanDate,receptionId) =>{
 const changeRequestStatus = async (requestsId) =>  {
     //console.log("changeRequestsStatus");
     const { user, password } = await loadCredentials()    
+    //requestsgermes/mobile/changestatus/2768555610000
 
-    const url=`BusinessCenterAPI.aspx?action=ChangeRequestsStatus\\${requestsId}`
+
+    const url=`requestsgermes/mobile/changestatus/${requestsId}`
     const body = `grant_type=password&username=${user}&password=${password}`
 
     const conf = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }}

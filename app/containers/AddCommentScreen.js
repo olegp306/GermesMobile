@@ -17,15 +17,15 @@ export default class AddCommentScreen extends Component {
     super(props);
     this.state = {
       comments:[
-        {commentId:"1", text : "Сказали что нет подписи", author: "Косокуков А", isMyComment : true},
+        {commentId:"1", text : "Сказали что нет подписи", author: "Иванов А", isMyComment : true},
         {commentId:"2", text : "Неправильный номер паспорта", author: "Чехов А", isMyComment : false},
         {commentId:"3", text : "Нет оригинала доверенности", author: "Быконя А", isMyComment : false},
-        {commentId:"4", text : "Сказали что нет подписи", author: "Косокуков А", isMyComment : true},
+        {commentId:"4", text : "Сказали что нет подписи", author: "Иванов А", isMyComment : true},
         {commentId:"5", text : "Неправильный номер паспорта", author: "Чехов А", isMyComment : false},
         {commentId:"6", text : "Нет оригинала доверенности", author: "Быконя А", isMyComment : false},
-        {commentId:"7", text : "Сказали что нет подписи", author: "Косокуков А", isMyComment : true},
+        {commentId:"7", text : "Сказали что нет подписи", author: "Иванов А", isMyComment : true},
         {commentId:"8", text : "Неправильный номер паспорта", author: "Чехов А", isMyComment : false},
-        {commentId:"9",text : "Нет оригинала доверенности", author: "Быконя А", isMyComment : false}
+        {commentId:"9",text : "Нет оригинала доверенности", author: "Иванов А", isMyComment : false}
       ]
     };
   }
