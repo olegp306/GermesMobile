@@ -93,11 +93,11 @@ const fetchRequests = (fromRegistrationPlanDate,receptionId) =>{
 };
 
 const changeRequestsStatus = async (requestsId) =>  {
-    console.log("changeRequestsStatus");
+    //console.log("changeRequestsStatus");
     const { user, password } = await loadCredentials()    
 
-    const url="BusinessCenterAPI.aspx?action=ChangeRequestsStatus"
-    const body = `grant_type=password&username=${user}&password=${password}&requestsId=${requestsId}`
+    const url=`BusinessCenterAPI.aspx?action=ChangeRequestsStatus\\${requestsId}`
+    const body = `grant_type=password&username=${user}&password=${password}`
 
     const conf = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }}
     //console.log(instance);
