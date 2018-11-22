@@ -10,11 +10,12 @@ import { storeCredentials, storeCredentialsHide, loadCredentials } from '../util
 //Local api service
 //export const API_SERVER_URL = 'http://192.168.0.121/ApiService/germes/v1/'
 
+// we don't need claris CRM connetion !!!
+// we need only api connection . Changes based on bol claris logic  will be throught API too
 
 //Germes real apiservice url
 export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
 
-//export const CLARIS_SERVER_URL='http://test.allwingroup.ru:3652'
 
 
 // export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1/'
@@ -26,9 +27,8 @@ const apiConf = {
     timeout: 35000
 }
 
-
-
 const apiInstance = axios.create(apiConf)
+
 
 
 toAssociativeArray =(data,idFieldName)=>{
@@ -92,7 +92,7 @@ const fetchRequests = (fromRegistrationPlanDate,receptionId) =>{
     return apiInstance.get('requestsgermes/mobile?fromRegistrationPlanDate='+fromRegistrationPlanDate+'&receptionId='+receptionId).catch(onError)
 };
 
-const changeRequestsStatus = async (requestsId) =>  {
+const changeRequestStatus = async (requestsId) =>  {
     //console.log("changeRequestsStatus");
     const { user, password } = await loadCredentials()    
 
@@ -101,7 +101,7 @@ const changeRequestsStatus = async (requestsId) =>  {
 
     const conf = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' }}
     //console.log(instance);
-    return clarisInstance.post(url, body, conf).catch(onError)
+    return apiInstance.post(url, body, conf).catch(onError)
 }
 
 
@@ -110,7 +110,7 @@ export default {
     login,
     authorize,
     setAuthHeader,
-    changeRequestsStatus,
+    changeRequestStatus,
     // fetchTickets,
     // addTicket,
     // updateTicketStatus,
