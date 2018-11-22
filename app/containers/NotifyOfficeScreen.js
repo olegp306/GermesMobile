@@ -10,8 +10,8 @@ import Loader from '../components/Loader'
 import { connect } from 'react-redux'
 
 import { setFilterDate, setReception } from '../store/germes/filter/actions.js'
-import { fetchRequests, startRequestsStatusChange } from '../store/germes/requests/actions.js'
-import { selectItem, unSelectItem, clearSelectedItems } from '../store/germes/selectedItems/actions.js'
+import { fetchRequests } from '../store/germes/requests/actions.js'
+import { selectItem, unSelectItem, clearSelectedItems , startRequestsStatusChange} from '../store/germes/selectedItems/actions.js'
 import _ from 'lodash'
 
 
@@ -211,7 +211,7 @@ compareRequests=(request1, request2) =>{
                 </View>
             </View>
 
-            {/* <Button
+            <Button
                 title="Уведомить офис "
                 onPress={() =>{ 
                     //startRequestsStatusChange
@@ -223,8 +223,9 @@ compareRequests=(request1, request2) =>{
                         {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                         {text: 'OK', onPress: () => {
                             console.log('OK Pressed');
+                            this.props.startRequestsStatusChangeAction()
                             //this.props.startRequestsStatusChangeAction()
-                            navigation.state.params.startRequestsStatusChangeAction()
+                            //navigation.state.params.startRequestsStatusChangeAction()
                             //navigation.state.params.dispatch(clearSelectedItemAction());
                             //navigation.state.params.dispatch(clearBarcodesAction());
                             }
@@ -235,7 +236,7 @@ compareRequests=(request1, request2) =>{
                     
 
                 }}
-             />      */}
+             />     
         </View>     
        
     );
