@@ -107,12 +107,12 @@ compareRequests=(request1, request2) =>{
 
 
   }
-  
-  
-  
 
-
-  _handleLongPressRequest = (requestId) =>{        
+    _handleOnClickUpdateStatus=()=>{
+    this.props.startRequestsStatusChangeAction(); 
+    }
+  
+    _handleLongPressRequest = (requestId) =>{        
     (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
   }
 
@@ -121,7 +121,7 @@ compareRequests=(request1, request2) =>{
   }
   
   _handleOnChangeRequestCheckBox = (requestId) =>{        
-    (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
+    (this.props.selectedItems.items.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
   }
 
   _getNumberOfMatches=(array1, arrya2)=>{
@@ -136,7 +136,29 @@ compareRequests=(request1, request2) =>{
     }
     return amount;
   }
-  
+
+  _getNumberOfBarcodesMatches=(array1, array2)=>{
+    let amount=0;
+    for(key in array1)
+    {
+        for(key2 in array2)
+        {
+            let requestId=array2[key2].receiptNumber;
+            if(key==requestId)
+            {
+                amount++;
+                break;
+            }
+        }   
+
+        // if(arrya2.hasOwnProperty(key))
+        // {
+        //     amount++;
+        // }
+
+    }
+    return amount;
+  }
 
  
   componentDidMount() {
@@ -184,36 +206,36 @@ compareRequests=(request1, request2) =>{
             <View style={styles.bottomContainer}>
                 <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>                
                 <View styles={styles.bottomRowContainer}>
-                    <Text style={styles.bottomSmallLable}>C баркодами: { this._getNumberOfMatches(barcodes,items)} шт.</Text>
-                    <Text style={styles.bottomSmallLable}>Выделено: { this._getNumberOfMatches(selectedItems,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>C баркодами: { this._getNumberOfBarcodesMatches(barcodes.items,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>Выделено: { this._getNumberOfMatches(selectedItems.items,items)} шт.</Text>
                 </View>
             </View>
 
-            <Button
-           title="Уведомить офис "
-           onPress={() =>{ 
-            //startRequestsStatusChange
-            //navigation.navigate('NotifyOffice')
-            Alert.alert(
-                'Внимание',
-                'Отправить данные о полученных документах ?  (тест)',
-                [                              
-                  {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                  {text: 'OK', onPress: () => {
-                      console.log('OK Pressed');
-                      //this.props.startRequestsStatusChangeAction()
-                      navigation.state.params.startRequestsStatusChangeAction()
-                      //navigation.state.params.dispatch(clearSelectedItemAction());
-                      //navigation.state.params.dispatch(clearBarcodesAction());
-                    }
-                },
-                ],
-                { cancelable: false }
-              )
-            
+            {/* <Button
+                title="Уведомить офис "
+                onPress={() =>{ 
+                    //startRequestsStatusChange
+                    //navigation.navigate('NotifyOffice')
+                    Alert.alert(
+                        'Внимание',
+                        'Отправить данные о полученных документах ?  (тест)',
+                        [                              
+                        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                        {text: 'OK', onPress: () => {
+                            console.log('OK Pressed');
+                            //this.props.startRequestsStatusChangeAction()
+                            navigation.state.params.startRequestsStatusChangeAction()
+                            //navigation.state.params.dispatch(clearSelectedItemAction());
+                            //navigation.state.params.dispatch(clearBarcodesAction());
+                            }
+                        },
+                        ],
+                        { cancelable: false }
+                    )
+                    
 
-        }}
-         />     
+                }}
+             />      */}
         </View>     
        
     );
