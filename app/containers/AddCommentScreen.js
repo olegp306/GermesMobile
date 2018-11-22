@@ -16,18 +16,6 @@ export default class AddCommentScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // request:
-      // {
-      //   "requestId": "2768498269000" ,
-      //   "requestNumber" : "48868" ,
-      //   "customerName" : "Каскад",
-      //   "transactionParticipant" : "ООО 'Бережки'",
-      //   "address" : "Подольский район, с/п Лаговское," ,
-      //   "docTypeNameName" : "акт приема-передачи" ,
-      //   "receiptNumber" : "50-50/001-50/001/010/2018-28901" ,
-      //   "fromRegistrationPlanDate" : "20.09.2018" ,
-      //   "notice" : "Акт выкупа зем. участка  50:27:0000000:132596"
-      // },
       comments:[
         {commentId:"1", text : "Сказали что нет подписи", author: "Косокуков А", isMyComment : true},
         {commentId:"2", text : "Неправильный номер паспорта", author: "Чехов А", isMyComment : false},

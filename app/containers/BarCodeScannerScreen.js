@@ -50,14 +50,6 @@ export default class BarCodeScannerScreen extends Component {
     this.props.addBarcodeAction(barcode);
   }
 
-
-
-  // _handlerScanBarcode=(barcode)=>{ 
-  //   this.props.addBarcodeAction(barcode);
-  //   //this.props.selectItemAction(barcode);    
-  // };
-  
-
   render() { 
     //const { isFetching ,items }=this.props.requests;
     const {items} = this.props.barcodes;  
