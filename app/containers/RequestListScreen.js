@@ -110,7 +110,7 @@ export default class RequestListScreen extends Component {
   }
   
   _handleOnChangeRequestCheckBox = (requestId) =>{        
-    (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
+    (this.props.selectedItems.items.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
   }
 
   _geNТumberOfMatches=(array1, arrya2)=>{
