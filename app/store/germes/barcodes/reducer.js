@@ -18,6 +18,7 @@ export function barcodesReducer(state = initialState, action){
       return state.mergeIn(['items',action.payload],{"codeText": action.payload,"scanDateTime": new Date() } )
       //return state.set([action.payload],  {"codeText": action.payload,"scanDateTime": new Date() });
       
+      
     case CLEAR_BARCODES:    
       return state.clear();
       

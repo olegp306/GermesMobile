@@ -44,6 +44,7 @@ export default requestsReducer = (state = initialState, action) => {
             return state.merge({isFetching: false, error: action.payload})
 
        
+            
          case REQUESTS_STATUS_CHANGE:
             return state.merge({isStatusChanging: true, statusChanged: false, statusChangedError: null})
 
