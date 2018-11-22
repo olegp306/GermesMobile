@@ -6,6 +6,7 @@ export const getRequest = store => store.request.toJS()
 
 
 export const getFilterDate = store => store.get('filterDate')
+
 export const getFilterReceptionId = store => store.get('filterReceptionId')
 
 
