@@ -15,9 +15,6 @@ import NotifyOfficeScreen from './app/containers/NotifyOfficeScreen';
 
 import './ReactotronConfig'
 
-
-
-
 const styles = StyleSheet.create({
   back: { 
     backgroundColor: '#C9C8C7'
