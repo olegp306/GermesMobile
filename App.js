@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
-import  {Text, View, Button,KeyboardAvoidingView,StyleSheet} from 'react-native';
+import  {StyleSheet} from 'react-native';
 import { createStackNavigator } from 'react-navigation'
+import {createDrawerNavigator } from 'react-navigation'
 
-// import store from './app/middleware/redux'
 import { Provider } from 'react-redux'
 import { store } from './app/store/index.js'
-
-import { MaterialIcons  } from '@expo/vector-icons';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from './app/containers/HomeScreen.js';
 import LoginScreen from './app/containers/LoginScreen';
 import RequestListScreen from './app/containers/RequestListScreen.js';
 import AddCommentScreen from './app/containers/AddCommentScreen.js';
 import BarCodeScannerScreen from './app/containers/BarCodeScannerScreen.js';
-//import NotifyOfficeComponent from './app/components/NotifyOfficeComponent.js';
 import NotifyOfficeScreen from './app/containers/NotifyOfficeScreen';
-import CheckBoxExampleComponent from './app/components/CheckBoxExampleComponent.js'
 
 import './ReactotronConfig'
 
@@ -94,8 +88,42 @@ const RootStack = createStackNavigator(
             headerTitleStyle: styles.title,
             headerTintColor: '#53565A'
         }
-  }
+  }  
 );
+
+const routes = {
+  Login: {
+    sc: LoginScreen,
+    
+  },
+  AddComment: {
+    screen: AddCommentScreen,
+    
+  },
+  NotifyOffice: {
+    screen: NotifyOfficeScreen,
+    
+  }
+  
+};
+
+const AppNavigator  = createDrawerNavigator({
+  BarCodeScanner:{
+    screen:BarCodeScannerScreen
+  },
+  NotifyOffice:{
+    screen:NotifyOfficeScreen
+  }
+}
+// ,
+//  {
+//   initialRouteName: 'Login',
+//   navigationOptions: {
+    
+//   },
+// }
+);
+
 
 //Назначение функции connect вытекает из названия: подключи React компонент к Redux store.
 // Результат работы функции connect - новый присоединенный компонент, который оборачивает переданный компонент.
