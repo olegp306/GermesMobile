@@ -42,7 +42,7 @@ export default class BarCodeScannerComponent extends Component {
           <Text>Запрашиваем разрешение на использование камеры</Text> :
           this.state.hasCameraPermission === false ?
             // <Text>Camera permission is not granted</Text> :
-            <Text>Разорешение к доступу к камере не предоставлены</Text> :
+            <Text>Разрешение к доступу к камере не предоставлены</Text> :
             <BarCodeScanner
               torchMode="on"
               onBarCodeRead={this._handleBarCodeRead}
