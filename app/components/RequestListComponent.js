@@ -59,7 +59,7 @@ export default class RequestListComponent extends Component {
                         fromRegistrationPlanDate={item.fromRegistrationPlanDate}
                         notice={item.notice}
 
-                        isSelected={this.props.selectedItems.hasOwnProperty(item.requestId)}
+                        isSelected={this.props.selectedItems.items.hasOwnProperty(item.requestId)}
                         isBarcodeExist={this.props.barcodes.items.hasOwnProperty(item.receiptNumber)}      
                         
                         onShortPressRequest={ this._handleShortPress }
