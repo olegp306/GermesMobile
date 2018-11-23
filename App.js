@@ -13,6 +13,8 @@ import AddCommentScreen from './app/containers/AddCommentScreen.js';
 import BarCodeScannerScreen from './app/containers/BarCodeScannerScreen.js';
 import NotifyOfficeScreen from './app/containers/NotifyOfficeScreen';
 
+import Colors from "./app/theme/Colors.js"
+
 import './ReactotronConfig'
 
 const styles = StyleSheet.create({
@@ -84,9 +86,8 @@ const RootStack = createStackNavigator(
     navigationOptions: {
             headerStyle: styles.back,
             headerTitleStyle: styles.title,
-            // headerTintColor: '#53565A',
-            headerTintColor: '#047591'
-        }
+            headerTintColor: Colors.darkBackgroundColor
+    }
   }  
 );
 

@@ -10,15 +10,23 @@ const Colors = {
   actionItemColorLight2: "#597482",
 
   navigatorBackgroudColor: '#047591',
-  touchableBorderColor: '#5A0CE8',
+  darkBackgroundColor: '#5A0CE8',
   actionBackgroudColor: '#5A0CE8',
   ligth:'#E8940B',
   ligth2:'#CFFF0D',
   
+
+  //https://color.adobe.com/ru/create/color-wheel/?base=2&rule=Analogous&selected=0&name=%D0%9C%D0%BE%D1%8F%20%D1%82%D0%B5%D0%BC%D0%B0%20Color&mode=rgb&rgbvalues=0.01568627450980392,0.4588235294117647,0.5686274509803921,0.3545127659571574,0.04549999999999994,0.91,1,0,0,0.91,0.5806126462347856,0.04495929504613476,0.8082137555665213,1,0.050000000000000044&swatchOrder=0,1,2,3,4
+  darkBackgroundColor : "#047591 ",
+  actionBackgroundColor :"#5A0CE8 ", 
+  lightBackgroundColor :"#CEFF0D ",
+  noteBackgroundColor :"#E8940B ",
+  warningBackgroundColor :"#FF0000 ",
+
   
   
 
-  touchableBorderColor: '#6DC9E7',
+  darkBackgroundColor: '#6DC9E7',
 
 }
 

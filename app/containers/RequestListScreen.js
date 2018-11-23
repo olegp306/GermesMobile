@@ -161,6 +161,7 @@ export default class RequestListScreen extends Component {
     return (
         <View style={styles.screenContainer}>
             <View style={styles.headContainer}>
+
                 <View  style={styles.filterDateContainer} >
                     <View style={styles.filterItem}>
                         <Text style={styles.filterLable}> Выдача до: </Text>                
@@ -183,7 +184,7 @@ export default class RequestListScreen extends Component {
                                 dateInput: {
                                     borderRadius: 5,
                                     borderWidth: 1,
-                                    borderColor: Colors.touchableBorderColor,
+                                    borderColor: Colors.darkBackgroundColor,
                                     backgroundColor: '#91d1ff',
                                     // fontSize:15
                                 },
@@ -214,6 +215,7 @@ export default class RequestListScreen extends Component {
                             </Picker>
                         </View>
                     </View>
+
                 </View>
             </View>
             
@@ -261,7 +263,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         height: '100%',
-        backgroundColor: Colors.backgroundColor
+        backgroundColor: 'white'
     },
 
     headContainer:{
@@ -272,7 +274,7 @@ const styles = StyleSheet.create({
     filterDateContainer:{
         flexDirection:'row',
         height: '85%',
-        borderColor:Colors.touchableBorderColor
+        borderColor:Colors.darkBackgroundColor
     },
 
     filterItem:{
@@ -322,7 +324,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1 ,
         backgroundColor: '#91d1ff' ,       
-        borderColor: Colors.touchableBorderColor,        
+        borderColor: Colors.darkBackgroundColor,        
     },
     filterLable:{
         fontSize:10
