@@ -113,7 +113,7 @@ export default class RequestListScreen extends Component {
     (this.props.selectedItems.items.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
   }
 
-  _geNТumberOfMatches=(array1, arrya2)=>{
+  _getNumberOfMatches=(array1, arrya2)=>{
     let amount=0;
     for(key in array1)
     {
@@ -122,6 +122,23 @@ export default class RequestListScreen extends Component {
             amount++;
         }
 
+    }
+    return amount;
+  }
+
+  _getNumberOfBarcodesMatches=(array1, array2)=>{
+    let amount=0;
+    for(key in array1)
+    {
+        for(key2 in array2)
+        {
+            let requestId=array2[key2].receiptNumber;
+            if(key==requestId)
+            {
+                amount++;
+                break;
+            }
+        }  
     }
     return amount;
   }
@@ -223,8 +240,8 @@ export default class RequestListScreen extends Component {
             <View style={styles.bottomContainer}>
                 <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>                
                 <View styles={styles.bottomRowContainer}>
-                    <Text style={styles.bottomSmallLable}>C баркодами: { this._geNТumberOfMatches(barcodes,items)} шт.</Text>
-                    <Text style={styles.bottomSmallLable}>Выделено: { this._geNТumberOfMatches(selectedItems,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>C баркодами: { this._getNumberOfBarcodesMatches(barcodes.items,items)} шт.</Text>
+                    <Text style={styles.bottomSmallLable}>Выделено: { this._getNumberOfMatches(selectedItems.items,items)} шт.</Text>
                 </View>
             </View>
             
