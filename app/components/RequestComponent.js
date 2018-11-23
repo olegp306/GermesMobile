@@ -51,11 +51,11 @@ export default class RequestComponent extends Component {
             </View>
 
             <View style={styles.rightMiddleContainer} >
-              <CheckBox              
+              <CheckBox style={styles.checkbox}              
                   onPress={this._handleOnChangeRequestCheckBox}
                   containerStyle={styles.checkboxContainer}              
                   checkedColor='green'
-                  checked={this.props.isSelected}
+                  checked={this.props.isSelected}                  
                />
             
             {this.props.isUpdating ? (<ActivityIndicator size='large' /> ) : null }       
@@ -78,18 +78,10 @@ export default class RequestComponent extends Component {
                 ):null
               }            
               </View>
-              {/* <View style={styles.bottomContainer}>
-              {
-                this.props.isBarcodeExist ?
-                (
-                <View style={styles.leftCheckbox}>
-                  <Text >Прочитан баркод </Text>                
-                </View>
-                ):null
-              }            
-              </View> */}
+              
             </View>                  
         </View>
+        <View style={styles.horizontalDivider}></View>
       
       </TouchableOpacity>
     );
@@ -102,12 +94,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignItems: 'stretch',
-        borderColor: '#252828',
-        borderWidth: 2,
-        backgroundColor: 'white',
-        borderRadius: 7,
-        //paddingLeft:5,        
         marginBottom:2,
+        backgroundColor: 'white',
+        //borderColor: '#252828',
+        //borderWidth: 2,
+        
+        //borderRadius: 7,
+        //paddingLeft:5,        
+        
         
     },
     checkboxContainer: {
@@ -115,25 +109,16 @@ const styles = StyleSheet.create({
       borderWidth: 0
   },
     selectedContentContainer: {
-      //height: 80,
-      
+      width: '100 %', 
       flexDirection: 'column',
       justifyContent: 'flex-start',
       alignItems: 'stretch',
-      borderColor: '#252828',
-      // borderColor: '#6DC9E7',
-      // borderColor: '#07ef00',
-      borderWidth: 2,
-      backgroundColor: '#C9C8C7',
-      borderRadius: 7,
-      //paddingLeft:5,
-      //marginTop:1,
-      marginBottom:2,
-      
-
+     marginBottom:2,
+     backgroundColor: '#EEEEEE',
+     opacity:0.5
   },
     receiptNumberContainer:{
-      backgroundColor: Colors.baseBackgroundColor
+      //backgroundColor: Colors.baseBackgroundColor
     },
     receiptNumber:{      
       fontWeight:'500',
@@ -189,6 +174,18 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'stretch'
+    },
+
+    horizontalDivider: {
+        width: '95%',
+        height: 1,
+        backgroundColor: "#6E6E6E",
+        justifyContent: 'space-between',
+    },
+    checkbox:{
+     
+      // borderColor:Colors.actionItemColor,
+      // color:Colors.actionItemColor
     }
 });
 

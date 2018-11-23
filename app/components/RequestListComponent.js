@@ -73,10 +73,3 @@ export default class RequestListComponent extends Component {
      )
   }
 }
-const styles = StyleSheet.create({   
-    list:{
-        backgroundColor: Colors.backgroundColor,        
-    }   
-
-    
-});

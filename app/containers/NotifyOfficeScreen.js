@@ -149,13 +149,7 @@ compareRequests=(request1, request2) =>{
                 amount++;
                 break;
             }
-        }   
-
-        // if(arrya2.hasOwnProperty(key))
-        // {
-        //     amount++;
-        // }
-
+        }  
     }
     return amount;
   }
@@ -265,7 +259,7 @@ const styles = StyleSheet.create({
     filterDateContainer:{
         flexDirection:'row',
         height: '85%',
-        borderColor:Colors.touchableBorderColor
+        borderColor:Colors.actionBackgroudColor
     },
 
     filterItem:{
@@ -313,7 +307,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1 ,
         backgroundColor: '#91d1ff' ,       
-        borderColor: Colors.touchableBorderColor,        
+        borderColor: Colors.actionBackgroudColor,        
     },
     filterLable:{
         fontSize:10

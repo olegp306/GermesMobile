@@ -17,11 +17,12 @@ import './ReactotronConfig'
 
 const styles = StyleSheet.create({
   back: { 
-    backgroundColor: '#C9C8C7'
+    backgroundColor: '#047591'
+    //'#C9C8C7'
   }, 
   title:
    {
-     color: '#53565A',
+     color: 'white',
      fontSize: 18
    },
    headButtonsContainer:{
@@ -83,7 +84,8 @@ const RootStack = createStackNavigator(
     navigationOptions: {
             headerStyle: styles.back,
             headerTitleStyle: styles.title,
-            headerTintColor: '#53565A'
+            // headerTintColor: '#53565A',
+            headerTintColor: '#047591'
         }
   }  
 );
