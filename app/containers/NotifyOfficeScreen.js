@@ -285,8 +285,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',  
         justifyContent: 'space-between',
         alignItems: 'center',        
-    },
-        
+    },        
         
     bottomLable:{
         color: Colors.baseColor,

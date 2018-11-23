@@ -160,43 +160,42 @@ export default class RequestListScreen extends Component {
 
     return (
         <View style={styles.screenContainer}>
+
             <View style={styles.headContainer}>
 
-                <View  style={styles.filterDateContainer} >
+                <View  style={styles.filtersContainer} >
+
                     <View style={styles.filterItem}>
-                        <Text style={styles.filterLable}> Выдача до: </Text>                
-                        <DatePicker
-                            style={{width: 175}}
-                            date={filterDate}
-                            mode="date"
-                            placeholder="select date"
-                            format="DD-MM-YYYY"
-                            minDate="2018-10-01"
-                            
-                            //maxDate="2016-06-01"
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            
-                            customStyles={{
-                                dateIcon: {
-                                    width: 0
-                                },
-                                dateInput: {
-                                    borderRadius: 5,
-                                    borderWidth: 1,
-                                    borderColor: Colors.darkBackgroundColor,
-                                    backgroundColor: '#91d1ff',
-                                    // fontSize:15
-                                },
-                                dateText:{
-                                    //color: '#c7c8ca',
-                                    fontSize:20,
-                                    justifyContent: 'flex-start'
-                                }
-                            }}
-                            
-                            onDateChange={(date) => this._handleFilterDateChange(date)}
-                        />
+                        <Text style={styles.filterLable}> Выдача до: </Text> 
+                        <View  style={styles.pickerContainer}>
+                            <DatePicker
+                                style={{width: 175}}
+                                date={filterDate}
+                                mode="date"
+                                placeholder="select date"
+                                format="DD-MM-YYYY"
+                                minDate="2018-10-01"
+                                
+                                //maxDate="2016-06-01"
+                                confirmBtnText="Confirm"
+                                cancelBtnText="Cancel"
+                                
+                                customStyles={{
+                                    dateIcon: {
+                                        width: 0
+                                    },
+                                    dateInput: {                                        
+                                        backgroundColor: Colors.actionBackgroundColor,
+                                        // fontSize:15
+                                    },
+                                    dateText:{                                    
+                                        fontSize:20,                                        
+                                    }
+                                }}
+                                
+                                onDateChange={(date) => this._handleFilterDateChange(date)}
+                            />
+                        </View>
                     </View>
                     
                     <View style={styles.filterItem}>
@@ -240,7 +239,10 @@ export default class RequestListScreen extends Component {
                  </Loader>
             </View>            
             <View style={styles.bottomContainer}>
-                <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>                
+                <View styles={styles.bottomRowContainer}>
+                    <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>
+                </View>                
+
                 <View styles={styles.bottomRowContainer}>
                     <Text style={styles.bottomSmallLable}>C баркодами: { this._getNumberOfBarcodesMatches(barcodes.items,items)} шт.</Text>
                     <Text style={styles.bottomSmallLable}>Выделено: { this._getNumberOfMatches(selectedItems.items,items)} шт.</Text>
@@ -271,15 +273,16 @@ const styles = StyleSheet.create({
         height: '12%',
     },
 
-    filterDateContainer:{
-        flexDirection:'row',
-        height: '85%',
-        borderColor:Colors.darkBackgroundColor
+    filtersContainer:{
+        flexDirection:'row',        
+        width: '100%',                
     },
 
     filterItem:{
         flexDirection: 'column',
-        justifyContent: 'space-between'
+        width: '47%',
+        marginLeft: 2 ,
+        marginRight: 2
     },
 
     listContainer:{        
@@ -291,27 +294,34 @@ const styles = StyleSheet.create({
     bottomContainer:{
         height: '8%',
         width:'98%',
-        flexDirection: 'row',
-        // flex: -1,
+        flexDirection: 'row',                
+        alignItems: 'center',
+        backgroundColor: Colors.darkBackgroundColor,
+
+        // flex: 1,
+        
         justifyContent: 'space-between',
         alignItems: 'center',
-    },
-    bottomRowContainer:{      
-        flexDirection: 'column',  
-        justifyContent: 'space-between',
-        alignItems: 'center',        
-    },
         
+    },
+    bottomRowContainer:{
+             
+        // flexDirection: 'column',         
+        // justifyContent: 'space-between',
+        // alignItems: 'center',        
+    },        
         
     bottomLable:{
         color: Colors.baseColor,
-        //textAlign:'left',
-        fontSize: 17
+        fontSize: 17,
+        color: 'white',
+        marginLeft: 5,
     },
     bottomSmallLable:{
         color: Colors.baseColor,
-        //textAlign:'left',
-        fontSize: 13
+        fontSize: 13,
+        color: 'white',
+        marginRight: 5,
     },
     horizontalDivider: {
         height: 15,
@@ -320,11 +330,14 @@ const styles = StyleSheet.create({
     },
     pickerContainer:{
         height: 40,
-        width: 175,
-        borderRadius: 5,
-        borderWidth: 1 ,
-        backgroundColor: '#91d1ff' ,       
-        borderColor: Colors.darkBackgroundColor,        
+        flexDirection: 'column',
+        justifyContent : 'center',
+        // justifyContent: 'flex-start',
+        //width: 175,
+        // borderRadius: 5,
+        // borderWidth: 1 ,
+        backgroundColor: Colors.actionBackgroundColor ,       
+        //borderColor: Colors.darkBackgroundColor,        
     },
     filterLable:{
         fontSize:10
