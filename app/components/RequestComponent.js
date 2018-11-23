@@ -4,20 +4,18 @@ import {
     View,
     Text,
     StyleSheet ,    
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator
  } from 'react-native';
 //import { CheckBox } from 'react-native-elements';
+import Loader from '../components/Loader'
+//import SmallLoader from "../components/SmallLoader"
 
 
  import { Colors, Images, Metrics } from '../theme';
 
 export default class RequestComponent extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //   };
-  // }
-
+  
   _handleShortPress=()=>{
     //console.log(this.props.onShortPressRequest);
     this.props.onShortPressRequest(this.props);
@@ -37,7 +35,8 @@ export default class RequestComponent extends Component {
       <TouchableOpacity 
         onPress={this._handleShortPress}
         onLongPress={this._handleLongPress}
-                  >    
+                  >
+        {/* <ActivityIndicator size='large' /> */}
         <View style={ this.props.isSelected==true ? styles.selectedContentContainer: styles.unselectedContentContainer}>
           <View style={ styles.receiptNumberContainer}>        
             <Text style={styles.receiptNumber}> {this.props.receiptNumber} </Text>
@@ -52,37 +51,46 @@ export default class RequestComponent extends Component {
             </View>
 
             <View style={styles.rightMiddleContainer} >
-            <CheckBox
-              //title='Запомнить меня'
-              onPress={this._handleOnChangeRequestCheckBox}
-              containerStyle={styles.checkboxContainer}
-              //textStyle={styles.checkboxText}
-              checkedColor='green'
-              checked={this.props.isSelected}
-              />
-              {/* <CheckBox              
-                value={this.props.isSelected}
-                //onValueChange =
-                onPress={this._handleOnChangeRequestCheckBox}
-                checkedColor='black'
-               /> */}
+              <CheckBox              
+                  onPress={this._handleOnChangeRequestCheckBox}
+                  containerStyle={styles.checkboxContainer}              
+                  checkedColor='green'
+                  checked={this.props.isSelected}
+               />
+            
+            {this.props.isUpdating ? (<ActivityIndicator size='large' /> ) : null }       
+            
+                            
             </View>
           </View>
 
           
           
 
-          <View style={styles.bottomContainer}>
-            {
-              this.props.isBarcodeExist ?
-              (
-              <View style={styles.leftCheckbox}>
-                <Text >Прочитан баркод </Text>                
+          <View style={styles.bottomStikersContainer}>
+            <View style={styles.bottomContainer}>
+              {
+                this.props.isBarcodeExist ?
+                (
+                <View style={styles.leftCheckbox}>
+                  <Text >Прочитан баркод </Text>                
+                </View>
+                ):null
+              }            
               </View>
-              ):null
-            }            
-            </View>                
+              {/* <View style={styles.bottomContainer}>
+              {
+                this.props.isBarcodeExist ?
+                (
+                <View style={styles.leftCheckbox}>
+                  <Text >Прочитан баркод </Text>                
+                </View>
+                ):null
+              }            
+              </View> */}
+            </View>                  
         </View>
+      
       </TouchableOpacity>
     );
   }
@@ -170,6 +178,13 @@ const styles = StyleSheet.create({
     },
     
     bottomContainer:{
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'stretch'
+    },
+
+    bottomStikersContainer:    {
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',

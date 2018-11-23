@@ -54,7 +54,7 @@ export const startRequestsStatusChange = () => {
         dispatch(changeItemStatus(requestId)); 
 
         api.changeRequestStatus(requestId)
-        .then(data=>dispatch(changeItemStatusSuccess(data.data)))
+        .then(data=>dispatch(changeItemStatusSuccess(requestId)))
         .catch(error=>dispatch(changeItemStatusError(error,requestId)))
       }
 
@@ -73,7 +73,8 @@ export const changeItemStatus=(requestId)=> {
 
 export const changeItemStatusSuccess=(requestId)=> {
   return {
-    type: 'CHANGE_ITEM_STATUS_SUCCESS'
+    type: 'CHANGE_ITEM_STATUS_SUCCESS',
+    payload: requestId,
   }
 } 
 
