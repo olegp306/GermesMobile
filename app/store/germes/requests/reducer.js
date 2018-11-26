@@ -18,9 +18,9 @@ import {
     fetched: false,
     error: null ,
 
-    isStatusChanging: false,
-    statusChanged: false,
-    statusChangedError: null
+    refreshing: false,
+
+    
   });
 
   // export function requestsReducer(state = initialState){

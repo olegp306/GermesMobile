@@ -113,6 +113,15 @@ export default class RequestListScreen extends Component {
     (this.props.selectedItems.items.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
   }
 
+  _handleOnRefreshList=()=>{
+    this.props.fetchRequestsAction(); 
+  }
+
+  _handleFilterDateChange = (filterDate) => {      
+    this.props.setFilterDateAction(filterDate);
+    this.props.fetchRequestsAction(); //параметры забиру из store
+   };
+
   _getNumberOfMatches=(array1, arrya2)=>{
     let amount=0;
     for(key in array1)
@@ -155,7 +164,7 @@ export default class RequestListScreen extends Component {
   render() {
     //console.log('RequestListScreen');
     //console.log(this.props);    
-    const { isFetching ,items, isStatusChanging }=this.props.requests;
+    const { isFetching ,items, isStatusChanging, refreshing }=this.props.requests;
     const { filterDate, filterReceptionId, selectedItems, barcodes }=this.props;
 
     return (
@@ -227,10 +236,12 @@ export default class RequestListScreen extends Component {
                 <Loader message='Обновление заявок' isLoading={isFetching || isStatusChanging} >
                     <RequestList                         
                         requests={_.sortBy(items,'requestId') } 
+                        refreshing={refreshing}
                         //requests={ items} 
                         onShortPressRequest={ this._handleShortPressRequest} 
                         onLongPressRequest={ this._handleLongPressRequest}
-                        onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox} 
+                        onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox}
+                        onRefreshList={ this._handleOnRefreshList} 
 
                         // selectedItems={selectedItems} 
                         selectedItems={selectedItems}

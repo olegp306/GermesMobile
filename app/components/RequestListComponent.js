@@ -8,17 +8,17 @@ import RequestComponent from './RequestComponent';
 
 export default class RequestListComponent extends Component {
 
-  getRequestArray=()=>{
-    let requestsArray= new Array;
+  // getRequestArray=()=>{
+  //   let requestsArray= new Array;
     
-    for (let prop in this.props.requests)
-    {
-        let request=this.props.requests[prop];        
-        requestsArray.push(this.props.requests[prop]);
-    }
+  //   for (let prop in this.props.requests)
+  //   {
+  //       let request=this.props.requests[prop];        
+  //       requestsArray.push(this.props.requests[prop]);
+  //   }
     
-    return requestsArray;
-   }
+  //   return requestsArray;
+  //  }
 
    _handleShortPress=(requestId)=>{    
     this.props.onShortPressRequest(requestId);
@@ -30,6 +30,10 @@ export default class RequestListComponent extends Component {
 
   _handleOnChangeRequestCheckBox=(requestId)=>{
     this.props.onChangeRequestCheckBox(requestId)
+  }
+
+  _handleOnRefreshList=()=>{
+    this.props.onRefreshList();
   }
 
   _isSelected=(request)=>{
@@ -46,6 +50,10 @@ export default class RequestListComponent extends Component {
         <FlatList 
             data={this.props.requests}
             keyExtractor={this._keyExtractor}
+
+            refreshing={this.props.refreshing}
+            onRefresh={this._handleOnRefreshList}
+            
             renderItem={({item}) =>                                         
                     <RequestComponent
                         key={item.requestId}
