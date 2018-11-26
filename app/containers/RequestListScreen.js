@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DatePicker from 'react-native-datepicker'
 
 import RequestList from '../components/RequestListComponent';
+import TotalRequestsContainer from '../containers/TotalRequestsContainer';
+
 import Loader from '../components/Loader'
 
 import { connect } from 'react-redux'
@@ -121,38 +123,6 @@ export default class RequestListScreen extends Component {
     this.props.setFilterDateAction(filterDate);
     this.props.fetchRequestsAction(); //параметры забиру из store
    };
-
-  _getNumberOfMatches=(array1, arrya2)=>{
-    let amount=0;
-    for(key in array1)
-    {
-        if(arrya2.hasOwnProperty(key))
-        {
-            amount++;
-        }
-
-    }
-    return amount;
-  }
-
-  _getNumberOfBarcodesMatches=(array1, array2)=>{
-    let amount=0;
-    for(key in array1)
-    {
-        for(key2 in array2)
-        {
-            let requestId=array2[key2].receiptNumber;
-            if(key==requestId)
-            {
-                amount++;
-                break;
-            }
-        }  
-    }
-    return amount;
-  }
-  
-
  
   componentDidMount() {
       this.props.fetchRequestsAction(); //параметры забиру из store
@@ -162,8 +132,6 @@ export default class RequestListScreen extends Component {
   
 
   render() {
-    //console.log('RequestListScreen');
-    //console.log(this.props);    
     const { isFetching ,items, refreshing }=this.props.requests;
     const { filterDate, filterReceptionId, selectedItems, barcodes }=this.props;
 
@@ -178,27 +146,25 @@ export default class RequestListScreen extends Component {
                         <Text style={styles.filterLable}> Выдача до: </Text> 
                         <View  style={styles.pickerContainer}>
                             <DatePicker
-                                style={{width: 175}}
+                                style={{width: '100%'}}
                                 date={filterDate}
                                 mode="date"
                                 placeholder="select date"
                                 format="DD-MM-YYYY"
-                                minDate="2018-10-01"
-                                
-                                //maxDate="2016-06-01"
+                                minDate="2010-10-01"
                                 confirmBtnText="Confirm"
                                 cancelBtnText="Cancel"
                                 
-                                customStyles={{
+                                customStyles={{                                    
                                     dateIcon: {
                                         width: 0
                                     },
-                                    dateInput: {                                        
-                                        backgroundColor: Colors.actionBackgroundColor,
-                                        // fontSize:15
+                                    dateInput: {
+                                        borderWidth: 0,
                                     },
                                     dateText:{                                    
-                                        fontSize:20,                                        
+                                        fontSize:20,
+                                        color: Colors.lightTextColor                                       
                                     }
                                 }}
                                 
@@ -211,6 +177,7 @@ export default class RequestListScreen extends Component {
                         <Text  style={styles.filterLable} >Приемная: </Text>
                         <View  style={styles.pickerContainer}>
                             <Picker
+                                style={{color:Colors.lightTextColor}}
                                 //value={this.state.filterDate}    
                                 selectedValue={filterReceptionId}                            
                                 prompt="Выберите приемную"
@@ -262,26 +229,13 @@ export default class RequestListScreen extends Component {
                     }            
                     
                  </Loader>
-            </View>            
-            <View style={styles.bottomContainer}>
-                <View styles={styles.bottomRowContainer}>
-                    <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>
-                </View>                
-
-                <View styles={styles.bottomRowContainer}>
-                    <Text style={styles.bottomSmallLable}>C баркодами: { this._getNumberOfBarcodesMatches(barcodes.items,items)} шт.</Text>
-                    <Text style={styles.bottomSmallLable}>Выделено: { this._getNumberOfMatches(selectedItems.items,items)} шт.</Text>
-                </View>
             </View>
-            
-          
+            <TotalRequestsContainer />            
         </View>     
        
     );
   }
 }
-
-
 
 const styles = StyleSheet.create({
     screenContainer: {
@@ -307,47 +261,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: '47%',
         marginLeft: 2 ,
-        marginRight: 2
+        marginRight: 2,        
     },
 
     listContainer:{        
         height: '80%',
         width:'98%',
         
-    },
-
-    bottomContainer:{
-        height: '8%',
-        width:'98%',
-        flexDirection: 'row',                
-        alignItems: 'center',
-        backgroundColor: Colors.darkBackgroundColor,
-
-        // flex: 1,
-        
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        
-    },
-    bottomRowContainer:{
-             
-        // flexDirection: 'column',         
-        // justifyContent: 'space-between',
-        // alignItems: 'center',        
-    },        
-        
-    bottomLable:{
-        color: Colors.baseColor,
-        fontSize: 17,
-        color: 'white',
-        marginLeft: 5,
-    },
-    bottomSmallLable:{
-        color: Colors.baseColor,
-        fontSize: 13,
-        color: 'white',
-        marginRight: 5,
-    },
+    },    
     horizontalDivider: {
         height: 15,
         borderWidth:1,
@@ -357,11 +278,11 @@ const styles = StyleSheet.create({
         height: 40,
         flexDirection: 'column',
         justifyContent : 'center',
-        // justifyContent: 'flex-start',
-        //width: 175,
         // borderRadius: 5,
         // borderWidth: 1 ,
-        backgroundColor: Colors.actionBackgroundColor ,       
+        backgroundColor: Colors.actionBackgroundColor ,
+        
+              
         //borderColor: Colors.darkBackgroundColor,        
     },
     filterLable:{
