@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet, Picker ,Alert ,Button} from 'react-native';
+import { View, Text, FlatList, StyleSheet, Picker ,Alert ,Button,TouchableOpacity,Keyboard} from 'react-native';
 import { Colors, Images, Metrics } from '../theme';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DatePicker from 'react-native-datepicker'
@@ -109,8 +109,20 @@ compareRequests=(request1, request2) =>{
   }
 
     _handleOnClickUpdateStatus=()=>{
-    this.props.startRequestsStatusChangeAction(); 
+        Alert.alert(
+            'Внимание',
+            'Отправить данные о полученных документах ?  (тест)',
+            [
+                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'OK', onPress: () => {
+                    console.log('OK Pressed');
+                this.props.startRequestsStatusChangeAction()
+                }},
+            ],
+            { cancelable: false }
+        )       
     }
+        
   
     _handleLongPressRequest = (requestId) =>{        
     (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
@@ -164,6 +176,8 @@ compareRequests=(request1, request2) =>{
   _handleOnRefreshList=()=>{
     this.props.fetchRequestsAction(); 
   }
+
+
   
 
   render() {
@@ -201,36 +215,23 @@ compareRequests=(request1, request2) =>{
                     <Text style={styles.bottomSmallLable}>Выделено: { this._getNumberOfMatches(selectedItems.items,items)} шт.</Text>
                 </View>
             </View>
+            <TouchableOpacity
+                onPress={() => {
+                                Keyboard.dismiss();
+                                this._handleOnClickUpdateStatus;
+                            }}
+                >
+                <View style={styles.bigButton}>
+                    <Text style={styles.bigButtonText}>ПОЛУЧЕНА</Text>
+                </View>                        
+            </TouchableOpacity>
 
-            <Button
-                title="Уведомить офис "
+            {/* <Button
+                title="Уведомить офис 3"
                 buttonStyle={{
                     backgroundColor: Colors.actionBackgroundColor,
                 }}
-                onPress={() =>{ 
-                    //startRequestsStatusChange
-                    //navigation.navigate('NotifyOffice')
-                    Alert.alert(
-                        'Внимание',
-                        'Отправить данные о полученных документах ?  (тест)',
-                        [                              
-                        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                        {text: 'OK', onPress: () => {
-                            console.log('OK Pressed');
-                            this.props.startRequestsStatusChangeAction()
-                            //this.props.startRequestsStatusChangeAction()
-                            //navigation.state.params.startRequestsStatusChangeAction()
-                            //navigation.state.params.dispatch(clearSelectedItemAction());
-                            //navigation.state.params.dispatch(clearBarcodesAction());
-                            }
-                        },
-                        ],
-                        { cancelable: false }
-                    )
-                    
-
-                }}
-             />     
+                onPress={this._handleOnClickUpdateStatus}     />      */}
         </View>     
        
     );
@@ -326,7 +327,24 @@ const styles = StyleSheet.create({
       },
       sendButton:{
         backgroundColor: Colors.actionBackgroundColor,
+      },
+      bigButton:{
+
       }
+      ,
+      bigButton: {
+        justifyContent: 'center',
+        backgroundColor: '#53565A',
+        minWidth: 245,
+        minHeight: 45,
+        borderRadius: 30
+        },
+        bigButtonText: {
+            fontSize: 24,
+            textAlign: 'center',
+            color: 'white',
+            margin: 5
+        },
 
 });
 
