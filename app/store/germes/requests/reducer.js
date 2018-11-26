@@ -1,14 +1,9 @@
-import { Map } from 'immutable' //нужно для merge
+import { Map } from 'immutable' 
 import { 
     FETCH_REQUESTS_START, 
     IS_REQUESTS_FETCHING, 
     FETCH_REQUESTS_SUCCESS, 
-    FETCH_REQUESTS_ERROR,
-    REQUESTS_STATUS_CHANGE,
-    REQUESTS_STATUS_CHANGE_SUCCESS,
-    REQUESTS_STATUS_CHANGE_ERROR
-
-
+    FETCH_REQUESTS_ERROR
 } from './actions.js'
 
 
@@ -18,18 +13,12 @@ import {
     fetched: false,
     error: null ,
 
-    refreshing: false,
-
-    
+    refreshing: false
   });
 
-  // export function requestsReducer(state = initialState){
-  //   return state
-  // }
-  
+ 
 
-export default requestsReducer = (state = initialState, action) => {
-    //console.log("requestReducer run with : "+action.type )
+export default requestsReducer = (state = initialState, action) => {    
     switch (action.type){
         case FETCH_REQUESTS_START:
             return state.merge({isFetching: true, fetched: false, error: null})
