@@ -153,7 +153,9 @@ const styles = StyleSheet.create({
         width: '94%',
         height: 50,
         backgroundColor: 'white',
-        borderRadius: 7
+        borderRadius: 7,
+        borderWidth:1,
+        borderColor:Colors.lightBackgroundColor
     },
     iconContainer: {
         width: 45,
@@ -193,7 +195,7 @@ const styles = StyleSheet.create({
     },
     enterButton: {
         justifyContent: 'center',
-        backgroundColor: '#53565A',
+        backgroundColor: Colors.actionBackgroundColor,
         minWidth: 245,
         minHeight: 45,
         borderRadius: 30
