@@ -28,6 +28,17 @@ export default class NotifyOfficeComponent extends Component {
             />
         </View>
         <View style={styles.bottomContainer}>
+        <TouchableOpacity
+          onPress={() => {
+          Keyboard.dismiss();
+          this.props.logIn();
+          }}
+          >
+            <View style={styles.enterButton}>
+              <Text style={styles.enterText}>Сменить статус</Text>
+            </View>
+         </TouchableOpacity>
+
           <Button
             title=" Уведомить офис о полученных документах "            
             onPress={() => this.props.navigation.navigate('Home')}
