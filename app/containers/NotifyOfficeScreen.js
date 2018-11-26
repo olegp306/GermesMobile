@@ -204,6 +204,9 @@ compareRequests=(request1, request2) =>{
 
             <Button
                 title="Уведомить офис "
+                buttonStyle={{
+                    backgroundColor: Colors.actionBackgroundColor,
+                }}
                 onPress={() =>{ 
                     //startRequestsStatusChange
                     //navigation.navigate('NotifyOffice')
@@ -320,6 +323,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 25,
 
+      },
+      sendButton:{
+        backgroundColor: Colors.actionBackgroundColor,
       }
 
 });

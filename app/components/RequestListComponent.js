@@ -8,18 +8,6 @@ import RequestComponent from './RequestComponent';
 
 export default class RequestListComponent extends Component {
 
-  // getRequestArray=()=>{
-  //   let requestsArray= new Array;
-    
-  //   for (let prop in this.props.requests)
-  //   {
-  //       let request=this.props.requests[prop];        
-  //       requestsArray.push(this.props.requests[prop]);
-  //   }
-    
-  //   return requestsArray;
-  //  }
-
    _handleShortPress=(requestId)=>{    
     this.props.onShortPressRequest(requestId);
   }
