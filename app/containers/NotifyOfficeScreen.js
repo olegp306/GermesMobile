@@ -160,21 +160,16 @@ compareRequests=(request1, request2) =>{
       this.props.navigation.setParams({dispatch: this.dispatch });
       this.props.navigation.setParams({startRequestsStatusChangeAction: this.props.startRequestsStatusChangeAction });
   }
+
+  _handleOnRefreshList=()=>{
+    this.props.fetchRequestsAction(); 
+  }
   
 
   render() {
-    //console.log('RequestListScreen');
-    //console.log(this.props);    
-    const { isFetching ,items, isStatusChanging }=this.props.requests;
+    const { isFetching ,items, isStatusChanging, refreshing }=this.props.requests;
     const { filterDate, filterReceptionId, selectedItems, barcodes }=this.props;
-    //const customSortItemsArray = _.orderBy(items, ['requestId'],['asc']).sort(this.compareRequests)
-    const customItemsArray = _.values(items)
-    const customSortItemsArray = customItemsArray.sort(this.compareRequests)
-
-//chars = _.orderBy(chars, ['name'],['asc']); // Use Lodash to sort array by 'name'
-
- //this.setState({characters: chars})
-
+   
     return (
         <View style={styles.screenContainer}>
             <View styles={styles.horizontalDivider}>
@@ -185,11 +180,13 @@ compareRequests=(request1, request2) =>{
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
                 <Loader message='Обновление заявок' isLoading={isFetching || isStatusChanging} >
                     <RequestList                         
-                        requests={ customSortItemsArray} 
-                        // requests={ items.sort(this.compareRequests)} 
+                        requests={_.sortBy(items,'requestId') } 
+                        refreshing={refreshing}
+                        //requests={ items} 
                         onShortPressRequest={ this._handleShortPressRequest} 
                         onLongPressRequest={ this._handleLongPressRequest}
-                        onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox} 
+                        onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox}
+                        onRefreshList={ this._handleOnRefreshList} 
 
                         // selectedItems={selectedItems} 
                         selectedItems={selectedItems}

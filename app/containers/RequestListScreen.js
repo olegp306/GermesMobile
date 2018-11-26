@@ -164,7 +164,7 @@ export default class RequestListScreen extends Component {
   render() {
     //console.log('RequestListScreen');
     //console.log(this.props);    
-    const { isFetching ,items, isStatusChanging, refreshing }=this.props.requests;
+    const { isFetching ,items, refreshing }=this.props.requests;
     const { filterDate, filterReceptionId, selectedItems, barcodes }=this.props;
 
     return (
@@ -233,20 +233,34 @@ export default class RequestListScreen extends Component {
             
             <View style={styles.listContainer}>
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
-                <Loader message='Обновление заявок' isLoading={isFetching || isStatusChanging} >
-                    <RequestList                         
-                        requests={_.sortBy(items,'requestId') } 
-                        refreshing={refreshing}
-                        //requests={ items} 
-                        onShortPressRequest={ this._handleShortPressRequest} 
-                        onLongPressRequest={ this._handleLongPressRequest}
-                        onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox}
-                        onRefreshList={ this._handleOnRefreshList} 
+                <Loader message='Обновление заявок' isLoading={isFetching} >
+                    {
+                        ((Object.keys(items).length==0 )  && !isFetching)
+                        ?
+                        (
+                            <View style={styles.noDataLable}>
+                                <Text>Нет данных </Text>
+                                <Text>Попробуйте изменить фильтр поиска </Text>                
+                            </View>
+                        )
+                        :
+                        (
+                            <RequestList                         
+                                requests={_.sortBy(items,'requestId') } 
+                                refreshing={refreshing}
+                                //requests={ items} 
+                                onShortPressRequest={ this._handleShortPressRequest} 
+                                onLongPressRequest={ this._handleLongPressRequest}
+                                onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox}
+                                onRefreshList={ this._handleOnRefreshList} 
 
-                        // selectedItems={selectedItems} 
-                        selectedItems={selectedItems}
-                        barcodes = { barcodes }
-                    />
+                                // selectedItems={selectedItems} 
+                                selectedItems={selectedItems}
+                                barcodes = { barcodes }
+                            />
+                        )
+                    }            
+                    
                  </Loader>
             </View>            
             <View style={styles.bottomContainer}>
@@ -365,6 +379,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 25,
 
+      },
+
+      noDataLable:{
+        flexDirection: 'column', 
+        justifyContent: 'center',
+        alignItems: 'center',
       }
 
 });
