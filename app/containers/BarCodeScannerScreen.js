@@ -12,14 +12,17 @@ import {
 
  import { Colors, Images, Metrics } from '../theme';
  import { addBarcode, clearBarcodes } from '../store/germes/barcodes/actions.js'
- import { selectItemByBarcode } from '../store/germes/selectedItems/actions.js'
+ import { selectItem } from '../store/germes/selectedItems/actions.js'
 
+ import TotalRequestsContainer from '../containers/TotalRequestsContainer';
  import BarCodeScannerComponent from '../components/BarCodeScannerComponent';
 
  const mapStateToProps = store => {    
   
   return {      
-      barcodes: store.barcodes.toJS()
+    requests: store.requests.toJS(),
+    selectedItems: store.selectedItems.toJS(),
+    barcodes: store.barcodes.toJS()
   }
 }
 
@@ -27,7 +30,7 @@ const mapDispatchToProps = dispatch =>{
    return {
        addBarcodeAction : barcode=> dispatch (addBarcode(barcode.data)),
        clearBarcodesAction : ()=> dispatch (clearBarcodes()),
-       selectItemAction: ()=> dispatch(selectItemByBarcode(barcode.data))
+       selectItemAction: (requestId)=> dispatch(selectItem(requestId))
    }
 } 
 
@@ -48,6 +51,34 @@ export default class BarCodeScannerScreen extends Component {
       Vibration.vibrate(200);      
     }
     this.props.addBarcodeAction(barcode);
+    this._selectRequestByBarcode(barcode);
+  }
+
+  _getRequestIdByBarcode = (barcode)=>
+  {
+    const{requests,barcodes,selectedItems}=this.props;
+
+    let requestId;
+
+    for(key in requests.items)
+    {
+      let request=requests.items[key];
+      if(request.receiptNumber==barcode || request.incomingPacketId==barcode)
+      {
+        requestId = request.requestId;
+        break;
+      }
+    }
+    return requestId;
+  }
+
+  _selectRequestByBarcode=(barcode)=>{
+    const requestId=this._getRequestIdByBarcode(barcode.data);
+    if (requestId)
+    {
+      this.props.selectItemAction(requestId);      
+    }
+
   }
 
   render() { 
@@ -60,19 +91,19 @@ export default class BarCodeScannerScreen extends Component {
           <BarCodeScannerComponent onScanBarCode={this._handlerScanBarcode} />
         </View>
         
-        <View>
+        <View style={styles.barcodeItemsContainer}>
             <Text style={styles.barCodeItem}> Здесь будут появляються отсканированные коды</Text>            
             <FlatList               
               data={_values(items)}            
               keyExtractor={(item, index) => item.codeText}
-              renderItem={({item}) =>
-            
-            <View style={styles.barCodeTextConteiner}>
-              <Text style={styles.barCodeText}>{item.codeText}</Text>
-            </View>
+              renderItem={({item}) =>            
+                <View style={styles.barcodeItemContainer}>
+                  <Text style={styles.barCodeText}>{item.codeText}</Text>
+                </View>
             }            
           />   
          </View>
+         <TotalRequestsContainer />
 
        </View>
     );
@@ -94,32 +125,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    barcodeItemsContainer:{
+      height: '42%',
+      justifyContent: 'center',
+      alignItems: 'center'
+
+    },
+
+    barcodeItemContainer:{
+
+    }
 
     
-
-    barCodeTextConteiner:{
-      width: '100 %', 
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      alignItems: 'stretch',
-      borderColor: '#252828',
-      borderWidth: 2,
-      backgroundColor: 'white',
-      borderRadius: 7,
-      padding:0,        
-      marginBottom:2
-
-    },
-
-    barCodeText:{
-        textAlign:'center',
-        fontWeight:'500',
-        fontSize: 18,
-        backgroundColor:'white',
-
-    },
-    notice:{
-        fontStyle:'italic'
-    }    
 });
 
