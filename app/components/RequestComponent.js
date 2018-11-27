@@ -47,20 +47,18 @@ export default class RequestComponent extends Component {
             <View style={styles.leftMiddleContainer} >
               <Text>{this.props.requestNumber + " " + this.props.address}</Text>              
               <Text>{this.props.transactionParticipant}</Text>    
-              <Text style={styles.notice}>  {this.props.notice} </Text>     
+              { this.props.notice ? (<Text style={styles.notice}>  {this.props.notice} </Text>) : null }              
             </View>
 
             <View style={styles.rightMiddleContainer} >
-              <CheckBox style={styles.checkbox}              
+              <CheckBox 
                   onPress={this._handleOnChangeRequestCheckBox}
                   containerStyle={styles.checkboxContainer}              
                   checkedColor='green'
                   checked={this.props.isSelected}                  
                />
             
-            {this.props.isUpdating ? (<ActivityIndicator size='large' /> ) : null }       
-            
-                            
+            {this.props.isUpdating ? (<ActivityIndicator size='large' /> ) : null }
             </View>
           </View>
 
@@ -105,7 +103,7 @@ const styles = StyleSheet.create({
         
     },
     checkboxContainer: {
-      backgroundColor: 'transparent',
+      //backgroundColor: 'blue',
       borderWidth: 0
   },
     selectedContentContainer: {
