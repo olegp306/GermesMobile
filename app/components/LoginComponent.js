@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         height: '100%',
-        backgroundColor: Colors.backgroundColor
+        backgroundColor: Colors.baseBackgroundColor
     },
     logoContainer: {
         width: '100%',

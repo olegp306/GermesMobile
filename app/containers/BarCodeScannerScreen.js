@@ -98,7 +98,7 @@ export default class BarCodeScannerScreen extends Component {
               keyExtractor={(item, index) => item.codeText}
               renderItem={({item}) =>            
                 <View style={styles.barcodeItemContainer}>
-                  <Text style={styles.barCodeText}>{item.codeText}</Text>
+                  <Text>{item.codeText}</Text>
                 </View>
             }            
           />   
@@ -125,15 +125,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+
     barcodeItemsContainer:{
       height: '42%',
-      justifyContent: 'center',
-      alignItems: 'center'
+      width: '100%',
+      flexDirection: 'column',
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      //backgroundColor:Colors.navigatorBackgroudColor
 
     },
 
     barcodeItemContainer:{
-
+      width: '100 %', 
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      //justifyContent: 'flex-start',
+      //alignItems: 'stretch',
+      margin: 4,
+      backgroundColor: '#EEEEEE',
+      //opacity:0.5
     }
 
     
