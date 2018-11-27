@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DatePicker from 'react-native-datepicker'
 
 import RequestList from '../components/RequestListComponent';
+import  TotalRequestsContainer   from '../containers/TotalRequestsContainer'
 import Loader from '../components/Loader'
 
 import { connect } from 'react-redux'
@@ -186,52 +187,57 @@ compareRequests=(request1, request2) =>{
    
     return (
         <View style={styles.screenContainer}>
-            <View styles={styles.horizontalDivider}>
-                {/* <Text>[ЧыК ЧЫК]></Text> */}
-            </View>
-            
+             <TotalRequestsContainer />
             <View style={styles.listContainer}>
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
                 <Loader message='Обновление заявок' isLoading={isFetching || isStatusChanging} >
-                    <RequestList                         
-                        requests={_.sortBy(items,'requestId') } 
-                        refreshing={refreshing}
-                        //requests={ items} 
-                        onShortPressRequest={ this._handleShortPressRequest} 
-                        onLongPressRequest={ this._handleLongPressRequest}
-                        onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox}
-                        onRefreshList={ this._handleOnRefreshList} 
+                {
+                    ((Object.keys(items).length==0 )  && !isFetching)
+                        ?
+                        (
+                            <View style={styles.noDataLable}>
+                                <Text>Нет данных </Text>
+                                <Text>Попробуйте изменить фильтр поиска  </Text>                
+                                <Text>( вернитесь назад на экран Заявок и измените фильтр поиска) </Text>                
+                            </View>
+                        )
+                        :
+                        (
+                            <RequestList                         
+                                requests={_.sortBy(items,'requestId') } 
+                                refreshing={refreshing}
+                                //requests={ items} 
+                                onShortPressRequest={ this._handleShortPressRequest} 
+                                onLongPressRequest={ this._handleLongPressRequest}
+                                onChangeRequestCheckBox={ this._handleOnChangeRequestCheckBox}
+                                onRefreshList={ this._handleOnRefreshList} 
 
-                        // selectedItems={selectedItems} 
-                        selectedItems={selectedItems}
-                        barcodes = { barcodes }
-                    />
+                                // selectedItems={selectedItems} 
+                                selectedItems={selectedItems}
+                                barcodes = { barcodes }
+                            />
+                        )
+                }
                  </Loader>
             </View>            
-            <View style={styles.bottomContainer}>
+            {/* <View style={styles.bottomContainer}>
                 <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>                
                 <View styles={styles.bottomRowContainer}>
                     <Text style={styles.bottomSmallLable}>C баркодами: { this._getNumberOfBarcodesMatches(barcodes.items,items)} шт.</Text>
                     <Text style={styles.bottomSmallLable}>Выделено: { this._getNumberOfMatches(selectedItems.items,items)} шт.</Text>
                 </View>
-            </View>
+            </View> */}
             <TouchableOpacity
                 onPress={() => {
                                 Keyboard.dismiss();
-                                this._handleOnClickUpdateStatus;
+                                this._handleOnClickUpdateStatus();
                             }}
                 >
                 <View style={styles.bigButton}>
                     <Text style={styles.bigButtonText}>ПОЛУЧЕНА</Text>
+                    <Text style={styles.bottomSmallLable}>Сменить статус у выделенных заявок</Text>
                 </View>                        
-            </TouchableOpacity>
-
-            {/* <Button
-                title="Уведомить офис 3"
-                buttonStyle={{
-                    backgroundColor: Colors.actionBackgroundColor,
-                }}
-                onPress={this._handleOnClickUpdateStatus}     />      */}
+            </TouchableOpacity>           
         </View>     
        
     );
@@ -239,7 +245,7 @@ compareRequests=(request1, request2) =>{
 }
 
 
-
+     
 
 
 const styles = StyleSheet.create({
