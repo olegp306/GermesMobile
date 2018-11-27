@@ -56,7 +56,7 @@ export default class RequestListComponent extends Component {
                         notice={item.notice}
 
                         isSelected={this.props.selectedItems.items.hasOwnProperty(item.requestId)}
-                        isBarcodeExist={this.props.barcodes.items.hasOwnProperty(item.receiptNumber)} 
+                        isBarcodeExist={this.props.barcodes.items.hasOwnProperty(item.receiptNumber) || this.props.barcodes.items.hasOwnProperty(item.incomingPacketId)} 
                         isUpdating={this.props.selectedItems.items.hasOwnProperty(item.requestId) && this.props.selectedItems.items[item.requestId].isUpdating}     
                         
                         onShortPressRequest={ this._handleShortPress }
