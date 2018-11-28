@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TimerMixin from 'react-timer-mixin'
 import { 
     View,
     Text,
@@ -44,47 +45,65 @@ export default class BarCodeScannerScreen extends Component {
     this.state = {
       lastBarcode: null,
       lastBarcodeNotice: "можно начинать сканировать",
-      isOkScanResult: true
+      isOkScanResult: true,
+      waitAfterSuccessScan : false
     };
   }
-  
+  _wait=()=>{this.setState({
+    waitAfterSuccessScan:false
+  })
+
+  }
+
   _handlerScanBarcode= (barcode)=>{
-    const lastBarcode=barcode.data;
-    let lastBarcodeNotice=null;
-    let isOkScanResult=false;
 
-    if(this.props.barcodes.items.hasOwnProperty(barcode.data))
-    { 
-      lastBarcodeNotice="Такой бар код уже добавлен"
-      Vibration.vibrate(200);       
-    }    
-    else
+    if(!this.state.waitAfterSuccessScan)
     {
-      const requestId=this._getRequestIdByBarcode(barcode.data);
-      if(requestId)
-      {        
-        this.props.addBarcodeAction(barcode);      
-        this._selectRequestByBarcode(barcode);
+      const lastBarcode=barcode.data;
+      let lastBarcodeNotice=null;
+      let isOkScanResult=false;
 
-        lastBarcodeNotice="баркод добавлен, заявка найдена";
-        isOkScanResult=true;
-        Vibration.vibrate(100);           
-      }
+      if(this.props.barcodes.items.hasOwnProperty(barcode.data))
+      { 
+        lastBarcodeNotice="Такой бар код уже добавлен"
+        Vibration.vibrate(200);       
+      }    
       else
       {
-        //Нет доходящей заявки в выборке
-        lastBarcodeNotice='Нет заявок с таким баркодом. 1) Проверьте есть ли заявка в списке заявок. 2) Измените фильтр';
-          
-        Vibration.vibrate(100);        
-        //в выбранных заявках нет какого штрихкода      
+        const requestId=this._getRequestIdByBarcode(barcode.data);
+        if(requestId)
+        {        
+          this.props.addBarcodeAction(barcode);      
+          this._selectRequestByBarcode(barcode);
+
+          lastBarcodeNotice="баркод добавлен, заявка найдена";
+          isOkScanResult=true;
+
+          this.setState({
+            waitAfterSuccessScan:true
+          })
+
+          Vibration.vibrate(100);   
+
+          setTimeout(this._wait,500);
+        }
+        else
+        {
+          //Нет доходящей заявки в выборке
+          lastBarcodeNotice='Нет заявок с таким баркодом. 1) Проверьте есть ли заявка в списке заявок. 2) Измените фильтр';
+            
+          Vibration.vibrate(100);        
+          //в выбранных заявках нет какого штрихкода      
+        }
       }
+      this.setState({
+        lastBarcode: lastBarcode,
+        lastBarcodeNotice: lastBarcodeNotice,
+        isOkScanResult: isOkScanResult     
+      });
+    
+    
     }
-    this.setState({
-      lastBarcode: lastBarcode,
-      lastBarcodeNotice: lastBarcodeNotice,
-      isOkScanResult: isOkScanResult     
-    });
-   
   }
 
   _getRequestIdByBarcode = (barcode)=>
