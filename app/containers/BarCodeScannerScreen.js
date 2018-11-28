@@ -38,11 +38,24 @@ const mapDispatchToProps = dispatch =>{
 
 @connect( mapStateToProps, mapDispatchToProps )
 export default class BarCodeScannerScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      lastBarcode: null,
+      lastBarcodeNotice: "можно начинать сканировать",
+      isOkScanResult: true
+    };
+  }
   
-  _handlerScanBarcode= (barcode)=>{        
+  _handlerScanBarcode= (barcode)=>{
+    const lastBarcode=barcode.data;
+    let lastBarcodeNotice=null;
+    let isOkScanResult=false;
+
     if(this.props.barcodes.items.hasOwnProperty(barcode.data))
     { 
-      //уже есть такой     
+      lastBarcodeNotice="Такой бар код уже добавлен"
       Vibration.vibrate(200);       
     }    
     else
@@ -50,18 +63,27 @@ export default class BarCodeScannerScreen extends Component {
       const requestId=this._getRequestIdByBarcode(barcode.data);
       if(requestId)
       {        
-        this.props.addBarcodeAction(barcode.data);      
-        this._selectRequestByBarcode(barcode.data);
+        this.props.addBarcodeAction(barcode);      
+        this._selectRequestByBarcode(barcode);
 
+        lastBarcodeNotice="баркод добавлен, заявка найдена";
+        isOkScanResult=true;
         Vibration.vibrate(100);           
       }
       else
       {
-        //Нет доходящей заявки в выборке        
-        Vibration.vibrate(100); 
+        //Нет доходящей заявки в выборке
+        lastBarcodeNotice='Нет заявок с таким баркодом. 1) Проверьте есть ли заявка в списке заявок. 2) Измените фильтр';
+          
+        Vibration.vibrate(100);        
         //в выбранных заявках нет какого штрихкода      
       }
     }
+    this.setState({
+      lastBarcode: lastBarcode,
+      lastBarcodeNotice: lastBarcodeNotice,
+      isOkScanResult: isOkScanResult     
+    });
    
   }
 
@@ -92,8 +114,7 @@ export default class BarCodeScannerScreen extends Component {
 
   }
 
-  render() { 
-    //const { isFetching ,items }=this.props.requests;
+  render() {     
     const {items} = this.props.barcodes; 
     const {requests} = this.props; 
     return (
@@ -102,11 +123,16 @@ export default class BarCodeScannerScreen extends Component {
         <View style={styles.barCodeScannerContainer}>
           <BarcodeScannerComponent onScanBarCode={this._handlerScanBarcode} />
         </View>
+
+         <View style={this.state.isOkScanResult ? (styles.lastBarcodeOk): (styles.lastBarcodeErr) }>
+            <Text style={styles.lastBarcodeText}> {this.state.lastBarcode} </Text>
+            <Text style={styles.lastBarcodeNoticeText}>  {this.state.lastBarcodeNotice}  </Text>
+         </View>
         
         <View style={styles.barcodeItemsContainer}>
-            <Text style={styles.barCodeItem}> Здесь будут появляються отсканированные коды</Text>            
+         
             <FlatList               
-              data={_.sortBy(items,'scanDateTime') }            
+              data={_.sortBy(items,'scanDateTime').reverse() }            
               keyExtractor={(item, index) => item.codeText}
               renderItem={({item}) =>{
                 const requestId=this._getRequestIdByBarcode(item.codeText);
@@ -127,36 +153,56 @@ export default class BarCodeScannerScreen extends Component {
   }
 }
 const styles = StyleSheet.create({
-    screenContainer: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        backgroundColor: Colors.backgroundColor
-    },
+  screenContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    backgroundColor: Colors.backgroundColor
+  },
 
-    barCodeScannerContainer: {
-        width: '100%',
-        height: '40%',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
+  barCodeScannerContainer: {
+    width: '100%',
+    height: '40%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 
-    barcodeItemsContainer:{
-      height: '42%',
-      width: '100%',
-      flexDirection: 'column',
-    },
+  lastBarcodeOk:{
+    width: '98 %',
+    height: '10%', 
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: Colors.lightBackgroundColor
+  },
 
-    barcodeItemContainer:{
-      width: '100 %', 
-      flexDirection: 'row',
-      justifyContent: 'flex-start',      
-      margin: 4,
-      backgroundColor: '#EEEEEE',      
-    }
+  lastBarcodeErr:{
+    width: '98 %',
+    height: '10%',  
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: Colors.warningBackgroundColor
+  },
 
+  lastBarcodeText:{
+      fontWeight:'500',
+      fontSize: 17,
+      marginLeft: 5,
+      textAlign: 'center'
+  },
+
+  lastBarcodeNoticeText:{
+    textAlign: 'center'
+    //backgroundColor:Colors.warningBackgroundColor
+  },
+
+  barcodeItemsContainer:{
+    height: '42%',
+    width: '100%',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
     
 });
 

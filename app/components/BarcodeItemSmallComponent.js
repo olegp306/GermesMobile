@@ -25,15 +25,27 @@ export default class BarcodeItemSmallComponent extends Component {
 const styles = StyleSheet.create({
   barcodeContainer:{
     width: '100 %', 
-    flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     margin: 4,
     backgroundColor: '#EEEEEE',  
   },
 
+  barcodeText:{
+    fontWeight:'500',
+    fontSize: 17,      
+  },
+
+  
+  requestNumber:{
+    fontWeight:'500',
+    fontSize: 17,      
+  },
+
+
   header:{
     flexDirection: 'row',
+    justifyContent: 'space-between',
   }
 
 })
