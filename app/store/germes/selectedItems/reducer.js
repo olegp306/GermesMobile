@@ -40,7 +40,7 @@ export function selectedItemsReducer(state = initialState, action){
       return state.mergeIn(['items',action.payload],{"isUpdating": true })
 
     case CHANGE_ITEM_STATUS_SUCCESS:
-      return state.mergeIn(['items',action.payload],{"isUpdating": false, error: null })    
+      return state.mergeIn(['items',action.payload],{"isUpdating": false, error: null, updated: true  })    
 
     case CHANGE_ITEM_STATUS_ERROR:
       return state.mergeIn(['items', action.requestId],{"isUpdating": false, error: action.payload.message })    

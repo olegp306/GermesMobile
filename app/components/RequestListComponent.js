@@ -42,8 +42,14 @@ export default class RequestListComponent extends Component {
             refreshing={this.props.refreshing}
             onRefresh={this._handleOnRefreshList}
             
-            renderItem={({item}) =>                                         
-                    <RequestComponent
+            renderItem={({item}) =>
+            {
+              const isSelected=this.props.selectedItems.items.hasOwnProperty(item.requestId);
+              const isBarcodeExist=(this.props.barcodes.items.hasOwnProperty(item.receiptNumber) || this.props.barcodes.items.hasOwnProperty(item.incomingPacketId));
+              const isUpdating=(this.props.selectedItems.items.hasOwnProperty(item.requestId) && this.props.selectedItems.items[item.requestId].isUpdating);
+              const isChangeStatusSuccess=(this.props.selectedItems.items.hasOwnProperty(item.requestId) && this.props.selectedItems.items[item.requestId].updated==true )
+
+              return (<RequestComponent
                         key={item.requestId}
                         requestId = {item.requestId}
                         requestNumber= {item.requestNumber} 
@@ -55,15 +61,17 @@ export default class RequestListComponent extends Component {
                         fromRegistrationPlanDate={item.fromRegistrationPlanDate}
                         notice={item.notice}
 
-                        isSelected={this.props.selectedItems.items.hasOwnProperty(item.requestId)}
-                        isBarcodeExist={this.props.barcodes.items.hasOwnProperty(item.receiptNumber) || this.props.barcodes.items.hasOwnProperty(item.incomingPacketId)} 
-                        isUpdating={this.props.selectedItems.items.hasOwnProperty(item.requestId) && this.props.selectedItems.items[item.requestId].isUpdating}     
+                        isSelected={isSelected}
+                        isBarcodeExist={isBarcodeExist} 
+                        isUpdating={isUpdating}    
+                        isChangeStatusSuccess={isChangeStatusSuccess} 
                         
                         onShortPressRequest={ this._handleShortPress }
                         onLongPressRequest={ this._handleLongPress }
                         onChangeRequestCheckBox ={ this._handleOnChangeRequestCheckBox }   
-                    />   
-            }
+                    />)
+            }   
+          }
           />
       </View>
      )

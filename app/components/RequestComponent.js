@@ -70,11 +70,20 @@ export default class RequestComponent extends Component {
               {
                 this.props.isBarcodeExist ?
                 (
-                <View style={styles.leftCheckbox}>
+                <View style={styles.stikerContainer}>
                   <Text >Прочитан баркод </Text>                
                 </View>
                 ):null
+              }
+              {
+                this.props.isChangeStatusSuccess?
+                (
+                <View style={styles.stikerContainer}>
+                  <Text >Статус ПОЛУЧЕНА </Text>                
+                </View>
+                ):null
               }            
+
               </View>
               
             </View>                  
@@ -86,93 +95,77 @@ export default class RequestComponent extends Component {
   }
 }
 const styles = StyleSheet.create({
-    
-  unselectedContentContainer: {        
-        width: '100 %', 
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'stretch',
-        marginBottom:2,
-        backgroundColor: 'white',
-        //borderColor: '#252828',
-        //borderWidth: 2,
-        
-        //borderRadius: 7,
-        //paddingLeft:5,        
-        
-        
-    },
-    checkboxContainer: {
-      //backgroundColor: 'blue',
-      borderWidth: 0
+  unselectedContentContainer: {
+    width: '100 %', 
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    marginBottom:2,
+    backgroundColor: 'white',
   },
-    selectedContentContainer: {
-      width: '100 %', 
-      flexDirection: 'column',
-      justifyContent: 'flex-start',
-      alignItems: 'stretch',
-     marginBottom:2,
-     backgroundColor: '#EEEEEE',
-     opacity:0.5
+  checkboxContainer: {
+    //backgroundColor: 'blue',
+    borderWidth: 0
   },
-    receiptNumberContainer:{
-      //backgroundColor: Colors.baseBackgroundColor
+  selectedContentContainer: {
+    width: '100 %', 
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    marginBottom:2,
+    backgroundColor: '#EEEEEE',
+    opacity:0.5
+  },
+  receiptNumberContainer:{
+    //backgroundColor: Colors.baseBackgroundColor
     },
-    receiptNumber:{      
-      fontWeight:'500',
-      fontSize: 17,
-      marginLeft: 10,
-    },
-
-    leftCheckbox:{     
-      flexDirection: 'row',
-      alignItems: 'flex-end',
-      borderRadius: 7,
-      //borderColor: '#252828',
-      // borderColor: '#6DC9E7',
-      // borderColor: '#07ef00',
-      //borderWidth: 1,
-      backgroundColor: '#4ef235',
+  receiptNumber:{      
+    fontWeight:'500',
+    fontSize: 17,
+    marginLeft: 10,
     },
 
-    rightCheckbox:{      
-      flexDirection: 'column',      
-    },
+  stikerContainer:{     
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    borderRadius: 1,
+    backgroundColor: '#4ef235',
+  },
+
     
-    
-
-    notice:{
+  notice:{
       fontStyle:'italic'
-    },
+  },
 
-    middleContainer:{
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'stretch',
-      marginLeft: 10,
-    },
-    leftMiddleContainer:{
-      width: '85%'
-    },
+  middleContainer:{
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
+    marginLeft: 10,
+  },
+  
+  leftMiddleContainer:{
+    width: '85%'
+  },
 
-    rightMiddleContainer:{
-      width: '15%',
-      alignItems: 'center'
-    },
+  rightMiddleContainer:{
+    width: '15%',
+    alignItems: 'center'
+  },
     
-    bottomContainer:{
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'stretch'
-    },
+  bottomContainer:{
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'stretch'
+  },
 
-    bottomStikersContainer:    {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'stretch'
-    },
+  bottomStikersContainer:{
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'stretch'
+  },
 
     horizontalDivider: {
         width: '95%',
