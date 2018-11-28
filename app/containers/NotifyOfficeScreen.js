@@ -130,7 +130,7 @@ compareRequests=(request1, request2) =>{
   }
 
   _handleShortPressRequest = (request) =>{    
-    this.props.navigation.navigate('AddComment',request )
+    //this.props.navigation.navigate('AddComment',request )
   }
   
   _handleOnChangeRequestCheckBox = (requestId) =>{        

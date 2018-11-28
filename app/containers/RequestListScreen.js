@@ -108,7 +108,7 @@ export default class RequestListScreen extends Component {
   }
 
   _handleShortPressRequest = (request) =>{    
-    this.props.navigation.navigate('AddComment',request )
+    //this.props.navigation.navigate('AddComment',request )
   }
   
   _handleOnChangeRequestCheckBox = (requestId) =>{        
