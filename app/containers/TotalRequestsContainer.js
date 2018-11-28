@@ -42,8 +42,9 @@ const mapDispatchToProps = dispatch =>{
     {
         for(key2 in array2)
         {
-            let requestId=array2[key2].receiptNumber;
-            if(key==requestId)
+            const requestId=array2[key2].receiptNumber;
+            const requestIncomingPacketId=array2[key2].incomingPacketId;
+            if(key==requestId || key==requestIncomingPacketId)
             {
                 amount++;
                 break;
