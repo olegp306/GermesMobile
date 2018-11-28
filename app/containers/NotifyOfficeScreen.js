@@ -110,18 +110,21 @@ compareRequests=(request1, request2) =>{
   }
 
     _handleOnClickUpdateStatus=()=>{
-        Alert.alert(
-            'Внимание',
-            'Отправить данные о полученных документах ?  (тест)',
-            [
-                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                {text: 'OK', onPress: () => {
-                    console.log('OK Pressed');
-                this.props.startRequestsStatusChangeAction()
-                }},
-            ],
-            { cancelable: false }
-        )       
+        if(this._amountOfUpdatingItems()==0)
+        {
+            Alert.alert(
+                'Внимание',
+                'Отправить данные о полученных документах ?',
+                [
+                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                    {text: 'OK', onPress: () => {
+                        console.log('OK Pressed');
+                    this.props.startRequestsStatusChangeAction()
+                    }},
+                ],
+                { cancelable: false }
+            )
+        }       
     }
         
   
@@ -178,17 +181,34 @@ compareRequests=(request1, request2) =>{
     this.props.fetchRequestsAction(); 
   }
 
+  _amountOfUpdatingItems=()=>{
+    let result=0;
+    const {selectedItems}=this.props;
+    for(key in selectedItems.items)
+    {
+        const item=selectedItems.items[key];
+        if(item.isUpdating){
+         result++;
+        }
+    }
+    return result;
+  }
+
 
   
 
   render() {
     const { isFetching ,items, isStatusChanging, refreshing }=this.props.requests;
     const { filterDate, filterReceptionId, selectedItems, barcodes }=this.props;
+    const amountOfUpdatingItems=this._amountOfUpdatingItems();
    
     return (
         <View style={styles.screenContainer}>
-             <TotalRequestsContainer />
-            <View style={styles.listContainer}>
+            <View style={styles.totalDataContainer}>
+                <TotalRequestsContainer />
+            </View>
+            
+            <View style={styles.requestListContainer}>
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
                 <Loader message='Обновление заявок' isLoading={isFetching || isStatusChanging} >
                 {
@@ -220,24 +240,27 @@ compareRequests=(request1, request2) =>{
                 }
                  </Loader>
             </View>            
-            {/* <View style={styles.bottomContainer}>
-                <Text style={styles.bottomLable}>Всего: { Object.keys(items).length} шт.</Text>                
-                <View styles={styles.bottomRowContainer}>
-                    <Text style={styles.bottomSmallLable}>C баркодами: { this._getNumberOfBarcodesMatches(barcodes.items,items)} шт.</Text>
-                    <Text style={styles.bottomSmallLable}>Выделено: { this._getNumberOfMatches(selectedItems.items,items)} шт.</Text>
-                </View>
-            </View> */}
-            <TouchableOpacity
-                onPress={() => {
-                                Keyboard.dismiss();
-                                this._handleOnClickUpdateStatus();
-                            }}
-                >
-                <View style={styles.bigButton}>
-                    <Text style={styles.bigButtonText}>ПОЛУЧЕНА</Text>
-                    <Text style={styles.bottomSmallLable}>Сменить статус у выделенных заявок</Text>
-                </View>                        
-            </TouchableOpacity>           
+            
+            <View style={styles.botttomContainer}>
+                <TouchableOpacity
+                    onPress={() => {
+                                    Keyboard.dismiss();
+                                    this._handleOnClickUpdateStatus();
+                                }}
+                    >
+                    <View style={styles.bigButton}>
+                        {
+                          (amountOfUpdatingItems!=0)
+                          ?
+                            (<Text style={styles.bigButtonText}>Осталось: {amountOfUpdatingItems} </Text>)
+                          :
+                            (<Text style={styles.bigButtonText}>Получены</Text>)
+                         
+                            
+                        }
+                    </View>                        
+                </TouchableOpacity>
+            </View>            
         </View>     
        
     );
@@ -250,107 +273,76 @@ compareRequests=(request1, request2) =>{
 
 const styles = StyleSheet.create({
     screenContainer: {
+        flex: 1,
         flexDirection: 'column',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
         height: '100%',
-        backgroundColor: Colors.backgroundColor
+        backgroundColor: Colors.baseBackgroundColor
     },
 
-    headContainer:{
-        marginTop: 5,
-        height: '12%',
+    totalDataContainer: {
+        height: '6%',
+        width: '100%',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        //backgroundColor: Colors.ligth
     },
 
-    filterDateContainer:{
-        flexDirection:'row',
-        height: '85%',
-        borderColor:Colors.actionBackgroudColor
-    },
-
-    filterItem:{
+    requestListContainer:{
+        height: '84%',
+        width: '100%',
         flexDirection: 'column',
-        justifyContent: 'space-between'
-    },
-
-    listContainer:{        
-        height: '85%',
-        width:'98%',
-        
-    },
-
-    bottomContainer:{
-        height: '8%',
-        width:'98%',
-        flexDirection: 'row',
-        // flex: -1,
         justifyContent: 'space-between',
+        //backgroundColor: Colors.ligth2
+    },
+
+    botttomContainer:{
+        height: '10%',
+        width: '100%',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        
+        //backgroundColor: Colors.ligth
+    },
+    
+
+    noDataLable:{
+        flexDirection: 'column', 
+        justifyContent: 'center',
         alignItems: 'center',
     },
-    bottomRowContainer:{      
-        flexDirection: 'column',  
-        justifyContent: 'space-between',
-        alignItems: 'center',        
-    },        
+
+    bigButton: {
+        justifyContent: 'center',
+        backgroundColor: Colors.actionBackgroundColor,
+        minWidth: 245,
+        minHeight: 45,
+        borderRadius: 30,
+        margin:2
+        },
+
+    bigButtonText: {
+        fontSize: 24,
+        textAlign: 'center',
+        color: 'white',
+        //margin: 5
+        },
+
+    bigButtonNoticeText:{
+        textAlign: 'center',
+        color: 'white',        
+        fontSize: 13,
         
-    bottomLable:{
-        color: Colors.baseColor,
-        fontSize: 17
-    },
-    bottomSmallLable:{
-        color: Colors.baseColor,
-        fontSize: 13
-    },
+    },   
+    
     horizontalDivider: {
         height: 15,
         borderWidth:1,
         borderColor : 'black'
-    },
-    pickerContainer:{
-        height: 40,
-        width: 175,
-        borderRadius: 5,
-        borderWidth: 1 ,
-        backgroundColor: '#91d1ff' ,       
-        borderColor: Colors.actionBackgroudColor,        
-    },
-    filterLable:{
-        fontSize:10
-    },
-
-    headButtonsContainer:{
-        flexDirection: 'row',        
-       },
-       
-       iconContainer: {
-        width: 45,
-        height: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight: 25,
-
-      },
-      sendButton:{
-        backgroundColor: Colors.actionBackgroundColor,
-      },
-      bigButton:{
-
-      }
-      ,
-      bigButton: {
-        justifyContent: 'center',
-        backgroundColor: '#53565A',
-        minWidth: 245,
-        minHeight: 45,
-        borderRadius: 30
-        },
-        bigButtonText: {
-            fontSize: 24,
-            textAlign: 'center',
-            color: 'white',
-            margin: 5
-        },
+    },    
+      
 
 });
 
