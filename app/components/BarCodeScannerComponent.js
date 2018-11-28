@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Alert } from 'react-native';
 
 import { Constants, BarCodeScanner, Permissions } from 'expo';
 
-export default class BarCodeScannerComponent extends Component {
+export default class BarcodeScannerComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -27,11 +27,7 @@ export default class BarCodeScannerComponent extends Component {
   _handleBarCodeRead = data => {
     if(this.props.onScanBarCode){
       this.props.onScanBarCode(data)
-    }
-    // Alert.alert(
-    //   'Отсканирован штрих код',
-    //   JSON.stringify(data)
-    // );
+    }    
   };
 
   render() {
@@ -46,7 +42,7 @@ export default class BarCodeScannerComponent extends Component {
             <BarCodeScanner
               torchMode="on"
               onBarCodeRead={this._handleBarCodeRead}
-              style={{ height: 300, width: 350 }}
+              style={{ height: 230, width: 350 }}
             />
         }
       </View>

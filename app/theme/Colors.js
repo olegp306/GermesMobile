@@ -19,7 +19,7 @@ const Colors = {
   ligth:'#E8940B',
   ligth2:'#CFFF0D',
 
-   actionBackgroundColor :"#5BB6DB", 
+  //  actionBackgroundColor :"#5BB6DB", 
   warningBackgroundColor :"#FF0000",
   noteBackgroundColor :"#6AAB33",
   lightBackgroundColor :"#B6DB92",
