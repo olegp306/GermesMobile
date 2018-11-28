@@ -35,8 +35,7 @@
       backgroundColor: 'white'
   },
 
-  bottomContainer:{
-    height: '8%',
+  bottomContainer:{    
     width:'100%',
     flexDirection: 'row',                    
     backgroundColor: Colors.navigatorBackgroudColor,
@@ -75,4 +74,5 @@
       borderWidth:1,
       borderColor : 'black'
   }
+  
 })
