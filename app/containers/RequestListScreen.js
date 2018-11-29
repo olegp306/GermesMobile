@@ -30,10 +30,7 @@ Date.prototype.formatDDMMYYYY = function(){
 
 // если @connect наверху то mapStateToProps уже должен быть объявлен перед @connect
 // приклеиваем данные из store
-const mapStateToProps = store => {    
-    //console.log("mapStateToProps");
-    console.log("store.requests.toJS()");
-    console.log(store.requests.toJS());
+const mapStateToProps = store => {
     return {
         filterDate: store.filter.get("filterDate"),
         filterReceptionId: store.filter.get("filterReceptionId"),        
@@ -74,7 +71,7 @@ export default class RequestListScreen extends Component {
                 <Icon
                     name='barcode'
                     size={40}
-                    color={Colors.actionItemColor}
+                    color={Colors.lightTextColor}
                     onPress={() => navigation.navigate('BarCodeScanner')}
                 />          
                 </View>
@@ -82,7 +79,7 @@ export default class RequestListScreen extends Component {
                 <Icon
                     name='send'
                     size={37}
-                    color={Colors.actionItemColor}
+                    color={Colors.lightTextColor}
                     onPress={() => navigation.navigate('NotifyOffice')}
                     
                 />          
