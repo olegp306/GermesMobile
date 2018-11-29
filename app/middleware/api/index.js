@@ -14,7 +14,9 @@ import { storeCredentials, storeCredentialsHide, loadCredentials } from '../util
 // we need only api connection . Changes based on bol claris logic  will be throught API too
 
 //Germes real apiservice url
-export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
+ export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
+//export const API_SERVER_URL = 'http://192.168.56.1/germes/v1'
+
 //export const API_SERVER_URL = 'http://192.168.1.73:81/germes/v1'
 
 
