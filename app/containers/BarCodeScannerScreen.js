@@ -159,6 +159,7 @@ export default class BarCodeScannerScreen extends Component {
                 <BarcodeItemComponent
                   barcodeText={item.codeText}
                   requestNumber={(requestId) ? requests.items[requestId].requestNumber: ''}
+                  incomingPacketId={(requestId) ? requests.items[requestId].incomingPacketId: ''}
                   transactionParticipant={(requestId)? requests.items[requestId].transactionParticipant: ''}                  
                 />)
               }               

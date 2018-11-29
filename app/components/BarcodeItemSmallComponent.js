@@ -13,6 +13,7 @@ export default class BarcodeItemSmallComponent extends Component {
       <View style={styles.barcodeContainer}>
         <View style={styles.header}>
           <Text style={styles.barcodeText}> {this.props.barcodeText} </Text>
+          <Text style={styles.incomingPacketId}> {this.props.incomingPacketId} </Text>
           <Text style={styles.requestNumber}> {this.props.requestNumber} </Text>
         </View>
         <Text style={styles.transactionParticipant}> {this.props.transactionParticipant} </Text>
@@ -34,6 +35,11 @@ const styles = StyleSheet.create({
   barcodeText:{
     fontWeight:'500',
     fontSize: 17,      
+  },
+
+  incomingPacketId:{
+    //fontWeight:'500',
+    //fontSize: 17,
   },
 
   
