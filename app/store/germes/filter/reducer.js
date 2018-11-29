@@ -18,7 +18,6 @@ const initialState = new Map({
 });
 
 export function filterReducer(state = initialState, action){
-  //console.log('filterReducer');
   switch(action.type)
   {
     case SET_FILTER_DATE:    

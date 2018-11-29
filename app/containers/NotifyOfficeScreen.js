@@ -30,9 +30,6 @@ Date.prototype.formatDDMMYYYY = function(){
 // если @connect наверху то mapStateToProps уже должен быть объявлен перед @connect
 // приклеиваем данные из store
 const mapStateToProps = store => {    
-    //console.log("mapStateToProps");
-    console.log("store.requests.toJS()");
-    console.log(store.requests.toJS());
     return {
         filterDate: store.filter.get("filterDate"),
         filterReceptionId: store.filter.get("filterReceptionId"),        

@@ -17,7 +17,6 @@ import Loader from '../components/Loader'
 export default class RequestComponent extends Component {
   
   _handleShortPress=()=>{
-    //console.log(this.props.onShortPressRequest);
     this.props.onShortPressRequest(this.props);
   }
 

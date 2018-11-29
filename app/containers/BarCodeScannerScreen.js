@@ -20,6 +20,9 @@ import {
  import BarcodeItemComponent from '../components/BarcodeItemSmallComponent';
  import BarcodeScannerComponent from '../components/BarcodeScannerComponent';
 
+//  var Sound = require('react-native-sound');
+//  var whoosh = new Sound()
+
  const mapStateToProps = store => {    
   
   return {      
@@ -84,6 +87,7 @@ export default class BarCodeScannerScreen extends Component {
           })
 
           Vibration.vibrate(100);   
+          //Sound
 
           setTimeout(this._wait,500);
         }

@@ -13,7 +13,6 @@ export default class NotifyOfficeComponent extends Component {
   }
 
   onLongPressRequest=()=>{
-    console.log("onLongPressRequest");
     Alert.alert('LongPress','longlongpress');
   }
 

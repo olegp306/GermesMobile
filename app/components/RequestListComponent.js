@@ -32,8 +32,7 @@ export default class RequestListComponent extends Component {
   //
 
   render() {
-    console.log('RequestListComponent');
-     return(
+    return(
       <View>
         <FlatList 
             data={this.props.requests}

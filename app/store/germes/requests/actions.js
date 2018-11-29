@@ -15,7 +15,6 @@ export const fetchRequests = () => {
         //getState можно получить данные из STORE
         dispatch(startFetchRequests());        
         const {filter}=getState();
-        //console.log("ACTION fetchRequests");
         api.fetchRequests(filter.get('filterDate'),filter.get('filterReceptionId'))
         .then(data=>dispatch(requestsFetched(data.data)))
         .catch(error=>requestsFetchingError(error))

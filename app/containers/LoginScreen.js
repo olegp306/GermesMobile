@@ -27,19 +27,16 @@ export default class LoginScreen extends Component {
     state = { user: '', password: '', remember: false}
 
     componentDidMount = async () => {
-        console.log('LoginScreen componentDidMount');
         const { remember, user, password } = await loadCredentials()
         if (remember && user && password)
             this.setState({remember, user, password})
     }
 
     componentWillReceiveProps = async (nextProps) => {
-        console.log('LoginScreen componentWillReceiveProps');
         const { logged, error, userId, roles } = nextProps.session
         const { dispatch } = this.props.navigation
     
         if (logged) {
-            console.log('LoginScreen componentWillReceiveProps logged=' + logged);
             const { remember, user, password } = this.state
             
             if (remember){
@@ -79,7 +76,6 @@ export default class LoginScreen extends Component {
     }
 
     _handleLogInClick = () => {
-        console.log("_handleLogInClick");
         const { user, password } = this.state
         if (!user || !password)
             Alert.alert( 'Ошибка', 'Необходимо заполнить имя пользователя и пароль', [ {text: 'Закрыть', onPress: () => { }} ])
