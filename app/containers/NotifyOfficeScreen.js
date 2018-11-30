@@ -201,9 +201,10 @@ compareRequests=(request1, request2) =>{
    
     return (
         <View style={styles.screenContainer}>
-            <View style={styles.totalDataContainer}>
+            {/* <View style={styles.totalDataContainer}> */}
+            
                 <TotalRequestsContainer />
-            </View>
+            {/* </View> */}
             
             <View style={styles.requestListContainer}>
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
@@ -279,13 +280,13 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.baseBackgroundColor
     },
 
-    totalDataContainer: {
-        height: '6%',
-        width: '100%',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        //backgroundColor: Colors.ligth
-    },
+    // totalDataContainer: {
+    //     height: '6%',
+    //     width: '100%',
+    //     justifyContent: 'flex-start',
+    //     alignItems: 'center',
+    //     //backgroundColor: Colors.ligth
+    // },
 
     requestListContainer:{
         height: '84%',
