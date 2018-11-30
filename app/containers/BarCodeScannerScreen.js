@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TimerMixin from 'react-timer-mixin'
 import { 
     View,
     Text,
@@ -20,8 +19,6 @@ import {
  import BarcodeItemComponent from '../components/BarcodeItemSmallComponent';
  import BarcodeScannerComponent from '../components/BarcodeScannerComponent';
 
-//  var Sound = require('react-native-sound');
-//  var whoosh = new Sound()
 
  const mapStateToProps = store => {    
   
@@ -87,7 +84,7 @@ export default class BarCodeScannerScreen extends Component {
           })
 
           Vibration.vibrate(100);   
-          //Sound
+         
 
           setTimeout(this._wait,500);
         }
