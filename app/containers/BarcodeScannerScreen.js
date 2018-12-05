@@ -15,7 +15,7 @@ import {
  import { addBarcode, clearBarcodes } from '../store/germes/barcodes/actions.js'
  import { selectItem } from '../store/germes/selectedItems/actions.js'
 
- import TotalRequestsContainer from '../containers/TotalRequestsContainer';
+ import TotalRequestsContainer from './TotalRequestsContainer';
  import BarcodeItemComponent from '../components/BarcodeItemSmallComponent';
  import BarcodeScannerComponent from '../components/BarcodeScannerComponent';
 
@@ -38,7 +38,7 @@ const mapDispatchToProps = dispatch =>{
 } 
 
 @connect( mapStateToProps, mapDispatchToProps )
-export default class BarCodeScannerScreen extends Component {
+export default class BarcodeScannerScreen extends Component {
   constructor(props) {
     super(props);
 

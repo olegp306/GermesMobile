@@ -10,7 +10,7 @@ import HomeScreen from './app/containers/HomeScreen.js';
 import LoginScreen from './app/containers/LoginScreen';
 import RequestListScreen from './app/containers/RequestListScreen.js';
 import AddCommentScreen from './app/containers/AddCommentScreen.js';
-import BarCodeScannerScreen from './app/containers/BarCodeScannerScreen.js';
+import BarcodeScannerScreen from './app/containers/BarcodeScannerScreen.js';
 import NotifyOfficeScreen from './app/containers/NotifyOfficeScreen';
 
 import Colors from "./app/theme/Colors.js"
@@ -63,8 +63,8 @@ const RootStack = createStackNavigator(
    },
 
     
-    BarCodeScanner: {
-      screen: BarCodeScannerScreen,
+    BarcodeScanner: {
+      screen: BarcodeScannerScreen,
       navigationOptions:{
         headerTitle: 'Сканирование штрихкодов'
        }
@@ -108,8 +108,8 @@ const routes = {
 };
 
 const AppNavigator  = createDrawerNavigator({
-  BarCodeScanner:{
-    screen:BarCodeScannerScreen
+  BarcodeScanner:{
+    screen:BarcodeScannerScreen
   },
   NotifyOffice:{
     screen:NotifyOfficeScreen
