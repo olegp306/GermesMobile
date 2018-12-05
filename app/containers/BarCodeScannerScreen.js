@@ -66,7 +66,12 @@ export default class BarCodeScannerScreen extends Component {
       if(this.props.barcodes.items.hasOwnProperty(barcode.data))
       { 
         lastBarcodeNotice="Такой бар код уже добавлен"
-        Vibration.vibrate(200);       
+        Vibration.vibrate(200);  
+
+        this.setState({
+          waitAfterSuccessScan:true
+        })  
+        setTimeout(this._wait,750);   
       }    
       else
       {
@@ -82,11 +87,8 @@ export default class BarCodeScannerScreen extends Component {
           this.setState({
             waitAfterSuccessScan:true
           })
-
+          setTimeout(this._wait,750);
           Vibration.vibrate(100);   
-         
-
-          setTimeout(this._wait,500);
         }
         else
         {
