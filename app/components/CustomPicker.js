@@ -40,31 +40,31 @@ export default class CustomPicker extends Component {
             value:1239067490001,
             text:"Автозаводская"
           },
-          // 21574407010001:{
-          //   value:21574407010001,
-          //   text:"Нагатинская"
-          // },
-          // 27685162610001:{
-          //   value:27685162610001,
-          //   text:"Орликов"
-          // },
-          // 1239067490002 : {
-          //   value:7544983880002,
-          //   text:"Обручева2"
-          // },
-          // 1239067490002:
-          // {
-          //   value:1239067490002,
-          //   text:"Автозаводская2"
-          // },
-          // 21574407010002:{
-          //   value:21574407010002,
-          //   text:"Нагатинская2"
-          // },
-          // 27685162610002:{
-          //   value:27685162610002,
-          //   text:"Орликов"
-          // }                         
+          21574407010001:{
+            value:21574407010001,
+            text:"Нагатинская"
+          },
+          27685162610001:{
+            value:27685162610001,
+            text:"Орликов"
+          },
+          1239067490002 : {
+            value:7544983880002,
+            text:"Обручева2"
+          },
+          1239067490002:
+          {
+            value:1239067490002,
+            text:"Автозаводская2"
+          },
+          21574407010002:{
+            value:21574407010002,
+            text:"Нагатинская2"
+          },
+          27685162610002:{
+            value:27685162610002,
+            text:"Орликов"
+          }                         
       }
         
     };
@@ -96,33 +96,26 @@ export default class CustomPicker extends Component {
           </View>
         </TouchableOpacity>
 
-
+      
           <Modal 
             visible={this.state.pickerDisaplayed} 
-            animationType={"slide"} 
+            animationType={"fade"} 
             transparent={true} 
             onRequestClose={()=> console.log("Modal click")}>
 
-            
+        
+            <View style={styles.modalScreenContainer}>
             <View style={styles.modalContainer}>
+
             
               <View style={styles.headContainer}>
-                <Text style={styles.pickerText}> {this.state.pickerText +":"}</Text>
+                <Text style={styles.headText}> {this.state.pickerText +":"}</Text>
+                <Text style={styles.headNotice}> { " выбрано :" + this.state.items[this.state.selectedValue].text }</Text>
+                
               </View>
 
-              <View style={styles.contentContainer}>
-                {/* <Text style={styles.cancelButtonText}>Отмена</Text>
-                <Text style={styles.cancelButtonText}>Отмена</Text>
-                <Text style={styles.cancelButtonText}>Отмена</Text>
-                <Text style={styles.cancelButtonText}>Отмена</Text>
-                <Text style={styles.cancelButtonText}>Отмена</Text>
-                <Text style={styles.cancelButtonText}>Отмена</Text>
-                <Text style={styles.cancelButtonText}>Отмена</Text>
-                <Text style={styles.cancelButtonText}>Отмена</Text>
-                <Text style={styles.cancelButtonText}>Отмена</Text>
-                <Text style={styles.cancelButtonText}>Отмена</Text>
-                 */}
-                  <FlatList 
+              <View style={styles.middleContainer}>
+                <FlatList 
                     data={itemsArr}
                     keyExtractor={this._keyExtractor}
                     refreshing={this.props.refreshing}
@@ -132,14 +125,15 @@ export default class CustomPicker extends Component {
                     renderItem={({item}) =>
                     {                
                       return (
-                        // <TouchableOpacity 
-                        //   onPress={this.togglePicker}
-                        //   //onLongPress={this._handleLongPress}
-                        // >
-                        // <View style={styles.pickerItemContainer}>
-                          <Text style={styles.pickerItemText}>{item.text}</Text>
-                        // </View>
-                      // </TouchableOpacity>
+                        <TouchableOpacity 
+                          onPress={this.togglePicker}
+                          //onLongPress={this._handleLongPress}
+                        >
+                        <View style={styles.pickerItemContainer}>
+                          <Text style={ item.value==this.state.selectedValue ? styles.pickerSelectedItemText : styles.pickerItemText}>{item.text}</Text>
+                        </View>
+                        <View style={styles.horizontalDivider}></View>
+                      </TouchableOpacity>
                       )
                     }   
                     }
@@ -149,6 +143,7 @@ export default class CustomPicker extends Component {
               </View>
 
               <View style={styles.bottomContainer}>
+              {/* <View style={styles.bottomHorizontalDivider}></View> */}
                 <TouchableOpacity
                               onPress={() => {
                                   //Keyboard.dismiss();
@@ -158,7 +153,8 @@ export default class CustomPicker extends Component {
                               <View style={styles.cancelButton}>
                                   <Text style={styles.cancelButtonText}>Отмена</Text>
                               </View>
-                          </TouchableOpacity>
+                </TouchableOpacity>
+                
               </View>
 
               
@@ -167,10 +163,12 @@ export default class CustomPicker extends Component {
 
 
             </View>
+            </View>
 
           </Modal>
+        
 
-        <Text> CustomPicker </Text>
+        {/* <Text> CustomPicker </Text> */}
       </View>
     );
   }
@@ -179,73 +177,93 @@ export default class CustomPicker extends Component {
 const styles= StyleSheet.create({
 
   pickerContainer:{
+    
 
+
+  },
+  modalScreenContainer:{
+    position:"absolute",
+    flex:1,    
+    backgroundColor:'rgba(52, 52, 52, 0.4)',
+    
+    height: '100%',
+    width:'100%',   
+
+    // top:"0%",
+    // bottom:"0%",
+    // left:"0%",
+    // right:"0%",
   },
 
   modalContainer:{
-    //height: '80%',
-    //width:'90%',
+    
+    position:"absolute",
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     
     //margin:'5%',
-    padding:'2%',
-    backgroundColor:Colors.lightTextColor,
+    //padding:'4%',
+    backgroundColor:Colors.baseBackgroundColor,
     
-    top:"20%",
-    bottom:"20%",
-    left:"5%",
-    right:"5%",
-
-    position:"absolute",
-    
+    top:"15%",
+    bottom:"15%",
+    left:"8%",
+    right:"8%",
   },
 
   headContainer:{
-    height: '13%',
+    height: '16%',
     width:'100%',
+    //padding:'4%',
 
-    flexDirection:'row',
-    justifyContent:'flex-start',
-    alignItems: 'center',
+    //flexDirection:'row',
+    justifyContent:'center',
+    //alignItems: 'center',
     backgroundColor:Colors.navigatorBackgroudColor
 
   },
-  contentContainer:{
-    height: '67%',
-    width:'100%',
-    // backgroundColor:Colors.darkBackgroundColor,
+  middleContainer:{
     flex: 1,
-    flexDirection: 'column',
+    height: '34%',
+    width:'100%',
+    alignItems: 'stretch',    
+  },
+
+  contentContainer:{        
     justifyContent: 'center',
-    //alignItems: 'center',
     alignItems: 'stretch',
 
   },
   bottomContainer:{
-    height: '20%',
+    height: '25%',
     width:'100%',
     flexDirection:'row',
     justifyContent:'center',
     alignItems: 'center',
-    //backgroundColor:Colors.navigatorBackgroudColor
+    
+  },
 
-    // height: '15%',
-    // width:'100%',
-    // flexDirection: 'column',
-    // justifyContent: 'space-between',
-    // alignItems: 'center',
-    // backgroundColor:Colors.navigatorBackgroudColor
+  headText:{
+    fontWeight: 'bold',
+    fontSize:23,
+    color: Colors.lightTextColor,
+    left:'4%',
+  },
+
+  headNotice:{
+    fontWeight: 'bold',
+    fontSize:10,
+    color: Colors.lightTextColor,
+    alignItems:"flex-start",
+    left:'4%'
   },
 
   pickerText:{
     fontWeight: 'bold',
     fontSize:20,
-    color: Colors.lightTextColor
-    
-    //marginBottom:10
+    color: Colors.lightTextColor,
   },
 
  
@@ -254,18 +272,25 @@ const styles= StyleSheet.create({
     //flex:1,
     //width:"100%",
     //height:"100%",
-    flexDirection:'column',
+    //flexDirection:'column',
     //justifyContent:"",
-    borderWidth:1,
-    borderColor : 'black'
+    //borderWidth:1,
+    //borderColor : 'black'
 
   },
 
   pickerItemText:{
+    fontSize: 23,
+    textAlign: 'center',
+    margin: 5
+  },
+  
+  pickerSelectedItemText:{
+    fontWeight: 'bold',
     fontSize: 24,
     textAlign: 'center',
-    //color: '',
-    margin: 5
+    margin: 5,
+    
 
   },
   cancelButton: {
@@ -280,6 +305,21 @@ cancelButtonText: {
     textAlign: 'center',
     color: 'white',
     margin: 5
+},
+horizontalDivider: {
+  width: '94%',
+  height: 1,
+  left:"3%",
+  right:"3%",
+  backgroundColor: Colors.lightBackgroundColor,
+  justifyContent: 'center',
+},
+
+bottomhorizontalDivider: {
+  width: '100%',
+  height: 1, 
+  backgroundColor: Colors.navigatorBackgroudColor,
+  justifyContent: 'center',
 },
 
 
