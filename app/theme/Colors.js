@@ -11,7 +11,8 @@ const Colors = {
 
 
   baseBackgroundColor: "white",
-
+  whiteSmoke:"#F5F5F5",
+  lightGray:"#D3D3D3",
   navigatorBackgroudColor: '#047591',
   darkBackgroundColor: '#5A0CE8',
   actionBackgroundColor: '#5A0CE8',

@@ -110,7 +110,7 @@ export default class CustomPicker extends Component {
             
               <View style={styles.headContainer}>
                 <Text style={styles.headText}> {this.state.pickerText +":"}</Text>
-                <Text style={styles.headNotice}> { " выбрано :" + this.state.items[this.state.selectedValue].text }</Text>
+                <Text style={styles.headNotice}> { " выбрано: " + this.state.items[this.state.selectedValue].text }</Text>
                 
               </View>
 
@@ -120,30 +120,31 @@ export default class CustomPicker extends Component {
                     keyExtractor={this._keyExtractor}
                     refreshing={this.props.refreshing}
                     onRefresh={this._handleOnRefreshList}
-                    contentContainerStyle={styles.contentContainer}
+                    contentContainerStyle={styles.pickerItemContainer}
                     
-                    renderItem={({item}) =>
+                    renderItem={({item,index}) =>
                     {                
                       return (
                         <TouchableOpacity 
                           onPress={this.togglePicker}
                           //onLongPress={this._handleLongPress}
                         >
-                        <View style={styles.pickerItemContainer}>
+                        <View >
                           <Text style={ item.value==this.state.selectedValue ? styles.pickerSelectedItemText : styles.pickerItemText}>{item.text}</Text>
+                          <View style={styles.horizontalDivider}></View>
                         </View>
-                        <View style={styles.horizontalDivider}></View>
+                        
                       </TouchableOpacity>
                       )
                     }   
                     }
                     />
                 
-
+                
               </View>
-
-              <View style={styles.bottomContainer}>
-              {/* <View style={styles.bottomHorizontalDivider}></View> */}
+              <View style={styles.bottomHorizontalDivider}></View>   
+              <View style={styles.bottomContainer}>           
+              
                 <TouchableOpacity
                               onPress={() => {
                                   //Keyboard.dismiss();
@@ -196,7 +197,7 @@ const styles= StyleSheet.create({
   },
 
   modalContainer:{
-    
+   
     position:"absolute",
     flex: 1,
     flexDirection: 'column',
@@ -224,29 +225,33 @@ const styles= StyleSheet.create({
     backgroundColor:Colors.navigatorBackgroudColor
 
   },
+
   middleContainer:{
     flex: 1,
+    flexDirection:'column',
+    justifyContent: 'center',
+    //alignItems: 'stretch',
+        
     height: '34%',
     width:'100%',
-    alignItems: 'stretch',    
+    
+    //alignItems: 'center',  
+    
   },
 
-  contentContainer:{        
-    justifyContent: 'center',
-    alignItems: 'stretch',
-
-  },
   bottomContainer:{
-    height: '25%',
-    width:'100%',
-    flexDirection:'row',
+    flexDirection:'column',
+    height: '17%',
+    width:'98%',
+    //flexDirection:'row',
     justifyContent:'center',
     alignItems: 'center',
+    backgroundColor:Colors.whiteSmoke
     
   },
 
   headText:{
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
     fontSize:23,
     color: Colors.lightTextColor,
     left:'4%',
@@ -270,16 +275,23 @@ const styles= StyleSheet.create({
 
   pickerItemContainer:{
     //flex:1,
-    //width:"100%",
-    //height:"100%",
-    //flexDirection:'column',
-    //justifyContent:"",
-    //borderWidth:1,
-    //borderColor : 'black'
+    flexDirection:'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+    //backgroundColor:Colors.ligth2,    
+     width:"100%",
+    // height:"100%",
+   
+    // justifyContent:"",
+    // borderWidth:1,
+    // borderColor : 'black'
 
   },
 
   pickerItemText:{
+    //flex:1,
+   //width:'90%',
     fontSize: 23,
     textAlign: 'center',
     margin: 5
@@ -294,31 +306,36 @@ const styles= StyleSheet.create({
 
   },
   cancelButton: {
-    justifyContent: 'center',
-    backgroundColor: Colors.actionBackgroundColor,
-    minWidth: 245,
-    minHeight: 45,
-    borderRadius: 30
+     flexDirection:"column",
+    // justifyContent: 'flex-end',
+    // backgroundColor: Colors.actionBackgroundColor,
+    // minWidth: 145,
+    // minHeight: 20,
+    // borderRadius: 30
 },
 cancelButtonText: {
     fontSize: 24,
+    //fontWeight:"bold",
     textAlign: 'center',
-    color: 'white',
-    margin: 5
+    color: Colors.navigatorBackgroudColor,
+    margin: 15
 },
+
 horizontalDivider: {
-  width: '94%',
+  width: '80%',
   height: 1,
   left:"3%",
   right:"3%",
-  backgroundColor: Colors.lightBackgroundColor,
+  backgroundColor: Colors.lightGray,
   justifyContent: 'center',
 },
 
-bottomhorizontalDivider: {
-  width: '100%',
+bottomHorizontalDivider: {
+  //flex:1,
+  marginTop: "4%",
+  width: '98%',
   height: 1, 
-  backgroundColor: Colors.navigatorBackgroudColor,
+  backgroundColor: Colors.lightGray,
   justifyContent: 'center',
 },
 
