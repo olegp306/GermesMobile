@@ -96,7 +96,7 @@ export default class RequestListScreen extends Component {
                     name='barcode'
                     size={40}
                     color={Colors.lightTextColor}
-                    onPress={() => navigation.navigate('BarCodeScanner')}
+                    onPress={() => navigation.navigate('BarcodeScanner')}
                 />          
                 </View>
                 <View style={styles.iconContainer}>
