@@ -57,7 +57,7 @@ export default class CustomPicker extends Component {
             visible={this.state.pickerDisaplayed} 
             animationType={"fade"} 
             transparent={true} 
-            // onRequestClose={()=> console.log("Modal click")}
+            onRequestClose={()=>this._togglePicker()}
             >
         
             <View style={styles.modalScreenContainer}>
@@ -129,7 +129,7 @@ const styles= StyleSheet.create({
   },
   selectedItemTextStyle:{
     textAlign:'center',
-    color:'white',
+    color:Colors.whiteTextColor,
     fontSize:16
   },
 
@@ -257,16 +257,11 @@ const styles= StyleSheet.create({
 
   },
   cancelButton: {
-     flexDirection:"column",
-    // justifyContent: 'flex-end',
-    // backgroundColor: Colors.actionBackgroundColor,
-    // minWidth: 145,
-    // minHeight: 20,
-    // borderRadius: 30
+     flexDirection:"column",    
 },
+
 cancelButtonText: {
     fontSize: 24,
-    //fontWeight:"bold",
     textAlign: 'center',
     color: Colors.navigatorBackgroudColor,
     margin: 15
@@ -282,7 +277,6 @@ horizontalDivider: {
 },
 
 bottomHorizontalDivider: {
-  //flex:1,
   marginTop: "4%",
   width: '98%',
   height: 1, 
