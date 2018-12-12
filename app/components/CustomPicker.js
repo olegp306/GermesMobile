@@ -7,70 +7,19 @@ export default class CustomPicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        pickerDisaplayed:false,
-
-        pickerText:"Выберите приемную",
-
-        selectedValue:123906749000,
-
-        items:{
-          123906749000 : {
-            value:754498388000,
-            text:"Обручева"
-          },
-          123906749000:
-          {
-            value:123906749000,
-            text:"Автозаводская"
-          },
-          2157440701000:{
-            value:2157440701000,
-            text:"Нагатинская"
-          },
-          2768516261000:{
-            value:2768516261000,
-            text:"Орликов"
-          },
-          1239067490001 : {
-            value:7544983880001,
-            text:"Обручева"
-          },
-          1239067490001:
-          {
-            value:1239067490001,
-            text:"Автозаводская"
-          },
-          21574407010001:{
-            value:21574407010001,
-            text:"Нагатинская"
-          },
-          27685162610001:{
-            value:27685162610001,
-            text:"Орликов"
-          },
-          1239067490002 : {
-            value:7544983880002,
-            text:"Обручева2"
-          },
-          1239067490002:
-          {
-            value:1239067490002,
-            text:"Автозаводская2"
-          },
-          21574407010002:{
-            value:21574407010002,
-            text:"Нагатинская2"
-          },
-          27685162610002:{
-            value:27685162610002,
-            text:"Орликов"
-          }                         
-      }
-        
+        pickerDisaplayed:false,       
     };
   }
 
-  togglePicker=()=>{
+  _onSetValueHandler=(receptionId)=>{
+    this._togglePicker();
+    this.setState({
+
+    })
+    this.props.onSetValue(receptionId);
+  }
+
+  _togglePicker=()=>{
     this.setState(
       {
         pickerDisaplayed: !this.state.pickerDisaplayed
@@ -78,22 +27,29 @@ export default class CustomPicker extends Component {
     )
   }
 
-  _keyExtractor=(item,index) => item.value;
+  _keyExtractor=(item,index) => item.id;
   
 
   render() {
-    const itemsArr = _.values(this.state.items);
+    
+    // const items=this.props.items;
+    // const pickerText=this.props.pickerText;
+    // const selectedItemId=this.props.selectedItemId;
+    const {items, pickerText, selectedItemId}=this.props;
+    
+
+    const itemsArr = _.values(items);
     return (
       <View style={styles.pickerContainer}>
         <TouchableOpacity
           onPress={() => {
           //Keyboard.dismiss();
-          this.togglePicker();
+          this._togglePicker();
           }}
         >
-          <View style={styles.enterButton}>
-            <Text style={styles.enterText}>{this.state.items[this.state.selectedValue].text}</Text>
-          </View>
+          
+            <Text style={styles.selectedItemTextStyle}>{items[selectedItemId].text}</Text>
+          
         </TouchableOpacity>
 
       
@@ -101,16 +57,16 @@ export default class CustomPicker extends Component {
             visible={this.state.pickerDisaplayed} 
             animationType={"fade"} 
             transparent={true} 
-            onRequestClose={()=> console.log("Modal click")}>
-
+            // onRequestClose={()=> console.log("Modal click")}
+            >
         
             <View style={styles.modalScreenContainer}>
             <View style={styles.modalContainer}>
 
             
               <View style={styles.headContainer}>
-                <Text style={styles.headText}> {this.state.pickerText +":"}</Text>
-                <Text style={styles.headNotice}> { " выбрано: " + this.state.items[this.state.selectedValue].text }</Text>
+                <Text style={styles.headText}> {pickerText +":"}</Text>
+                <Text style={styles.headNotice}> { " выбрано: " + items[selectedItemId].text }</Text>
                 
               </View>
 
@@ -126,11 +82,10 @@ export default class CustomPicker extends Component {
                     {                
                       return (
                         <TouchableOpacity 
-                          onPress={this.togglePicker}
-                          //onLongPress={this._handleLongPress}
+                          onPress={()=>{this._onSetValueHandler(item.id)}}                          
                         >
                         <View >
-                          <Text style={ item.value==this.state.selectedValue ? styles.pickerSelectedItemText : styles.pickerItemText}>{item.text}</Text>
+                          <Text style={ item.id==selectedItemId ? styles.pickerSelectedItemText : styles.pickerItemText}>{item.text}</Text>
                           <View style={styles.horizontalDivider}></View>
                         </View>
                         
@@ -148,28 +103,19 @@ export default class CustomPicker extends Component {
                 <TouchableOpacity
                               onPress={() => {
                                   //Keyboard.dismiss();
-                                  this.togglePicker();
+                                  this._togglePicker();
                               }}
                               >
                               <View style={styles.cancelButton}>
                                   <Text style={styles.cancelButtonText}>Отмена</Text>
                               </View>
-                </TouchableOpacity>
-                
+                </TouchableOpacity>                
               </View>
-
-              
-
-              
-
-
             </View>
-            </View>
+          </View>
 
-          </Modal>
+        </Modal>
         
-
-        {/* <Text> CustomPicker </Text> */}
       </View>
     );
   }
@@ -177,11 +123,15 @@ export default class CustomPicker extends Component {
 
 const styles= StyleSheet.create({
 
-  pickerContainer:{
-    
+  pickerContainer:{   
 
 
   },
+  selectedItemTextStyle:{
+    textAlign:'center',
+    color:'white'
+  },
+
   modalScreenContainer:{
     position:"absolute",
     flex:1,    
