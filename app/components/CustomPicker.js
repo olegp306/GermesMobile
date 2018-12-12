@@ -129,7 +129,8 @@ const styles= StyleSheet.create({
   },
   selectedItemTextStyle:{
     textAlign:'center',
-    color:'white'
+    color:'white',
+    fontSize:16
   },
 
   modalScreenContainer:{

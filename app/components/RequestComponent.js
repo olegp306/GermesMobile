@@ -100,12 +100,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     marginBottom:2,
-    backgroundColor: 'white',
   },
+
   checkboxContainer: {
-    //backgroundColor: 'blue',
+    backgroundColor: Colors.baseBackgroundColor,
     borderWidth: 0
   },
+  
   selectedContentContainer: {
     width: '100 %', 
     flexDirection: 'column',

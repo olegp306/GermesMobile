@@ -50,9 +50,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'stretch',
-        //backgroundColor:'#f6f6f6',
+        
         borderWidth: 1,
-        backgroundColor: 'white',
+        
         borderRadius: 7
 
     },

@@ -32,7 +32,7 @@
       alignItems: 'center',
       width: '100%',
       height: '100%',
-      backgroundColor: 'white'
+      backgroundColor: Colors.whiteTextColor
   },
 
   bottomContainer:{    
@@ -54,7 +54,7 @@
   },        
       
   bottomLable:{
-      color: 'white',
+      color: Colors.whiteTextColor,
       fontSize: 17,
       marginLeft: 4,
       marginRight: 4
@@ -62,7 +62,7 @@
 
   
   bottomSmallLable:{
-      color: 'white',
+      color: Colors.whiteTextColor,
       fontSize: 13,
       marginLeft: 4,
       marginRight: 4,
