@@ -6,6 +6,7 @@ import DatePicker from 'react-native-datepicker'
 
 import RequestList from '../components/RequestListComponent';
 import TotalRequestsContainer from '../containers/TotalRequestsContainer';
+import CustomPicker from '../components/CustomPicker'
 
 import Loader from '../components/Loader'
 
@@ -21,6 +22,29 @@ const avtozavodskayaId=123906749000;
 const obruchevaId=754498388000;
 const nagatinskayaId=2157440701000;
 const orlikov17Id=2768516261000;
+
+const receptionItems={
+    754498388000 : {
+      id:754498388000,
+      text:"Обручева"
+    },
+    123906749000:
+    {
+        id:123906749000,
+      text:"Автозаводская"
+    },
+    2157440701000:{
+        id:2157440701000,
+      text:"Нагатинская"
+    },
+    2768516261000:{
+        id:2768516261000,
+      text:"Орликов"
+    },
+
+    
+};
+
 
 Date.prototype.formatDDMMYYYY = function(){   
     return (this.getFullYear() +
@@ -173,7 +197,17 @@ export default class RequestListScreen extends Component {
                     <View style={styles.filterItem}>
                         <Text  style={styles.filterLable} >Приемная: </Text>
                         <View  style={styles.pickerContainer}>
-                            <Picker
+                            
+                            
+                            
+                            <CustomPicker 
+                                pickerText={"Выберите приемную:"} 
+                                items={receptionItems} 
+                                selectedItemId={this.props.filterReceptionId}
+                                onSetValue={(receptionId, itemIndex) => this._handleReceptoionChange(receptionId)}
+                                //selectedItemTextStyle={styles.selectedItemTextStyle}
+                                />                        
+                            {/* <Picker
                                 style={{color:Colors.lightTextColor}}
                                 //value={this.state.filterDate}    
                                 selectedValue={filterReceptionId}                            
@@ -184,7 +218,7 @@ export default class RequestListScreen extends Component {
                                 <Picker.Item label="Автозаводская" value="123906749000" />
                                 <Picker.Item label="Нагатинская" value="2157440701000" />
                                 <Picker.Item label="Орликов" value="2768516261000" />
-                            </Picker>
+                            </Picker> */}
                         </View>
                     </View>
 
@@ -303,6 +337,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column', 
         justifyContent: 'center',
         alignItems: 'center',
+      },
+      selectedItemTextStyle:{
+          flex:1,
+          color:'white',
+          textAlign:'center'
       }
 
 });
