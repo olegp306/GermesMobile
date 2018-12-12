@@ -63,7 +63,7 @@ const RootStack = createStackNavigator(
    },
 
     
-    BarcodeScanner: {
+   BarcodeScanner: {
       screen: BarcodeScannerScreen,
       navigationOptions:{
         headerTitle: 'Сканирование штрихкодов'
