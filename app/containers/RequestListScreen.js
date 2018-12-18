@@ -215,18 +215,7 @@ export default class RequestListScreen extends Component {
                                 onSetValue={(receptionId, itemIndex) => this._handleReceptoionChange(receptionId)}
                                 //selectedItemTextStyle={styles.selectedItemTextStyle}
                                 />                        
-                            {/* <Picker
-                                style={{color:Colors.lightTextColor}}
-                                //value={this.state.filterDate}    
-                                selectedValue={filterReceptionId}                            
-                                prompt="Выберите приемную"
-                                onValueChange={(itemValue, itemIndex) => this._handleReceptoionChange(itemValue)}>
-                
-                                <Picker.Item label="Обручева" value="754498388000" />
-                                <Picker.Item label="Автозаводская" value="123906749000" />
-                                <Picker.Item label="Нагатинская" value="2157440701000" />
-                                <Picker.Item label="Орликов" value="2768516261000" />
-                            </Picker> */}
+                           
                         </View>
                     </View>
 
@@ -252,7 +241,7 @@ export default class RequestListScreen extends Component {
                         :
                         (
                             <RequestList                         
-                                requests={_.sortBy(items,'requestId') } 
+                                requests={_.sortBy(items,['statusId','requestId']) } 
                                 refreshing={refreshing}
                                 //requests={ items} 
                                 onShortPressRequest={ this._handleShortPressRequest} 
