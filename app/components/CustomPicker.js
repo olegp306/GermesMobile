@@ -12,10 +12,7 @@ export default class CustomPicker extends Component {
   }
 
   _onSetValueHandler=(receptionId)=>{
-    this._togglePicker();
-    this.setState({
-
-    })
+    this._togglePicker(); 
     this.props.onSetValue(receptionId);
   }
 
@@ -30,16 +27,12 @@ export default class CustomPicker extends Component {
   _keyExtractor=(item,index) => item.id;
   
 
-  render() {
-    
-    // const items=this.props.items;
-    // const pickerText=this.props.pickerText;
-    // const selectedItemId=this.props.selectedItemId;
+  render() {   
     const {items, pickerText, selectedItemId}=this.props;
-    
 
     const itemsArr = _.values(items);
     return (
+      
       <View style={styles.pickerContainer}>
         <TouchableOpacity
           onPress={() => {
@@ -47,7 +40,7 @@ export default class CustomPicker extends Component {
           this._togglePicker();
           }}
         >
-          
+          {/* Текущий выбор */}
             <Text style={styles.selectedItemTextStyle}>{items[selectedItemId].text}</Text>
           
         </TouchableOpacity>
