@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
       alignItems: 'flex-start',
       width: '94%',
       height: 50,
-      backgroundColor: 'white',
+      
       borderRadius: 7
   },
   iconContainer: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   enterText: {
       fontSize: 24,
       textAlign: 'center',
-      color: 'white',
+      
       margin: 5
   },
   checkboxContainer: {
