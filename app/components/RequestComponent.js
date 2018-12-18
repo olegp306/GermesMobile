@@ -81,7 +81,16 @@ export default class RequestComponent extends Component {
                   <Text >Статус ПОЛУЧЕНА </Text>                
                 </View>
                 ):null
-              }            
+              }
+
+              {
+                this.props.isStatusPriostanovka?
+                (
+                <View style={styles.stikerPriostanovka}>
+                  <Text >приостановка </Text>                
+                </View>
+                ):null
+              }                
 
               </View>
               
@@ -130,6 +139,13 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     borderRadius: 1,
     backgroundColor: '#4ef235',
+  },
+  
+  stikerPriostanovka:{
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    borderRadius: 1,
+    backgroundColor: Colors.statusPriostanovkaBackgroundColor
   },
 
     
