@@ -6,6 +6,20 @@ import _ from 'lodash'
 
 import RequestComponent from './RequestComponent';
 
+const statusItems={
+    
+  95485390000 : {
+      id:95485390000,
+      text:"Cдана"
+    },
+    97670516000:
+    {
+        id:97670516000,
+      text:"Приостановлена"
+    },   
+
+}
+
 export default class RequestListComponent extends Component {
 
    _handleShortPress=(requestId)=>{    
@@ -48,6 +62,8 @@ export default class RequestListComponent extends Component {
               const isUpdating=(this.props.selectedItems.items.hasOwnProperty(item.requestId) && this.props.selectedItems.items[item.requestId].isUpdating);
               const isChangeStatusSuccess=(this.props.selectedItems.items.hasOwnProperty(item.requestId) && this.props.selectedItems.items[item.requestId].updated==true )
 
+              const isStatusPriostanovka=(item.statusId==statusItems["97670516000"].id )
+
               return (<RequestComponent
                         key={item.requestId}
                         requestId = {item.requestId}
@@ -63,7 +79,8 @@ export default class RequestListComponent extends Component {
                         isSelected={isSelected}
                         isBarcodeExist={isBarcodeExist} 
                         isUpdating={isUpdating}    
-                        isChangeStatusSuccess={isChangeStatusSuccess} 
+                        isChangeStatusSuccess={isChangeStatusSuccess}
+                        isStatusPriostanovka={isStatusPriostanovka} 
                         
                         onShortPressRequest={ this._handleShortPress }
                         onLongPressRequest={ this._handleLongPress }
