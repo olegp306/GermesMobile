@@ -39,6 +39,7 @@ const mapDispatchToProps = dispatch =>{
 
 @connect( mapStateToProps, mapDispatchToProps )
 export default class BarcodeScannerScreen extends Component {
+  
   constructor(props) {
     super(props);
 
@@ -49,6 +50,25 @@ export default class BarcodeScannerScreen extends Component {
       waitAfterSuccessScan : false
     };
   }
+
+  // Ovveride базовый navigationOptions и дополнил кнопками в хедере
+  static navigationOptions=({ navigation, navigationOptions })=>{
+    const { params } = navigation.state;
+
+    return {
+        title: 'Сканирование штрихкодов',
+        headerRight: 
+           <View style={styles.headButtonsContainer}>                
+                <View style={styles.iconContainer}>               
+                </View>     
+            </View>                  
+            }
+            
+  }  
+
+
+
+
   _wait=()=>{this.setState({
     waitAfterSuccessScan:false
   })
