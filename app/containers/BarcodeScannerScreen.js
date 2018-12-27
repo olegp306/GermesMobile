@@ -56,17 +56,15 @@ export default class BarcodeScannerScreen extends Component {
     const { params } = navigation.state;
 
     return {
-        title: 'Сканирование штрихкодов',
-        headerRight: 
-           <View style={styles.headButtonsContainer}>                
-                <View style={styles.iconContainer}>               
-                </View>     
-            </View>                  
-            }
+      title: 'Сканирование штрихкодов',      
+      // headerRight: 
+      //   <View style={styles.headButtonsContainer}>                
+      //     <View style={styles.iconContainer}>
+      //     </View>     
+      //   </View>                  
+    }
             
-  }  
-
-
+  }
 
 
   _wait=()=>{this.setState({
@@ -209,7 +207,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '40%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 5,
   },
 
   lastBarcodeOk:{
@@ -217,7 +216,8 @@ const styles = StyleSheet.create({
     height: '10%', 
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: Colors.lightBackgroundColor
+    backgroundColor: Colors.lightBackgroundColor,
+    borderRadius: 5,
   },
 
   lastBarcodeErr:{
