@@ -32,13 +32,16 @@
       alignItems: 'center',
       width: '100%',
       height: '100%',
-      backgroundColor: Colors.whiteTextColor
+      backgroundColor: Colors.lightGray,
+      borderWidth:1,
+      borderRadius: 2,
+      //borderColor:Colors.lightTextColor
   },
 
   bottomContainer:{    
     width:'100%',
     flexDirection: 'row',                    
-    backgroundColor: Colors.navigatorBackgroudColor,
+    backgroundColor: Colors.lightGray,
 
     // flex: 1,
     
@@ -54,7 +57,7 @@
   },        
       
   bottomLable:{
-      color: Colors.whiteTextColor,
+      color: Colors.lightBlackTextColor,
       fontSize: 17,
       marginLeft: 4,
       marginRight: 4
@@ -62,7 +65,7 @@
 
   
   bottomSmallLable:{
-      color: Colors.whiteTextColor,
+      color: Colors.lightBlackTextColor,
       fontSize: 13,
       marginLeft: 4,
       marginRight: 4,
