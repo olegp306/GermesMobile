@@ -53,26 +53,7 @@ const LoginStackNav = createStackNavigator({
   // }
 })
 
-// const StackNav = createStackNavigator(
-//   {
-//     // Home: HomeScreen
-//     Home: { screen: HomeScreen, navigationOptions: { header: null } },    
-//     Login: { screen: LoginScreen,  navigationOptions: { header: null } },    
-//     RequestList: { screen: RequestListScreen},
-//     AddComment: { screen: AddCommentScreen},
-//     BarcodeScanner: { screen: BarcodeScannerScreen },  
-//     NotifyOffice: { screen: NotifyOfficeScreen },  
-//   },
-//   {
-//     initialRouteName: 'Login',
 
-//     navigationOptions: {
-//             headerStyle: styles.back,
-//             headerTitleStyle: styles.title,
-//             headerTintColor: Colors.darkBackgroundColor
-//     }
-//   }  
-// );
 
 const TabsNav  = createBottomTabNavigator(
   {
@@ -80,14 +61,14 @@ const TabsNav  = createBottomTabNavigator(
       screen: RequestListScreen,
       navigationOptions: {
         tabBarLabel:"Заявки",
-        tabBarIcon: ({ tintColor }) => <Icon name={"library-books"} color={tintColor} />
+        tabBarIcon: ({ tintColor }) => <Icon size={20} name={"library-books"} color={tintColor} />
       }
     },
     BarcodeScanner:{ 
       screen:BarcodeScannerScreen,
       navigationOptions: {
         tabBarLabel:"Сканер",
-        tabBarIcon: ({ tintColor }) => <Icon2 name={"barcode-scan"} color={tintColor} />
+        tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
     }
 
      },
@@ -95,7 +76,7 @@ const TabsNav  = createBottomTabNavigator(
       screen:NotifyOfficeScreen,
       navigationOptions: {
         tabBarLabel:"Отправить",
-        tabBarIcon: ({ tintColor }) => <Icon name={"send"} color={tintColor} />
+        tabBarIcon: ({ tintColor }) => <Icon size={20} name={"send"} color={tintColor} />
       }
     }  
   }
@@ -106,27 +87,6 @@ const TabsNav  = createBottomTabNavigator(
   }
 
 );
-
-// const DrawerNav = createDrawerNavigator(
-//   { 
-//     //StackNav : {screen: StackNav },
-//     //TabsNav : {screen: TabsNav },
-//     //Login: { screen: LoginScreen },
-//     AddComment: { screen: AddCommentScreen },
-//     NotifyOffice: { screen: NotifyOfficeScreen }, 
-//   },
-
-//   // {
-//   //   initialRouteName: 'Login',
-
-//   //   // navigationOptions: {
-//   //   //         headerStyle: styles.back,
-//   //   //         headerTitleStyle: styles.title,
-//   //   //         headerTintColor: Colors.darkBackgroundColor
-//   //   // }
-//   // }
-// );
-
 
 const PrimaryNav= createStackNavigator({
   LoginStack:{screen: LoginStackNav},
