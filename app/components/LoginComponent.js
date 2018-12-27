@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.actionBackgroundColor,
         minWidth: 245,
         minHeight: 45,
-        borderRadius: 30
+        borderRadius: 7
     },
     enterText: {
         fontSize: 24,
