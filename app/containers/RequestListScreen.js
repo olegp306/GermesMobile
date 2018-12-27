@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
 
     listContainer:{        
         height: '80%',
-        width:'98%',
+        width:'100%',
         
     },    
     horizontalDivider: {
