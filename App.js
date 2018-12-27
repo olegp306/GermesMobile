@@ -84,6 +84,12 @@ const TabsNav  = createBottomTabNavigator(
   {
     order: ['RequestList','BarcodeScanner','NotifyOffice'],
     animationEnabled: true,
+    tabBarOptions:{
+      activeTintColor : "white",
+      inactiveBackgroundColor:Colors.navigatorBackgroudDarkColor,
+      activeBackgroundColor:Colors.navigatorBackgroudColor
+
+    }
   }
 
 );
