@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     height: '10%', 
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: Colors.lightGray,
+    backgroundColor: Colors.lightBackgroundColor,
     borderRadius: 5,
   },
 
@@ -232,7 +232,8 @@ const styles = StyleSheet.create({
       fontWeight:'500',
       fontSize: 17,
       marginLeft: 5,
-      textAlign: 'center'
+      textAlign: 'center',
+      color:Colors.lightBlackTextColor
   },
 
   lastBarcodeNoticeText:{

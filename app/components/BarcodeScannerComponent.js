@@ -40,16 +40,24 @@ export default class BarcodeScannerComponent extends Component {
             // <Text>Camera permission is not granted</Text> :
             <Text>Разрешение к доступу к камере не предоставлены</Text> :
             <BarCodeScanner
-              torchMode="on"
+              // torchMode="on"
               onBarCodeRead={this._handleBarCodeRead}
               style={{ height: 230, width: 350 }}
-            />
+            >
+              <View style={styles.layerTop} />
+              <View style={styles.layerCenter}>
+                <View style={styles.layerLeft} />
+                <View style={styles.focused} />
+                <View style={styles.layerRight} />
+              </View>
+            <View style={styles.layerBottom} />
+        </BarCodeScanner>
         }
       </View>
     );
   }
 }
-
+const opacity = 'rgba(0, 0, 0, .6)';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -65,4 +73,29 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#34495e',
   },
+  layerTop: {
+    flex: 2,
+    backgroundColor: opacity
+  },
+  layerCenter: {
+    flex: 10,
+    flexDirection: 'row'
+  },
+
+  layerLeft: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  focused: {
+    flex: 20
+  },
+  layerRight: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  layerBottom: {
+    flex: 2,
+    backgroundColor: opacity
+  },
+  
 });
