@@ -97,26 +97,39 @@ export default class RequestListScreen extends Component {
 
     return {
         title: 'Заявки',
-        headerRight: 
-           <View style={styles.headButtonsContainer}>
-                <View style={styles.iconContainer}>
-                <Icon
-                    name='barcode'
-                    size={40}
-                    color={Colors.lightTextColor}
-                    onPress={() => navigation.navigate('BarcodeScanner')}
-                />          
-                </View>
-                <View style={styles.iconContainer}>
-                <Icon
-                    name='send'
-                    size={37}
-                    color={Colors.lightTextColor}
-                    onPress={() => navigation.navigate('NotifyOffice')}
+        headerLeft:
+        <View style={styles.headButtonsContainer}>
+        
+             <View style={styles.iconContainer}>
+             <Icon
+                 name='navicon'
+                 size={40}
+                 color={Colors.lightTextColor}
+                 onPress={() => navigation.navigate('BarcodeScanner')}
+             />          
+             </View>
+        </View>
+        ,        
+        // headerRight: 
+        //    <View style={styles.headButtonsContainer}>
+        //         <View style={styles.iconContainer}>
+        //         <Icon
+        //             name='barcode'
+        //             size={40}
+        //             color={Colors.lightTextColor}
+        //             onPress={() => navigation.navigate('BarcodeScanner')}
+        //         />          
+        //         </View>
+        //         <View style={styles.iconContainer}>
+        //         <Icon
+        //             name='send'
+        //             size={37}
+        //             color={Colors.lightTextColor}
+        //             onPress={() => navigation.navigate('NotifyOffice')}
                     
-                />          
-                </View>     
-            </View>                  
+        //         />          
+        //         </View>     
+        //     </View>                  
             }
   }
   
@@ -212,8 +225,7 @@ export default class RequestListScreen extends Component {
                                 pickerText={"Выберите приемную:"} 
                                 items={receptionItems} 
                                 selectedItemId={this.props.filterReceptionId}
-                                onSetValue={(receptionId, itemIndex) => this._handleReceptoionChange(receptionId)}
-                                //selectedItemTextStyle={styles.selectedItemTextStyle}
+                                onSetValue={(receptionId, itemIndex) => this._handleReceptoionChange(receptionId)}                                
                                 />                        
                            
                         </View>
@@ -268,16 +280,17 @@ export default class RequestListScreen extends Component {
 const styles = StyleSheet.create({
     screenContainer: {
         flexDirection: 'column',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%',
         height: '100%',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+       
     },
 
     headContainer:{
         marginTop: 5,
-        height: '12%',
+        height: '5%',
     },
 
     filtersContainer:{
@@ -306,7 +319,7 @@ const styles = StyleSheet.create({
         height: 40,
         flexDirection: 'column',
         justifyContent : 'center',
-        // borderRadius: 5,
+        borderRadius: 3,
         // borderWidth: 1 ,
         backgroundColor: Colors.actionBackgroundColor ,
         
@@ -319,28 +332,23 @@ const styles = StyleSheet.create({
 
     headButtonsContainer:{
         flexDirection: 'row',        
-       },
+    },
        
-       iconContainer: {
+    iconContainer: {
         width: 45,
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         marginRight: 25,
 
-      },
+    },
 
-      noDataLable:{
+    noDataLable:{
         flexDirection: 'column', 
         justifyContent: 'center',
         alignItems: 'center',
-      },
-      selectedItemTextStyle:{
-          flex:1,
-          color:'white',
-          textAlign:'center'
-      }
-
+    },
+     
 });
 
 
