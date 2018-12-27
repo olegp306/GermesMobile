@@ -152,7 +152,18 @@ export default class NotifyOfficeScreen extends Component {
     }
     return result;
   }
+  _getNumberOfMatches=(array1, arrya2)=>{
+    let amount=0;
+    for(key in array1)
+    {
+        if(arrya2.hasOwnProperty(key))
+        {
+            amount++;
+        }
 
+    }
+    return amount;
+  }
 
   
 
@@ -160,6 +171,7 @@ export default class NotifyOfficeScreen extends Component {
     const { isFetching ,items, isStatusChanging, refreshing }=this.props.requests;
     const { filterDate, filterReceptionId, selectedItems, barcodes }=this.props;
     const amountOfUpdatingItems=this._amountOfUpdatingItems();
+    const selectedAmount=this._getNumberOfMatches(selectedItems.items,items);
    
     return (
         <View style={styles.screenContainer}>
@@ -167,6 +179,26 @@ export default class NotifyOfficeScreen extends Component {
             
                 
             {/* </View> */}
+            <View style={styles.botttomContainer}>
+                <TouchableOpacity
+                    onPress={() => {
+                                    Keyboard.dismiss();
+                                    this._handleOnClickUpdateStatus();
+                                }}
+                    >
+                    <View style={styles.bigButton}>
+                        {
+                          (amountOfUpdatingItems!=0)
+                          ?
+                            (<Text style={styles.bigButtonText}>Осталось: {amountOfUpdatingItems} </Text>)
+                          :
+                            (<Text style={styles.bigButtonText}>Получить {selectedAmount} шт.</Text>)
+                         
+                            
+                        }
+                    </View>                        
+                </TouchableOpacity>
+            </View>
             
             <View style={styles.requestListContainer}>
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
@@ -201,26 +233,7 @@ export default class NotifyOfficeScreen extends Component {
                  </Loader>
             </View>            
             
-            <View style={styles.botttomContainer}>
-                <TouchableOpacity
-                    onPress={() => {
-                                    Keyboard.dismiss();
-                                    this._handleOnClickUpdateStatus();
-                                }}
-                    >
-                    <View style={styles.bigButton}>
-                        {
-                          (amountOfUpdatingItems!=0)
-                          ?
-                            (<Text style={styles.bigButtonText}>Осталось: {amountOfUpdatingItems} </Text>)
-                          :
-                            (<Text style={styles.bigButtonText}>Получены</Text>)
-                         
-                            
-                        }
-                    </View>                        
-                </TouchableOpacity>
-            </View>
+            
             <TotalRequestsContainer />            
         </View>     
        
