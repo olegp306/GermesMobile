@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     height: '40%',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 15,
   },
 
   lastBarcodeOk:{
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     height: '10%', 
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundColor: Colors.lightBackgroundColor,
+    backgroundColor: Colors.lightGray,
     borderRadius: 5,
   },
 
