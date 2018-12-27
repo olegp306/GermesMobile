@@ -63,50 +63,10 @@ export default class NotifyOfficeScreen extends Component {
     const { params } = navigation.state;
 
     return {
-        title: 'Уведомить офис',
-        headerRight: 
-           <View style={styles.headButtonsContainer}>                
-                <View style={styles.iconContainer}>               
-                </View>     
-            </View>                  
+        title: 'Уведомить офис'                     
             }
             
-  }  
-
-// функция сравнения для фильрации
-
-// compareRequests=(request1, request2) =>{
-//     const barcodes=this.props.barcodes;
-//     const barcode1=barcodes.items[request1.receiptNumber];
-//     const barcode2=barcodes.items[request2.receiptNumber];
-
-    
-
-//     if(barcode1 && barcode2)
-//     {
-//         var dateA = new Date(barcode1.scanDateTime);
-//         var dateB = new Date(barcode2.scanDateTime);
-//         //return barcodes.items[request1.receiptNumber].scanDateTime - barcodes.items[request2.receiptNumber].scanDateTime;
-//         return  dateB - dateA;
-//     }
-
-//      if(barcode1 && barcode2==undefined)
-//     {
-//         return -1;
-//     }
-
-//      if(barcode1==undefined && barcode2)
-//     {
-//         return 1;
-//     }
-
-//      if(barcode1==undefined && barcode2==undefined)
-//     {
-//         return request1.requestId-request2.requestId;
-//     }
-
-
-//   }
+  }
 
     _handleOnClickUpdateStatus=()=>{
         if(this._amountOfUpdatingItems()==0)
@@ -205,7 +165,7 @@ export default class NotifyOfficeScreen extends Component {
         <View style={styles.screenContainer}>
             {/* <View style={styles.totalDataContainer}> */}
             
-                <TotalRequestsContainer />
+                
             {/* </View> */}
             
             <View style={styles.requestListContainer}>
@@ -260,7 +220,8 @@ export default class NotifyOfficeScreen extends Component {
                         }
                     </View>                        
                 </TouchableOpacity>
-            </View>            
+            </View>
+            <TotalRequestsContainer />            
         </View>     
        
     );
@@ -319,7 +280,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.actionBackgroundColor,
         minWidth: 245,
         minHeight: 45,
-        borderRadius: 30,
+        borderRadius: 7,
         margin:2
         },
 
