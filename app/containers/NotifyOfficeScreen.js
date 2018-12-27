@@ -175,31 +175,7 @@ export default class NotifyOfficeScreen extends Component {
     const selectedAmount=this._getNumberOfMatches(selectedItems.items,items);
    
     return (
-        <View style={styles.screenContainer}>
-            {/* <View style={styles.totalDataContainer}> */}
-            
-                
-            {/* </View> */}
-            {/* <View style={styles.bottomContainer}>
-                <TouchableOpacity
-                    onPress={() => {
-                                    Keyboard.dismiss();
-                                    this._handleOnClickUpdateStatus();
-                                }}
-                    >
-                    <View style={styles.bigButton}>
-                        {
-                          (amountOfUpdatingItems!=0)
-                          ?
-                            (<Text style={styles.bigButtonText}>Осталось: {amountOfUpdatingItems} </Text>)
-                          :
-                            (<Text style={styles.bigButtonText}>Получить {selectedAmount} шт.</Text>)
-                         
-                            
-                        }
-                    </View>                        
-                </TouchableOpacity>
-            </View> */}
+        <View style={styles.screenContainer}>           
             
             <View style={styles.requestListContainer}>
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
@@ -290,6 +266,7 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        paddingTop:4
         //backgroundColor: Colors.ligth2
     },
 
