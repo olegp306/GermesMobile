@@ -54,7 +54,7 @@ export default class LoginScreen extends Component {
             const resetAction = StackActions.reset({
                 index: 0,
                 actions: [
-                    NavigationActions.navigate({ routeName: 'RequestList'})
+                    NavigationActions.navigate({ routeName: 'TabsNav'})
                 ],
                 key: null
             })
