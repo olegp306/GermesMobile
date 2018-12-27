@@ -21,6 +21,7 @@ const Colors = {
   navigatorBackgroudColor: '#047591',  
   navigatorBackgroudDarkColor:'#023947',
   darkBackgroundColor: '#5A0CE8',
+  lightBlackTextColor:'#424242',
 
   // actionBackgroundColor: '#5A0CE8',
   actionBackgroundColor: '#6AAB33',

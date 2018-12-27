@@ -69,6 +69,7 @@ export default class NotifyOfficeScreen extends Component {
   }
 
     _handleOnClickUpdateStatus=()=>{
+        
         if(this._amountOfUpdatingItems()==0)
         {
             Alert.alert(
@@ -179,7 +180,7 @@ export default class NotifyOfficeScreen extends Component {
             
                 
             {/* </View> */}
-            <View style={styles.botttomContainer}>
+            <View style={styles.bottomContainer}>
                 <TouchableOpacity
                     onPress={() => {
                                     Keyboard.dismiss();
@@ -272,9 +273,9 @@ const styles = StyleSheet.create({
         //backgroundColor: Colors.ligth2
     },
 
-    botttomContainer:{
+    bottomContainer:{
         height: '10%',
-        width: '100%',
+        width: '75%',
         flexDirection: 'column',
         justifyContent: 'center',
         
