@@ -290,7 +290,7 @@ const styles = StyleSheet.create({
 
     headContainer:{
         marginTop: 5,
-        height: '5%',
+        height: '6%',
     },
 
     filtersContainer:{
