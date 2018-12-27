@@ -180,7 +180,7 @@ export default class NotifyOfficeScreen extends Component {
             
                 
             {/* </View> */}
-            <View style={styles.bottomContainer}>
+            {/* <View style={styles.bottomContainer}>
                 <TouchableOpacity
                     onPress={() => {
                                     Keyboard.dismiss();
@@ -199,7 +199,7 @@ export default class NotifyOfficeScreen extends Component {
                         }
                     </View>                        
                 </TouchableOpacity>
-            </View>
+            </View> */}
             
             <View style={styles.requestListContainer}>
                 {/* <Loader message='Обновление заявок' isLoading={false}> */}
@@ -232,7 +232,27 @@ export default class NotifyOfficeScreen extends Component {
                         )
                 }
                  </Loader>
-            </View>            
+            </View> 
+            <View style={styles.bottomContainer}>
+                <TouchableOpacity
+                    onPress={() => {
+                                    Keyboard.dismiss();
+                                    this._handleOnClickUpdateStatus();
+                                }}
+                    >
+                    <View style={styles.bigButton}>
+                        {
+                          (amountOfUpdatingItems!=0)
+                          ?
+                            (<Text style={styles.bigButtonText}>Осталось: {amountOfUpdatingItems} </Text>)
+                          :
+                            (<Text style={styles.bigButtonText}>Получить {selectedAmount} шт.</Text>)
+                         
+                            
+                        }
+                    </View>                        
+                </TouchableOpacity>
+            </View>           
             
             
             <TotalRequestsContainer />            
