@@ -109,22 +109,23 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     marginBottom:2,
+    //backgroundColor:Colors.ligth2
   },
-
-  checkboxContainer: {
-    backgroundColor: Colors.baseBackgroundColor,
-    borderWidth: 0
-  },
-  
+ 
   selectedContentContainer: {
     width: '100 %', 
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     marginBottom:2,
-    backgroundColor: '#EEEEEE',
     opacity:0.5
   },
+
+  checkboxContainer: {
+    backgroundColor: 'white',
+    borderWidth: 0
+  },
+  
   receiptNumberContainer:{
     //backgroundColor: Colors.baseBackgroundColor
     },
@@ -166,7 +167,8 @@ const styles = StyleSheet.create({
 
   rightMiddleContainer:{
     width: '15%',
-    alignItems: 'center'
+    alignItems: 'center',
+    //backgroundColor:Colors.ligth2
   },
     
   bottomContainer:{
@@ -184,10 +186,10 @@ const styles = StyleSheet.create({
   },
 
     horizontalDivider: {
-        width: '95%',
+        width: '100%',
         height: 1,
         backgroundColor: "#6E6E6E",
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
     },
     checkbox:{
      
