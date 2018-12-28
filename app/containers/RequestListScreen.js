@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DatePicker from 'react-native-datepicker'
 
 import RequestList from '../components/RequestListComponent';
-import TotalRequestsContainer from '../containers/TotalRequestsContainer';
+import TotalRequestsContainer from './TotalRequestsContainer';
 import CustomPicker from '../components/CustomPicker'
 
 import Loader from '../components/Loader'
