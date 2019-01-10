@@ -7,7 +7,7 @@ export const REQUESTS_STATUS_CHANGE = 'REQUESTS_STATUS_CHANGE'
 export const REQUESTS_STATUS_CHANGE_SUCCESS = 'REQUESTS_STATUS_CHANGE_SUCCESS'
 export const REQUESTS_STATUS_CHANGE_ERROR = 'REQUESTS_STATUS_CHANGE_ERROR'
 
-import _keyBy from 'lodash'
+import {keyBy} from 'lodash'
 import api from '../../../middleware/api'
 
 export const fetchRequests = () => {
@@ -31,7 +31,7 @@ export const startFetchRequests = () => {
 export const requestsFetched = (items) => {
     return {
         type: FETCH_REQUESTS_SUCCESS,
-        payload:api.toAssociativeArray(items,'requestId')
+        payload:keyBy(items,'requestId')
     }
 }
 
