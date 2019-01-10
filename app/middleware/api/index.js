@@ -14,8 +14,13 @@ import { storeCredentials, storeCredentialsHide, loadCredentials } from '../util
 // we need only api connection . Changes based on bol claris logic  will be throught API too
 
 //Germes real apiservice url
-export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
-// export const API_SERVER_URL = 'http://192.168.1.73/ApiService/germes/v1'
+//export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
+//export const API_SERVER_URL = 'http://192.168.1.73/ApiService/germes/v1' 
+export const API_SERVER_URL = 'http://192.168.8.2/ApiService/germes/v1'
+export const API_CHAT_SERVER_URL = 'http://192.168.8.2/germes/v1'
+
+//получениесообщений
+//http://service.allwingroup.ru:3652/germes/v1/messages/chatid/2768027587000
 
 //export const API_SERVER_URL = 'http://192.168.1.73:81/germes/v1'
 
@@ -31,33 +36,15 @@ const apiConf = {
     timeout: 35000
 }
 
+const chatApiConf = {
+    baseURL: API_CHAT_SERVER_URL,
+    headers: { 'Cache-Control': 'no-cache' },
+    timeout: 35000
+}
+
 const apiInstance = axios.create(apiConf)
+const apiChatInstance = axios.create(chatApiConf)
 
-
-
-toAssociativeArray =(data,idFieldName)=>{
-    if(!idFieldName){
-      var  idFieldName="id";
-    }
-    let map = {};
-    //console.log('toAssociativeArr', data);
-    for (var i = 0, l = data.length; i < l; i++) {
-      let item=data[i];
-        map[item[idFieldName]] = item;
-    }
-    //console.log(map);
-    return map;
-  }
-/*
-instance.interceptors.request.use(request => {
-    console.log('Starting Request', request)
-    return request
-})
-
-instance.interceptors.response.use(response => {
-    console.log('Response:', response)
-    return response
-})*/
 
 const onError = (error) => {
     if (error.response) {
@@ -92,16 +79,12 @@ const authorize = () => apiInstance.get('/vNext/v1/users/current').catch(onError
 const setAuthHeader = (token) => apiInstance.defaults.headers.authorization = `Bearer ${token}`
 
 const fetchRequests = (fromRegistrationPlanDate,receptionId) =>{ 
-    //console.log(API_SERVER_URL+'requestsgermes/mobile?fromRegistrationPlanDate='+fromRegistrationPlanDate+'&receptionId='+receptionId) ;
     return apiInstance.get('requestsgermes/mobile?fromRegistrationPlanDate='+fromRegistrationPlanDate+'&receptionId='+receptionId).catch(onError)
 };
 
 const changeRequestStatus = async (requestsId) =>  {
     //console.log("changeRequestsStatus");
     const { user, password } = await loadCredentials()    
-    //requestsgermes/mobile/changestatus/2768555610000
-
-
     const url=`requestsgermes/mobile/changestatus/${requestsId}`
     const body = `grant_type=password&username=${user}&password=${password}`
 
@@ -110,6 +93,10 @@ const changeRequestStatus = async (requestsId) =>  {
     return apiInstance.post(url, body, conf).catch(onError)
 }
 
+const fetchMessages = (chatId) =>{ 
+    chatId=2768203390000;
+    return apiChatInstance.get('messages/chatid/'+chatId )
+};
 
 
 export default {
@@ -123,7 +110,8 @@ export default {
     // fetchCompanies,
     // fetchEmployees,
     fetchRequests,
-    toAssociativeArray
+    
+    fetchMessages
 }
 
 
