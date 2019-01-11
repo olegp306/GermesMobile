@@ -10,9 +10,11 @@ import { store } from './app/store/index.js'
 import HomeScreen from './app/containers/HomeScreen.js';
 import LoginScreen from './app/containers/LoginScreen';
 import RequestListScreen from './app/containers/RequestListScreen.js';
-import AddCommentScreen from './app/containers/AddCommentScreen.js';
+import ChatScreen from './app/containers/ChatScreen';
 import BarcodeScannerScreen from './app/containers/BarcodeScannerScreen.js';
 import NotifyOfficeScreen from './app/containers/NotifyOfficeScreen';
+
+
 
 import Colors from "./app/theme/Colors.js"
 
@@ -52,6 +54,25 @@ const LoginStackNav = createStackNavigator({
 //     title: 'You are not logged in'
   // }
 })
+
+// const RequestListStackNav= createStackNavigator({
+//   RequestList: { 
+//     screen: RequestListScreen,
+//     navigationOptions: {
+//       tabBarLabel:"Заявки",
+//       tabBarIcon: ({ tintColor }) => <Icon size={20} name={"library-books"} color={tintColor} />
+//     }
+//   },
+//   AddComment:{
+//     screen: AddCommentScreen
+//   }
+//   },
+//   {
+//     initialRouteName: 'RequestList',
+//     navigationOptions: { header: null }
+//   }
+// )
+
 
 
 
@@ -96,13 +117,18 @@ const TabsNav  = createBottomTabNavigator(
 
 const PrimaryNav= createStackNavigator({
   LoginStack:{screen: LoginStackNav},
-  TabsNav:{screen: TabsNav}
+  TabsNav:{screen: TabsNav},
+  ChatRequest:{
+    screen: ChatScreen      
+  }
   },
   {
     initialRouteName: 'LoginStack',
     navigationOptions: { header: null }
-  }
+  },
+  
 )
+
 
 
 
