@@ -7,12 +7,8 @@ import {
     TouchableOpacity,
     ActivityIndicator
  } from 'react-native';
-//import { CheckBox } from 'react-native-elements';
-import Loader from '../components/Loader'
-//import SmallLoader from "../components/SmallLoader"
 
-
- import { Colors, Images, Metrics } from '../theme';
+import { Colors } from '../theme';
 
 export default class RequestComponent extends Component {
   
