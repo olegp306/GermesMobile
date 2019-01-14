@@ -3,6 +3,7 @@ import {
     MESSAGES_GET_SUCCESS,
     MESSAGES_GET_FAIL,
 } from './actions.js'
+
 import { Map } from 'immutable'
 
 const initialState =new Map({
@@ -12,6 +13,7 @@ const initialState =new Map({
     error: null 
   });
 
+  
   export default messagesReducer = (state = initialState, action) => {    
     switch (action.type){
 
@@ -23,7 +25,6 @@ const initialState =new Map({
             
         case MESSAGES_GET_FAIL:
             return state.merge({isFetching: false, error: action.payload})
-
         
         default: return state
     }
