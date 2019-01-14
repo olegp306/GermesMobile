@@ -14,6 +14,7 @@ import { connect } from 'react-redux'
 
 import { setFilterDate, setReception } from '../store/germes/filter/actions'
 import { fetchRequests, startRequestsStatusChange } from '../store/germes/requests/actions'
+import { getMessages } from '../chat/messages/actions'
 import { selectItem, unSelectItem, clearSelectedItems } from '../store/germes/selectedItems/actions'
 import _ from 'lodash'
 
@@ -84,7 +85,9 @@ const mapStateToProps = store => {
 
          addBarcodeAction : barcode=> dispatch (addBarcode(barcode)),
          clearBarcodesAction : ()=> dispatch (clearBarcodes()),
-         startRequestsStatusChangeAction: ()=> dispatch(startRequestsStatusChange())
+         startRequestsStatusChangeAction: ()=> dispatch(startRequestsStatusChange()),
+
+         getMessages : (requestId) => dispatch (getMessages(requestId))
 
      }
  } 
@@ -149,7 +152,10 @@ export default class RequestListScreen extends Component {
     (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
   }
 
-  _handleShortPressRequest = (request) =>{    
+  _handleShortPressRequest = (request) =>{  
+    const testChatId=2768203390000;
+    this.props.getMessages(testChatId) 
+    
     this.props.navigation.navigate('ChatRequest',request )
   }
   
