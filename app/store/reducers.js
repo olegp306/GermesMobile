@@ -11,7 +11,7 @@ import {selectedItemsReducer} from './germes/selectedItems/reducer.js'
 import {barcodesReducer} from './germes/barcodes/reducer.js'
 
 import  messagesReducer  from '../chat/messages/reducer.js'
-
+import  usersReducer  from '../chat/users/reducer.js'
 
 
 export const rootReducer = combineReducers({
@@ -21,7 +21,8 @@ export const rootReducer = combineReducers({
   selectedItems: selectedItemsReducer,
   barcodes: barcodesReducer,
 
-  messages : messagesReducer
+  messages : messagesReducer,
+  users : usersReducer
 })
 
 
