@@ -14,15 +14,17 @@ import { connect } from 'react-redux'
 
 import { setFilterDate, setReception } from '../store/germes/filter/actions'
 import { fetchRequests, startRequestsStatusChange } from '../store/germes/requests/actions'
-import { getMessages } from '../chat/messages/actions'
+import { getMessages  } from '../chat/messages/actions'
+import { getUsers } from '../chat/users/actions'
+
 import { selectItem, unSelectItem, clearSelectedItems } from '../store/germes/selectedItems/actions'
 import _ from 'lodash'
 
 
-const avtozavodskayaId=123906749000;
-const obruchevaId=754498388000;
-const nagatinskayaId=2157440701000;
-const orlikov17Id=2768516261000;
+// const avtozavodskayaId=123906749000;
+// const obruchevaId=754498388000;
+// const nagatinskayaId=2157440701000;
+// const orlikov17Id=2768516261000;
 
 const receptionItems={
     754498388000 : {
@@ -87,7 +89,8 @@ const mapStateToProps = store => {
          clearBarcodesAction : ()=> dispatch (clearBarcodes()),
          startRequestsStatusChangeAction: ()=> dispatch(startRequestsStatusChange()),
 
-         getMessages : (requestId) => dispatch (getMessages(requestId))
+         getChatMessagesByChatId : (requestId) => dispatch (getMessages(requestId)),
+         getChatUsersByChatId : (requestId)=> dispatch (getUsers(requestId))
 
      }
  } 
@@ -154,7 +157,8 @@ export default class RequestListScreen extends Component {
 
   _handleShortPressRequest = (request) =>{  
     const testChatId=2768203390000;
-    this.props.getMessages(testChatId) 
+    this.props.getChatUsersByChatId(testChatId);
+    this.props.getChatMessagesByChatId(testChatId) 
     
     this.props.navigation.navigate('ChatRequest',request )
   }
