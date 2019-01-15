@@ -29,7 +29,7 @@ export default class MessageComponent extends Component {
 
 const styles = StyleSheet.create({
   leftMessageContainer:{
-    borderWidth: 1,
+    //borderWidth: 1,
     backgroundColor: 'white',
     borderRadius: 7,
     alignItems:"flex-start",
