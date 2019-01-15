@@ -111,6 +111,10 @@ const getUsersByChatId = (chatId) =>{
     return apiChatInstance.get('users/chatid/'+chatId )
 };
 
+const getCurrentUserInfo = () =>{     
+    return apiChatInstance.get('users/currrentuser' )
+};
+
 
 export default {
     login,
@@ -125,7 +129,8 @@ export default {
     fetchRequests,
     
     getMessagesByChatId,
-    getUsersByChatId
+    getUsersByChatId,
+    getCurrentUserInfo
 }
 
 

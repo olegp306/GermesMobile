@@ -13,6 +13,9 @@ import { Colors, Metrics } from '../theme';
 import { MaterialIcons  } from '@expo/vector-icons';
 import RequestComponentBig from '../components/RequestComponentBig';
 import MessageComponent from '../chat/message/MessageComponent'
+
+import { getMessages  } from '../chat/messages/actions'
+import { getUsers } from '../chat/users/actions'
 import _ from 'lodash' 
 
 // если @connect наверху то mapStateToProps уже должен быть объявлен перед @connect
@@ -31,18 +34,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch =>{
    return {
-      //  setFilterDateAction : date => dispatch (setFilterDate(date)),
-      //  setReceptionIdAction : receptionId => dispatch (setReception(receptionId)),
-      //  fetchRequestsAction: ( filterDate, filterReceptionId ) => dispatch(fetchRequests( { filterDate, filterReceptionId } )),
-
-      //  selectItemAction : requestId=>dispatch(selectItem(requestId)),
-      //  unSelectItemAction : requestId=>dispatch(unSelectItem(requestId)),
-      //  clearSelectedItemAction : ()=>dispatch(clearSelectedItems()),
-
-      //  addBarcodeAction : barcode=> dispatch (addBarcode(barcode)),
-      //  clearBarcodesAction : ()=> dispatch (clearBarcodes()),
-      //  startRequestsStatusChangeAction: ()=> dispatch(startRequestsStatusChange())
-      //getMessages : () => dispatch (getMessages)
+    getChatMessagesByChatId : (requestId) => dispatch (getMessages(requestId)),
+    getChatUsersByChatId : (requestId)=> dispatch (getUsers(requestId))
    }
 } 
 
@@ -52,6 +45,12 @@ export default class ChatScreen extends Component {
   constructor(props) {
     super(props);
   }
+  componentDidMount = () => {
+    const testChatId=2768203390000;
+    this.props.getChatUsersByChatId(testChatId);
+    this.props.getChatMessagesByChatId(testChatId) 
+  };
+  
 
   render() {
     const { navigation } = this.props;
