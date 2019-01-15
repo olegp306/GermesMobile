@@ -16,13 +16,17 @@ export default class RequestComponentBig extends Component {
 
   render() {
     return (
-      <View style={styles.requestContainer}>
+      <View style={styles.request}>
         <Text style={styles.receiptNumber}> {this.props.receiptNumber} </Text>
-        <Text>  {this.props.requestNumber + " " + this.props.address}  </Text>
-        <Text>  {this.props.customerName} </Text>
-        <Text>  {this.props.transactionParticipant} </Text>
-        <Text style={styles.notice}>  {this.props.notice} </Text>
-      </View>       
+        
+        <View style={styles.middleContainer}>
+            <Text>{this.props.requestNumber + " " + this.props.address} , {this.props.customerName},  {this.props.transactionParticipant} </Text>
+            {/* <Text>{this.props.customerName},  {this.props.transactionParticipant}  </Text> */}
+        </View>
+        <View style={styles.bottomContainer}>        
+            <Text style={styles.notice}>  {this.props.notice} </Text>
+        </View>     
+      </View>    
     );
   }
 }
@@ -41,19 +45,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    // logo: {
-    //     width: 250
-    // },
-
-    contentContainer: {
-        //height: 80,
+   
+    contentContainer: {        
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'stretch',
         
-        borderWidth: 1,
+        //borderWidth: 1,
         
-        borderRadius: 7
+        //borderRadius: 7
 
     },
     receiptNumber:{
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
         fontWeight:'500',
         fontSize: 20,
     },
+    
     notice:{
         fontStyle:'italic'
     },
