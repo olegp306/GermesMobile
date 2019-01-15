@@ -70,9 +70,9 @@ export default class ChatScreen extends Component {
     return (
       
       <KeyboardAvoidingView
-      style={styles.container}
-      behavior="padding"
-      keyboardVerticalOffset={+80}>
+        style={styles.container}
+        behavior="padding"
+        keyboardVerticalOffset={+80}>
 
       <View style={styles.screenContainer}>
 
@@ -122,24 +122,30 @@ export default class ChatScreen extends Component {
 }
 const styles = StyleSheet.create({
     screenContainer: {
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        backgroundColor: Colors.backgroundColor
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'white',
+     
     },
     
     
     requestContainer: {
-        width: '100%',
-        height: '25%',
+        width: '98%',
+        height: '20%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop:10
+        
+        
     },
+
     horizontalDivider: {
-        height: 5
+      width: '100%',
+      height: 1,
+      backgroundColor: "#6E6E6E",
+      // justifyContent: 'space-between',
     },
     commentsContainer:{
       // backgroundColor:'white',
