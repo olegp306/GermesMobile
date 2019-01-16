@@ -111,9 +111,26 @@ const getUsersByChatId = (chatId) =>{
     return apiChatInstance.get('users/chatid/'+chatId )
 };
 
-const getCurrentUserInfo = () =>{     
-    return apiChatInstance.get('users/currrentuser' )
+const getCurrentUser = () =>{     
+    return apiChatInstance.get('users/currrentuser/' )
 };
+
+const addMessage = (message) => {
+    return apiChatInstance.post('/messages/', message);
+};
+
+const addUsersToChat = (users) => {
+    return apiChatInstance.post('/userschats',users).then(checkStatus);
+};
+
+
+// export function addMessage (message) {
+//   return axios.post('/messages/', message).then(checkStatus);
+// }
+// export function addUsersToChat (users) {
+//     return axios.post('/userschats',users).then(checkStatus);
+//   }
+  
 
 
 export default {
@@ -130,7 +147,8 @@ export default {
     
     getMessagesByChatId,
     getUsersByChatId,
-    getCurrentUserInfo
+    getCurrentUser,
+    addMessage
 }
 
 
