@@ -10,13 +10,26 @@ import {
 import { connect } from 'react-redux'
 
 import { Colors, Metrics } from '../theme';
+
+import moment from 'moment'
+import 'moment/src/locale/ru'
+import 'moment/src/locale/fr'
+// import 'moment/min/moment-with-locales'
+
+//import 'moment/min/moment-with-locales'
+//import Moment from 'moment';
 import { MaterialIcons  } from '@expo/vector-icons';
 import RequestComponentBig from '../components/RequestComponentBig';
 import MessageComponent from '../chat/message/MessageComponent'
+import SendNewMessageComponent from '../chat/message/SendNewMessageComponent'
 
 import { getMessages  } from '../chat/messages/actions'
+import { postMessage  } from '../chat/message/actions'
+
 import { getUsers } from '../chat/users/actions'
+import { getCurrentUser } from '../chat/currentUser/actions'
 import _ from 'lodash' 
+
 
 // если @connect наверху то mapStateToProps уже должен быть объявлен перед @connect
 // приклеиваем данные из store
@@ -27,15 +40,20 @@ const mapStateToProps = store => {
       // requests: store.requests.toJS(),
       // selectedItems: store.selectedItems.toJS(),
       // barcodes: store.barcodes.toJS()
-      messages : store.messages.toJS(),
-      requests : store.requests.toJS()
+      messages : store.messages.toJS(), 
+      message : store.message.toJS(),
+      users : store.users.toJS(),      
+      currentUser : store.currentUser.toJS(),
+
   }
 }
 
 const mapDispatchToProps = dispatch =>{
    return {
     getChatMessagesByChatId : (requestId) => dispatch (getMessages(requestId)),
-    getChatUsersByChatId : (requestId)=> dispatch (getUsers(requestId))
+    getChatUsersByChatId : (requestId)=> dispatch (getUsers(requestId)),
+    getCurrentUser : () => dispatch ( getCurrentUser()),
+    addMessage : (message) => dispatch (postMessage(message))
    }
 } 
 
@@ -45,11 +63,23 @@ export default class ChatScreen extends Component {
   constructor(props) {
     super(props);
   }
+
   componentDidMount = () => {
     const testChatId=2768203390000;
+
     this.props.getChatUsersByChatId(testChatId);
-    this.props.getChatMessagesByChatId(testChatId) 
-  };
+    this.props.getChatMessagesByChatId(testChatId);
+    this.props.getCurrentUser();
+
+  }
+  
+   _handlerAddMessage=(messageText)=>{
+     let message={
+       text: messageText,
+       chatId : 2768203390000
+     }
+      this.props.addMessage(message);
+  }
   
 
   render() {
@@ -63,9 +93,13 @@ export default class ChatScreen extends Component {
     const notice = navigation.getParam('notice', '');
 
 
-    //const messages=this.props.messages.items;
     
-    const messagesAr=_.values(this.props.messages.items);
+    const { currentUser, messages , users }= this.props;
+    const messagesAr=_.values(messages.items);
+   
+    const messagesSortAr = _.sortBy(messagesAr, ['creationDate']).reverse();
+    
+    
     return (
       
       <KeyboardAvoidingView
@@ -87,33 +121,52 @@ export default class ChatScreen extends Component {
         </View>
 
         <View style={styles.horizontalDivider} />     
-
-        <FlatList style={styles.commentsContainer} 
-          data={ messagesAr }
-          keyExtractor={(item, index) => item.id}
-          renderItem={({item}) =>
-            <MessageComponent 
-              item={item}
+        { 
+          (currentUser.isFetching ||messages.isFetching || users.isFetching)
+          ?
+          (
+            <View style={styles.noDataLable}>
+              <Text>Загрузка данных </Text>
+              <Text> подождите чуть-чуть </Text>                
+            </View>
+          )
+          :
+          (
+            <FlatList style={styles.commentsContainer} 
+              inverted
+              data={ messagesSortAr }
+              keyExtractor={(item, index) => item.id}
+              renderItem={({item}) =>
+              // const  isMyMessage =this.props.isMyMessage;
+              // const  author = this.props.author;
+              // const  text = this.props.text;
+               
+                <MessageComponent 
+                  isMyMessage={( currentUser.item.id == item.userId ) ? true: false }
+                  author={users.items[item.userId] ? users.items[item.userId].name : 'неизвестный отправитель' }
+                  //author={item.userId}
+                  text= {item.text}
+                  //creationDate= {Moment(item.creationDate).format('MMMM Do YYYY, hh:mm ')}
+                  creationDate= {moment(item.creationDate).format('MMMM Do YYYY, hh:mm ')}
+                  
+                />
+                
+              }
             />
-            
-          }
+          )
+        }
+
+        
+        <View style={styles.horizontalDivider} />
+
+        <SendNewMessageComponent
+          sendNewMessage={this._handlerAddMessage}
+          
+          //message={newMessage}
         />
-        <View style={styles.inputFieldContainer}>
-          <View style={styles.iconContainer}>
-            <MaterialIcons  name='camera' size={30} color='#53565A' />
-          </View>
 
-          <View style={styles.verticalDivider} />
-            <TextInput
-              style={styles.input}
-              autoCapitalize='none'
-              placeholder='Введите сообщение'
-              autoCorrect={false}
-              value={this.props.password}
-              disabled={this.props.disabled}
-              underlineColorAndroid='transparent'
-            />
-          </View>          
+         
+                 
        </View>
       </KeyboardAvoidingView>
     );
@@ -141,9 +194,9 @@ const styles = StyleSheet.create({
     },
 
     horizontalDivider: {
-      width: '100%',
+      width: '98%',
       height: 1,
-      backgroundColor: "#6E6E6E",
+      backgroundColor: "#f6f6f6",
       // justifyContent: 'space-between',
     },
     commentsContainer:{
@@ -175,35 +228,9 @@ const styles = StyleSheet.create({
       fontSize: 18
     },
 
-    inputFieldContainer: {
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      width: '100%',
-      height: 50,
-      backgroundColor: 'white',
-      borderRadius: 7,
-      marginTop: 10
-    },
-    iconContainer: {
-      width: 45,
-      height: '100%',
-      justifyContent: 'center',
-      alignItems: 'center'
-    },
-    verticalDivider: {
-        width: 1,
-        height: '100%',
-        backgroundColor: '#f6f6f6'
-    },
-    input: {
-        width: Metrics.screenWidth - 80,
-        height: 50,
-        marginLeft: 7,
-        marginTop: 1,
-        textAlignVertical: 'center',
-        fontSize: 17,
-        color: 'gray'
-    },
+    
+    
+   
 
     contentContainer: {
         //height: 80,
@@ -221,5 +248,10 @@ const styles = StyleSheet.create({
     notice:{
         fontStyle:'italic'
     },
+    noDataLable:{
+      flexDirection: 'column', 
+      justifyContent: 'center',
+      alignItems: 'center',
+  },
 });
 
