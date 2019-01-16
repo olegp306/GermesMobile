@@ -148,13 +148,15 @@ export default class RequestListScreen extends Component {
     this.props.fetchRequestsAction(); //параметры забиру из store
     }
 
-  _handleLongPressRequest = (requestId) =>{        
-    (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
+  _handleLongPressRequest = (requestId) =>{   
+    //this.props.navigation.navigate('ChatRequest',requestId )     
+     (this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
   }
 
   _handleShortPressRequest = (request) =>{  
-        
-    this.props.navigation.navigate('ChatRequest',request )
+    const requestId=request.id;
+    //(this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
+      this.props.navigation.navigate('ChatRequest',request )
   }
   
   _handleOnChangeRequestCheckBox = (requestId) =>{        
