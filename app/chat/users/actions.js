@@ -11,8 +11,9 @@
 
  export function getUsers(chatId) {
     return async(dispatch, getState) => {
-      dispatch({ type: USERS_GET, chatId });
+      
         try {
+          dispatch({ type: USERS_GET, chatId });
 
          api.getUsersByChatId(chatId)
          .then(data=>dispatch(getUsersSuccess(data.data)))
