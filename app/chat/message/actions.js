@@ -1,6 +1,7 @@
 
  import api from '../../middleware/api'
  import {keyBy} from 'lodash'
+ import {addNewMessage, getMessages as getChatMessagesByChatId } from '../messages/actions'
 // https://medium.com/@kylpo/redux-best-practices-eef55a20cc72
 // action name: <NOUN>_<VERB>
 // action creator name: <verb><Noun>
@@ -11,11 +12,16 @@
 
  export function postMessage(message) {
     return async(dispatch, getState) => {
+
+      dispatch(addNewMessage(message))
       dispatch({ type: MESSAGE_POST });
         try {
-
-         api.addMessage(message)
-         .then(data=>dispatch(postMessageSuccess(data.data)))
+         api.postMessage(message)
+         .then((data)=>{
+           dispatch(postMessageSuccess(data.data))
+            //todo add new message in MESSAGES
+           //dispatch(addNewMessage(data.data))
+          })
 
       } catch (error) {
         dispatch({ type: MESSAGE_POST_FAIL, error });        
@@ -23,7 +29,7 @@
     };
   }
 
-  export function postMessageSuccess(items) {
+  export function postMessageSuccess(item) {
     return {
       type: MESSAGE_POST_SUCCESS,
       payload: item
