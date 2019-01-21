@@ -28,22 +28,24 @@ import { postMessage  } from '../chat/message/actions'
 
 import { getUsers } from '../chat/users/actions'
 import { getCurrentUser } from '../chat/currentUser/actions'
+import { getChatsByRequestId, setCurrent } from '../chat/chat/actions'
+import { getAllDataForChatByrequestId } from '../chat/chatScreen/actions'
+
 import _ from 'lodash' 
+
 
 
 // если @connect наверху то mapStateToProps уже должен быть объявлен перед @connect
 // приклеиваем данные из store
 const mapStateToProps = store => {
   return {
-      // filterDate: store.filter.get("filterDate"),
-      // filterReceptionId: store.filter.get("filterReceptionId"),        
-      // requests: store.requests.toJS(),
-      // selectedItems: store.selectedItems.toJS(),
-      // barcodes: store.barcodes.toJS()
-      messages : store.messages.toJS(), 
-      message : store.message.toJS(),
-      users : store.users.toJS(),      
       currentUser : store.currentUser.toJS(),
+      messages : store.messages.toJS(), 
+      users : store.users.toJS(), 
+
+      message : store.message.toJS(),      
+      chat : store.chat.toJS(), 
+      chatScreen : store.chatScreen.toJS(), 
 
   }
 }
@@ -53,7 +55,11 @@ const mapDispatchToProps = dispatch =>{
     getChatMessagesByChatId : (requestId) => dispatch (getMessages(requestId)),
     getChatUsersByChatId : (requestId)=> dispatch (getUsers(requestId)),
     getCurrentUser : () => dispatch ( getCurrentUser()),
-    addMessage : (message) => dispatch (postMessage(message))
+    postMessage : (message) => dispatch (postMessage(message)),
+
+    getChatsByRequestId :(requestId)=> dispatch(getChatsByRequestId(requestId)),
+    setCurrentChat: (chat) => dispatch(setCurrent(chat)),
+    getAllDataForChatByrequestId : (requestId) => dispatch(getAllDataForChatByrequestId(requestId))
    }
 } 
 
@@ -64,23 +70,35 @@ export default class ChatScreen extends Component {
     super(props);
   }
 
-  componentDidMount = () => {
-    const testChatId=2768203390000;
+  componentDidMount () {
+    const { navigation } = this.props;
+    const requestId=navigation.getParam('requestId', '');
 
-    this.props.getChatUsersByChatId(testChatId);
-    this.props.getChatMessagesByChatId(testChatId);
-    this.props.getCurrentUser();
-
+    this.props.getAllDataForChatByrequestId(requestId);
   }
   
-   _handlerAddMessage=(messageText)=>{
+   _handlerPostMessage=(messageText)=>{
+    const currentChatId=this.props.chat.currentChat.id
+    
+    const currentUserId=this.props.currentUser.item.id
      let message={
        text: messageText,
-       chatId : 2768203390000
+       userId: currentUserId,
+       chatId : currentChatId,
+       tempFrontId : messageText + new Date(Date.now()).toLocaleString(),
+       creationDate :  new Date(Date.now()).toLocaleString()
      }
-      this.props.addMessage(message);
+     //добавить сообщение в список с крутилкой
+     //как сообщение дойдет до сервера убрать крутилку
+
+      this.props.postMessage(message);
   }
-  
+
+  _handleOnRefreshList=()=>{   
+    const currentChatId=this.props.chat.currentChat.id
+    this.props.getChatUsersByChatId(currentChatId);
+    this.props.getChatMessagesByChatId(currentChatId);
+  }  
 
   render() {
     const { navigation } = this.props;
@@ -94,10 +112,11 @@ export default class ChatScreen extends Component {
 
 
     
-    const { currentUser, messages , users }= this.props;
+    const { currentUser, messages , users , chatScreen}= this.props;
     const messagesAr=_.values(messages.items);
    
     const messagesSortAr = _.sortBy(messagesAr, ['creationDate']).reverse();
+    
     
     
     return (
@@ -119,21 +138,45 @@ export default class ChatScreen extends Component {
             notice={notice}        
           />
         </View>
-
+        
         <View style={styles.horizontalDivider} />     
         { 
-          (currentUser.isFetching ||messages.isFetching || users.isFetching)
+          (currentUser.isFetching || messages.isFetching || users.isFetching || chatScreen.isRequestChatExist)
           ?
           (
-            <View style={styles.noDataLable}>
-              <Text>Загрузка данных </Text>
-              <Text> подождите чуть-чуть </Text>                
-            </View>
+            (
+            (chatScreen.isRequestChatExist )
+            ? 
+              (
+              <View style={styles.noDataLable}>
+                <Text>Чат существует </Text>
+                
+                <Text>Загрузка данных </Text>
+                <Text> подождите чуть-чуть </Text>                
+              </View>
+                  
+              
+              )
+            :
+              (
+                <View style={styles.noDataLable}>
+                <Text>Чат НЕ  существует </Text>
+                <Text>создать чат и добавить кураторов заявки ? </Text>
+                
+              </View>
+
+              )
+            )
+
+           
           )
           :
           (
             <FlatList style={styles.commentsContainer} 
               inverted
+              onRefresh={this._handleOnRefreshList}
+              refreshing={ messages.refreshing }
+
               data={ messagesSortAr }
               keyExtractor={(item, index) => item.id}
               renderItem={({item}) =>
@@ -160,7 +203,7 @@ export default class ChatScreen extends Component {
         <View style={styles.horizontalDivider} />
 
         <SendNewMessageComponent
-          sendNewMessage={this._handlerAddMessage}
+          sendNewMessage={this._handlerPostMessage}
           
           //message={newMessage}
         />
