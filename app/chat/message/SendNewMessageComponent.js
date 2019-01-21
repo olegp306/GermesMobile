@@ -7,24 +7,16 @@ export default class SendNewMessageComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        messageText:null
+        text:""
     };
   }
- 
-  _handlerChangeText=(text)=>
-  {
-    //const value = e.target && e.target.value;
-    this.setState({messageText:text});
-  }
+
 
   _handlerSendMessage=()=>
   {
-    //this.props.getChatUsersByChatId(testChatId)
-    const messageText=this.state.messageText;
-    
-    console.log(this.state.messageText)
-
+    const messageText=this.state.text;
     this.props.sendNewMessage(messageText);
+    this.setState({text: ""});
   }
 
   render() {
@@ -44,12 +36,14 @@ export default class SendNewMessageComponent extends Component {
                 autoCapitalize='none'
                 placeholder='Введите сообщение'
                 autoCorrect={true}
-                value={this.state.messageText}
+
+                value={this.state.text}
+
                 disabled={this.props.disabled}
                 underlineColorAndroid='transparent'
 
-                onChange={this._handlerChangeText}
-                //onChange={(text) => this.setState({messageText: text}) }
+                //onChange={(text)=>this._handlerChangeText(text)}
+                onChangeText={(text) => this.setState({text: text})}
             />
            
             <TouchableOpacity  onPress={this._handlerSendMessage}>
@@ -57,8 +51,10 @@ export default class SendNewMessageComponent extends Component {
                     <MaterialIcons  name='send' size={30} color={Colors.actionBackgroundColor}  />
                 </View>
             </TouchableOpacity>
+           
             
         </View> 
+        {/* <Text>{this.state.text}</Text> */}
       </View>
     );
   }
