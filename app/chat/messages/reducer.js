@@ -2,6 +2,7 @@ import {
     MESSAGES_GET,
     MESSAGES_GET_SUCCESS,
     MESSAGES_GET_FAIL,
+    MESSAGES_ADD_NEW
 } from './actions.js'
 
 import { Map } from 'immutable'
@@ -10,7 +11,9 @@ const initialState =new Map({
     items:{},        
     isFetching: false,
     fetched: false,
-    error: null 
+    error: null ,
+
+    refreshing: false
   });
 
   
@@ -26,6 +29,10 @@ const initialState =new Map({
         case MESSAGES_GET_FAIL:
             return state.merge({isFetching: false, error: action.payload})
         
+
+        case MESSAGES_ADD_NEW:
+            return state.mergeIn(['items',action.payload.tempFrontId],action.payload)
+            
         default: return state
     }
 }

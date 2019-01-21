@@ -9,6 +9,9 @@
  export const MESSAGES_GET_SUCCESS='MESSAGES_GET_SUCCESS';
  export const MESSAGES_GET_FAIL='MESSAGES_GET_FAIL';
 
+ export const MESSAGES_ADD_NEW='MESSAGES_ADD_NEW';
+
+
  export function getMessages(chatId) {
     return async(dispatch, getState) => {
       try {
@@ -36,3 +39,11 @@
       payload: error
     } 
   }
+  
+  export function addNewMessage(item) {
+    return {
+      type: MESSAGES_ADD_NEW,
+      payload: item
+    } 
+  }
+  
