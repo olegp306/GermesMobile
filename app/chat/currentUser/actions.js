@@ -9,17 +9,15 @@
  export const CURRENTUSER_GET_SUCCESS='CURRENTUSER_GET_SUCCESS';
  export const CURRENTUSER_GET_FAIL='CURRENTUSER_GET_FAIL';
 
- CURRENTUSER_GET,
- CURRENTUSER_GET_SUCCESS,
- CURRENTUSER_GET_FAIL
 
  export function getCurrentUser() {
     return async(dispatch, getState) => {
       dispatch({ type: CURRENTUSER_GET});
         try {
           api.getCurrentUser()
-          .then(data=>dispatch(getCurrentUserSuccess(data.data)))      
-
+          .then(data=>dispatch(getCurrentUserSuccess(data.data) ))
+          //.then(action=>  dispatch(getChatsByRequestId(action.payload[0]) ))
+          
       } catch (error) {
         dispatch(requestsFetchingError(error));
         //dispatch({ type: CURRENTUSER_GET_FAIL, error });        

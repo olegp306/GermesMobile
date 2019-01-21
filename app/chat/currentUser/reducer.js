@@ -10,7 +10,9 @@ const initialState =new Map({
     item:{},        
     isFetching: false,
     fetched: false,
-    error: null 
+    error: null,
+
+    //currentUser : null
   });
 
 
