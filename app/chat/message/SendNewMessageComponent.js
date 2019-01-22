@@ -21,6 +21,7 @@ export default class SendNewMessageComponent extends Component {
 
   render() {
     //const messageText =this.props.message.text;
+    const isSendButtonAllow=( this.state.text.length>0 ? true : false ) 
     return (
       <View>
         <View style={styles.inputFieldContainer}>
@@ -46,9 +47,9 @@ export default class SendNewMessageComponent extends Component {
                 onChangeText={(text) => this.setState({text: text})}
             />
            
-            <TouchableOpacity  onPress={this._handlerSendMessage}>
+            <TouchableOpacity  onPress={this._handlerSendMessage} disabled={!isSendButtonAllow}>
                 <View style={styles.iconContainer}>
-                    <MaterialIcons  name='send' size={30} color={Colors.actionBackgroundColor}  />
+                    <MaterialIcons  name='send' size={40} color={isSendButtonAllow ? Colors.actionBackgroundColor : Colors.lightGray}  />
                 </View>
             </TouchableOpacity>
            
