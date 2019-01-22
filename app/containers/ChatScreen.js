@@ -5,7 +5,8 @@ import {
     StyleSheet,
     FlatList,
     TextInput,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    ActivityIndicator
  } from 'react-native';
 import { connect } from 'react-redux'
 
@@ -174,8 +175,10 @@ export default class ChatScreen extends Component {
           (currentChat.isFetching)
           ?
           (
+            
             <View style={styles.noDataLable}>
                 <Text>Загрузка данных </Text>
+                <ActivityIndicator size='large' />
                 {/* <Text> подождите чуть-чуть </Text>               */}
             </View>         
           )
