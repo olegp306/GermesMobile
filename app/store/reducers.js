@@ -17,7 +17,7 @@ import usersReducer  from '../chat/users/reducer.js'
 
 import currentUserReducer from '../chat/currentUser/reducer'
 import chatReducer  from '../chat/chat/reducer.js'
-import chatScreenReducer  from '../chat/chatScreen/reducer.js'
+import currentChatReducer  from '../chat/currentChat/reducer'
 
 
 
@@ -34,7 +34,7 @@ export const rootReducer = combineReducers({
   message : messageReducer, 
   
   chat : chatReducer,
-  chatScreen: chatScreenReducer
+  currentChat: currentChatReducer
   
 
   // chats:{
