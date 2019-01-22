@@ -4,6 +4,8 @@ import {
     CHATS_GET_BY_REQUESTID,
     CHATS_GET_BY_REQUESTID_SUCCESS,
     CHATS_GET_BY_REQUESTID_FAIL,
+
+    CHAT_REQUEST_NOT_FOUND
     // CHAT_POST,
     // CHAT_POST_SUCCESS,
     // CHAT_POST_FAIL,
@@ -19,7 +21,7 @@ const initialState =new Map({
     
     requestChats:{},
 
-    currentChat:null
+    // currentChat:null
   });
 
 
@@ -29,6 +31,9 @@ const initialState =new Map({
 
         case CHAT_SET_CURRENT:
             return state.merge({currentChat: action.chat})
+
+        // case CHAT_REQUEST_NOT_FOUND:
+        //     return state.merge({currentChat: action.chat})
 
 
         case CHATS_GET_BY_REQUESTID:
@@ -40,6 +45,8 @@ const initialState =new Map({
         case CHATS_GET_BY_REQUESTID_FAIL:
             return state.merge({isFetching: false, error: action.payload})
         
+
+
         default: return state
     }
 }

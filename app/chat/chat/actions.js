@@ -69,10 +69,3 @@
       payload: error
     } 
   }
-
-  export function notFoundChatRequest(requestId) {
-    return {
-      type: CHAT_REQUEST_NOT_FOUND,
-      payload: error
-    } 
-  }
