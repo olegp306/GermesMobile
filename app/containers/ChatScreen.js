@@ -14,18 +14,18 @@ import { Colors, Metrics } from '../theme';
 // import 'moment/min/moment-with-locales'
 
 //import 'moment/min/moment-with-locales'
-//import Moment from 'moment';
+import moment from 'moment';
 import { MaterialIcons  } from '@expo/vector-icons';
 import RequestComponentBig from '../components/RequestComponentBig';
 import MessagesComponent from '../chat/messages/MessagesComponent'
 import SendNewMessageComponent from '../chat/message/SendNewMessageComponent'
 
-import { getMessages  } from '../chat/messages/actions'
+import { getMessages, addNewMessage  } from '../chat/messages/actions'
 import { postMessage  } from '../chat/message/actions'
 
 import { getUsers } from '../chat/users/actions'
 import { getCurrentUser } from '../chat/currentUser/actions'
-import { getChatsByRequestId, setCurrent } from '../chat/chat/actions'
+import { getChatsByRequestId, setCurrent, postRequestTypeChat } from '../chat/chat/actions'
 import { getAllDataForChatByrequestId } from '../chat/currentChat/actions'
 
 import _ from 'lodash' 
@@ -53,10 +53,13 @@ const mapDispatchToProps = dispatch =>{
     getChatUsersByChatId : (requestId)=> dispatch (getUsers(requestId)),
     getCurrentUser : () => dispatch ( getCurrentUser()),
     postMessage : (message) => dispatch (postMessage(message)),
-
+    addNewMessage : (message) => dispatch (addNewMessage(message)),///добавляет в список, чтобы сразу показать
+    
     getChatsByRequestId :(requestId)=> dispatch(getChatsByRequestId(requestId)),
     setCurrentChat: (chat) => dispatch(setCurrent(chat)),
-    getAllDataForChatByrequestId : (requestId) => dispatch(getAllDataForChatByrequestId(requestId))
+    getAllDataForChatByrequestId : (requestId) => dispatch(getAllDataForChatByrequestId(requestId)),
+    postRequestTypeChat: (message, requestId) => dispatch(postRequestTypeChat(message, requestId)),
+    
    }
 } 
 
@@ -80,25 +83,32 @@ export default class ChatScreen extends Component {
   
   
    _handlerPostMessage=(messageText)=>{
+    const { currentChat , currentUser , navigation}=this.props;
+
+    const currentChatId=(currentChat.item ? currentChat.item.id :"")      
+    const currentUserId=currentUser.item.id
+
+    let message={
+      text: messageText,
+      userId: currentUserId,
+      chatId : currentChatId,
+      tempFrontId : messageText + new Date(),
+      creationDate :  new Date()
+    }
+
     if (currentChat.isRequestChatExist)
     {
-      const currentChatId=this.props.chat.currentChat.id
-      
-      const currentUserId=this.props.currentUser.item.id
-      let message={
-        text: messageText,
-        userId: currentUserId,
-        chatId : currentChatId,
-        tempFrontId : messageText + new Date(Date.now()).toLocaleString(),
-        creationDate :  new Date(Date.now()).toLocaleString()
-      }
-
-      this.props.postMessage(message);
+      //отослать на сервер
+       this.props.postMessage(message);
+       //добавить  на вью
+       this.props.addNewMessage(message);
+       
     }
     else
     {
-      //todo создать чат и отправить сообщение
+      const requestId = navigation.getParam('requestId', '');     
 
+      this.props.postRequestTypeChat(message, requestId);
     }
     
      //добавить сообщение в список с крутилкой
@@ -121,8 +131,6 @@ export default class ChatScreen extends Component {
     const customerName = navigation.getParam('customerName', '');
     const transactionParticipant = navigation.getParam('transactionParticipant', '');
     const notice = navigation.getParam('notice', '');
-
-
     
     const { currentUser, messages , users , currentChat}= this.props;
     const messagesAr=_.values(messages.items);
@@ -135,7 +143,7 @@ export default class ChatScreen extends Component {
       <KeyboardAvoidingView
         style={styles.container}
         behavior="padding"
-        keyboardVerticalOffset={+80}>
+        keyboardVerticalOffset={+20}>
 
       <View style={styles.screenContainer}>
 
