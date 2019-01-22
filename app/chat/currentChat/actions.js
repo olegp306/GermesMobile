@@ -23,6 +23,7 @@ export function getAllDataForChatByrequestId(requestId) {
     try 
       {
         dispatch({ type: CURRENTCHAT_GET_ALL_DATA});
+        
         api.getChatsByRequestId(requestId)        
         .then((data) => {
           if(data)
@@ -31,7 +32,7 @@ export function getAllDataForChatByrequestId(requestId) {
             const currentChatId=currentChat.id;
 
             dispatch(existChatRequest(currentChat))
-            dispatch(getCurrentUser());
+            
             dispatch(setCurrentChat(currentChat))
             dispatch(getChatUsersByChatId(currentChatId))
             dispatch (getChatMessagesByChatId(currentChatId));

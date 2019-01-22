@@ -14,7 +14,6 @@ import { Map } from 'immutable'
 import { FormValidationMessage } from 'react-native-elements';
 
 const initialState =new Map({
-
     isRequestChatExist: false,
     isFetching : false,
     item: null
