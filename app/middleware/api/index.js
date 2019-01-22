@@ -21,10 +21,11 @@ import { storeCredentials, storeCredentialsHide, loadCredentials } from '../util
 // export const API_CHAT_SERVER_URL = 'http://192.168.8.2/germes/v1'
 
 // http://10.0.0.1/ApiService/
-export const API_SERVER_URL = 'http://10.0.0.1/ApiService/germes/v1'
-export const API_CHAT_SERVER_URL = 'http://10.0.0.1/ApiService/germes/v1'
-                                    // http://10.0.0.1/ApiService/germes/v1/messages/chatid/2768203390000
-
+// export const API_SERVER_URL = 'http://10.0.0.1/ApiService/germes/v1'
+// export const API_CHAT_SERVER_URL = 'http://10.0.0.1/ApiService/germes/v1'
+//192.168.97.2
+export const API_SERVER_URL = 'http://192.168.1.71/ApiService/germes/v1'
+export const API_CHAT_SERVER_URL = 'http:/192.168.1.71/ApiService/germes/v1'
 
 //получениесообщений
 //http://service.allwingroup.ru:3652/germes/v1/messages/chatid/2768027587000
@@ -61,6 +62,8 @@ const onError = (error) => {
             throw Error('Не верный логин или пароль')
         } else if (error.response.status === 401) {
             throw Error('Неккоректное имя пользователя или пароль'  )
+        } else if (error.response.status === 404) {
+            //console.warn('нет данных' )    
         } else if (error.response.status > 401) {
             throw Error('При обработке запроса на сервере произошла ошибка, мы ее зафиксировали и уже разбираемся в причинах.' + error.response.status )
         }
@@ -115,8 +118,17 @@ const getCurrentUser = () =>{
     return apiChatInstance.get('users/currrentuser/' )
 };
 
-const addMessage = (message) => {
+const postMessage = (message) => {
     return apiChatInstance.post('/messages/', message);
+};
+
+
+const getChatsByRequestId = (requestId) =>{     
+    return apiChatInstance.get(`chats?requestId=${requestId}`).catch(onError)
+};
+
+const createRequestChatsByRequestId = (requestId) =>{     
+    return apiChatInstance.get(`chats?requestId=${requestId}&autoCreate=true`).catch(onError)
 };
 
 const addUsersToChat = (users) => {
@@ -148,7 +160,9 @@ export default {
     getMessagesByChatId,
     getUsersByChatId,
     getCurrentUser,
-    addMessage
+    postMessage,
+    getChatsByRequestId,
+    createRequestChatsByRequestId
 }
 
 
