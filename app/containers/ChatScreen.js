@@ -20,7 +20,7 @@ import RequestComponentBig from '../components/RequestComponentBig';
 import MessagesComponent from '../chat/messages/MessagesComponent'
 import SendNewMessageComponent from '../chat/message/SendNewMessageComponent'
 
-import { getMessages, addNewMessage  } from '../chat/messages/actions'
+import { getMessages, addNewMessage , removeMessages } from '../chat/messages/actions'
 import { postMessage  } from '../chat/message/actions'
 
 import { getUsers } from '../chat/users/actions'
@@ -59,7 +59,7 @@ const mapDispatchToProps = dispatch =>{
     setCurrentChat: (chat) => dispatch(setCurrent(chat)),
     getAllDataForChatByrequestId : (requestId) => dispatch(getAllDataForChatByrequestId(requestId)),
     postRequestTypeChat: (message, requestId) => dispatch(postRequestTypeChat(message, requestId)),
-    
+    removeMessages: () => dispatch(removeMessages())
    }
 } 
 
@@ -71,10 +71,20 @@ export default class ChatScreen extends Component {
   }
 
   componentDidMount () {
-    const { navigation } = this.props;
+    const { navigation, currentChat, currentUser } = this.props;
     const requestId=navigation.getParam('requestId', '');
-
-    this.props.getAllDataForChatByrequestId(requestId);
+    
+    if(currentChat.item && currentChat.item.requestGermesId!=requestId){
+      this.props.removeMessages()
+    }
+    if( currentUser.item==null )
+      this.props.getCurrentUser().then(()=>{
+        this.props.getAllDataForChatByrequestId(requestId);
+      })
+    else{
+      this.props.getAllDataForChatByrequestId(requestId);
+    }
+    
   }
 
   componentWillUnmount = () => {
