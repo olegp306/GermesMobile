@@ -13,7 +13,10 @@ import { getCurrentUser } from '../currentUser/actions'
 
 
  
-export const GET_ALL_DATA_FOR_CHAT_BY_REQUESTID='GET_ALL_DATA_FOR_CHAT_BY_REQUESTID';
+export const CURRENTCHAT_GET_ALL_DATA='CURRENTCHAT_GET_ALL_DATA';
+export const CURRENTCHAT_GET_ALL_DATA_SUCCESS='CURRENTCHAT_GET_ALL_DATA_SUCCESS'
+export const CURRENTCHAT_GET_ALL_DATA_FAIL='CURRENTCHAT_GET_ALL_DATA_FAIL'
+
 
 export const CHAT_REQUEST_NOT_FOUND='CHAT_REQUEST_NOT_FOUND';
 export const CHAT_REQUEST_EXIST='CHAT_REQUEST_EXIST';
@@ -23,35 +26,38 @@ export const CHAT_REQUEST_EXIST='CHAT_REQUEST_EXIST';
   export function getAllDataForChatByrequestId(requestId) {
     return async(dispatch, getState) => {
       try 
-      {           
-        dispatch(getCurrentUser());
-        api.getChatsByRequestId(requestId)
-        //.then(data=> dispatch(getChatsByRequestIdSuccess(data.data))
+      {
+        dispatch({ type: CURRENTCHAT_GET_ALL_DATA});
+        api.getChatsByRequestId(requestId)        
         .then((data) => {
           if(data)
           {
-            dispatch( existChatRequest(requestId))
+            dispatch(existChatRequest(requestId))
+            // api.existChatRequest(requestId)
+            // .then((data)=>{
+              const currentChat=data.data[0];
+              const currentChatId=currentChat.id;
 
-            const currentChat=data.data[0];
-            const currentChatId=currentChat.id;
-            
-            
-            dispatch(setCurrentChat(currentChat))
-            
-            dispatch(getChatUsersByChatId(currentChatId))
-            
-            dispatch (getChatMessagesByChatId(currentChatId));
+              dispatch(getCurrentUser());
+              dispatch(setCurrentChat(currentChat))
+              dispatch(getChatUsersByChatId(currentChatId))
+              dispatch (getChatMessagesByChatId(currentChatId));
+            // })
+
+            dispatch({type: CURRENTCHAT_GET_ALL_DATA_SUCCESS})
           }
+          //чат не найден
           else
           {
-            dispatch(notFoundChatRequest(requestId))
+            dispatch({type: CURRENTCHAT_GET_ALL_DATA_SUCCESS})
+            dispatch(notFoundChatRequest(requestId))            
           }
         })
         
       } 
       catch (error)
       {
-        dispatch({ type: GET_ALL_DATA_FOR_CHAT_BY_REQUESTID_FAIL, error })
+        dispatch({type: CURRENTCHAT_GET_ALL_DATA_FAIL})
       }
       
     };

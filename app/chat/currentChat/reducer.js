@@ -1,13 +1,20 @@
 import {
+    CURRENTCHAT_GET_ALL_DATA,
+    CURRENTCHAT_GET_ALL_DATA_SUCCESS,
+    CURRENTCHAT_GET_ALL_DATA_FAIL,
+
+        
     CHAT_REQUEST_NOT_FOUND,
     CHAT_REQUEST_EXIST
 } from './actions.js'
 
 import { Map } from 'immutable'
+import { FormValidationMessage } from 'react-native-elements';
 
 const initialState =new Map({
 
-    isRequestChatExist: false
+    isRequestChatExist: false,
+    isFetching : false
 
   });
 
@@ -15,6 +22,16 @@ const initialState =new Map({
   
   export default chatReducer = (state = initialState, action) => {    
     switch (action.type){
+
+        case CURRENTCHAT_GET_ALL_DATA:
+            return state.merge({isFetching: true})
+
+        case CURRENTCHAT_GET_ALL_DATA_SUCCESS:
+            return state.merge({isFetching: false})
+
+        case CURRENTCHAT_GET_ALL_DATA_FAIL:
+            return state.merge({isFetching: false})
+
 
         case CHAT_REQUEST_NOT_FOUND:
             return state.merge({isRequestChatExist: false})
