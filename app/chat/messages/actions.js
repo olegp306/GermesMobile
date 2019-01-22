@@ -10,6 +10,7 @@
  export const MESSAGES_GET_FAIL='MESSAGES_GET_FAIL';
 
  export const MESSAGES_ADD_NEW='MESSAGES_ADD_NEW';
+ export const MESSAGES_REMOVE='MESSAGES_REMOVE';
 
 
  export function getMessages(chatId) {
@@ -44,6 +45,13 @@
     return {
       type: MESSAGES_ADD_NEW,
       payload: item
+    } 
+  }
+
+  export function removeMessages() {
+    return {
+      type: MESSAGES_REMOVE,
+      //payload: item
     } 
   }
   
