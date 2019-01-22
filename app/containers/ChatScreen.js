@@ -11,16 +11,13 @@ import { connect } from 'react-redux'
 
 import { Colors, Metrics } from '../theme';
 
-import moment from 'moment'
-import 'moment/src/locale/ru'
-import 'moment/src/locale/fr'
 // import 'moment/min/moment-with-locales'
 
 //import 'moment/min/moment-with-locales'
 //import Moment from 'moment';
 import { MaterialIcons  } from '@expo/vector-icons';
 import RequestComponentBig from '../components/RequestComponentBig';
-import MessageComponent from '../chat/message/MessageComponent'
+import MessagesComponent from '../chat/messages/MessagesComponent'
 import SendNewMessageComponent from '../chat/message/SendNewMessageComponent'
 
 import { getMessages  } from '../chat/messages/actions'
@@ -29,7 +26,7 @@ import { postMessage  } from '../chat/message/actions'
 import { getUsers } from '../chat/users/actions'
 import { getCurrentUser } from '../chat/currentUser/actions'
 import { getChatsByRequestId, setCurrent } from '../chat/chat/actions'
-import { getAllDataForChatByrequestId } from '../chat/chatScreen/actions'
+import { getAllDataForChatByrequestId } from '../chat/currentChat/actions'
 
 import _ from 'lodash' 
 
@@ -45,7 +42,7 @@ const mapStateToProps = store => {
 
       message : store.message.toJS(),      
       chat : store.chat.toJS(), 
-      chatScreen : store.chatScreen.toJS(), 
+      currentChat : store.currentChat.toJS(), 
 
   }
 }
@@ -76,22 +73,37 @@ export default class ChatScreen extends Component {
 
     this.props.getAllDataForChatByrequestId(requestId);
   }
+
+  componentWillUnmount = () => {
+    //todo удалить сообщения
+  };
+  
   
    _handlerPostMessage=(messageText)=>{
-    const currentChatId=this.props.chat.currentChat.id
-    
-    const currentUserId=this.props.currentUser.item.id
-     let message={
-       text: messageText,
-       userId: currentUserId,
-       chatId : currentChatId,
-       tempFrontId : messageText + new Date(Date.now()).toLocaleString(),
-       creationDate :  new Date(Date.now()).toLocaleString()
-     }
-     //добавить сообщение в список с крутилкой
-     //как сообщение дойдет до сервера убрать крутилку
+    if (currentChat.isRequestChatExist)
+    {
+      const currentChatId=this.props.chat.currentChat.id
+      
+      const currentUserId=this.props.currentUser.item.id
+      let message={
+        text: messageText,
+        userId: currentUserId,
+        chatId : currentChatId,
+        tempFrontId : messageText + new Date(Date.now()).toLocaleString(),
+        creationDate :  new Date(Date.now()).toLocaleString()
+      }
 
       this.props.postMessage(message);
+    }
+    else
+    {
+      //todo создать чат и отправить сообщение
+
+    }
+    
+     //добавить сообщение в список с крутилкой
+     //как сообщение дойдет до сервера убрать крутилку
+      
   }
 
   _handleOnRefreshList=()=>{   
@@ -112,11 +124,10 @@ export default class ChatScreen extends Component {
 
 
     
-    const { currentUser, messages , users , chatScreen}= this.props;
+    const { currentUser, messages , users , currentChat}= this.props;
     const messagesAr=_.values(messages.items);
    
     const messagesSortAr = _.sortBy(messagesAr, ['creationDate']).reverse();
-    
     
     
     return (
@@ -141,75 +152,56 @@ export default class ChatScreen extends Component {
         
         <View style={styles.horizontalDivider} />     
         { 
-          (currentUser.isFetching || messages.isFetching || users.isFetching || chatScreen.isRequestChatExist)
+          // (currentUser.isFetching || messages.isFetching || users.isFetching )
+          (currentChat.isFetching)
           ?
           (
-            (
-            (chatScreen.isRequestChatExist )
-            ? 
-              (
-              <View style={styles.noDataLable}>
-                <Text>Чат существует </Text>
-                
+            <View style={styles.noDataLable}>
                 <Text>Загрузка данных </Text>
-                <Text> подождите чуть-чуть </Text>                
-              </View>
-                  
-              
-              )
-            :
-              (
-                <View style={styles.noDataLable}>
-                <Text>Чат НЕ  существует </Text>
-                <Text>создать чат и добавить кураторов заявки ? </Text>
-                
-              </View>
-
-              )
-            )
-
-           
+                {/* <Text> подождите чуть-чуть </Text>               */}
+            </View>         
           )
-          :
+          :          
           (
-            <FlatList style={styles.commentsContainer} 
+            (currentChat.isRequestChatExist)
+            ?
+            <MessagesComponent 
+              messagesSortAr={ messagesSortAr } 
+              users={ users }
+              currentUser={ currentUser } 
+              onRefresh={ this._handleOnRefreshList }
+              refreshing={messages.refreshing}          
+            />
+            :
+            (
+              <View style={styles.noDataLable}>
+                  <Text> По зтой заявке еще нет чата</Text>
+                  <Text> Отправьте первое сообщение и чат будет создан автоматически.  </Text>
+                  <Text> участники чата будут добавлены  автоматически </Text>              
+              </View>
+            )            
+          )
+        }
+        
+            {/* <FlatList style={ styles.commentsContainer } 
               inverted
-              onRefresh={this._handleOnRefreshList}
+              onRefresh={ this._handleOnRefreshList }
               refreshing={ messages.refreshing }
 
               data={ messagesSortAr }
-              keyExtractor={(item, index) => item.id}
-              renderItem={({item}) =>
-              // const  isMyMessage =this.props.isMyMessage;
-              // const  author = this.props.author;
-              // const  text = this.props.text;
-               
+              keyExtractor={ (item, index) => item.id}
+              renderItem={ ({item}) =>              
                 <MessageComponent 
-                  isMyMessage={( currentUser.item.id == item.userId ) ? true: false }
-                  author={users.items[item.userId] ? users.items[item.userId].name : 'неизвестный отправитель' }
-                  //author={item.userId}
+                  isMyMessage={( currentUser.item.id == item.userId ) ? true : false }
+                  author={users.items[item.userId] ? users.items[item.userId].name : 'неизвестный отправитель' }                  
                   text= {item.text}
-                  //creationDate= {Moment(item.creationDate).format('MMMM Do YYYY, hh:mm ')}
-                  creationDate= {moment(item.creationDate).format('MMMM Do YYYY, hh:mm ')}
-                  
+                  creationDate= {moment(item.creationDate).format('MMMM Do YYYY, hh:mm ')}                  
                 />
-                
               }
-            />
-          )
-        }
-
-        
+            /> */}
         <View style={styles.horizontalDivider} />
 
-        <SendNewMessageComponent
-          sendNewMessage={this._handlerPostMessage}
-          
-          //message={newMessage}
-        />
-
-         
-                 
+        <SendNewMessageComponent sendNewMessage={this._handlerPostMessage} />
        </View>
       </KeyboardAvoidingView>
     );
@@ -232,8 +224,6 @@ const styles = StyleSheet.create({
         height: '20%',
         justifyContent: 'center',
         alignItems: 'center',
-        
-        
     },
 
     horizontalDivider: {
@@ -242,11 +232,11 @@ const styles = StyleSheet.create({
       backgroundColor: "#f6f6f6",
       // justifyContent: 'space-between',
     },
-    commentsContainer:{
-      // backgroundColor:'white',
-      width: '90%',
-      marginTop: 10,     
-    },
+    // commentsContainer:{
+    //   // backgroundColor:'white',
+    //   width: '90%',
+    //   marginTop: 10,     
+    // },
 
     leftCommentContainer:{
       borderWidth: 1,
