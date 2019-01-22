@@ -11,39 +11,31 @@ import { getUsers as getChatUsersByChatId  } from '../users/actions'
 import { getMessages as getChatMessagesByChatId } from '../messages/actions'
 import { getCurrentUser } from '../currentUser/actions'
 
-
- 
 export const CURRENTCHAT_GET_ALL_DATA='CURRENTCHAT_GET_ALL_DATA';
 export const CURRENTCHAT_GET_ALL_DATA_SUCCESS='CURRENTCHAT_GET_ALL_DATA_SUCCESS'
 export const CURRENTCHAT_GET_ALL_DATA_FAIL='CURRENTCHAT_GET_ALL_DATA_FAIL'
 
-
 export const CHAT_REQUEST_NOT_FOUND='CHAT_REQUEST_NOT_FOUND';
 export const CHAT_REQUEST_EXIST='CHAT_REQUEST_EXIST';
-
-
  
-  export function getAllDataForChatByrequestId(requestId) {
-    return async(dispatch, getState) => {
-      try 
+export function getAllDataForChatByrequestId(requestId) {
+  return async(dispatch, getState) => {
+    try 
       {
         dispatch({ type: CURRENTCHAT_GET_ALL_DATA});
         api.getChatsByRequestId(requestId)        
         .then((data) => {
           if(data)
           {
-            dispatch(existChatRequest(requestId))
-            // api.existChatRequest(requestId)
-            // .then((data)=>{
-              const currentChat=data.data[0];
-              const currentChatId=currentChat.id;
+            const currentChat=data.data[0];
+            const currentChatId=currentChat.id;
 
-              dispatch(getCurrentUser());
-              dispatch(setCurrentChat(currentChat))
-              dispatch(getChatUsersByChatId(currentChatId))
-              dispatch (getChatMessagesByChatId(currentChatId));
-            // })
-
+            dispatch(existChatRequest(currentChat))
+            dispatch(getCurrentUser());
+            dispatch(setCurrentChat(currentChat))
+            dispatch(getChatUsersByChatId(currentChatId))
+            dispatch (getChatMessagesByChatId(currentChatId));
+            
             dispatch({type: CURRENTCHAT_GET_ALL_DATA_SUCCESS})
           }
           //чат не найден
@@ -62,7 +54,6 @@ export const CHAT_REQUEST_EXIST='CHAT_REQUEST_EXIST';
       
     };
   }
-
   
   export function notFoundChatRequest(requestId) {
     return {
@@ -70,12 +61,15 @@ export const CHAT_REQUEST_EXIST='CHAT_REQUEST_EXIST';
       payload: requestId
     } 
   }
-  export function existChatRequest(requestId) {
+
+  export function existChatRequest(currentChat) {
     return {
       type: CHAT_REQUEST_EXIST,
-      payload: requestId
+      payload: currentChat
     } 
   }
+
+ 
 
 
 
