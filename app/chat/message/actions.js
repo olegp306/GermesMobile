@@ -13,7 +13,7 @@
  export function postMessage(message) {
     return async(dispatch, getState) => {
 
-      dispatch(addNewMessage(message))
+      //dispatch(addNewMessage(message))
       dispatch({ type: MESSAGE_POST });
         try {
          api.postMessage(message)
