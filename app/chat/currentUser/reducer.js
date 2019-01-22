@@ -7,7 +7,7 @@ import {
 import { Map } from 'immutable'
 
 const initialState =new Map({
-    item:{},        
+    item: null,        
     isFetching: false,
     fetched: false,
     error: null,
