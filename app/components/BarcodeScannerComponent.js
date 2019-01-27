@@ -33,14 +33,11 @@ export default class BarcodeScannerComponent extends Component {
   render() {
     return (
       <View>
-        {this.state.hasCameraPermission === null ?
-          // <Text>Requesting for camera permission</Text> :
+        {this.state.hasCameraPermission === null ?          
           <Text>Запрашиваем разрешение на использование камеры</Text> :
-          this.state.hasCameraPermission === false ?
-            // <Text>Camera permission is not granted</Text> :
+          this.state.hasCameraPermission === false ?           
             <Text>Разрешение к доступу к камере не предоставлены</Text> :
             <BarCodeScanner
-              // torchMode="on"
               onBarCodeRead={this._handleBarCodeRead}
               style={{ height: 230, width: 350 }}
             >
@@ -50,8 +47,8 @@ export default class BarcodeScannerComponent extends Component {
                 <View style={styles.focused} />
                 <View style={styles.layerRight} />
               </View>
-            <View style={styles.layerBottom} />
-        </BarCodeScanner>
+              <View style={styles.layerBottom} />
+            </BarCodeScanner>
         }
       </View>
     );
