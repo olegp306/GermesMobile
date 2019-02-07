@@ -91,7 +91,7 @@ const TabsNav  = createBottomTabNavigator(
       screen: RequestStackNav,
       navigationOptions: {
         tabBarLabel:"Заявки",
-        tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
+        tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"library-books"} color={tintColor} />
     }
       
     },
