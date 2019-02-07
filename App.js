@@ -13,6 +13,8 @@ import RequestListScreen from './app/containers/RequestListScreen.js';
 import ChatScreen from './app/containers/ChatScreen';
 import BarcodeScannerScreen from './app/containers/BarcodeScannerScreen.js';
 import NotifyOfficeScreen from './app/containers/NotifyOfficeScreen';
+import CameraScreen from './app/camera/CameraScreen';
+
 
 
 
@@ -43,47 +45,55 @@ const styles = StyleSheet.create({
 })
 
 const LoginStackNav = createStackNavigator({
-  Login: { screen: LoginScreen,  navigationOptions: { header: null } },    
-  // SignUp: { screen: SignUpScreen },
-  // ForgottenPassword: { screen: ForgottenPasswordScreen, navigationOptions: { title: 'Forgot Password' } }
-// }, 
-// {
-//   headerMode: 'float',
-//   navigationOptions: {
-//     headerStyle: {backgroundColor: 'red'},
-//     title: 'You are not logged in'
-  // }
+  Login: { screen: LoginScreen,  navigationOptions: { header: null } },      
 })
 
-// const RequestListStackNav= createStackNavigator({
-//   RequestList: { 
-//     screen: RequestListScreen,
-//     navigationOptions: {
-//       tabBarLabel:"Заявки",
-//       tabBarIcon: ({ tintColor }) => <Icon size={20} name={"library-books"} color={tintColor} />
-//     }
-//   },
-//   AddComment:{
-//     screen: AddCommentScreen
-//   }
+
+// сonst PrimaryNav= createStackNavigator({
+//   LoginStack:{screen: LoginStackNav},
+//   TabsNav:{screen: TabsNav},
+//   // ChatStack :{screen: ChatStackNav}
 //   },
 //   {
-//     initialRouteName: 'RequestList',
+//     initialRouteName: 'LoginStack',
 //     navigationOptions: { header: null }
-//   }
+//   },
+ 
+  
 // )
 
 
+const ChatStackNav=createStackNavigator({
+  Chat:{ screen: ChatScreen },
+  Camera:{ screen: CameraScreen }    
+},
+{
+  initialRouteName: 'Chat',
+  navigationOptions: { header: null }
+})
+
+
+const RequestStackNav=createStackNavigator({
+  RequestList: {screen: RequestListScreen },
+  ChatStack: {screen: ChatStackNav }
+  }
+  ,
+{
+  initialRouteName: 'RequestList',
+  navigationOptions: { header: null }
+})
 
 
 const TabsNav  = createBottomTabNavigator(
   {
+
     RequestList: { 
-      screen: RequestListScreen,
+      screen: RequestStackNav,
       navigationOptions: {
         tabBarLabel:"Заявки",
-        tabBarIcon: ({ tintColor }) => <Icon size={20} name={"library-books"} color={tintColor} />
-      }
+        tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
+    }
+      
     },
     BarcodeScanner:{ 
       screen:BarcodeScannerScreen,
@@ -91,7 +101,7 @@ const TabsNav  = createBottomTabNavigator(
         tabBarLabel:"Сканер",
         tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
     }
-
+ 
      },
     NotifyOffice:{ 
       screen:NotifyOfficeScreen,
@@ -100,7 +110,7 @@ const TabsNav  = createBottomTabNavigator(
         tabBarIcon: ({ tintColor }) => <Icon size={20} name={"send"} color={tintColor} />
       }
     }  
-  }
+  }          
   ,
   {
     order: ['RequestList','BarcodeScanner','NotifyOffice'],
@@ -115,17 +125,17 @@ const TabsNav  = createBottomTabNavigator(
 
 );
 
+
 const PrimaryNav= createStackNavigator({
   LoginStack:{screen: LoginStackNav},
   TabsNav:{screen: TabsNav},
-  ChatRequest:{
-    screen: ChatScreen      
-  }
+  // ChatStack :{screen: ChatStackNav}
   },
   {
     initialRouteName: 'LoginStack',
     navigationOptions: { header: null }
   },
+ 
   
 )
 
