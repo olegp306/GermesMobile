@@ -156,7 +156,8 @@ export default class RequestListScreen extends Component {
   _handleShortPressRequest = (request) =>{  
     const requestId=request.id;
     //(this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
-      this.props.navigation.navigate('ChatRequest',request )
+  
+    this.props.navigation.navigate('ChatStack',request )
   }
   
   _handleOnChangeRequestCheckBox = (requestId) =>{        

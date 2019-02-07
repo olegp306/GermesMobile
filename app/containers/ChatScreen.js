@@ -131,7 +131,13 @@ export default class ChatScreen extends Component {
     const currentChatId=this.props.chat.currentChat.id
     this.props.getChatUsersByChatId(currentChatId);
     this.props.getChatMessagesByChatId(currentChatId);
-  }  
+  }
+  
+  _handleOnCameraClick=()=>{
+    //const { navigation }=this.props;
+    this.props.navigation.navigate('Camera')
+    
+  }
 
   render() {
     const { navigation } = this.props;
@@ -171,11 +177,9 @@ export default class ChatScreen extends Component {
         
         <View style={styles.horizontalDivider} />     
         { 
-          // (currentUser.isFetching || messages.isFetching || users.isFetching )
           (currentChat.isFetching)
           ?
-          (
-            
+          ( 
             <View style={styles.noDataLable}>
                 <Text>Загрузка данных </Text>
                 <ActivityIndicator size='large' />
@@ -203,26 +207,10 @@ export default class ChatScreen extends Component {
             )            
           )
         }
-        
-            {/* <FlatList style={ styles.commentsContainer } 
-              inverted
-              onRefresh={ this._handleOnRefreshList }
-              refreshing={ messages.refreshing }
 
-              data={ messagesSortAr }
-              keyExtractor={ (item, index) => item.id}
-              renderItem={ ({item}) =>              
-                <MessageComponent 
-                  isMyMessage={( currentUser.item.id == item.userId ) ? true : false }
-                  author={users.items[item.userId] ? users.items[item.userId].name : 'неизвестный отправитель' }                  
-                  text= {item.text}
-                  creationDate= {moment(item.creationDate).format('MMMM Do YYYY, hh:mm ')}                  
-                />
-              }
-            /> */}
         <View style={styles.horizontalDivider} />
 
-        <SendNewMessageComponent sendNewMessage={this._handlerPostMessage} />
+        <SendNewMessageComponent sendNewMessage={this._handlerPostMessage} onCameraClick={this._handleOnCameraClick}/>
        </View>
       </KeyboardAvoidingView>
     );
