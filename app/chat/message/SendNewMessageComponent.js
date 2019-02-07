@@ -26,7 +26,7 @@ export default class SendNewMessageComponent extends Component {
       <View>
         <View style={styles.inputFieldContainer}>
           <View style={styles.iconContainer}>
-            <MaterialIcons  name='camera' size={30} color='#53565A' />
+            <MaterialIcons  name='camera' size={30} color='#53565A' onPress={this.props.onCameraClick} />
           </View>
 
           <View style={styles.verticalDivider} />
