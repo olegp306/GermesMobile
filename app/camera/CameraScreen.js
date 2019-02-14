@@ -118,7 +118,11 @@ export default class CameraScreen extends React.Component {
 
   takePicture = () => {
     if (this.camera) {
-      this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved });
+      this.camera.takePictureAsync({ onPictureSaved: this.onPictureSaved }).then((data)=>{
+        console.log(data.uri);
+      }).catch((data)=>{
+        console.log(data);
+      });
     }
   };
 
