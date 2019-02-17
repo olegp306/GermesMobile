@@ -19,8 +19,8 @@ export const API_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
 
 
 //192.168.97.2
-// export const API_SERVER_URL = 'http://192.168.1.71/ApiService/germes/v1'
-// export const API_CHAT_SERVER_URL = 'http:/192.168.1.71/ApiService/germes/v1'
+//export const API_SERVER_URL = 'http://192.168.1.234/ApiService/germes/v1'
+//export const API_CHAT_SERVER_URL = 'http:/192.168.1.69/ApiService/germes/v1'
 
 //export const FILE_SERVER_URL = 'https://saas.claris.su/UserSettings/9323/Docs/'
 
