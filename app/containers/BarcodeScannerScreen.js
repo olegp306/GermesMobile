@@ -112,7 +112,8 @@ export default class BarcodeScannerScreen extends Component {
         {
           //Нет доходящей заявки в выборке
           lastBarcodeNotice='Нет заявок с таким баркодом. 1) Проверьте есть ли заявка в списке заявок. 2) Измените фильтр';
-            
+          
+          setTimeout(this._wait,750);  
           Vibration.vibrate(100);        
           //в выбранных заявках нет какого штрихкода      
         }
