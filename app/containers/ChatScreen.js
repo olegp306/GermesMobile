@@ -32,6 +32,27 @@ import { getAllDataForChatByrequestId } from '../chat/currentChat/actions'
 import _ from 'lodash' 
 
 
+// типы чатов
+// tblTipy_chatov2768027315000
+
+// 	чат
+// 	2768777886000
+
+// 	замечание
+// 	2768777887000
+
+// Тип сообщения чатов
+// tblTip_soobshhenija_chatov2768777837000
+
+// 	картинка
+// 	2768777880000
+	
+// 	текст
+// 	2768777882000
+	
+// 	цитата
+// 	2768777884000
+
 
 // если @connect наверху то mapStateToProps уже должен быть объявлен перед @connect
 // приклеиваем данные из store
