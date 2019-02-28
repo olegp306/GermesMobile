@@ -114,13 +114,14 @@ export default class ChatScreen extends Component {
   };
   
   
-   _handlerPostMessage=(messageText)=>{
+   _postMessageHandler=(messageText)=>{
     const { currentChat , currentUser , navigation}=this.props;
 
     const currentChatId=(currentChat.item ? currentChat.item.id :"")      
     const currentUserId=currentUser.item.id
 
     let message={
+      type: 2768777882000,  //текстовое
       text: messageText,
       userId: currentUserId,
       chatId : currentChatId,
@@ -132,6 +133,7 @@ export default class ChatScreen extends Component {
     {
       //отослать на сервер
        this.props.postMessage(message);
+
        //добавить  на вью
        this.props.addNewMessage(message);
        
@@ -147,18 +149,13 @@ export default class ChatScreen extends Component {
      //как сообщение дойдет до сервера убрать крутилку
       
   }
-
   _handleOnRefreshList=()=>{   
     const currentChatId=this.props.chat.currentChat.id
     this.props.getChatUsersByChatId(currentChatId);
     this.props.getChatMessagesByChatId(currentChatId);
   }
   
-  _handleOnCameraClick=()=>{
-    //const { navigation }=this.props;
-    this.props.navigation.navigate('Camera')
-    
-  }
+  _
 
   render() {
     const { navigation } = this.props;
@@ -231,7 +228,9 @@ export default class ChatScreen extends Component {
 
         <View style={styles.horizontalDivider} />
 
-        <SendNewMessageComponent sendNewMessage={this._handlerPostMessage} onCameraClick={this._handleOnCameraClick}/>
+        <SendNewMessageComponent 
+          sendNewMessage={this._postMessageHandler}                    
+          />
        </View>
       </KeyboardAvoidingView>
     );
