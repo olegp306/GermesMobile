@@ -2,14 +2,23 @@ import React, { Component } from 'react';
 import { MaterialIcons  } from '@expo/vector-icons';
 import { View, Text, StyleSheet,TextInput , TouchableOpacity } from 'react-native';
 import { Colors, Metrics } from '../../theme';
-import ImagePickerComponent from '../../../app/camera/ImagePickerComponent';
+import ImagePickerComponent from '../../camera/ImagePickerComponent';
 
 export default class SendNewMessageComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        text:""
+        text:"",
+        pickerDisaplayed:false,
     };
+  }
+
+  _togglePicker=()=>{
+    this.setState(
+      {
+        pickerDisaplayed: !this.state.pickerDisaplayed
+      }
+    )
   }
 
 
@@ -27,8 +36,12 @@ export default class SendNewMessageComponent extends Component {
       <View>
         <View style={styles.inputFieldContainer}>
           <View style={styles.iconContainer}>
-           <ImagePickerComponent />
-            {/* <MaterialIcons  name='camera' size={30} color='#53565A' onPress={this.props.onCameraClick} /> */}
+            <ImagePickerComponent 
+              pickerTitle={"источник картинки"}
+              onTogglePicker={this._togglePicker} 
+              pickerDisaplayed={this.state.pickerDisaplayed}
+            />
+            <MaterialIcons  name='camera' size={30} color='#53565A' onPress={this._togglePicker} />
           </View>
 
           <View style={styles.verticalDivider} />
