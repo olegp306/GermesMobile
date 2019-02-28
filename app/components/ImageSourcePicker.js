@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { Colors } from '../theme';
 import { MaterialIcons  } from '@expo/vector-icons';
 
-export default class CustomPicker extends Component {
+export default class ImageSourcePicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,8 +30,18 @@ export default class CustomPicker extends Component {
 
   render() {   
     const {items, pickerText, selectedItemId}=this.props;
-
     const itemsArr = _.values(items);
+
+    // let sourceItems= itemsArr.map(function(item,index){
+    //   return(
+    //     <TouchableOpacity onPress={()=>{ this._onSetValueHandler(item.id) }} >  
+    //       <Text style={ item.id==selectedItemId ? styles.selectedItemText : styles.itemText}>
+    //         {item.text}
+    //       </Text>
+    //     </TouchableOpacity>
+    //   )
+    // })
+    
     return (
       
       <View style={styles.pickerContainer}>
@@ -43,7 +53,7 @@ export default class CustomPicker extends Component {
         >
           {/* Текущий выбор */}
           <MaterialIcons  name='camera' size={30} color='#53565A' />
-            {/* <Text style={styles.selectedItemTextStyle}>{items[selectedItemId].text}</Text> */}
+            {/* <Text style={styles.selectedItemHeadText}>{items[selectedItemId].text}</Text> */}
           
         </TouchableOpacity>
 
@@ -56,58 +66,60 @@ export default class CustomPicker extends Component {
             >
         
             <View style={styles.modalScreenContainer}>
-            <View style={styles.modalContainer}>
+              <View style={styles.modalContainer}>    
 
-            
-              <View style={styles.headContainer}>
+                <View style={styles.headContainer}>
                 <Text style={styles.headText}> {pickerText +":"}</Text>
                 {
-                  
+                  (selectedItemId) 
+                  ?
+                    <Text style={styles.headNotice}> { " выбрано: " + items[selectedItemId].text }</Text>  
+                  :
+                    null
                 }
-                <Text style={styles.headNotice}> { " выбрано: " + items[selectedItemId].text }</Text>
+
+                {/* <Text style={styles.headNotice}> { " выбрано: " + items[selectedItemId].text }</Text> */}
                 
               </View>
 
-              <View style={styles.middleContainer}>
-                <FlatList 
-                    data={itemsArr}
-                    keyExtractor={this._keyExtractor}
-                    refreshing={this.props.refreshing}
-                    onRefresh={this._handleOnRefreshList}
-                    contentContainerStyle={styles.pickerItemContainer}
-                    
-                    renderItem={({item,index}) =>
-                    {                
-                      return (
-                        <TouchableOpacity 
-                          onPress={()=>{this._onSetValueHandler(item.id)}}                          
-                        >
-                        <View >
-                          <Text style={ item.id==selectedItemId ? styles.pickerSelectedItemText : styles.pickerItemText}>{item.text}</Text>
-                          <View style={styles.horizontalDivider}></View>
-                        </View>
-                        
-                      </TouchableOpacity>
-                      )
-                    }   
-                    }
-                    />
-                
-                
-              </View>
-              <View style={styles.bottomHorizontalDivider}></View>   
-              <View style={styles.bottomContainer}>           
-              
-                <TouchableOpacity
-                              onPress={() => {
-                                  //Keyboard.dismiss();
-                                  this._togglePicker();
-                              }}
+                <View style={styles.middleContainer}>
+                {/* {sourceItems} */}
+
+                  <FlatList 
+                      data={itemsArr}
+                      keyExtractor={this._keyExtractor}
+                      refreshing={this.props.refreshing}
+                      onRefresh={this._handleOnRefreshList}
+
+                      contentContainerStyle={styles.flatListContainer}
+                      
+                      renderItem={({item,index}) =>
+                      {                
+                        return (
+                          <View style={{width:"100%",  backgroundColor:"red", }} >
+                            <TouchableOpacity onPress={()=>{this._onSetValueHandler(item.id)}} >  
+                              <Text 
+                              style={ item.id==selectedItemId ? styles.selectedItemText : styles.itemText}
                               >
-                              <View style={styles.cancelButton}>
-                                  <Text style={styles.cancelButtonText}>Отмена</Text>
-                              </View>
+                                {item.text}                           
+                              </Text>
+                            </TouchableOpacity>
+                          </View>
+                        )
+                      }   
+                      }
+                      />
+                </View>
+
+                <View style={styles.bottomHorizontalDivider}></View> 
+
+              <View style={styles.bottomContainer}>       
+                <TouchableOpacity onPress={this._togglePicker}>
+                  <View style={styles.cancelButton}>
+                    <Text style={styles.cancelButtonText}>Отмена</Text>
+                  </View>
                 </TouchableOpacity>                
+
               </View>
             </View>
           </View>
@@ -121,16 +133,10 @@ export default class CustomPicker extends Component {
 
 const styles= StyleSheet.create({
 
-  pickerContainer:{   
-
-
-  },
-  selectedItemTextStyle:{
-    textAlign:'center',
-    color:Colors.whiteTextColor,
-    fontSize:16
+  pickerContainer:{ 
   },
 
+  
   modalScreenContainer:{
     position:"absolute",
     flex:1,    
@@ -138,16 +144,10 @@ const styles= StyleSheet.create({
     
     height: '100%',
     width:'100%',   
-    //backgroundColor:Colors.ligth2,
-
-    // top:"0%",
-    // bottom:"0%",
-    // left:"0%",
-    // right:"0%",
+    
   },
 
-  modalContainer:{
-   
+  modalContainer:{   
     position:"absolute",
     flex: 1,
     flexDirection: 'column',
@@ -167,32 +167,63 @@ const styles= StyleSheet.create({
   headContainer:{
     height: '16%',
     width:'100%',
-    //padding:'4%',
-
-    //flexDirection:'row',
     justifyContent:'center',
-    //alignItems: 'center',
     backgroundColor:Colors.navigatorBackgroudColor
-
   },
+    headText:{
+      //fontWeight: 'bold',
+      fontSize:23,
+      color: Colors.lightTextColor,
+      left:'4%',
+    },
+    headNotice:{
+      fontWeight: 'bold',
+      fontSize:10,
+      color: Colors.lightTextColor,
+      alignItems:"flex-start",
+      left:'4%'
+    },
 
-  middleContainer:{
-    //flex: 1,
-    flexDirection:'column',
-    justifyContent: 'center',
-    //alignItems: 'stretch',
-        
-    // height: '34%',
+  middleContainer:{    
+    height: '64%',
     width:'100%',
+    //flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    //alignItems: 'center',   
     
-    //alignItems: 'center',  
-    
+    backgroundColor:"yellow"
   },
+
+  flatListContainer:{    
+    // flexDirection:'column',
+    // justifyContent: 'center',
+    
+    
+    // //backgroundColor:Colors.ligth2,    
+    //  width:"100%",
+  },
+
+  selectedItemText:{
+    width:'90%',    
+    fontSize: 24,
+    textAlign: 'center',
+    backgroundColor:"blue"
+    //margin: 5,   
+
+  },
+ 
+  selectedItemHeadText:{
+    textAlign:'center',
+    color:Colors.whiteTextColor,
+    fontSize:16
+  },
+
 
   bottomContainer:{
-    flexDirection:'column',
-    height: '17%',
+    height: '20%',
     width:'98%',
+    flexDirection:'column',
     //flexDirection:'row',
     justifyContent:'center',
     alignItems: 'center',
@@ -200,61 +231,17 @@ const styles= StyleSheet.create({
     
   },
 
-  headText:{
+  itemText:{
+     //width:'90%',
     //fontWeight: 'bold',
-    fontSize:23,
-    color: Colors.lightTextColor,
-    left:'4%',
-  },
-
-  headNotice:{
-    fontWeight: 'bold',
-    fontSize:10,
-    color: Colors.lightTextColor,
-    alignItems:"flex-start",
-    left:'4%'
-  },
-
-  pickerText:{
-    fontWeight: 'bold',
-    fontSize:20,
-    color: Colors.lightTextColor,
-  },
-
- 
-
-  pickerItemContainer:{
-    //flex:1,
-    flexDirection:'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    
-    //backgroundColor:Colors.ligth2,    
-     width:"100%",
-    // height:"100%",
-   
-    // justifyContent:"",
-    // borderWidth:1,
-    // borderColor : 'black'
-
-  },
-
-  pickerItemText:{
-    //flex:1,
-   //width:'90%',
-    fontSize: 23,
-    textAlign: 'center',
-    margin: 5
-  },
-  
-  pickerSelectedItemText:{
-    fontWeight: 'bold',
     fontSize: 24,
     textAlign: 'center',
-    margin: 5,
-    
-
+    //margin: 5,
+    backgroundColor:"blue"
   },
+
+  
+ 
   cancelButton: {
      flexDirection:"column",    
 },
@@ -276,8 +263,8 @@ horizontalDivider: {
 },
 
 bottomHorizontalDivider: {
-  marginTop: "4%",
-  width: '98%',
+  //marginTop: "4%",
+  width: '100%',
   height: 1, 
   backgroundColor: Colors.lightGray,
   justifyContent: 'center',
