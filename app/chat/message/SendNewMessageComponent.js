@@ -23,7 +23,11 @@ export default class SendNewMessageComponent extends Component {
 
 
   _handlerSendMessage=()=>
+
+  ///перенести создание сообщениея с типом сюда
   {
+
+
     const messageText=this.state.text;
     this.props.sendNewMessage(messageText);
     this.setState({text: ""});
@@ -40,6 +44,7 @@ export default class SendNewMessageComponent extends Component {
               pickerTitle={"источник картинки"}
               onTogglePicker={this._togglePicker} 
               pickerDisaplayed={this.state.pickerDisaplayed}
+              sendImageMessage={this.props.sendImageMessage}
             />
             <MaterialIcons  name='camera' size={30} color='#53565A' onPress={this._togglePicker} />
           </View>
@@ -62,7 +67,10 @@ export default class SendNewMessageComponent extends Component {
                 onChangeText={(text) => this.setState({text: text})}
             />
            
-            <TouchableOpacity  onPress={this._handlerSendMessage} disabled={!isSendButtonAllow}>
+            <TouchableOpacity  
+              onPress={this._handlerSendMessage} 
+              disabled={!isSendButtonAllow} 
+            >
                 <View style={styles.iconContainer}>
                     <MaterialIcons  name='send' size={40} color={isSendButtonAllow ? Colors.actionBackgroundColor : Colors.lightGray}  />
                 </View>

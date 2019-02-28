@@ -41,6 +41,7 @@ export default class ImagePickerComponent extends Component {
     console.log(result);
     if (!result.cancelled) {
       this.setState({ image: result.uri });
+      this.props.sendImageMessage(result)
     }
   };
 
@@ -51,10 +52,11 @@ export default class ImagePickerComponent extends Component {
       quality: 0.5,
       //aspect: [4, 3],
     });
-
     console.log(result);
     if (!result.cancelled) {
       this.setState({ image: result.uri });
+
+      this.props.sendImageMessage(result)
     }
   }
 
@@ -136,7 +138,7 @@ export default class ImagePickerComponent extends Component {
         </View>
       </View>
 
-       {image &&   <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+       {/* {image &&   <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />} */}
       </Modal>
     );
   }
