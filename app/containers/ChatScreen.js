@@ -19,7 +19,10 @@ import moment from 'moment';
 import { MaterialIcons  } from '@expo/vector-icons';
 import RequestComponentBig from '../components/RequestComponentBig';
 import MessagesComponent from '../chat/messages/MessagesComponent'
-import SendNewMessageComponent from '../chat/message/SendNewMessageComponent'
+//import SendNewMessageComponent from '../chat/message/sendMessage/SendImageMessageContainer'
+import SendMessageContainer from '../chat/message/sendMessage/SendMessageContainer'
+
+
 
 import { getMessages, addNewMessage , removeMessages } from '../chat/messages/actions'
 import { postMessage  } from '../chat/message/actions'
@@ -113,42 +116,6 @@ export default class ChatScreen extends Component {
     //todo удалить сообщения
   };
   
-  
-   _postMessageHandler=(messageText)=>{
-    const { currentChat , currentUser , navigation}=this.props;
-
-    const currentChatId=(currentChat.item ? currentChat.item.id :"")      
-    const currentUserId=currentUser.item.id
-
-    let message={
-      type: 2768777882000,  //текстовое
-      text: messageText,
-      userId: currentUserId,
-      chatId : currentChatId,
-      tempFrontId : messageText + new Date(),
-      creationDate :  new Date()
-    }
-
-    if (currentChat.isRequestChatExist)
-    {
-      //отослать на сервер
-       this.props.postMessage(message);
-
-       //добавить  на вью
-       this.props.addNewMessage(message);
-       
-    }
-    else
-    {
-      const requestId = navigation.getParam('requestId', '');     
-
-      this.props.postRequestTypeChat(message, requestId);
-    }
-    
-     //добавить сообщение в список с крутилкой
-     //как сообщение дойдет до сервера убрать крутилку
-      
-  }
   _handleOnRefreshList=()=>{   
     const currentChatId=this.props.chat.currentChat.id
     this.props.getChatUsersByChatId(currentChatId);
@@ -226,11 +193,9 @@ export default class ChatScreen extends Component {
           )
         }
 
-        <View style={styles.horizontalDivider} />
-
-        <SendNewMessageComponent 
-          sendNewMessage={this._postMessageHandler}                    
-          />
+        <View style={styles.horizontalDivider} />       
+        
+        <SendMessageContainer />
        </View>
       </KeyboardAvoidingView>
     );
