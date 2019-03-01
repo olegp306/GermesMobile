@@ -2,7 +2,7 @@
   "expo": {
     "sdkVersion": "27.0.0",
     "icon": "./logo1024.png",
-    "version": "1.4.5",
+    "version": "1.5.2",
     "name": "AllWin Group Germes",
     "slug": "germes",
     "privacy": "public",
@@ -13,8 +13,10 @@
       }
     },
     "android": {
-      "package": "com.altsoft.germes"
+      "package": "com.altsoft.germes",
+      "versionCode": 3,
+      "permissions":  [ "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE", "READ_INTERNAL_STORAGE", "WRITE_INTERNAL_STORAGE", "CAMERA" ]
     },
-    "description": "переработана навигация приложения\nдобавлена возможность отправлять и получать фото в чате ( работает в тестовом режиме)\nисправлены ошибки в прошлой версии\nускорена загрузка приложения\n"
+    "description": "Приложение для клиентов и сотрудников компании Allwin Group Germes. Позволяет получать данные о заявках . Позволяет происводить необходимые действия для продвижения заявки по бинзес процессу"
   }
 }
