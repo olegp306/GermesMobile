@@ -1,34 +1,46 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import Colors from '../../theme/Colors'
+import React, { Component } from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
+import Colors from "../../theme/Colors";
 
 export default class MessageComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
-  
 
   render() {
-    const  isMyMessage =this.props.isMyMessage;
-    const  author = this.props.author;
-    const  text = this.props.text;
-    const  creationDate = this.props.creationDate;
-  
-    let isNewMessage=(!this.state.isNewMessage ? false: true);
-    
+    const isMyMessage = this.props.isMyMessage;
+    const author = this.props.author;
+    const text = this.props.text;
+    const creationDate = this.props.creationDate;
+    const type = this.props.type;
+
+    let isNewMessage = !this.state.isNewMessage ? false : true;
+
     return (
-      <View style={isMyMessage ? styles.rightMessageContainer : styles.leftMessageContainer }>
-      {/* <View style={ styles.leftMessageContainer }> */}
+      <View
+        style={
+          isMyMessage
+            ? styles.rightMessageContainer
+            : styles.leftMessageContainer
+        }
+      >
         <View style={styles.authorContainer}>
-          <Text style={styles.authorText}>{ author }</Text>
+          <Text style={styles.authorText}>{author}</Text>
         </View>
 
-        <Text style={styles.messageText}>{ text }</Text>
+        {
+         (type==2768777880000) //картинка
+         ?
+         <Image style={{width: 50, height: 50}} source={text} />
+         :
+         <Text style={styles.messageText}>{text}</Text>
+        }
+
+        {/* <Text style={styles.messageText}>{text}</Text> */}
 
         <View style={styles.creationDateContainer}>
-           <Text style={styles.creationDate}>{ creationDate }</Text>
+          <Text style={styles.creationDate}>{creationDate}</Text>
         </View>
       </View>
     );
@@ -36,56 +48,52 @@ export default class MessageComponent extends Component {
 }
 
 const styles = StyleSheet.create({
-  leftMessageContainer:{
+  leftMessageContainer: {
     borderWidth: 1,
     borderRadius: 5,
     borderColor: Colors.actionBackgroundColor,
 
-    backgroundColor: 'white',
-    alignItems:"flex-start",
-    marginTop:4,
-    marginRight:10
+    backgroundColor: "white",
+    alignItems: "flex-start",
+    marginTop: 4,
+    marginRight: 10
   },
 
-  rightMessageContainer:{
+  rightMessageContainer: {
     borderWidth: 1,
     borderRadius: 5,
     borderColor: Colors.actionBackgroundColor,
-   
+
     backgroundColor: Colors.lightBackgroundColor,
-    alignItems:"flex-end",
-    marginTop:10,
-    marginLeft:20
+    alignItems: "flex-end",
+    marginTop: 10,
+    marginLeft: 20
   },
 
-  authorContainer:{
-    width: '100%',
-    alignItems: 'flex-start',
+  authorContainer: {
+    width: "100%",
+    alignItems: "flex-start"
     //backgroundColor:"red"
   },
 
-  authorText:{
-    fontSize:10,
-    //color: Colors.lightGray     
+  authorText: {
+    fontSize: 10
+    //color: Colors.lightGray
   },
 
-  itemContainer:{
+  itemContainer: {},
 
-  },
-
-  messageText:{
+  messageText: {
     fontSize: 18
   },
 
-  creationDateContainer:{
-    width:'100%',
-    alignItems: 'flex-end',
+  creationDateContainer: {
+    width: "100%",
+    alignItems: "flex-end"
   },
 
-  creationDate:{
-    fontSize: 8,
-    //color: Colors.lightGray  
+  creationDate: {
+    fontSize: 8
+    //color: Colors.lightGray
   }
-
-
-})
+});

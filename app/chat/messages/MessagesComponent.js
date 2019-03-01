@@ -33,6 +33,7 @@ export default class MessagesComponent extends Component {
                   isMyMessage={( currentUserId == item.userId ) ? true : false }
                   author={users.items[item.userId] ? users.items[item.userId].name : 'неизвестный отправитель' }                  
                   text= {item.text}
+                  type = {item.type}
                   creationDate= {moment(item.creationDate).format('MMMM Do YYYY, hh:mm ')}                  
                 />
               }
