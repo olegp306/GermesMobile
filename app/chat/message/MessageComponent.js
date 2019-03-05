@@ -32,7 +32,8 @@ export default class MessageComponent extends Component {
         {
          (type==2768777880000) //картинка
          ?
-         <Image style={{width: 50, height: 50}} source={text} />
+         //<Image style={{width: 50, height: 50}} source={text} />
+         <Image source={{ uri: text }} style={{ width: 200, height: 200 }} />
          :
          <Text style={styles.messageText}>{text}</Text>
         }
