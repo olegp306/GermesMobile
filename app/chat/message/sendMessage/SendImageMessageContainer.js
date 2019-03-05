@@ -66,7 +66,7 @@ export default class SendImageMessageContainer extends Component {
       //добавить  на вью
       this.props.addNewMessage(message);
     } else {
-      const requestId = navigation.getParam("requestId", "");
+      const requestId = currentChat.requestId;
 
       this.props.postRequestTypeChat(message, requestId);
     }

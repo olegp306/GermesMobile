@@ -1,36 +1,31 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity
-} from "react-native";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 import SendTextMessageComponent from "../sendMessage/SendTextMessageComponent";
-// import { addNewMessage  } from '../../chat/messages/actions'
-import { addNewMessage  } from '../../../chat/messages/actions'
-import { postMessage  } from '../actions'
-import { postRequestTypeChat } from '../../chat/actions'
 
+import { addNewMessage } from "../../../chat/messages/actions";
+import { postMessage } from "../actions";
+import { postRequestTypeChat } from "../../chat/actions";
 
 const mapStateToProps = store => {
   return {
-      currentUser : store.currentUser.toJS(),
-      currentChat : store.currentChat.toJS(),
-  }
-}
+    currentUser: store.currentUser.toJS(),
+    currentChat: store.currentChat.toJS()
+  };
+};
 
-const mapDispatchToProps = dispatch =>{
-  return {   
-   postMessage : (message) => dispatch (postMessage(message)),
-   addNewMessage : (message) => dispatch (addNewMessage(message)),///добавляет в список, чтобы сразу показать      
-   postRequestTypeChat: (message, requestId) => dispatch(postRequestTypeChat(message, requestId)),
-  }
-} 
+const mapDispatchToProps = dispatch => {
+  return {
+    postMessage: message => dispatch(postMessage(message)),
+    addNewMessage: message => dispatch(addNewMessage(message)), ///добавляет в список, чтобы сразу показать
+    postRequestTypeChat: (message, requestId) =>
+      dispatch(postRequestTypeChat(message, requestId))
+  };
+};
 
-
-@connect( mapStateToProps, mapDispatchToProps )
+@connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
 export default class SendTextMessageContainer extends Component {
   constructor(props) {
     super(props);
@@ -59,8 +54,7 @@ export default class SendTextMessageContainer extends Component {
       //добавить  на вью
       this.props.addNewMessage(message);
     } else {
-      const requestId = navigation.getParam("requestId", "");
-
+      const requestId = currentChat.requestId;
       this.props.postRequestTypeChat(message, requestId);
     }
 
