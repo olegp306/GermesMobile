@@ -2,6 +2,7 @@ import {
     CURRENTCHAT_GET_ALL_DATA,
     CURRENTCHAT_GET_ALL_DATA_SUCCESS,
     CURRENTCHAT_GET_ALL_DATA_FAIL,
+    CURRENTCHAT_SET_REQUESTID,
 
         
     CHAT_REQUEST_NOT_FOUND,
@@ -14,9 +15,10 @@ import { Map } from 'immutable'
 import { FormValidationMessage } from 'react-native-elements';
 
 const initialState =new Map({
+    requestId: null,
     isRequestChatExist: false,
     isFetching : false,
-    item: null
+    item: null,
 
   });
 
@@ -34,12 +36,18 @@ const initialState =new Map({
         case CURRENTCHAT_GET_ALL_DATA_FAIL:
             return state.merge({isFetching: false})
 
+        case CURRENTCHAT_SET_REQUESTID:
+            return state.merge({ requestId: action.payload})
+
+
 
         case CHAT_REQUEST_NOT_FOUND:
             return state.merge({isRequestChatExist: false, item: null})
 
         case CHAT_REQUEST_EXIST:
             return state.merge({isRequestChatExist: true, item: action.payload})
+
+        
 
         
         // case CHATS_GET_BY_REQUESTID:

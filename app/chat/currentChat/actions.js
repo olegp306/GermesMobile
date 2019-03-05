@@ -14,6 +14,8 @@ import { getCurrentUser } from '../currentUser/actions'
 export const CURRENTCHAT_GET_ALL_DATA='CURRENTCHAT_GET_ALL_DATA';
 export const CURRENTCHAT_GET_ALL_DATA_SUCCESS='CURRENTCHAT_GET_ALL_DATA_SUCCESS'
 export const CURRENTCHAT_GET_ALL_DATA_FAIL='CURRENTCHAT_GET_ALL_DATA_FAIL'
+export const CURRENTCHAT_SET_REQUESTID='CURRENTCHAT_SET_REQUESTID'
+
 
 export const CHAT_REQUEST_NOT_FOUND='CHAT_REQUEST_NOT_FOUND';
 export const CHAT_REQUEST_EXIST='CHAT_REQUEST_EXIST';
@@ -54,6 +56,13 @@ export function getAllDataForChatByrequestId(requestId) {
       }
       
     };
+  }
+
+  export function setCurrentRequestId(requestId){
+    return {
+      type: CURRENTCHAT_SET_REQUESTID,
+      payload: requestId
+    } 
   }
   
   export function notFoundChatRequest(requestId) {

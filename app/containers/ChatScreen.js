@@ -30,7 +30,7 @@ import { postMessage  } from '../chat/message/actions'
 import { getUsers } from '../chat/users/actions'
 import { getCurrentUser } from '../chat/currentUser/actions'
 import { getChatsByRequestId, setCurrent, postRequestTypeChat } from '../chat/chat/actions'
-import { getAllDataForChatByrequestId } from '../chat/currentChat/actions'
+import { getAllDataForChatByrequestId, setCurrentRequestId} from '../chat/currentChat/actions'
 
 import _ from 'lodash' 
 
@@ -77,6 +77,7 @@ const mapDispatchToProps = dispatch =>{
     getChatMessagesByChatId : (requestId) => dispatch (getMessages(requestId)),
     getChatUsersByChatId : (requestId)=> dispatch (getUsers(requestId)),
     getCurrentUser : () => dispatch ( getCurrentUser()),
+    setCurrentRequestId : (requestId)=> dispatch( setCurrentRequestId(requestId)),
     postMessage : (message) => dispatch (postMessage(message)),
     addNewMessage : (message) => dispatch (addNewMessage(message)),///добавляет в список, чтобы сразу показать
     
@@ -98,6 +99,7 @@ export default class ChatScreen extends Component {
   componentDidMount () {
     const { navigation, currentChat, currentUser } = this.props;
     const requestId=navigation.getParam('requestId', '');
+    this.props.setCurrentRequestId (requestId);
     
     if(currentChat.item && currentChat.item.requestGermesId!=requestId){
       this.props.removeMessages()
@@ -127,6 +129,7 @@ export default class ChatScreen extends Component {
   render() {
     const { navigation } = this.props;
 
+    const requestId = navigation.getParam("requestId", "");
     const receiptNumber = navigation.getParam('receiptNumber', '');
     const requestNumber = navigation.getParam('requestNumber', '');
     const address = navigation.getParam('address', '');    
@@ -195,7 +198,7 @@ export default class ChatScreen extends Component {
 
         <View style={styles.horizontalDivider} />       
         
-        <SendMessageContainer />
+        <SendMessageContainer  />
        </View>
       </KeyboardAvoidingView>
     );
