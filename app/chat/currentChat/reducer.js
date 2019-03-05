@@ -36,7 +36,7 @@ const initialState =new Map({
 
 
         case CHAT_REQUEST_NOT_FOUND:
-            return state.merge({isRequestChatExist: false})
+            return state.merge({isRequestChatExist: false, item: null})
 
         case CHAT_REQUEST_EXIST:
             return state.merge({isRequestChatExist: true, item: action.payload})
