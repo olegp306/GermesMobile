@@ -12,17 +12,6 @@ import { ImagePicker, Permissions } from "expo";
 import PickerItem from "./PickerItem";
 import _ from "lodash";
 
-const photoSourceItems = {
-  1: {
-    id: 1,
-    text: "Камера"
-  },
-  2: {
-    id: 2,
-    text: "Галерея"
-  }
-};
-
 export default class ImagePickerComponent extends Component {
   constructor(props) {
     super(props);
@@ -32,91 +21,54 @@ export default class ImagePickerComponent extends Component {
   }
 
   _cancelButtonHandler = () => {
-    this.props.onTogglePicker();
-  };
-
-  _pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: false,
-      quality: 0.5
-      //aspect: [4, 3],
-    });
-    console.log(result);
-    if (!result.cancelled) {
-      this.setState({ image: result.uri });
-      this.props.sendImageMessage(result);
-    }
-  };
-
-  _launchCamera = async () => {
-    await this._askPermissionsAsync();
-    let result = await ImagePicker.launchCameraAsync({
-      allowsEditing: false,
-      quality: 0.5,
-      exif: true
-      //aspect: [4, 3],
-    });
-    console.log(result);
-    this.props.onTogglePicker();
-    if (!result.cancelled) {      
-      this.setState({ image: result.uri });
-      this.props.sendImageMessage(result);
-    }
-  };
-
-  _askPermissionsAsync = async () => {
-    await Permissions.askAsync(Permissions.CAMERA);
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // you would probably do something to verify that permissions
-    // are actually granted, but I'm skipping that for brevity
-  };
-
-  _onSetValueHandler = item => {
-   
-    if (item.id == 1) {
-      this._launchCamera();
-    }
-    if (item.id == 2) {
-      this._pickImage();
-    }
+    this.props.onSetImageSource(null);   
   };
 
   render() {
     const { image } = this.state;
-    const pickerItemsArr = _.values(photoSourceItems);
+    const pickerItemsArr = _.values(this.props.photoSourceItems);
     const arrLength = pickerItemsArr.length;
+
     let pickerItemsList = pickerItemsArr.map((item, index) => {
       return (
-        <PickerItem
-          key={item.id}
-          pickerItemText={item.text}
-          onPressItem={() => {
-            return this._onSetValueHandler(item);
-          }}
-          isLastElement={arrLength == index + 1}
-        />
+        <View>
+          <PickerItem
+            key={item.id}
+            pickerItemText={item.text}
+            onPressItem={() => {
+              return this.props.onSetImageSource(item);
+            }}
+            isLastElement={arrLength == index + 1}
+          />
+          {(arrLength == index + 1) ? null : (
+            <View
+              style={{ width: "100%", height: 1, backgroundColor: "#D3D3D3" }}
+            />
+          )}
+        </View>
       );
     });
 
     return (
       <Modal
-        visible={this.props.pickerDisaplayed}
+        visible={this.props.pickerDisplayed}
         animationType={"fade"}
         transparent={true} //Setting this to true will render the modal over a transparent background.
         onRequestClose={() => this._togglePicker()}
       >
         {/* фон */}
-        <View style={{ flex: 1, backgroundColor: "#D3D3D3", opacity: 0.8 }} />
+        <View style={{ flex: 1, backgroundColor: "#D3D3D3", opacity: 0.9 }} />
 
         <View style={styles.menuContainer}>
           <View style={styles.horizontalBlockDivider} />
-          
+
           <View style={styles.middleContainer}>
-            {pickerItemsList[0]}
+            {pickerItemsList}
+            {/* {pickerItemsList[0]}
             <View
               style={{ width: "100%", height: 1, backgroundColor: "#D3D3D3" }}
             />
-            {pickerItemsList[1]}
+            {pickerItemsList[1]} */}
           </View>
 
           <View style={styles.horizontalBlockDivider} />
