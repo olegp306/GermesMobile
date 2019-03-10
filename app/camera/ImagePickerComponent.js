@@ -32,10 +32,12 @@ export default class ImagePickerComponent extends Component {
   }
 
   _cancelButtonHandler = () => {
-    this.props.onTogglePicker();
+    //this.props.onTogglePicker();
+    this.props.navigation.goBack(); 
   };
 
   _pickImage = async () => {
+    this.props.navigation.goBack(); 
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: false,
       quality: 0.5
@@ -49,6 +51,7 @@ export default class ImagePickerComponent extends Component {
   };
 
   _launchCamera = async () => {
+    this.props.navigation.goBack(); 
     await this._askPermissionsAsync();
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false,
@@ -57,8 +60,9 @@ export default class ImagePickerComponent extends Component {
       //aspect: [4, 3],
     });
     console.log(result);
-    this.props.onTogglePicker();
-    if (!result.cancelled) {      
+    //this.props.onTogglePicker();
+    
+    if (!result.cancelled) {
       this.setState({ image: result.uri });
       this.props.sendImageMessage(result);
     }
@@ -72,7 +76,6 @@ export default class ImagePickerComponent extends Component {
   };
 
   _onSetValueHandler = item => {
-   
     if (item.id == 1) {
       this._launchCamera();
     }
@@ -99,18 +102,12 @@ export default class ImagePickerComponent extends Component {
     });
 
     return (
-      <Modal
-        visible={this.props.pickerDisaplayed}
-        animationType={"fade"}
-        transparent={true} //Setting this to true will render the modal over a transparent background.
-        onRequestClose={() => this._togglePicker()}
-      >
-        {/* фон */}
-        <View style={{ flex: 1, backgroundColor: "#D3D3D3", opacity: 0.8 }} />
+      <View style={styles.screenContainer }>        
+        {/* <View style={{ flex: 1, backgroundColor: "#D3D3D3", opacity: 0.8 }} /> */}
 
         <View style={styles.menuContainer}>
           <View style={styles.horizontalBlockDivider} />
-          
+
           <View style={styles.middleContainer}>
             {pickerItemsList[0]}
             <View
@@ -132,23 +129,23 @@ export default class ImagePickerComponent extends Component {
             </TouchableOpacity>
           </View>
         </View>
-
-        {/* {image &&   <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />} */}
-      </Modal>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  menuContainer: {
+  screenContainer:{
     flex: 1,
-    position: "absolute",
     justifyContent: "flex-end",
+    alignItems: 'center',
+  },
 
-    top: "65%",
-    bottom: "5%",
-    left: "2%",
-    right: "2%"
+  menuContainer: {
+    height:'50%',
+    width:'95%',
+    justifyContent: "flex-end",
+    //backgroundColor: 'blue'
   },
   /*************** */
   headContainer: {

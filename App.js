@@ -13,7 +13,8 @@ import RequestListScreen from './app/containers/RequestListScreen.js';
 import ChatScreen from './app/containers/ChatScreen';
 import BarcodeScannerScreen from './app/containers/BarcodeScannerScreen.js';
 import NotifyOfficeScreen from './app/containers/NotifyOfficeScreen';
-import CameraScreen from './app/camera/CameraScreen';
+//import CameraScreen from './app/camera/CameraScreen';
+import ImagePickerComponent from './app/camera/ImagePickerComponent';
 
 
 
@@ -65,10 +66,11 @@ const LoginStackNav = createStackNavigator({
 
 const ChatStackNav=createStackNavigator({
   Chat:{ screen: ChatScreen },
-  Camera:{ screen: CameraScreen }    
+  //Camera:{ screen: CameraScreen },
+  ImagePicker: {screen: ImagePickerComponent }
 },
 {
-  initialRouteName: 'Chat',
+  initialRouteName: 'ImagePicker',
   navigationOptions: { header: null }
 })
 
