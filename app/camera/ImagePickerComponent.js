@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { postRequestTypeChat } from "../chat/chat/actions";
+import { postMessage } from "../chat/message/actions";
+import { addNewMessage } from "../chat/messages/actions";
 import {
   View,
   Text,
@@ -23,6 +27,24 @@ const photoSourceItems = {
   }
 };
 
+const mapStateToProps = store => {
+  return {
+    currentUser: store.currentUser.toJS(),
+    currentChat: store.currentChat.toJS()
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    postMessage: message => dispatch(postMessage(message)),
+    addNewMessage: message => dispatch(addNewMessage(message)), ///добавляет в список, чтобы сразу показать
+    postRequestTypeChat: (message, requestId) =>
+      dispatch(postRequestTypeChat(message, requestId))
+  };
+};
+@connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
 export default class ImagePickerComponent extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +55,7 @@ export default class ImagePickerComponent extends Component {
 
   _cancelButtonHandler = () => {
     //this.props.onTogglePicker();
-    this.props.navigation.goBack(); 
+    this.props.navigation.popToTop (); 
   };
 
   _pickImage = async () => {
@@ -45,8 +67,9 @@ export default class ImagePickerComponent extends Component {
     });
     console.log(result);
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
-      this.props.sendImageMessage(result);
+      //this.setState({ image: result.uri });
+      // this.props.sendImageMessage(result);
+      this._sendImageMessage(result);
     }
   };
 
@@ -63,8 +86,9 @@ export default class ImagePickerComponent extends Component {
     //this.props.onTogglePicker();
     
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
-      this.props.sendImageMessage(result);
+      //this.setState({ image: result.uri });
+      //this.props.sendImageMessage(result);
+      this._sendImageMessage(result);
     }
   };
 
@@ -83,6 +107,39 @@ export default class ImagePickerComponent extends Component {
       this._pickImage();
     }
   };
+
+  _sendImageMessage = image => {
+    //сформировать с типом Image
+    const { currentChat, currentUser } = this.props;
+
+    const currentChatId = currentChat.item ? currentChat.item.id : "";
+    const currentUserId = currentUser.item.id;
+
+    let message = {
+      type: 2768777880000, //картинка
+      text: image.uri,
+      userId: currentUserId,
+      chatId: currentChatId,
+      tempFrontId: image.uri + new Date(),
+      creationDate: new Date()
+    };
+
+    if (currentChat.isRequestChatExist) {
+      //отослать на сервер маленьккую картинку
+      //отослать на сервер большую картинку
+      this.props.postMessage(message);
+
+      //добавить  на вью
+      this.props.addNewMessage(message);
+    } else {
+      const requestId = currentChat.requestId;
+
+      this.props.postRequestTypeChat(message, requestId);
+    }
+
+    //добавить сообщение в список с крутилкой
+    //как сообщение дойдет до сервера убрать крутилку
+  }
 
   render() {
     const { image } = this.state;
