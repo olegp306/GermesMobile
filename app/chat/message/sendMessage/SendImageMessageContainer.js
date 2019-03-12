@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { addNewMessage } from "../../../chat/messages/actions";
 import { postMessage } from "../actions";
 import { postRequestTypeChat } from "../../chat/actions";
+import { withNavigation } from 'react-navigation';
 
 const mapStateToProps = store => {
   return {
@@ -16,8 +17,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postMessage: message => dispatch(postMessage(message)),
-    addNewMessage: message => dispatch(addNewMessage(message)), ///добавляет в список, чтобы сразу показать
+    //postMessage: message => dispatch(postMessage(message)),
+    //addNewMessage: message => dispatch(addNewMessage(message)), ///добавляет в список, чтобы сразу показать
     postRequestTypeChat: (message, requestId) =>
       dispatch(postRequestTypeChat(message, requestId))
   };
@@ -27,7 +28,8 @@ const mapDispatchToProps = dispatch => {
   mapStateToProps,
   mapDispatchToProps
 )
-export default class SendImageMessageContainer extends Component {
+
+class SendImageMessageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,11 +77,18 @@ export default class SendImageMessageContainer extends Component {
     //как сообщение дойдет до сервера убрать крутилку
   };
 
+  onPressIcon=()=>{
+    this.props.navigation.navigate('ImagePicker')
+  }
+
   render() {
     return (
       <SendImageMessageComponent
         sendImageMessage={this._sendImageMessageHandler}
+        onPressIcon={this.onPressIcon}
       />
     );
   }
 }
+
+export default withNavigation(SendImageMessageContainer)
