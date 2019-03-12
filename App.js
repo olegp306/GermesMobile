@@ -70,7 +70,7 @@ const ChatStackNav=createStackNavigator({
   ImagePicker: {screen: ImagePickerComponent }
 },
 {
-  initialRouteName: 'ImagePicker',
+  initialRouteName: 'Chat',
   navigationOptions: { header: null }
 })
 
