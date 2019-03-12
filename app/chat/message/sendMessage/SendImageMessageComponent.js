@@ -18,29 +18,32 @@ export default class SendNewMessageComponent extends Component {
       pickerDisaplayed: false
     };
   }
-
   _togglePicker = () => {
-    this.setState({
-      pickerDisaplayed: !this.state.pickerDisaplayed
-    });
+    // this.setState({
+    //   pickerDisaplayed: !this.state.pickerDisaplayed
+    // });
   };
+  onPressIcon=()=>{
+    //this.props.navigation.navigate('ImagePicker')
+    this.props.onPressIcon();
+  }
 
   render() {
     return (
       <View>
         <View style={styles.inputFieldContainer}>
           <View style={styles.iconContainer}>
-            <ImagePickerComponent
+            {/* <ImagePickerComponent
               pickerTitle={"источник картинки"}
               onTogglePicker={this._togglePicker}
               pickerDisaplayed={this.state.pickerDisaplayed}
               sendImageMessage={this.props.sendImageMessage}
-            />
+            /> */}
             <MaterialIcons
               name="camera"
               size={30}
-              color="#53565A"
-              onPress={this._togglePicker}
+              color="#53565A"              
+              onPress={this.onPressIcon}
             />
           </View>
         </View>
