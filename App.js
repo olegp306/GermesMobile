@@ -4,7 +4,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createStackNavigator, createDrawerNavigator, createBottomTabNavigator, createMaterialTopTabNavigator,createMaterialBottomTabNavigator } from 'react-navigation'
 
-import { Provider } from 'react-redux'
+import { Provider as StoreProvider } from 'react-redux'
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+
+
 import { store } from './app/store/index.js'
 
 import HomeScreen from './app/containers/HomeScreen.js';
@@ -141,7 +144,31 @@ const PrimaryNav= createStackNavigator({
   
 )
 
-
+const theme= {
+  dark: false,
+  roundness: 4,
+  colors: {
+    primary: '#6200ee',
+    accent: '#03dac4',
+    background: '#f6f6f6',
+    surface: '#ffffff ',
+    error: '#B00020',
+    text: '#000000',
+    disabled: color(black)
+      .alpha(0.26)
+      .rgb()
+      .string(),
+    placeholder: color(black)
+      .alpha(0.54)
+      .rgb()
+      .string(),
+    backdrop: color(black)
+      .alpha(0.5)
+      .rgb()
+      .string(),
+  },
+  fonts,
+};
 
 
 //Назначение функции connect вытекает из названия: подключи React компонент к Redux store.
@@ -151,13 +178,15 @@ const PrimaryNav= createStackNavigator({
 export default class HelloWorld extends Component{
   render(){
     return (
-      <Provider store={store}>
-        <View style={{ flex:1 , paddingTop:25,backgroundColor: Colors.navigatorBackgroudDarkColor}}>
-          <PrimaryNav />
-        </View>
+      <StoreProvider store={store}>
+       <PaperProvider theme={theme}>
+          <View style={{ flex:1 , paddingTop:25,backgroundColor: Colors.navigatorBackgroudDarkColor}}>
+            <PrimaryNav />
+          </View>
+        </PaperProvider>
         {/* <RequestListScreen /> */}
         {/* <TestComponent /> */}
-      </Provider>
+      </StoreProvider>
     )
   }
 }
