@@ -9,7 +9,7 @@
     "ios": {
       "bundleIdentifier": "com.altsoft.germes",
       "infoPlist": {
-        "NSCameraUsageDescription": "This app uses the camera to scan barcodes on requests and also to take foto for chat."
+        "NSCameraUsageDescription": "Это приложение использует камеру для фотографий и сканирования штрихкодов"
       }
     },
     "android": {
