@@ -21,8 +21,13 @@ import ImagePickerComponent from './app/camera/ImagePickerComponent';
 
 
 
-
 import Colors from "./app/theme/Colors.js"
+import {colors as Colors2} from "./app/theme/colors2.js"
+import color from 'color';
+import { black, white }  from "./app/theme/colors2.js"
+import fonts from "./app/theme/fonts"
+
+
 
 import './ReactotronConfig'
 
@@ -148,10 +153,10 @@ const theme= {
   dark: false,
   roundness: 4,
   colors: {
-    primary: '#6200ee',
+    primary: Colors.navigatorBackgroudColor,
     accent: '#03dac4',
     background: '#f6f6f6',
-    surface: '#ffffff ',
+    surface: white,
     error: '#B00020',
     text: '#000000',
     disabled: color(black)
