@@ -2,7 +2,7 @@
   "expo": {
     "sdkVersion": "27.0.0",
     "icon": "./logo1024.png",
-    "version": "1.7.2",
+    "version": "2.0.2",
     "name": "AllWin Group Germes",
     "slug": "germes",
     "privacy": "public",
