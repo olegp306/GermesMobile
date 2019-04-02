@@ -14,31 +14,57 @@ import {
   Image,
   Keyboard,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Animated
 } from "react-native";
 import { withTheme } from "react-native-paper";
 
 import { Colors, Images, Metrics } from "../theme";
-import {
-  lightBlue200,
-  green100,
-  blue100,
-  red100,
-  yellow100,
-  green300
-} from "../theme/paperUicolors";
+
+const IMAGE_HEIGHT=95
+const IMAGE_HEIGHT_SMALL=75;
 
 class LoginComponent extends Component {
+  constructor(props) {
+    super(props);
+
+    this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
+  }
+
+  componentWillMount () {
+    this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
+    this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+  }
+
+  componentWillUnmount() {
+    this.keyboardWillShowSub.remove();
+    this.keyboardWillHideSub.remove();
+  }
+
+  keyboardWillShow = (event) => {
+    Animated.timing(this.imageHeight, {
+      duration: event.duration,
+      toValue: IMAGE_HEIGHT_SMALL,
+    }).start();
+  };
+
+  keyboardWillHide = (event) => {
+    Animated.timing(this.imageHeight, {
+      duration: event.duration,
+      toValue: IMAGE_HEIGHT,
+    }).start();
+  };
+
   render() {
     return (
       <KeyboardAvoidingView behavior="padding">
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={styles.screenContainer}>
             <View style={styles.logoContainer}>
-              <Image
+              <Animated.Image 
                 source={Images.logo}
                 resizeMode="contain"
-                style={styles.logo}
+                style={[styles.logo, { height: this.imageHeight }]}
               />
             </View>
 
@@ -139,7 +165,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   logo: {
-    width: "90%"
+    //width: "90%"
   },
   contentContainer: {
     flexDirection: "column",
