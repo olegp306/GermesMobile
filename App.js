@@ -185,7 +185,8 @@ export default class HelloWorld extends Component{
     return (
       <StoreProvider store={store}>
        <PaperProvider theme={theme}>
-          <View style={{ flex:1 , paddingTop:25,backgroundColor: Colors.whiteSmoke}}>
+          {/* <View style={{ flex:1 , paddingTop:25,backgroundColor: Colors.whiteSmoke}}> */}
+          <View style={{ flex:1 , paddingTop:25}}>
             <PrimaryNav />
           </View>
         </PaperProvider>
