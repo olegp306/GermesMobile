@@ -21,8 +21,8 @@ import { withTheme } from "react-native-paper";
 
 import { Colors, Images, Metrics } from "../theme";
 
-const IMAGE_HEIGHT=95
-const IMAGE_HEIGHT_SMALL=75;
+const IMAGE_HEIGHT = 95;
+const IMAGE_HEIGHT_SMALL = 75;
 
 class LoginComponent extends Component {
   constructor(props) {
@@ -31,9 +31,15 @@ class LoginComponent extends Component {
     this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
   }
 
-  componentWillMount () {
-    this.keyboardWillShowSub = Keyboard.addListener('keyboardWillShow', this.keyboardWillShow);
-    this.keyboardWillHideSub = Keyboard.addListener('keyboardWillHide', this.keyboardWillHide);
+  componentWillMount() {
+    this.keyboardWillShowSub = Keyboard.addListener(
+      "keyboardWillShow",
+      this.keyboardWillShow
+    );
+    this.keyboardWillHideSub = Keyboard.addListener(
+      "keyboardWillHide",
+      this.keyboardWillHide
+    );
   }
 
   componentWillUnmount() {
@@ -41,17 +47,17 @@ class LoginComponent extends Component {
     this.keyboardWillHideSub.remove();
   }
 
-  keyboardWillShow = (event) => {
+  keyboardWillShow = event => {
     Animated.timing(this.imageHeight, {
       duration: event.duration,
-      toValue: IMAGE_HEIGHT_SMALL,
+      toValue: IMAGE_HEIGHT_SMALL
     }).start();
   };
 
-  keyboardWillHide = (event) => {
+  keyboardWillHide = event => {
     Animated.timing(this.imageHeight, {
       duration: event.duration,
-      toValue: IMAGE_HEIGHT,
+      toValue: IMAGE_HEIGHT
     }).start();
   };
 
@@ -61,7 +67,7 @@ class LoginComponent extends Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={styles.screenContainer}>
             <View style={styles.logoContainer}>
-              <Animated.Image 
+              <Animated.Image
                 source={Images.logo}
                 resizeMode="contain"
                 style={[styles.logo, { height: this.imageHeight }]}
@@ -74,7 +80,7 @@ class LoginComponent extends Component {
                 <TextInput
                   style={styles.input}
                   //   mode= 'outlined'
-                  onChange={e => this.props.changeUser(e.nativeEvent.text)}                  
+                  onChange={e => this.props.changeUser(e.nativeEvent.text)}
                   autoCapitalize="none"
                   label="Имя пользователя"
                   value={this.props.user}
@@ -88,7 +94,7 @@ class LoginComponent extends Component {
                 <TextInput
                   style={styles.input}
                   //   mode='outlined'
-                  onChange={e => this.props.changePassword(e.nativeEvent.text)}                  
+                  onChange={e => this.props.changePassword(e.nativeEvent.text)}
                   autoCapitalize="none"
                   label="Пароль"
                   autoCorrect={false}
@@ -107,7 +113,7 @@ class LoginComponent extends Component {
 
               <View style={{ height: "15%", width: "100%" }} />
 
-              <View style={styles.enterContainer}>                
+              <View style={styles.enterContainer}>
                 <Button
                   style={{ width: "100%" }}
                   contentStyle={{ height: 55 }}
@@ -130,15 +136,20 @@ class LoginComponent extends Component {
                         onPress={this.props.changeRemember}
                       />
                     </View>
-                    <Text style={styles.rememberMeLabelStyle}>
-                      Запомнить меня
-                    </Text>
+                    <Text style={styles.rememberMeLabel}>Запомнить меня</Text>
                   </View>
                 </TouchableRipple>
               </View>
             </View>
 
-            {/* <View style={styles.bottomContainer} > test </View> */}
+            <View style={styles.bottomContainer}>
+              <Text style={styles.bottomText}>
+                Юридические и кадастровые услуги в сфере недвижимости
+              </Text>
+              <Text style={styles.bottomText}>Оллвин Груп © 2006 – 2019</Text>
+
+              <View style={{ height: "5%", width: "100%" }} />
+            </View>
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
@@ -178,9 +189,10 @@ const styles = StyleSheet.create({
   },
 
   bottomContainer: {
-    //flexDirection: "column",
-    //justifyContent: "space-evenly",
-    //alignItems: "stretch",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    alignItems: "center",
+
     width: "85%",
     height: "25%"
     // backgroundColor: green300
@@ -212,7 +224,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between"
   },
+
   rememberMeLabel: {
     color: "gray"
+  },
+
+  bottomText: {
+    textAlign: "center",
+    color: "gray",
+    fontSize: 12
   }
 });
