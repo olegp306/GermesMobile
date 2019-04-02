@@ -22,9 +22,9 @@ import ImagePickerComponent from './app/camera/ImagePickerComponent';
 
 
 import Colors from "./app/theme/Colors.js"
-import {colors as Colors2} from "./app/theme/colors2.js"
+//import {colors as Colors2} from "./app/theme/colors2.js"
 import color from 'color';
-import { black, white }  from "./app/theme/colors2.js"
+import { black, white }  from "./app/theme/paperUicolors.js"
 import fonts from "./app/theme/fonts"
 
 
@@ -185,7 +185,7 @@ export default class HelloWorld extends Component{
     return (
       <StoreProvider store={store}>
        <PaperProvider theme={theme}>
-          <View style={{ flex:1 , paddingTop:25,backgroundColor: Colors.navigatorBackgroudDarkColor}}>
+          <View style={{ flex:1 , paddingTop:25,backgroundColor: Colors.whiteSmoke}}>
             <PrimaryNav />
           </View>
         </PaperProvider>
