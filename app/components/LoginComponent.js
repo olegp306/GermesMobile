@@ -1,174 +1,192 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
-   
-    TextInput,    
-    Button,
-    Checkbox,
-    Paragraph,
-    TouchableRipple,
-    Text
-    
-} from 'react-native-paper';
+  TextInput,
+  Button,
+  Checkbox,
+  TouchableRipple,
+  Text
+} from "react-native-paper";
 
 import {
-    StyleSheet,
-    // Text,
-    View,
-    // TextInput,
-    ActivityIndicator,
-    Image,
-    // Button,
-    TouchableOpacity,
-    Keyboard,
-    KeyboardAvoidingView
-} from 'react-native';
-import { withTheme } from 'react-native-paper';
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback
+} from "react-native";
+import { withTheme } from "react-native-paper";
 
-// import { CheckBox } from 'react-native-elements';
-import { MaterialIcons } from '@expo/vector-icons';
-
-import { Colors, Images, Metrics } from '../theme';
+import { Colors, Images, Metrics } from "../theme";
+import {
+  lightBlue200,
+  green100,
+  blue100,
+  red100,
+  yellow100,
+  green300
+} from "../theme/paperUicolors";
 
 class LoginComponent extends Component {
-    render() {
-        return (
-            <KeyboardAvoidingView
-                behavior='padding'>
-                <View style={styles.screenContainer}>
-                    <View style={styles.logoContainer}>
-                        <Image
-                            source={Images.logo}
-                            resizeMode='contain'
-                            style={styles.logo}
-                        />
-                    </View>
+  render() {
+    return (
+      <KeyboardAvoidingView behavior="padding">
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.screenContainer}>
+            <View style={styles.logoContainer}>
+              <Image
+                source={Images.logo}
+                resizeMode="contain"
+                style={styles.logo}
+              />
+            </View>
 
-                    <View style={styles.contentContainer}>
-                        <View style={styles.inputsContainer}>
-                            <TextInput
-                                style={styles.input}
-                                //mode= 'outlined'
-                                onChange={e => this.props.changeUser(e.nativeEvent.text)}
-                                autoCapitalize='none'
-                                label='Имя пользователя'
-                                value={this.props.user}
-                                disabled={this.props.disabled}
-                                autoCorrect={false}
-                                underlineColorAndroid='transparent'
-                            />
-                            
-                            <TextInput
-                                style={styles.input}                            
-                                onChange={e => this.props.changePassword(e.nativeEvent.text)}
-                                autoCapitalize='none'
-                                label='Пароль'
-                                autoCorrect={false}
-                                value={this.props.password}
-                                disabled={this.props.disabled}
-                                secureTextEntry={true}
-                                underlineColorAndroid='transparent'
-                            />
-                            
-                        </View>
-                        {
-                            this.props.disabled ?
-                            (
-                                <View style={{ alignSelf: 'center' }}>
-                                    <ActivityIndicator size='large' color='#627ab4' />
-                                </View>
-                            ) : null
-                        }
-                    
-                    <View style={{height:'5%'}}></View>
-                    <View style={styles.enterContainer}>
-                        <TouchableRipple  
-                            style={{width:'100%'}}  
-                            onPress={() => {
-                                        Keyboard.dismiss();
-                                        this.props.logIn();
-                                    }} >
-                            <Button 
-                                style={{width:'100%'}}                        
-                                mode="contained" 
-                                onPress={() => {
-                                        Keyboard.dismiss();
-                                        this.props.logIn();
-                                    }}>
-                                Войти
-                            </Button>
-                        </TouchableRipple>                      
+            <View style={styles.contentContainer}>
+              {/* Login pasw inputs */}
+              <View style={styles.inputsContainer}>
+                <TextInput
+                  style={styles.input}
+                  //   mode= 'outlined'
+                  onChange={e => this.props.changeUser(e.nativeEvent.text)}                  
+                  autoCapitalize="none"
+                  label="Имя пользователя"
+                  value={this.props.user}
+                  disabled={this.props.disabled}
+                  autoCorrect={false}
+                  underlineColorAndroid="transparent"
+                />
 
-                        <TouchableRipple
-                                onPress={this.props.changeRemember}
-                                >
-                                <View style={styles.row}>
-                                    
-                                    <View pointerEvents="none">
-                                        <Checkbox
-                                            status= { this.props.remember ? 'checked' : 'unchecked' }
-                                            onPress={this.props.changeRemember}
-                                        />
-                                    </View>
-                                    <Text style={styles.rememberMeLabelStyle}>Запомнить меня</Text>
-                                </View>
-                        </TouchableRipple>
+                <View style={{ height: "5%", width: "100%" }} />
 
+                <TextInput
+                  style={styles.input}
+                  //   mode='outlined'
+                  onChange={e => this.props.changePassword(e.nativeEvent.text)}                  
+                  autoCapitalize="none"
+                  label="Пароль"
+                  autoCorrect={false}
+                  value={this.props.password}
+                  disabled={this.props.disabled}
+                  secureTextEntry={true}
+                  underlineColorAndroid="transparent"
+                />
+              </View>
+
+              {this.props.disabled ? (
+                <View style={{ alignSelf: "center" }}>
+                  <ActivityIndicator size="large" color="#627ab4" />
+                </View>
+              ) : null}
+
+              <View style={{ height: "15%", width: "100%" }} />
+
+              <View style={styles.enterContainer}>                
+                <Button
+                  style={{ width: "100%" }}
+                  contentStyle={{ height: 55 }}
+                  mode="contained"
+                  onPress={() => {
+                    this.props.logIn();
+                  }}
+                >
+                  Войти
+                </Button>
+                {/* </TouchableRipple> */}
+
+                <View style={{ flex: 1, height: "10%" }} />
+                <TouchableRipple onPress={this.props.changeRemember}>
+                  <View style={styles.row}>
+                    <View pointerEvents="none">
+                      <Checkbox
+                        //style={{border:1, borderColor: Colors.lightGray }}
+                        status={this.props.remember ? "checked" : "unchecked"}
+                        onPress={this.props.changeRemember}
+                      />
                     </View>
-                    </View>
-                 </View>
-            </KeyboardAvoidingView>
-        );
-    }
+                    <Text style={styles.rememberMeLabelStyle}>
+                      Запомнить меня
+                    </Text>
+                  </View>
+                </TouchableRipple>
+              </View>
+            </View>
+
+            {/* <View style={styles.bottomContainer} > test </View> */}
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    );
+  }
 }
 
-export default withTheme (LoginComponent);
+export default withTheme(LoginComponent);
 
 const styles = StyleSheet.create({
-    screenContainer: {
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        backgroundColor: Colors.baseBackgroundColor
-    },
-    logoContainer: {
-        width: '100%',
-        height: '25%',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    logo: {
-        width: 250
-    },
-    contentContainer: {
-        width:'85%',
-        height: '75%',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'stretch',
-    },
-    
-    inputsContainer: {
-        justifyContent: 'flex-start',
-        alignItems: 'center',       
-    },
-    
-    input: {
-        width: '100%',
-        backgroundColor: "white"
-    },
-    
-    enterContainer: {      
-        alignItems: 'center', 
-    }, 
-   
-    row: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',      
-      },
-      rememberMeLabel:{
-        color:'gray'        
-      }
+  screenContainer: {
+    // flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    backgroundColor: Colors.baseBackgroundColor
+  },
+  logoContainer: {
+    width: "100%",
+    height: "35%",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  logo: {
+    width: "90%"
+  },
+  contentContainer: {
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+    //alignItems: "stretch",
+    width: "85%",
+    height: "40%"
+
+    // backgroundColor: lightGreenA100
+  },
+
+  bottomContainer: {
+    //flexDirection: "column",
+    //justifyContent: "space-evenly",
+    //alignItems: "stretch",
+    width: "85%",
+    height: "25%"
+    // backgroundColor: green300
+  },
+
+  inputsContainer: {
+    flex: 1,
+    height: "65%",
+    //flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+    // backgroundColor: green100
+  },
+
+  input: {
+    width: "100%",
+    backgroundColor: "white"
+    // backgroundColor: lightBlue100,
+  },
+
+  enterContainer: {
+    height: "35%",
+    // backgroundColor: blue100,
+    alignItems: "center"
+  },
+
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  rememberMeLabel: {
+    color: "gray"
+  }
 });
