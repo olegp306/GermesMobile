@@ -15,20 +15,25 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Animated
+  Animated,
+  Dimensions
 } from "react-native";
 import { withTheme } from "react-native-paper";
 
 import { Colors, Images, Metrics } from "../theme";
 
-const IMAGE_HEIGHT = 95;
+const IMAGE_HEIGHT = 55;
 const IMAGE_HEIGHT_SMALL = 75;
+
+const IMAGE_WIDTH = Dimensions.get('window').width * 0.97;
+const IMAGE_WIDTH_SMALL = Dimensions.get('window').width * 0.7 ;
 
 class LoginComponent extends Component {
   constructor(props) {
     super(props);
 
     this.imageHeight = new Animated.Value(IMAGE_HEIGHT);
+    this.imageWidth = new Animated.Value(IMAGE_WIDTH);
   }
 
   componentWillMount() {
@@ -52,6 +57,11 @@ class LoginComponent extends Component {
       duration: event.duration,
       toValue: IMAGE_HEIGHT_SMALL
     }).start();
+
+    Animated.timing(this.imageWidth, {
+      duration: event.duration,
+      toValue: IMAGE_WIDTH_SMALL
+    }).start();
   };
 
   keyboardWillHide = event => {
@@ -59,6 +69,13 @@ class LoginComponent extends Component {
       duration: event.duration,
       toValue: IMAGE_HEIGHT
     }).start();
+
+    Animated.timing(this.imageWidth, {
+      duration: event.duration,
+      toValue: IMAGE_WIDTH
+    }).start();
+
+
   };
 
   render() {
@@ -70,7 +87,8 @@ class LoginComponent extends Component {
               <Animated.Image
                 source={Images.logo}
                 resizeMode="contain"
-                style={[styles.logo, { height: this.imageHeight }]}
+                // style={[styles.logo, { height: this.imageHeight }]}
+                style={[styles.logo, { width: this.imageWidth }]}
               />
             </View>
 
@@ -148,7 +166,7 @@ class LoginComponent extends Component {
               </Text>
               <Text style={styles.bottomText}>Оллвин Груп © 2006 – 2019</Text>
 
-              <View style={{ height: "5%", width: "100%" }} />
+              <View style={{ height: "10%", width: "100%" }} />
             </View>
           </View>
         </TouchableWithoutFeedback>
