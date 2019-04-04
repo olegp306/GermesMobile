@@ -9,13 +9,18 @@ import { reactotronRedux } from "reactotron-redux";
 //   .connect() // let's connect!
 
 let scriptHostname;
+
 if (__DEV__) {
   const scriptURL = NativeModules.SourceCode.scriptURL;
   scriptHostname = scriptURL.split("://")[1].split(":")[0];
 }
 
-const reactotron = Reactotron.configure({ host: scriptHostname })
-  .use(reactotronRedux()) //  <- here i am!
-  .connect(); //Don't forget about me!
+const reactotron = __DEV__
+  ? Reactotron.configure({ host: scriptHostname })
+      .use(reactotronRedux())
+      .connect()
+  : Reactotron.configure({ name: "React Native Demo" })
+      .use(reactotronRedux())
+      .connect();
 
 export default reactotron;
