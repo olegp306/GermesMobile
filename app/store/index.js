@@ -1,4 +1,4 @@
-import { createStore , applyMiddleware } from 'redux'
+import { createStore , applyMiddleware, compose } from 'redux'
 
 import Reactotron from '../../ReactotronConfig.js'
 import { rootReducer  } from './reducers.js'
@@ -10,4 +10,11 @@ import thunk from 'redux-thunk'
 // первый аргумент - функция-обработчик изменений (редьюсер)
 // второй аргумент - начальное состояние
 
-export const store = Reactotron.createStore(rootReducer , applyMiddleware(thunk, logger))
+// export const store = Reactotron.createStore(rootReducer , applyMiddleware(thunk, logger))
+
+let composseEnhancers=compose;
+
+if(__DEV__){
+    composseEnhancers=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+}
+export const store = Reactotron.createStore(rootReducer , composseEnhancers(applyMiddleware(thunk, logger)))
