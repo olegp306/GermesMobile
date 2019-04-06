@@ -19,6 +19,13 @@ import NotifyOfficeScreen from './app/containers/NotifyOfficeScreen';
 //import CameraScreen from './app/camera/CameraScreen';
 import ImagePickerComponent from './app/camera/ImagePickerComponent';
 
+import CustomerFirstScreen from './app/containers/CustomerFirstScreen';
+import CustomerSecondScreen from './app/containers/CustomerSecondScreen';
+import CustomerThirdScreen from './app/containers/CustomerThirdScreen';
+import CustomerRequestListScreen from './app/containers/CustomerRequestListScreen';
+
+
+
 
 
 import Colors from "./app/theme/Colors.js"
@@ -30,6 +37,7 @@ import fonts from "./app/theme/fonts"
 
 
 import './ReactotronConfig'
+
 
 const styles = StyleSheet.create({
   back: { 
@@ -135,10 +143,63 @@ const TabsNav  = createBottomTabNavigator(
 
 );
 
+const CustomerStackNav = createStackNavigator({
+  CustomerFirstScreen:{ screen: CustomerFirstScreen },
+  CustomerRequestListScreen:{ screen: CustomerRequestListScreen },
+  //ImagePicker: {screen: ImagePickerComponent }
+},
+{
+  initialRouteName: 'CustomerFirstScreen',
+  navigationOptions: { header: null }
+})
+
+// const TabsNavCustomer  = createBottomTabNavigator(
+//   {
+
+//     RequestList: { 
+//       screen: CustomerFirstScreeen,
+//       navigationOptions: {
+//         tabBarLabel:"первый экран Заказчика",
+//         tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"library-books"} color={tintColor} />
+//     }
+      
+//     },
+
+//     CustomerSecondScreeen:{ 
+//       screen:CustomerSecondScreeen,
+//       navigationOptions: {
+//         tabBarLabel:"CustomerSecondScreeen",
+//         tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
+//     }
+ 
+//      },
+//      CustomerThirdScreeen:{ 
+//       screen:CustomerThirdScreeen,
+//       navigationOptions: {
+//         tabBarLabel:"CustomerThirdScreeen",
+//         tabBarIcon: ({ tintColor }) => <Icon size={20} name={"send"} color={tintColor} />
+//       }
+//     }  
+//   }          
+//   ,
+//   {
+//     order: ['RequestList','BarcodeScanner','NotifyOffice'],
+//     animationEnabled: true,
+//     tabBarOptions:{
+//       activeTintColor : "white",
+//       inactiveBackgroundColor:Colors.navigatorBackgroudDarkColor,
+//       activeBackgroundColor:Colors.navigatorBackgroudColor
+
+//     }
+//   }
+
+// );
+
 
 const PrimaryNav= createStackNavigator({
   LoginStack:{screen: LoginStackNav},
   TabsNav:{screen: TabsNav},
+  CustomerStackNav:{screen: CustomerStackNav},
   // ChatStack :{screen: ChatStackNav}
   },
   {
