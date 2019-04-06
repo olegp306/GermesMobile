@@ -2,6 +2,7 @@ import { Map } from 'immutable'
 import { LOGIN_REQUEST, IS_LOGGING, LOGGED, LOGIN_FAILED } from './actions.js'
 
 const initialState = Map({
+  contractorId: null,
   token: null,
   userId: null,
   user: null,
@@ -24,8 +25,8 @@ const reducer = (state = initialState, action) => {
       return state.merge({ isLogging: true, error: null })
 
     case LOGGED:
-      const { token, userId, user, companyId, accountId, account, roles } = action.payload      
-      return state.merge({ token, userId, user, companyId, accountId, account, roles, isLogging: false, logged: true })
+      const { token, userId, user, companyId, accountId, account, roles, contractorId } = action.payload      
+      return state.merge({ token, userId, user, companyId, accountId, account, roles, contractorId, isLogging: false, logged: true })
 
     case LOGIN_FAILED: 
       return state.merge({
