@@ -55,6 +55,7 @@ export default class LoginScreen extends Component {
                 index: 0,
                 actions: [
                     NavigationActions.navigate({ routeName: 'TabsNav'})
+                    // NavigationActions.navigate({ routeName: 'CustomerStackNav'})
                 ],
                 key: null
             })
