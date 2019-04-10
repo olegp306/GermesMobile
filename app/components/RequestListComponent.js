@@ -63,6 +63,8 @@ export default class RequestListComponent extends Component {
               const isChangeStatusSuccess=(this.props.selectedItems.items.hasOwnProperty(item.requestId) && this.props.selectedItems.items[item.requestId].updated==true )
 
               const isStatusPriostanovka=(item.statusId==statusItems["97670516000"].id )
+              const errorText=(this.props.selectedItems.items.hasOwnProperty(item.requestId) && this.props.selectedItems.items[item.requestId].error ) ?   this.props.selectedItems.items[item.requestId].error : null;
+              //const errorText=null;
 
               return (<RequestComponent
                         key={item.requestId}
@@ -80,7 +82,8 @@ export default class RequestListComponent extends Component {
                         isBarcodeExist={isBarcodeExist} 
                         isUpdating={isUpdating}    
                         isChangeStatusSuccess={isChangeStatusSuccess}
-                        isStatusPriostanovka={isStatusPriostanovka} 
+                        isStatusPriostanovka={isStatusPriostanovka}
+                        errorText={errorText} 
                         
                         onShortPressRequest={ this._handleShortPress }
                         onLongPressRequest={ this._handleLongPress }
