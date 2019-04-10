@@ -1,6 +1,7 @@
+import { Colors, Images, Metrics } from "../../theme";
 import axios from "axios";
 import querystring from "querystring";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Platform } from "react-native";
 
 import {
   storeCredentials,
@@ -8,8 +9,17 @@ import {
   loadCredentials
 } from "../utils/AsyncStorage";
 
-//Germes real apiservice url
-export const API_SERVER_URL = "https://service.allwingroup.ru/germes/v1";
+//Germes Prod apiservice url
+export const PROD_API_SERVER_URL = "https://service.allwingroup.ru/germes/v1";
+
+//Germes Test apiservice url
+export const TEST_API_SERVER_URL = "https://apitest.allwingroup.ru/germes/v1";
+
+//Germes LOCAL Test apiservice url
+export const LOCAL_API_SERVER_URL = "http://192.168.1.69/ApiService/germes/v1";
+
+const API_SERVER_URL = __DEV__ ? LOCAL_API_SERVER_URL : PROD_API_SERVER_URL;
+
 // export const API_SERVER_URL = 'http://192.168.1.69/ApiService/germes/v1'
 
 //export const API_CHAT_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
@@ -23,6 +33,11 @@ const apiConf = {
 };
 
 const apiInstance = axios.create(apiConf);
+// 200 - OK
+// 400 - Bad Request (Client Error) - A json with error \ more details should return to the client.
+// 401 - Unauthorized
+// 500 - Internal Server Error - A json with an error should return to the client only when there is no security risk by doing that.
+//https://blog.restcase.com/rest-api-error-codes-101/
 
 const onError = error => {
   if (error.response) {
@@ -32,11 +47,13 @@ const onError = error => {
       throw Error("Неккоректное имя пользователя или пароль");
     } else if (error.response.status === 404) {
       //console.warn('нет данных' )
-    } else if (error.response.status > 401) {
+    } else if (error.response.status > 401 && error.response.status < 500) {
       throw Error(
         "При обработке запроса на сервере произошла ошибка, мы ее зафиксировали и уже разбираемся в причинах." +
           error.response.status
       );
+    } else if (error.response.status >= 500) {
+      throw Error(error.response.data);
     }
   } else if (error.request) {
     console.warn("axios onError" + error.request);
@@ -99,6 +116,30 @@ const postMessage = message => {
   return apiInstance.post("/messages/", message);
 };
 
+
+const postFile = message => {
+   var bodyFormData = new FormData();
+   //const len=message.image.uri.length()
+   //const fileName=message.image.uri.substring(message.image.uri.lastIndexOf('/') + 1, len)
+  
+  bodyFormData.append('file', {
+      uri: message.image.uri,
+      type: 'image/jpeg', // or photo.type
+      name: "fromMobApp.jpeg"
+    });
+
+  //return apiInstance.post("/files/", bodyFormData, { headers: {'Content-Type': 'multipart/form-data' }} );
+    const url =API_SERVER_URL + '/files';
+    
+  return axios({
+    method: 'post',
+    url: url,
+    data: bodyFormData,
+    config: { headers: {'Content-Type': 'multipart/form-data' }}
+    })
+  
+};
+
 const getChatsByRequestId = requestId => {
   return apiInstance.get(`chats?requestId=${requestId}`).catch(onError);
 };
@@ -124,6 +165,7 @@ export default {
   getUsersByChatId,
   getCurrentUser,
   postMessage,
+  postFile,
   getChatsByRequestId,
   createRequestChatsByRequestId
 };
