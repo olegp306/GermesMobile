@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { addNewMessage } from "../../../chat/messages/actions";
 import { postMessage } from "../actions";
 import { postRequestTypeChat } from "../../chat/actions";
-import { withNavigation } from 'react-navigation';
+import { withNavigation } from "react-navigation";
 
 const mapStateToProps = store => {
   return {
@@ -28,7 +28,6 @@ const mapDispatchToProps = dispatch => {
   mapStateToProps,
   mapDispatchToProps
 )
-
 class SendImageMessageContainer extends Component {
   constructor(props) {
     super(props);
@@ -44,51 +43,17 @@ class SendImageMessageContainer extends Component {
     });
   };
 
-  _sendImageMessageHandler = image => {
-    //сформировать с типом Image
-    const { currentChat, currentUser, navigation } = this.props;
-
-    const currentChatId = currentChat.item ? currentChat.item.id : "";
-    const currentUserId = currentUser.item.id;
-
-    let message = {
-      type: 2768777880000, //картинка
-      text: image.uri,
-      userId: currentUserId,
-      chatId: currentChatId,
-      tempFrontId: image.uri + new Date(),
-      creationDate: new Date()
-    };
-
-    if (currentChat.isRequestChatExist) {
-      //отослать на сервер маленьккую картинку
-      //отослать на сервер большую картинку
-      this.props.postMessage(message);
-
-      //добавить  на вью
-      this.props.addNewMessage(message);
-    } else {
-      const requestId = currentChat.requestId;
-
-      this.props.postRequestTypeChat(message, requestId);
-    }
-
-    //добавить сообщение в список с крутилкой
-    //как сообщение дойдет до сервера убрать крутилку
+  onPressIcon = () => {
+    this.props.navigation.navigate("ImagePicker");
   };
-
-  onPressIcon=()=>{
-    this.props.navigation.navigate('ImagePicker')
-  }
 
   render() {
     return (
-      <SendImageMessageComponent
-        sendImageMessage={this._sendImageMessageHandler}
+      <SendImageMessageComponent        
         onPressIcon={this.onPressIcon}
       />
     );
   }
 }
 
-export default withNavigation(SendImageMessageContainer)
+export default withNavigation(SendImageMessageContainer);

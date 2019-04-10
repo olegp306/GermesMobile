@@ -32,13 +32,7 @@ export default class SendNewMessageComponent extends Component {
     return (
       <View>
         <View style={styles.inputFieldContainer}>
-          <View style={styles.iconContainer}>
-            {/* <ImagePickerComponent
-              pickerTitle={"источник картинки"}
-              onTogglePicker={this._togglePicker}
-              pickerDisaplayed={this.state.pickerDisaplayed}
-              sendImageMessage={this.props.sendImageMessage}
-            /> */}
+          <View style={styles.iconContainer}>            
             <MaterialIcons
               name="camera"
               size={30}
