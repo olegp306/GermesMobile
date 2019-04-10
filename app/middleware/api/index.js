@@ -116,28 +116,27 @@ const postMessage = message => {
   return apiInstance.post("/messages/", message);
 };
 
-
 const postFile = message => {
-   var bodyFormData = new FormData();
-   //const len=message.image.uri.length()
-   //const fileName=message.image.uri.substring(message.image.uri.lastIndexOf('/') + 1, len)
-  
-  bodyFormData.append('file', {
-      uri: message.image.uri,
-      type: 'image/jpeg', // or photo.type
-      name: "fromMobApp.jpeg"
-    });
+  var bodyFormData = new FormData();
+  //const len=message.image.uri.length()
+  //const fileName=message.image.uri.substring(message.image.uri.lastIndexOf('/') + 1, len)
+
+  bodyFormData.append("file", {
+    uri: message.image.uri,
+    type: "image/jpeg", // or photo.type
+    name: "fromMobApp.jpeg"
+  });
 
   //return apiInstance.post("/files/", bodyFormData, { headers: {'Content-Type': 'multipart/form-data' }} );
-    const url =API_SERVER_URL + '/files';
-    
+  const url = API_SERVER_URL + "/files";
+
+  var test="111";
   return axios({
-    method: 'post',
+    method: "post",
     url: url,
     data: bodyFormData,
-    config: { headers: {'Content-Type': 'multipart/form-data' }}
-    })
-  
+    config: { headers: { "Content-Type": "multipart/form-data" } }
+  });
 };
 
 const getChatsByRequestId = requestId => {
