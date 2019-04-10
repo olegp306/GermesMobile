@@ -119,7 +119,7 @@ const postMessage = message => {
 const postFile = message => {
   var bodyFormData = new FormData();    
 
-  //return apiInstance.post("/files/", bodyFormData, { headers: {'Content-Type': 'multipart/form-data' }} );
+  
   const url = API_SERVER_URL + "/files";
 
   bodyFormData.append("file", {
@@ -128,13 +128,16 @@ const postFile = message => {
     name: "fromMobApp.jpeg"
   });
 
-  
-  return axios({
-    method: "post",
-    url: url,
-    data: bodyFormData,
-    config: { headers: { "Content-Type": "multipart/form-data" } }
-  });
+  //axios#post(url[, data[, config]])
+
+  return apiInstance.post("/files", bodyFormData, { headers: {'Content-Type': 'multipart/form-data' }} );
+
+  // return axios({
+  //   method: "post",
+  //   url: url,
+  //   data: bodyFormData,
+  //   config: { headers: { "Content-Type": "multipart/form-data" } }
+  // });
 };
 
 const getChatsByRequestId = requestId => {
