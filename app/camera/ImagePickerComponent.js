@@ -117,6 +117,7 @@ export default class ImagePickerComponent extends Component {
 
     let message = {
       type: 2768777880000, //картинка
+      image: image,
       text: image.uri,
       userId: currentUserId,
       chatId: currentChatId,
