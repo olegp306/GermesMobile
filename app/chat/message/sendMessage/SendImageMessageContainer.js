@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import SendImageMessageComponent from "./SendImageMessageComponent";
 
 import { connect } from "react-redux";
-import { addNewMessage } from "../../../chat/messages/actions";
-import { postMessage } from "../actions";
-import { postRequestTypeChat } from "../../chat/actions";
+//import { addNewMessage } from "../../../chat/messages/actions";
+//import { postMessage } from "../actions";
+//import { postRequestTypeChat } from "../../chat/actions";
 import { withNavigation } from "react-navigation";
 
 const mapStateToProps = store => {
@@ -19,8 +19,8 @@ const mapDispatchToProps = dispatch => {
   return {
     //postMessage: message => dispatch(postMessage(message)),
     //addNewMessage: message => dispatch(addNewMessage(message)), ///добавляет в список, чтобы сразу показать
-    postRequestTypeChat: (message, requestId) =>
-      dispatch(postRequestTypeChat(message, requestId))
+    //postRequestTypeChat: (message, requestId) =>
+    //  dispatch(postRequestTypeChat(message, requestId))
   };
 };
 
