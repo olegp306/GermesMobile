@@ -117,9 +117,10 @@ const postMessage = message => {
 };
 
 const postFile = message => {
-  var bodyFormData = new FormData();
-  //const len=message.image.uri.length()
-  //const fileName=message.image.uri.substring(message.image.uri.lastIndexOf('/') + 1, len)
+  var bodyFormData = new FormData();    
+
+  //return apiInstance.post("/files/", bodyFormData, { headers: {'Content-Type': 'multipart/form-data' }} );
+  const url = API_SERVER_URL + "/files";
 
   bodyFormData.append("file", {
     uri: message.image.uri,
@@ -127,10 +128,7 @@ const postFile = message => {
     name: "fromMobApp.jpeg"
   });
 
-  //return apiInstance.post("/files/", bodyFormData, { headers: {'Content-Type': 'multipart/form-data' }} );
-  const url = API_SERVER_URL + "/files";
-
-  var test="111";
+  
   return axios({
     method: "post",
     url: url,
