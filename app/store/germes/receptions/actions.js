@@ -15,7 +15,8 @@ export function getReceptions() {
   return async (dispatch, getState) => {
     try {
       dispatch({ type: RECEPTION_GET });
-      api.getReceptions()
+      api
+        .getReceptions()
         .then(response => dispatch(getReceptionsSuccess(response.data)));
     } catch (error) {
       dispatch({ type: RECEPTION_GET_FAIL, error });
@@ -36,5 +37,3 @@ export function getReceptionsFail(error) {
     payload: error
   };
 }
-
-
