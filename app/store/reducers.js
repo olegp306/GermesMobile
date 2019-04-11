@@ -18,6 +18,7 @@ import usersReducer  from '../chat/users/reducer.js'
 import currentUserReducer from '../chat/currentUser/reducer'
 import chatReducer  from '../chat/chat/reducer.js'
 import currentChatReducer  from '../chat/currentChat/reducer'
+import receptionReducer from './germes/receptions/reducer'
 
 
 
@@ -27,6 +28,7 @@ export const rootReducer = combineReducers({
   session: sessionReducer,
   selectedItems: selectedItemsReducer,
   barcodes: barcodesReducer,
+  receptions: receptionReducer,
 
   currentUser:  currentUserReducer,  
   messages : messagesReducer,
@@ -35,16 +37,6 @@ export const rootReducer = combineReducers({
   
   chat : chatReducer,
   currentChat: currentChatReducer
-  
-
-  // chats:{
-  //   currentUser:  currentUserReducer,  
-  //   currentChat :{
-  //     messages : messagesReducer,
-  //     users : usersReducer,
-  //   },    
-  //   message : messageReducer,    
-  // }
 })
 
 
