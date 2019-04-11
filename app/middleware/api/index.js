@@ -153,6 +153,10 @@ const createRequestChatsByRequestId = requestId => {
 const addUsersToChat = users => {
   return apiInstance.post("/userschats", users).then(checkStatus);
 };
+const getReceptions = () => {
+  return apiInstance.get("/receptions").catch(onError);
+};
+
 
 export default {
   login,
@@ -160,6 +164,7 @@ export default {
   setAuthHeader,
   changeRequestStatus,
   fetchRequests,
+  getReceptions,
 
   getMessagesByChatId,
   getUsersByChatId,
