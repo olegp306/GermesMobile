@@ -12,7 +12,7 @@ export const RECEPTION_GET_FAIL = "RECEPTION_GET_FAIL";
 // export const RECEPTION_REMOVE = "RECEPTION_REMOVE";
 
 export function getReceptions() {
-  return async (dispatch, getState) => {
+  return  (dispatch, getState) => {
     try {
       dispatch({ type: RECEPTION_GET });
       api
