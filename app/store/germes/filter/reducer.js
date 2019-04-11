@@ -13,7 +13,7 @@ Date.prototype.formatYYYYMMDD = function(){
 
 const initialState = new Map({
   filterDate: new Date().formatYYYYMMDD(),
-  filterReceptionId: "123906749000",
+  filterReceptionId: null
   
 });
 
