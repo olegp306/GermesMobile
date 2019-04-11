@@ -250,15 +250,19 @@ export default class RequestListScreen extends Component {
                 />
               </View>
             </View>
+            {/* 92617395000 Область
+            92617396000 Москва */}
 
             <View style={styles.filterItem}>
               <Text style={styles.filterLable}>Приемная: </Text>
               <View style={styles.pickerContainer}>
                 <CustomPicker
                   pickerText={"Выберите приемную:"}
-                  items={receptionItems}
-                  //items={this.props.receptions.items}
+                  //items={receptionItems}
+                  items={this.props.receptions.items}
+
                   selectedItemId={this.props.filterReceptionId}
+
                   onSetValue={(receptionId, itemIndex) =>
                     this._handleReceptoionChange(receptionId)
                   }
