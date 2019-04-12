@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postRequestTypeChat } from "../chat/chat/actions";
-import { postMessage } from "../chat/message/actions";
-import { addNewMessage } from "../chat/messages/actions";
+import { postMessage, postFileMessage } from "../chat/message/actions";
+import { addNewMessage as addNewMessageOnView } from "../chat/messages/actions";
+import { postFile } from "../store/germes/file/actions";
 import {
   View,
   Text,
@@ -36,9 +37,11 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     postMessage: message => dispatch(postMessage(message)),
-    addNewMessage: message => dispatch(addNewMessage(message)), ///добавляет в список, чтобы сразу показать
+    postFileMessage: message => dispatch(postFileMessage(message)),
+    addNewMessageOnView: message => dispatch(addNewMessageOnView(message)), ///добавляет в список, чтобы сразу показать
     postRequestTypeChat: (message, requestId) =>
-      dispatch(postRequestTypeChat(message, requestId))
+      dispatch(postRequestTypeChat(message, requestId)),
+      postFile: file => dispatch(postFile(file))
   };
 };
 @connect(
@@ -108,34 +111,34 @@ export default class ImagePickerComponent extends Component {
     }
   };
 
-  _sendImageMessage = image => {
+  _sendImageMessage = file => {
     //сформировать с типом Image
     const { currentChat, currentUser } = this.props;
-
     const currentChatId = currentChat.item ? currentChat.item.id : "";
     const currentUserId = currentUser.item.id;
 
-    let message = {
-      type: 2768777880000, //картинка
-      image: image,
-      text: image.uri,
+    let fileMessage = {
+      type: 2768654243000, //картинка
+      file: file,
+      text: "file message",
       userId: currentUserId,
       chatId: currentChatId,
-      tempFrontId: image.uri + new Date(),
+      tempFrontId: file.uri + new Date(),
       creationDate: new Date()
     };
 
     if (currentChat.isRequestChatExist) {
       //отослать на сервер маленьккую картинку
       //отослать на сервер большую картинку
-      this.props.postMessage(message);
+      this.props.postFileMessage(fileMessage)
+      
 
       //добавить  на вью
-      this.props.addNewMessage(message);
+      this.props.addNewMessageOnView(fileMessage);
     } else {
       const requestId = currentChat.requestId;
 
-      this.props.postRequestTypeChat(message, requestId);
+      this.props.postRequestTypeChat(fileMessage, requestId);
     }
 
     //добавить сообщение в список с крутилкой
