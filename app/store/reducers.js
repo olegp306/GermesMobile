@@ -19,6 +19,7 @@ import currentUserReducer from '../chat/currentUser/reducer'
 import chatReducer  from '../chat/chat/reducer.js'
 import currentChatReducer  from '../chat/currentChat/reducer'
 import receptionReducer from './germes/receptions/reducer'
+import fileReducer from './germes/file/reducer'
 
 
 
@@ -29,6 +30,7 @@ export const rootReducer = combineReducers({
   selectedItems: selectedItemsReducer,
   barcodes: barcodesReducer,
   receptions: receptionReducer,
+  file: fileReducer,
 
   currentUser:  currentUserReducer,  
   messages : messagesReducer,
