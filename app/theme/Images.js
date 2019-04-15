@@ -4,7 +4,8 @@ const images = {
   car: require('./images/car.png'),
   list: require('./images/list.png'),
   ring: require('./images/events.png'),
-  zhukovHeader: require('./images/zhukov-header.png')
+  zhukovHeader: require('./images/zhukov-header.png'),
+  avatarExample: require('./images/avatarExample.png'),
 }
 
 export default images;
