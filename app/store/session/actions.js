@@ -16,7 +16,10 @@ export const login = (user, password) => {
       .then(data => {
         const session = {
           token: data.data.accessToken,
-          contractorId: data.data.contractorId
+          contractorId: data.data.contractorId,
+          roles:data.data.employee.extInfo,
+          employee:data.data.employee
+
         };
         api.setAuthHeader(data.data.accessToken);
         dispatch(logged(session));

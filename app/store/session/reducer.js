@@ -1,42 +1,68 @@
-import { Map } from 'immutable'
-import { LOGIN_REQUEST, IS_LOGGING, LOGGED, LOGIN_FAILED } from './actions.js'
+import { Map } from "immutable";
+import { LOGIN_REQUEST, IS_LOGGING, LOGGED, LOGIN_FAILED } from "./actions.js";
 
 const initialState = Map({
-  contractorId: null,
   token: null,
+  contractorId: null,
+  roles: null,
+  employee: null,
   userId: null,
   user: null,
   companyId: null,
   accountId: null,
   account: null,
-  roles: [],
+  roles: null,
   isLogging: false,
   logged: false,
-  error: null,
-})
+  error: null
+});
 
 const reducer = (state = initialState, action) => {
-  console.log("SESSION REDUCER" );
-  switch (action.type){
+  console.log("SESSION REDUCER");
+  switch (action.type) {
     case LOGIN_REQUEST:
-      return initialState
+      return initialState;
 
     case IS_LOGGING:
-      return state.merge({ isLogging: true, error: null })
+      return state.merge({ isLogging: true, error: null });
 
     case LOGGED:
-      const { token, userId, user, companyId, accountId, account, roles, contractorId } = action.payload      
-      return state.merge({ token, userId, user, companyId, accountId, account, roles, contractorId, isLogging: false, logged: true })
+      const {
+        token,
+        userId,
+        user,
+        employee,
+        companyId,
+        accountId,
+        account,
+        roles,
+        contractorId
+      } = action.payload;
+      
+      return state.merge({
+        token,
+        contractorId,
+        roles,
+        employee,
+        userId,
+        user,
+        companyId,
+        accountId,
+        account,
+        roles,
+        isLogging: false,
+        logged: true
+      });
 
-    case LOGIN_FAILED: 
+    case LOGIN_FAILED:
       return state.merge({
         isLogging: false,
         error: action.payload.message
-      })
+      });
 
-    default: 
-       return state
+    default:
+      return state;
   }
-}
+};
 
-export default reducer
+export default reducer;
