@@ -1,70 +1,73 @@
-import React, { Component } from 'react';
-import  {StyleSheet, SafeAreaView, View} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
-import { createStackNavigator, createDrawerNavigator, createBottomTabNavigator, createMaterialTopTabNavigator,createMaterialBottomTabNavigator } from 'react-navigation'
+import React, { Component } from "react";
+import { StyleSheet, SafeAreaView, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
+import {
+  createStackNavigator,
+  createDrawerNavigator,
+  createBottomTabNavigator,
+  createMaterialTopTabNavigator,
+  createMaterialBottomTabNavigator
+} from "react-navigation";
 
-import { Provider as StoreProvider } from 'react-redux'
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { Provider as StoreProvider } from "react-redux";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
+import { store } from "./app/store/index.js";
 
-import { store } from './app/store/index.js'
-
-import HomeScreen from './app/containers/HomeScreen.js';
-import LoginScreen from './app/containers/LoginScreen';
-import RequestListScreen from './app/containers/RequestListScreen.js';
-import ChatScreen from './app/containers/ChatScreen';
-import BarcodeScannerScreen from './app/containers/BarcodeScannerScreen.js';
-import NotifyOfficeScreen from './app/containers/NotifyOfficeScreen';
+import HomeScreen from "./app/containers/HomeScreen.js";
+import LoginScreen from "./app/containers/LoginScreen";
+import RequestListScreen from "./app/containers/RequestListScreen.js";
+import ChatScreen from "./app/containers/ChatScreen";
+import BarcodeScannerScreen from "./app/containers/BarcodeScannerScreen.js";
+import NotifyOfficeScreen from "./app/containers/NotifyOfficeScreen";
 //import CameraScreen from './app/camera/CameraScreen';
-import ImagePickerComponent from './app/camera/ImagePickerComponent';
+import ImagePickerComponent from "./app/camera/ImagePickerComponent";
 
-import CustomerFirstScreen from './app/containers/CustomerFirstScreen';
-import CustomerSecondScreen from './app/containers/CustomerSecondScreen';
-import CustomerThirdScreen from './app/containers/CustomerThirdScreen';
-import CustomerRequestListScreen from './app/containers/CustomerRequestListScreen';
+import CustomerGeneralScreen from "./app/containers/customer/CustomerGeneralScreen";
 
+import CustomerPausedRequestScreen from "./app/containers/customer/CustomerPausedRequestScreen";
+import CustomerSubmittedRequestScreen from "./app/containers/customer/CustomerSubmittedRequestScreen";
+import CustomerRecievedRequestScreen from "./app/containers/customer/CustomerRecievedRequestScreen";
+// import CustomerRecievedRequestScreen from './app/containers/customer/CustomerRecievedRequestScreen';
+import CustomerRequestBigScreen from "./app/containers/customer/CustomerRequestBigScreen";
 
+// import CustomerSecondScreen from './app/containers/customer/CustomerSubmittedRequestScreen';
+// import CustomerThirdScreen from './app/containers/customer/CustomerRecievedRequestScreen';
+// import CustomerRequestListScreen from './app/containers/customer/CustomerPausedRequestScreen';
 
-
-
-import Colors from "./app/theme/Colors.js"
+import Colors from "./app/theme/Colors.js";
 //import {colors as Colors2} from "./app/theme/colors2.js"
-import color from 'color';
-import { black, white }  from "./app/theme/paperUicolors.js"
-import fonts from "./app/theme/fonts"
+import color from "color";
+import { black, white } from "./app/theme/paperUicolors.js";
+import fonts from "./app/theme/fonts";
 
-
-
-import './ReactotronConfig'
-
+import "./ReactotronConfig";
 
 const styles = StyleSheet.create({
-  back: { 
-    backgroundColor: '#047591'
+  back: {
+    backgroundColor: "#047591"
     //'#C9C8C7'
-  }, 
-  title:
-   {
-     color: 'white',
-     fontSize: 18
-   },
-   headButtonsContainer:{
-    flexDirection: 'row',
-   },
-   
-   iconContainer: {
-    width: 45,
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center'
   },
-})
+  title: {
+    color: "white",
+    fontSize: 18
+  },
+  headButtonsContainer: {
+    flexDirection: "row"
+  },
+
+  iconContainer: {
+    width: 45,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center"
+  }
+});
 
 const LoginStackNav = createStackNavigator({
-  Login: { screen: LoginScreen,  navigationOptions: { header: null } },      
-})
-
+  Login: { screen: LoginScreen, navigationOptions: { header: null } }
+});
 
 // сonst PrimaryNav= createStackNavigator({
 //   LoginStack:{screen: LoginStackNav},
@@ -75,112 +78,162 @@ const LoginStackNav = createStackNavigator({
 //     initialRouteName: 'LoginStack',
 //     navigationOptions: { header: null }
 //   },
- 
-  
+
 // )
 
-
-const ChatStackNav=createStackNavigator({
-  Chat:{ screen: ChatScreen },
-  //Camera:{ screen: CameraScreen },
-  ImagePicker: {screen: ImagePickerComponent }
-},
-{
-  initialRouteName: 'Chat',
-  navigationOptions: { header: null }
-})
-
-
-const RequestStackNav=createStackNavigator({
-  RequestList: {screen: RequestListScreen },
-  ChatStack: {screen: ChatStackNav }
-  }
-  ,
-{
-  initialRouteName: 'RequestList',
-  navigationOptions: { header: null }
-})
-
-
-const TabsNav  = createBottomTabNavigator(
+const ChatStackNav = createStackNavigator(
   {
-
-    RequestList: { 
-      screen: RequestStackNav,
-      navigationOptions: {
-        tabBarLabel:"Заявки",
-        tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"library-books"} color={tintColor} />
-    }
-      
-    },
-    BarcodeScanner:{ 
-      screen:BarcodeScannerScreen,
-      navigationOptions: {
-        tabBarLabel:"Сканер",
-        tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
-    }
- 
-     },
-    NotifyOffice:{ 
-      screen:NotifyOfficeScreen,
-      navigationOptions: {
-        tabBarLabel:"Отправить",
-        tabBarIcon: ({ tintColor }) => <Icon size={20} name={"send"} color={tintColor} />
-      }
-    }  
-  }          
-  ,
+    Chat: { screen: ChatScreen },
+    //Camera:{ screen: CameraScreen },
+    ImagePicker: { screen: ImagePickerComponent }
+  },
   {
-    order: ['RequestList','BarcodeScanner','NotifyOffice'],
-    animationEnabled: true,
-    tabBarOptions:{
-      activeTintColor : "white",
-      inactiveBackgroundColor:Colors.navigatorBackgroudDarkColor,
-      activeBackgroundColor:Colors.navigatorBackgroudColor
-
-    }
+    initialRouteName: "Chat",
+    navigationOptions: { header: null }
   }
-
 );
 
-const CustomerStackNav = createStackNavigator({
-  CustomerFirstScreen:{ screen: CustomerFirstScreen },
-  CustomerRequestListScreen:{ screen: CustomerRequestListScreen },
-  //ImagePicker: {screen: ImagePickerComponent }
-},
-{
-  initialRouteName: 'CustomerFirstScreen',
-  navigationOptions: { header: null }
-})
+const RequestStackNav = createStackNavigator(
+  {
+    RequestList: { screen: RequestListScreen },
+    ChatStack: { screen: ChatStackNav }
+  },
+  {
+    initialRouteName: "RequestList",
+    navigationOptions: { header: null }
+  }
+);
+
+const TabsNav = createBottomTabNavigator(
+  {
+    RequestList: {
+      screen: RequestStackNav,
+      navigationOptions: {
+        tabBarLabel: "Заявки",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon2 size={20} name={"library-books"} color={tintColor} />
+        )
+      }
+    },
+    BarcodeScanner: {
+      screen: BarcodeScannerScreen,
+      navigationOptions: {
+        tabBarLabel: "Сканер",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
+        )
+      }
+    },
+    NotifyOffice: {
+      screen: NotifyOfficeScreen,
+      navigationOptions: {
+        tabBarLabel: "Отправить",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon size={20} name={"send"} color={tintColor} />
+        )
+      }
+    }
+  },
+  {
+    order: ["RequestList", "BarcodeScanner", "NotifyOffice"],
+    animationEnabled: true,
+    tabBarOptions: {
+      activeTintColor: "white",
+      inactiveBackgroundColor: Colors.navigatorBackgroudDarkColor,
+      activeBackgroundColor: Colors.navigatorBackgroudColor
+    }
+  }
+);
+
+const CustomerTabNav = createMaterialTopTabNavigator(
+  {
+    CustomerSubmittedRequestScreen: {
+      screen: CustomerSubmittedRequestScreen,
+      navigationOptions: {
+        tabBarLabel: "сдана",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon2 size={20} name={"library-books"} color={tintColor} />
+        )
+      }
+    },
+
+    CustomerPausedRequestScreen: {
+      screen: CustomerPausedRequestScreen,
+      navigationOptions: {
+        tabBarLabel: "paused",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
+        )
+      }
+    },
+    CustomerRecievedRequestScreen: {
+      screen: CustomerRecievedRequestScreen,
+      navigationOptions: {
+        tabBarLabel: "recieved",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon size={20} name={"send"} color={tintColor} />
+        )
+      }
+    }
+  },
+  {
+    order: [
+      "CustomerSubmittedRequestScreen",
+      "CustomerPausedRequestScreen",
+      "CustomerRecievedRequestScreen"
+    ],
+    animationEnabled: true,
+    tabBarOptions: {
+      activeTintColor: "white",
+      inactiveBackgroundColor: Colors.navigatorBackgroudDarkColor,
+      activeBackgroundColor: Colors.navigatorBackgroudColor
+    }
+  }
+);
+
+const CustomerStackNav = createStackNavigator(
+  {
+    CustomerGeneralScreen: {
+      screen: CustomerGeneralScreen,
+      navigationOptions: { header: null }
+    },
+    CustomerMyRequestsScreen: { screen: CustomerTabNav,  navigationOptions: () => ({ title: `Мои заявки`, headerBackTitle: null }) },
+    CustomerRequestBigScreen: { screen: CustomerRequestBigScreen }
+  },
+  {
+    initialRouteName: "CustomerGeneralScreen"
+    // navigationOptions: { header: "Test header" }
+  }
+);
 
 // const TabsNavCustomer  = createBottomTabNavigator(
 //   {
 
-//     RequestList: { 
+//     RequestList: {
 //       screen: CustomerFirstScreeen,
 //       navigationOptions: {
 //         tabBarLabel:"первый экран Заказчика",
 //         tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"library-books"} color={tintColor} />
 //     }
-      
+
 //     },
 
-//     CustomerSecondScreeen:{ 
+//     CustomerSecondScreeen:{
 //       screen:CustomerSecondScreeen,
 //       navigationOptions: {
 //         tabBarLabel:"CustomerSecondScreeen",
 //         tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
 //     }
- 
+
 //      },
-//      CustomerThirdScreeen:{ 
+//      CustomerThirdScreeen:{
 //       screen:CustomerThirdScreeen,
 //       navigationOptions: {
 //         tabBarLabel:"CustomerThirdScreeen",
 //         tabBarIcon: ({ tintColor }) => <Icon size={20} name={"send"} color={tintColor} />
 //       }
-//     }  
-//   }          
+//     }
+//   }
 //   ,
 //   {
 //     order: ['RequestList','BarcodeScanner','NotifyOffice'],
@@ -195,31 +248,29 @@ const CustomerStackNav = createStackNavigator({
 
 // );
 
-
-const PrimaryNav= createStackNavigator({
-  LoginStack:{screen: LoginStackNav},
-  TabsNav:{screen: TabsNav},
-  CustomerStackNav:{screen: CustomerStackNav},
-  // ChatStack :{screen: ChatStackNav}
+const PrimaryNav = createStackNavigator(
+  {
+    LoginStack: { screen: LoginStackNav },
+    TabsNav: { screen: TabsNav },
+    CustomerStackNav: { screen: CustomerStackNav }
+    // ChatStack :{screen: ChatStackNav}
   },
   {
-    initialRouteName: 'LoginStack',
+    initialRouteName: "LoginStack",
     navigationOptions: { header: null }
-  },
- 
-  
-)
+  }
+);
 
-const theme= {
+const theme = {
   dark: false,
   roundness: 4,
   colors: {
     primary: Colors.navigatorBackgroudColor,
-    accent: '#03dac4',
-    background: '#f6f6f6',
+    accent: "#03dac4",
+    background: "#f6f6f6",
     surface: white,
-    error: '#B00020',
-    text: '#000000',
+    error: "#B00020",
+    text: "#000000",
     disabled: color(black)
       .alpha(0.26)
       .rgb()
@@ -231,29 +282,26 @@ const theme= {
     backdrop: color(black)
       .alpha(0.5)
       .rgb()
-      .string(),
+      .string()
   },
-  fonts,
+  fonts
 };
-
 
 //Назначение функции connect вытекает из названия: подключи React компонент к Redux store.
 // Результат работы функции connect - новый присоединенный компонент, который оборачивает переданный компонент.
 // У нас был компонент <App />, а на выходе получился <Connected(App)>. В этом не трудно убедиться, если взглянуть в react dev tools.
 
-export default class HelloWorld extends Component{
-  render(){
+export default class HelloWorld extends Component {
+  render() {
     return (
       <StoreProvider store={store}>
-       <PaperProvider theme={theme}>
+        <PaperProvider theme={theme}>
           {/* <View style={{ flex:1 , paddingTop:25,backgroundColor: Colors.whiteSmoke}}> */}
-          <View style={{ flex:1 , paddingTop:25}}>
+          <View style={{ flex: 1, paddingTop: 25 }}>
             <PrimaryNav />
           </View>
         </PaperProvider>
-        {/* <RequestListScreen /> */}
-        {/* <TestComponent /> */}
       </StoreProvider>
-    )
+    );
   }
 }

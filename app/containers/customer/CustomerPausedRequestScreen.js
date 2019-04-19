@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text } from "react-native";
 import { Caption } from "react-native-paper";
 
-export default class CustomerThirdScreen extends Component {
+export default class CustomerPausedRequestScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -17,7 +17,7 @@ export default class CustomerThirdScreen extends Component {
           justifyContent: "space-evenly"
         }}
       >
-        <Caption>CustomerThirdScreen</Caption>
+        <Caption>CustomerPausedRequestScreen</Caption>
       </View>
     );
   }

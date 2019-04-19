@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
-import { Images } from "../theme/";
+import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { Images } from "../../theme";
 import {
   Caption,
   Avatar,
@@ -13,10 +13,13 @@ import {
   Text
 } from "react-native-paper";
 
-export default class CustomerFirstScreeen extends Component {
+export default class CustomerGeneralScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+  _handleShortPress=()=>{        
+      this.props.navigation.navigate("CustomerMyRequestsScreen");    
   }
 
   render() {
@@ -25,7 +28,7 @@ export default class CustomerFirstScreeen extends Component {
       <View>
         <View style={{ height: "1%", width: "100%" }} />
         {/* Сведения о пользователе */}
-        <View style={{ alignItems: "center" }}>
+        <TouchableOpacity style={{ alignItems: "center" }} onPress={this._handleShortPress}>
           <Card style={{ width: "95%" }}>
             <Card.Title
               title="Петрова Мария Ивановна"
@@ -40,10 +43,9 @@ export default class CustomerFirstScreeen extends Component {
               <Paragraph>Центр-Инвест. Роль - 'Заказчик'</Paragraph>
             </Card.Content> */}
           </Card>
-        </View>
+        </TouchableOpacity>
         <View style={{ height: "1%", width: "100%" }} />
         <ScrollView contentContainerStyle={styles.contentContainer}>
-        
           <View style={{ height: "5%", width: "100%" }} />
           <Text> Вариант №1 </Text>
           {/* Получено Замечания */}
@@ -53,6 +55,8 @@ export default class CustomerFirstScreeen extends Component {
               justifyContent: "center"
               //alignItems: "center",
             }}
+            
+            
           >
             {/* Получено */}
             <Card style={{ width: "46%" }}>
@@ -91,10 +95,11 @@ export default class CustomerFirstScreeen extends Component {
             {/* Замечания */}
             <View style={{ width: "2%" }} />
             <Card style={{ width: "46%" }}>
-              <Card.Title title="Сдана" 
-              // subtitle="статус сдана" 
-              elevation={3}
-               />
+              <Card.Title
+                title="Сдана"
+                // subtitle="статус сдана"
+                elevation={3}
+              />
               <Text style={{ color: "red", textAlign: "center" }}>12 шт </Text>
             </Card>
           </View>
@@ -213,7 +218,7 @@ export default class CustomerFirstScreeen extends Component {
           <View style={{ alignItems: "center" }}>
             <Card style={{ width: "95%" }}>
               <Card.Title
-                title="Тест блок 2 для проверки скролва вниз"                
+                title="Тест блок 2 для проверки скролва вниз"
                 elevation={3}
                 left={props => <Avatar.Icon {...props} icon="update" />}
                 // verified-user
