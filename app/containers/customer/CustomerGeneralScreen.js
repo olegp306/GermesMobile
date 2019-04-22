@@ -10,7 +10,8 @@ import {
   Paragraph,
   Badge,
   IconButton,
-  Text
+  Text,
+  ThemeProvider
 } from "react-native-paper";
 
 export default class CustomerGeneralScreen extends Component {
@@ -18,9 +19,9 @@ export default class CustomerGeneralScreen extends Component {
     super(props);
     this.state = {};
   }
-  _handleShortPress=()=>{        
-      this.props.navigation.navigate("CustomerMyRequestsScreen");    
-  }
+  _handleShortPress = () => {
+    this.props.navigation.navigate("CustomerMyRequestsScreen");
+  };
 
   render() {
     return (
@@ -28,7 +29,10 @@ export default class CustomerGeneralScreen extends Component {
       <View>
         <View style={{ height: "1%", width: "100%" }} />
         {/* Сведения о пользователе */}
-        <TouchableOpacity style={{ alignItems: "center" }} onPress={this._handleShortPress}>
+        <TouchableOpacity
+          style={{ alignItems: "center" }}
+          onPress={this._handleShortPress}
+        >
           <Card style={{ width: "95%" }}>
             <Card.Title
               title="Петрова Мария Ивановна"
@@ -38,119 +42,55 @@ export default class CustomerGeneralScreen extends Component {
               )}
               // verified-user
             />
-            {/* <Card.Content style={styles.cardContent}>
-              <Title>Петрова Мария Ивановна</Title>
-              <Paragraph>Центр-Инвест. Роль - 'Заказчик'</Paragraph>
-            </Card.Content> */}
           </Card>
         </TouchableOpacity>
         <View style={{ height: "1%", width: "100%" }} />
+
         <ScrollView contentContainerStyle={styles.contentContainer}>
           <View style={{ height: "5%", width: "100%" }} />
-          <Text> Вариант №1 </Text>
+          {/* <Text> Вариант №1 </Text> */}
           {/* Получено Замечания */}
           <View
             style={{
               flexDirection: "row",
               justifyContent: "center"
-              //alignItems: "center",
             }}
-            
-            
           >
-            {/* Получено */}
-            <Card style={{ width: "46%" }}>
-              <Card.Title title="Получено" elevation={3} />
+            <TouchableOpacity
+              style={styles.smallContainerWithShadowStyle}
+              onPress={() => {
+                this.props.navigation.navigate({
+                  routeName: "CustomerPausedRequestScreen"
+                });
+              }}
+            >
+              <Text style={styles.h2}>Получено</Text>
               <Text style={{ color: "red", textAlign: "center" }}>13 шт </Text>
-            </Card>
-            {/* Замечания */}
-            <View style={{ width: "2%" }} />
-            <Card style={{ width: "46%" }}>
-              <Card.Title
-                title="Замечания"
-                // subtitle="Открытыми замечания"
-                elevation={3}
-              />
-              <Text style={{ color: "red", textAlign: "center" }}>3 шт </Text>
-            </Card>
+            </TouchableOpacity>
+            <View style={{ height: "100%", width: "1%" }} />
+            <TouchableOpacity style={styles.smallContainerWithShadowStyle}>
+              <Text style={styles.h2}>Замечания</Text>
+              <Text style={{ color: "red", textAlign: "center" }}>13 шт </Text>
+            </TouchableOpacity>
           </View>
-          <View style={{ height: "1%", width: "100%" }} />
           {/* Приостановка Сдана */}
+          <View style={{ height: "1%", width: "100%" }} />
+
           <View
             style={{
               flexDirection: "row",
               justifyContent: "center"
-              //alignItems: "center",
             }}
           >
-            {/* Получено */}
-            <Card style={{ width: "46%" }}>
-              <Card.Title
-                title="Приостановка"
-                // subtitle="статус приостановка"
-                elevation={3}
-              />
-              <Text style={{ color: "red", textAlign: "center" }}>1 шт </Text>
-            </Card>
-            {/* Замечания */}
-            <View style={{ width: "2%" }} />
-            <Card style={{ width: "46%" }}>
-              <Card.Title
-                title="Сдана"
-                // subtitle="статус сдана"
-                elevation={3}
-              />
-              <Text style={{ color: "red", textAlign: "center" }}>12 шт </Text>
-            </Card>
-          </View>
-
-          <View style={{ height: "2%", width: "100%" }} />
-          <Text> Вариант №2 </Text>
-
-          <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "95%" }}>
-              <Card.Title
-                title=" Получены сегодня"
-                // subtitle="я получены"
-                elevation={3}
-                right={props => <Text style={{ color: "red" }}>13 шт </Text>}
-                // <Badge {...props} children={3} size={30} />
-              />
-            </Card>
-          </View>
-          <View style={{ height: "1%", width: "100%" }} />
-
-          <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "95%" }}>
-              <Card.Title
-                title=" Замечания"
-                // subtitle="Заявки которые сегодня получены"
-                elevation={3}
-                right={props => <Text style={{ color: "red" }}>3 шт </Text>}
-              />
-            </Card>
-          </View>
-          <View style={{ height: "1%", width: "100%" }} />
-          <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "95%" }}>
-              <Card.Title
-                title=" Приостановка"
-                elevation={3}
-                // right={props => <Badge {...props} children={3} size={30} />}
-                right={props => <Text style={{ color: "red" }}>1 шт </Text>}
-              />
-            </Card>
-          </View>
-          <View style={{ height: "1%", width: "100%" }} />
-          <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "95%" }}>
-              <Card.Title
-                title=" Сдана"
-                // subtitle="Заявки которые сегодня получены"
-                elevation={3}
-                right={props => <Text style={{ color: "red" }}>12 шт </Text>}
-              />
-            </Card>
+            <TouchableOpacity style={styles.smallContainerWithShadowStyle}>
+              <Text style={styles.h2}>Приостановка</Text>
+              <Text style={{ color: "red", textAlign: "center" }}>13 шт </Text>
+            </TouchableOpacity>
+            <View style={{ height: "100%", width: "1%" }} />
+            <TouchableOpacity style={styles.smallContainerWithShadowStyle}>
+              <Text style={styles.h2}>Сдана</Text>
+              <Text style={{ color: "red", textAlign: "center" }}>13 шт </Text>
+            </TouchableOpacity>
           </View>
 
           <View style={{ height: "2%", width: "100%" }} />
@@ -158,7 +98,7 @@ export default class CustomerGeneralScreen extends Component {
             <Card style={{ width: "95%" }}>
               <Card.Title
                 title="Статистика сданных дел"
-                // subtitle="Заявки которые сегодня получены"
+                subtitle="Заявки которые будут скоро получены"
                 elevation={3}
                 left={props => <Avatar.Icon {...props} icon="update" />}
                 // verified-user
@@ -179,68 +119,6 @@ export default class CustomerGeneralScreen extends Component {
                   <Paragraph>22 шт.</Paragraph>
                 </View>
               </Card.Content>
-
-              {/* <Card.Cover source={{ uri: "https://picsum.photos/700" }} /> */}
-            </Card>
-          </View>
-
-          <View style={{ height: "2%", width: "100%" }} />
-          <Text>Тест блок для проверки скролла вниз</Text>
-          <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "95%" }}>
-              <Card.Title
-                title="Тест блок для проверки скролва вниз"
-                elevation={3}
-                left={props => <Avatar.Icon {...props} icon="update" />}
-                // verified-user
-              />
-              <Card.Content style={styles.cardContent}>
-                <View style={styles.rowContainer}>
-                  <Paragraph>27.03.2018</Paragraph>
-                  <Paragraph>3 шт.</Paragraph>
-                </View>
-
-                <View style={styles.rowContainer}>
-                  <Paragraph>28.03.2018</Paragraph>
-                  <Paragraph>9 шт.</Paragraph>
-                </View>
-
-                <View style={styles.rowContainer}>
-                  <Paragraph>29.03.2018</Paragraph>
-                  <Paragraph>22 шт.</Paragraph>
-                </View>
-              </Card.Content>
-
-              {/* <Card.Cover source={{ uri: "https://picsum.photos/700" }} /> */}
-            </Card>
-          </View>
-          <View style={{ height: "2%", width: "100%" }} />
-          <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "95%" }}>
-              <Card.Title
-                title="Тест блок 2 для проверки скролва вниз"
-                elevation={3}
-                left={props => <Avatar.Icon {...props} icon="update" />}
-                // verified-user
-              />
-              <Card.Content style={styles.cardContent}>
-                <View style={styles.rowContainer}>
-                  <Paragraph>27.03.2018</Paragraph>
-                  <Paragraph>3 шт.</Paragraph>
-                </View>
-
-                <View style={styles.rowContainer}>
-                  <Paragraph>28.03.2018</Paragraph>
-                  <Paragraph>9 шт.</Paragraph>
-                </View>
-
-                <View style={styles.rowContainer}>
-                  <Paragraph>29.03.2018</Paragraph>
-                  <Paragraph>22 шт.</Paragraph>
-                </View>
-              </Card.Content>
-
-              {/* <Card.Cover source={{ uri: "https://picsum.photos/700" }} /> */}
             </Card>
           </View>
 
@@ -250,10 +128,53 @@ export default class CustomerGeneralScreen extends Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   contentContainer: {
     paddingBottom: 250
   },
+  smallContainerWithShadowStyle: {
+    width: "48%",
+    minHeight: 100,
+    justifyContent: "space-evenly",
+    borderRadius: 5,
+    backgroundColor: "white",
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: "gray",
+    shadowOffset: { height: 0, width: 0 }
+  },
+
+  bigContainerWithShadowStyle: {
+    width: "96%",
+    justifyContent: "space-evenly",
+    borderRadius: 5,
+    backgroundColor: "white",
+    shadowOpacity: 0.75,
+    shadowRadius: 5,
+    shadowColor: "gray",
+    shadowOffset: { height: 0, width: 0 }
+  },
+
+  h2: {
+    fontSize: 18,
+    textAlign: "center",
+    fontWeight: "400"
+  },
+  // containerWithShadowStyle2: {
+  //   borderWidth: 1,
+  //   borderRadius: 2,
+  //   borderColor: "#ddd",
+  //   borderBottomWidth: 0,
+  //   shadowColor: "#000",
+  //   shadowOffset: { width: 0, height: 2 },
+  //   shadowOpacity: 0.8,
+  //   shadowRadius: 2,
+  //   elevation: 1,
+  //   marginLeft: 5,
+  //   marginRight: 5,
+  //   marginTop: 10
+  // },
 
   rowContainer: {
     flexDirection: "row",
