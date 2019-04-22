@@ -160,7 +160,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerPausedRequestScreen: {
       screen: CustomerPausedRequestScreen,
       navigationOptions: {
-        tabBarLabel: "paused",
+        tabBarLabel: "пристановка",
         tabBarIcon: ({ tintColor }) => (
           <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
         )
@@ -169,7 +169,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerRecievedRequestScreen: {
       screen: CustomerRecievedRequestScreen,
       navigationOptions: {
-        tabBarLabel: "recieved",
+        tabBarLabel: "получена",
         tabBarIcon: ({ tintColor }) => (
           <Icon size={20} name={"send"} color={tintColor} />
         )
