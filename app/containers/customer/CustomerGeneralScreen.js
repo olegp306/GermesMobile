@@ -1,19 +1,34 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Images } from "../../theme";
-import {
-  Caption,
-  Avatar,
-  Button,
-  Card,
-  Title,
-  Paragraph,
-  Badge,
-  IconButton,
-  Text,
-  ThemeProvider
-} from "react-native-paper";
+import { Avatar, Card, Paragraph, Text } from "react-native-paper";
+import _ from "lodash";
 
+import { fetchRequests } from "../../store/germes/requests/actions";
+
+const mapStateToProps = store => {
+  return {
+    requests: store.requests.toJS()
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchRequests: () => dispatch(fetchRequests())
+  };
+};
+
+const SOZDANA = 95242996000;
+
+const SDANA = 95485390000;
+const PRIOSTANOVLENA = 97670516000;
+const POLUCHENA = 95486490000;
+
+@connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
 export default class CustomerGeneralScreen extends Component {
   constructor(props) {
     super(props);
@@ -23,15 +38,34 @@ export default class CustomerGeneralScreen extends Component {
     this.props.navigation.navigate("CustomerMyRequestsScreen");
   };
 
+  componentDidMount() {
+    this.props.fetchRequests();
+  }
+
   render() {
+    const { requests } = this.props;
+    const requestsAr = _.values(requests.items);
+
+    const submittedRequests = requestsAr.filter(item => {
+      return item.statusId == SDANA;
+    });
+
+    const recieviedRequests = requestsAr.filter(item => {
+      return item.statusId == POLUCHENA;
+    });
+
+    const pausedRequests = requestsAr.filter(item => {
+      return item.statusId == PRIOSTANOVLENA;
+    });
+
+
     return (
-      // <ScrollView contentContainerStyle={styles.contentContainer}>
       <View>
         <View style={{ height: "1%", width: "100%" }} />
         {/* Сведения о пользователе */}
         <TouchableOpacity
           style={{ alignItems: "center" }}
-          onPress={this._handleShortPress}
+          // onPress={this._handleShortPress}
         >
           <Card style={{ width: "95%" }}>
             <Card.Title
@@ -60,17 +94,29 @@ export default class CustomerGeneralScreen extends Component {
               style={styles.smallContainerWithShadowStyle}
               onPress={() => {
                 this.props.navigation.navigate({
-                  routeName: "CustomerPausedRequestScreen"
+                  routeName: "CustomerRecievedRequestScreen"
                 });
               }}
             >
-              <Text style={styles.h2}>Получено</Text>
-              <Text style={{ color: "red", textAlign: "center" }}>13 шт </Text>
+              <Text style={styles.h2}>Получена</Text>
+              {/* <Text style={{ textAlign: "center",fontSize:'10', color:'gray'}}> ( сегодня )</Text> */}
+              <Text style={{ color: "red", textAlign: "center" }}>
+                {recieviedRequests.length}{" "}                
+              </Text>
             </TouchableOpacity>
             <View style={{ height: "100%", width: "1%" }} />
-            <TouchableOpacity style={styles.smallContainerWithShadowStyle}>
+            <TouchableOpacity
+              style={styles.smallContainerWithShadowStyle}
+              // onPress={() => {
+              //   this.props.navigation.navigate({
+              //     routeName: "CustomerRecievedRequestScreen"
+              //   });
+              // }}
+            >
               <Text style={styles.h2}>Замечания</Text>
-              <Text style={{ color: "red", textAlign: "center" }}>13 шт </Text>
+              <Text style={{ color: "red", textAlign: "center" }}>
+                нет данных{" "}
+              </Text>
             </TouchableOpacity>
           </View>
           {/* Приостановка Сдана */}
@@ -82,14 +128,33 @@ export default class CustomerGeneralScreen extends Component {
               justifyContent: "center"
             }}
           >
-            <TouchableOpacity style={styles.smallContainerWithShadowStyle}>
+            <TouchableOpacity
+              style={styles.smallContainerWithShadowStyle}
+              onPress={() => {
+                this.props.navigation.navigate({
+                  routeName: "CustomerPausedRequestScreen"
+                });
+              }}
+            >
               <Text style={styles.h2}>Приостановка</Text>
-              <Text style={{ color: "red", textAlign: "center" }}>13 шт </Text>
+              <Text style={{ color: "red", textAlign: "center" }}>
+               
+                {pausedRequests.length}{" "}
+              </Text>
             </TouchableOpacity>
             <View style={{ height: "100%", width: "1%" }} />
-            <TouchableOpacity style={styles.smallContainerWithShadowStyle}>
+            <TouchableOpacity
+              style={styles.smallContainerWithShadowStyle}
+              onPress={() => {
+                this.props.navigation.navigate({
+                  routeName: "CustomerSubmittedRequestScreen"
+                });
+              }}
+            >
               <Text style={styles.h2}>Сдана</Text>
-              <Text style={{ color: "red", textAlign: "center" }}>13 шт </Text>
+              <Text style={{ color: "red", textAlign: "center" }}>
+                {submittedRequests.length}{" "}
+              </Text>
             </TouchableOpacity>
           </View>
 
