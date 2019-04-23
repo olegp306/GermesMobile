@@ -33,7 +33,7 @@ export default class RequestListContainer extends Component {
     });
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 , alignItems: 'center',}}>
         {isFetching ? (
           <Text>Загрузка заявок</Text>
         ) : (
