@@ -33,6 +33,7 @@ export const fetchRequests = () => {
         .then(data => dispatch(requestsFetched(data.data)))
         .catch(error => requestsFetchingError(error));
     } else {
+      const { filter } = getState();
       api
         .fetchRequests(
           filter.get("filterDate"),
