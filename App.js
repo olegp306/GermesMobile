@@ -198,7 +198,7 @@ const CustomerStackNav = createStackNavigator(
       navigationOptions: { header: null }
     },
     CustomerMyRequestsScreen: { screen: CustomerTabNav,  navigationOptions: () => ({ title: `Мои заявки`, headerBackTitle: null }) },
-    CustomerRequestBigScreen: { screen: CustomerRequestBigScreen }
+    CustomerRequestBigScreen: { screen: CustomerRequestBigScreen, navigationOptions: () => ({ title: `Заявка подробно`, headerBackTitle: null })  }
   },
   {
     initialRouteName: "CustomerGeneralScreen"
