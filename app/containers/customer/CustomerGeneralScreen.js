@@ -9,7 +9,8 @@ import { fetchRequests } from "../../store/germes/requests/actions";
 
 const mapStateToProps = store => {
   return {
-    requests: store.requests.toJS()
+    requests: store.requests.toJS(),
+    session: store.session.toJS()
   };
 };
 
@@ -43,6 +44,7 @@ export default class CustomerGeneralScreen extends Component {
   }
 
   render() {
+    const { session } = this.props;
     const { requests } = this.props;
     const requestsAr = _.values(requests.items);
 
@@ -58,7 +60,6 @@ export default class CustomerGeneralScreen extends Component {
       return item.statusId == PRIOSTANOVLENA;
     });
 
-
     return (
       <View>
         <View style={{ height: "1%", width: "100%" }} />
@@ -69,8 +70,8 @@ export default class CustomerGeneralScreen extends Component {
         >
           <Card style={{ width: "95%" }}>
             <Card.Title
-              title="Петрова Мария Ивановна"
-              subtitle="Центр-Инвест"
+              title={session.employee.name}
+              subtitle={session.employee.contractor.name}
               left={props => (
                 <Avatar.Image size={50} source={Images.avatarExample} />
               )}
@@ -94,40 +95,18 @@ export default class CustomerGeneralScreen extends Component {
               style={styles.smallContainerWithShadowStyle}
               onPress={() => {
                 this.props.navigation.navigate({
-                  routeName: "CustomerRecievedRequestScreen"
+                  routeName: "CustomerSubmittedRequestScreen"
                 });
               }}
             >
-              <Text style={styles.h2}>Получена</Text>
-              {/* <Text style={{ textAlign: "center",fontSize:'10', color:'gray'}}> ( сегодня )</Text> */}
+              <Text style={styles.h2}>Сдана</Text>
               <Text style={{ color: "red", textAlign: "center" }}>
-                {recieviedRequests.length}{" "}                
+                {submittedRequests.length}{" "}
               </Text>
             </TouchableOpacity>
-            <View style={{ height: "100%", width: "1%" }} />
-            <TouchableOpacity
-              style={styles.smallContainerWithShadowStyle}
-              // onPress={() => {
-              //   this.props.navigation.navigate({
-              //     routeName: "CustomerRecievedRequestScreen"
-              //   });
-              // }}
-            >
-              <Text style={styles.h2}>Замечания</Text>
-              <Text style={{ color: "red", textAlign: "center" }}>
-                нет данных{" "}
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {/* Приостановка Сдана */}
-          <View style={{ height: "1%", width: "100%" }} />
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center"
-            }}
-          >
+            <View style={{ height: "100%", width: "1%" }} />
+
             <TouchableOpacity
               style={styles.smallContainerWithShadowStyle}
               onPress={() => {
@@ -138,22 +117,40 @@ export default class CustomerGeneralScreen extends Component {
             >
               <Text style={styles.h2}>Приостановка</Text>
               <Text style={{ color: "red", textAlign: "center" }}>
-               
                 {pausedRequests.length}{" "}
               </Text>
             </TouchableOpacity>
+          </View>
+          {/* Замечания Получено */}
+          <View style={{ height: "1%", width: "100%" }} />
+
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            <TouchableOpacity style={styles.smallContainerWithShadowStyle}>
+              <Text style={styles.h2}>Замечания</Text>
+              <Text style={{ color: "red", textAlign: "center" }}>
+                нет данных{" "}
+              </Text>
+            </TouchableOpacity>
+
             <View style={{ height: "100%", width: "1%" }} />
+
             <TouchableOpacity
               style={styles.smallContainerWithShadowStyle}
               onPress={() => {
                 this.props.navigation.navigate({
-                  routeName: "CustomerSubmittedRequestScreen"
+                  routeName: "CustomerRecievedRequestScreen"
                 });
               }}
             >
-              <Text style={styles.h2}>Сдана</Text>
+              <Text style={styles.h2}>Получена</Text>
+              {/* <Text style={{ textAlign: "center",fontSize:'10', color:'gray'}}> ( сегодня )</Text> */}
               <Text style={{ color: "red", textAlign: "center" }}>
-                {submittedRequests.length}{" "}
+                {recieviedRequests.length}{" "}
               </Text>
             </TouchableOpacity>
           </View>
@@ -162,7 +159,7 @@ export default class CustomerGeneralScreen extends Component {
           <View style={{ alignItems: "center" }}>
             <Card style={{ width: "95%" }}>
               <Card.Title
-                title="Статистика сданных дел"
+                title="Не работает Статистика сданных дел"
                 subtitle="Заявки которые будут скоро получены"
                 elevation={3}
                 left={props => <Avatar.Icon {...props} icon="update" />}
@@ -205,7 +202,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "white",
     shadowOpacity: 0.75,
-    shadowRadius: 5,
+    shadowRadius: 3,
     shadowColor: "gray",
     shadowOffset: { height: 0, width: 0 }
   },
@@ -216,7 +213,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "white",
     shadowOpacity: 0.75,
-    shadowRadius: 5,
+    shadowRadius: 3,
     shadowColor: "gray",
     shadowOffset: { height: 0, width: 0 }
   },
