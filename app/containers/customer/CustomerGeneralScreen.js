@@ -73,7 +73,7 @@ export default class CustomerGeneralScreen extends Component {
               title={session.employee.name}
               subtitle={session.employee.contractor.name}
               left={props => (
-                <Avatar.Image size={50} source={Images.avatarExample} />
+                <Avatar.Image size={50} source={{uri:session.employee.avatar.url}} />
               )}
               // verified-user
             />
