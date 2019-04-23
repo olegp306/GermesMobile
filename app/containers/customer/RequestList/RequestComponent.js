@@ -33,17 +33,19 @@ class RequestComponent extends Component {
       >
         <View style={{ flex: 1, margin: "2%" }}>
           <Text style={styles.transactionParticipantText}>
-            {" "}
-            {transactionParticipant}{" "}
+            
+            {transactionParticipant}
           </Text>
-
+          <View style={{height:"2%"}}/>
           {/* <Text> {customerName }</Text> */}
           {/* <Text> {transactionParticipant} </Text> */}
           <Text style={styles.addressText}> {address}</Text>
-          <View style={{ flexDirection: "row" ,justifyContent:"space-around"}}>
-          <Text style={styles.smGrayText}> № {requestNumber} расписка №{receiptNumber}</Text>
-            {/* <Text style={styles.smGrayText}> {receiptNumber} </Text> */}
-            
+          <View style={{height:"2%"}}/>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={styles.receiptNumberText}> {receiptNumber} </Text>
+            <Text style={styles.requestNumberText}> № {requestNumber} </Text>
           </View>
           {/* <Text> {fromRegistrationPlanDate} </Text> */}
         </View>
@@ -55,7 +57,7 @@ export default withNavigation(RequestComponent);
 
 const styles = StyleSheet.create({
   bigContainerWithShadowStyle: {
-    width: "96%",
+    //width: "96%",
     justifyContent: "space-evenly",
     borderRadius: 5,
     backgroundColor: "white",
@@ -69,13 +71,23 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: "lightgray",
     textAlign: "center",
-    marginTop: '2%',
+    marginTop: "2%"
   },
   transactionParticipantText: {
     fontSize: 15,
     fontWeight: "500"
   },
   addressText: {
+    fontSize: 12,
+    fontWeight: "200",
+    // color: "gray"
+  },
+  requestNumberText: {
+    fontSize: 13,
+    fontWeight: "100"
+    //color: "gray"
+  },
+  receiptNumberText: {
     fontSize: 13,
     fontWeight: "100",
     color: "gray"
