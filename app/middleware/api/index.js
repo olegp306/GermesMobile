@@ -89,6 +89,14 @@ const fetchRequests = (fromRegistrationPlanDate, receptionId) => {
     .catch(onError);
 };
 
+const fetchCustomerRequests = () => {
+  return apiInstance
+    .get(
+      "requestsgermes/mobile/customer/onwork"
+    )
+    .catch(onError);
+};
+
 const changeRequestStatus = async requestsId => {
   const { user, password } = await loadCredentials();
   const url = `requestsgermes/mobile/changestatus/${requestsId}`;
@@ -160,6 +168,7 @@ export default {
   setAuthHeader,
   changeRequestStatus,
   fetchRequests,
+  fetchCustomerRequests,
   getReceptions,
 
   getMessagesByChatId,
