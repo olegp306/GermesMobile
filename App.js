@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView, View } from "react-native";
+import { StyleSheet, SafeAreaView, View,Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import {
@@ -68,18 +68,6 @@ const styles = StyleSheet.create({
 const LoginStackNav = createStackNavigator({
   Login: { screen: LoginScreen, navigationOptions: { header: null } }
 });
-
-// сonst PrimaryNav= createStackNavigator({
-//   LoginStack:{screen: LoginStackNav},
-//   TabsNav:{screen: TabsNav},
-//   // ChatStack :{screen: ChatStackNav}
-//   },
-//   {
-//     initialRouteName: 'LoginStack',
-//     navigationOptions: { header: null }
-//   },
-
-// )
 
 const ChatStackNav = createStackNavigator(
   {
@@ -150,7 +138,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerSubmittedRequestScreen: {
       screen: CustomerSubmittedRequestScreen,
       navigationOptions: {
-        tabBarLabel: "сдана",
+        tabBarLabel: <Text style={{minHeight:50,alignItems: 'center',color:'white',fontSize:18, fontWeight:"400"}}>сдана</Text>,
         tabBarIcon: ({ tintColor }) => (
           <Icon2 size={20} name={"library-books"} color={tintColor} />
         )
@@ -160,7 +148,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerPausedRequestScreen: {
       screen: CustomerPausedRequestScreen,
       navigationOptions: {
-        tabBarLabel: "пристановка",
+        tabBarLabel:<Text style={{minHeight:50,alignItems: 'center',color:'white',fontSize:18, fontWeight:"400"}}>пристановка</Text> ,
         tabBarIcon: ({ tintColor }) => (
           <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
         )
@@ -169,7 +157,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerRecievedRequestScreen: {
       screen: CustomerRecievedRequestScreen,
       navigationOptions: {
-        tabBarLabel: "получена",
+        tabBarLabel: <Text style={{minHeight:50,alignItems: 'center',color:'white',fontSize:18, fontWeight:"400"}}>получена</Text>,
         tabBarIcon: ({ tintColor }) => (
           <Icon size={20} name={"send"} color={tintColor} />
         )
@@ -206,47 +194,7 @@ const CustomerStackNav = createStackNavigator(
   }
 );
 
-// const TabsNavCustomer  = createBottomTabNavigator(
-//   {
 
-//     RequestList: {
-//       screen: CustomerFirstScreeen,
-//       navigationOptions: {
-//         tabBarLabel:"первый экран Заказчика",
-//         tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"library-books"} color={tintColor} />
-//     }
-
-//     },
-
-//     CustomerSecondScreeen:{
-//       screen:CustomerSecondScreeen,
-//       navigationOptions: {
-//         tabBarLabel:"CustomerSecondScreeen",
-//         tabBarIcon: ({ tintColor }) => <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
-//     }
-
-//      },
-//      CustomerThirdScreeen:{
-//       screen:CustomerThirdScreeen,
-//       navigationOptions: {
-//         tabBarLabel:"CustomerThirdScreeen",
-//         tabBarIcon: ({ tintColor }) => <Icon size={20} name={"send"} color={tintColor} />
-//       }
-//     }
-//   }
-//   ,
-//   {
-//     order: ['RequestList','BarcodeScanner','NotifyOffice'],
-//     animationEnabled: true,
-//     tabBarOptions:{
-//       activeTintColor : "white",
-//       inactiveBackgroundColor:Colors.navigatorBackgroudDarkColor,
-//       activeBackgroundColor:Colors.navigatorBackgroudColor
-
-//     }
-//   }
-
-// );
 
 const PrimaryNav = createStackNavigator(
   {
