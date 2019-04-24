@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Linking } from "react-native";
 
 import { Caption, Button, withTheme } from "react-native-paper";
-import Colors from "../../theme/Colors"
+import Colors from "../../theme/Colors";
 // in managed apps:
 // import { FileSystem } from "expo";
 
@@ -129,7 +129,9 @@ class CustomerRequestBigScreen extends Component {
         <Text style={styles.requestNumberText}> {requestNumber} </Text>
 
         <Text style={styles.lable}> Текущий статус заявки </Text>
-        <Text style={styles.requestStatusText}>{statusList[statusId].name} </Text>
+        <Text style={styles.requestStatusText}>
+          {statusList[statusId].name}{" "}
+        </Text>
 
         <Text style={styles.lable}> Планируемая дата получения </Text>
         <Text>
@@ -140,9 +142,10 @@ class CustomerRequestBigScreen extends Component {
             "." +
             fromRegistrationPlanDate.getFullYear()}{" "}
         </Text>
-
+        <View style={{ height: "4%" }} />
         <Text style={styles.lable}> Адрес объекта </Text>
         <Text> {address}</Text>
+        <View style={{ height: "4%" }} />
         <View>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={styles.lable}> Номер расписки </Text>
@@ -183,8 +186,7 @@ const styles = new StyleSheet.create({
   },
   requestStatusText: {
     fontSize: 24,
-    color: Colors.navigatorBackgroudColor ,
+    color: Colors.navigatorBackgroudColor,
     fontWeight: "500"
   }
-
 });
