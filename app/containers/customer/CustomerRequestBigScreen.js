@@ -1,8 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Modal } from "react-native";
-import ImageViewer from "react-native-image-zoom-viewer";
+import { View, Text, StyleSheet, Linking } from "react-native";
+
 import { Caption, Button, withTheme } from "react-native-paper";
+import Colors from "../../theme/Colors"
+// in managed apps:
+// import { FileSystem } from "expo";
+
+// in bare apps:
+//import * as FileSystem from 'expo-file-system';
 
 const statusList = {
   "95485390000": {
@@ -26,10 +31,7 @@ const POLUCHENA = 95486490000;
 class CustomerRequestBigScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      index: 0,
-      modalVisible: false
-    };
+    this.state = {};
   }
 
   _downloadFile = () => {
@@ -53,16 +55,30 @@ class CustomerRequestBigScreen extends Component {
     ];
   };
 
-  //onCancel={_onCancelViewHandler} onSwipeDown ={_onSwipeDownHandler}
-  _onCancelViewHandler = () => {
-    this.setState({ modalVisible: false });
-  };
-  _onSwipeDownHandler = () => {
-    this.setState({ modalVisible: false });
-  };
+  _handleDocumentClick = bill => {
+    const { navigation } = this.props;
+    const requestNumber = navigation.getParam("requestNumber", "");
+    const receiptUrl = navigation.getParam("receiptUrl", "");
 
-  _downloadFile = () => {
-    this.setState({ modalVisible: true });
+    if (!receiptUrl) {
+      Alert.alert(
+        "Внимание",
+        "У данной заявки отсутствует прикрепленный документ",
+        [{ text: "Закрыть", onPress: () => {} }]
+      );
+    } else {
+      Linking.canOpenURL(receiptUrl).then(supported => {
+        if (supported) {
+          Linking.openURL(receiptUrl);
+        } else {
+          Alert.alert(
+            "Ошибка",
+            "Не удалось найти программу, чтобы открыть файл данного формата",
+            [{ text: "Закрыть", onPress: () => {} }]
+          );
+        }
+      });
+    }
   };
 
   render() {
@@ -84,9 +100,13 @@ class CustomerRequestBigScreen extends Component {
       "transactionParticipant",
       ""
     );
+    const fromRegistrationPlanDateUTC = navigation.getParam(
+      "fromRegistrationPlanDate",
+      ""
+    );
     const statusId = navigation.getParam("statusId", "");
     const notice = navigation.getParam("notice", "");
-
+    const fromRegistrationPlanDate = new Date(fromRegistrationPlanDateUTC);
     return (
       <View
         style={{
@@ -106,10 +126,20 @@ class CustomerRequestBigScreen extends Component {
         </Text>
 
         <Text style={styles.lable}> Заявка № </Text>
-        <Text> {requestNumber} </Text>
+        <Text style={styles.requestNumberText}> {requestNumber} </Text>
 
-        <Text style={styles.lable}> Статус заявки </Text>        
-        <Text>{statusList[statusId].name } </Text>
+        <Text style={styles.lable}> Текущий статус заявки </Text>
+        <Text style={styles.requestStatusText}>{statusList[statusId].name} </Text>
+
+        <Text style={styles.lable}> Планируемая дата получения </Text>
+        <Text>
+          {" "}
+          {+fromRegistrationPlanDate.getDate() +
+            "." +
+            (fromRegistrationPlanDate.getMonth() + 1) +
+            "." +
+            fromRegistrationPlanDate.getFullYear()}{" "}
+        </Text>
 
         <Text style={styles.lable}> Адрес объекта </Text>
         <Text> {address}</Text>
@@ -120,46 +150,16 @@ class CustomerRequestBigScreen extends Component {
           </View>
           <View style={{ alignItems: "flex-end" }}>
             <Button
-              style={{ width: "85%",margin: '4%', }}
+              style={{ width: "85%", margin: "4%" }}
               contentStyle={{ height: 45 }}
               mode="contained"
-              onPress={this._downloadFile}
+              onPress={this._handleDocumentClick}
             >
               Скачать/посмотреть
             </Button>
           </View>
           {/* <Text>{receiptUrl} </Text> */}
         </View>
-
-        <View
-          style={{
-            padding: 10
-          }}
-        >
-          <Modal
-            visible={this.state.modalVisible}
-            transparent={true}
-            onRequestClose={() => this.setState({ modalVisible: false })}
-          >
-            <ImageViewer
-              imageUrls={images}
-              index={this.state.index}
-              onSwipeDown={() => {
-                this.setState({ modalVisible: false });
-              }}
-              onMove={data => console.log(data)}
-              enableSwipeDown={true}
-            />
-          </Modal>
-        </View>
-
-        
-
-        {/* <Text> {customerName }</Text> */}
-        {/* <Text> {transactionParticipant} </Text> */}
-        {/* <Text> {address}</Text>
-        <Text> {receiptNumber} </Text> */}
-        {/* <Text> {fromRegistrationPlanDate} </Text> */}
       </View>
     );
   }
@@ -175,5 +175,16 @@ const styles = new StyleSheet.create({
     fontSize: 17,
     fontWeight: "500"
     //color: "gray"
+  },
+  requestNumberText: {
+    fontSize: 24,
+    color: "gray",
+    fontWeight: "500"
+  },
+  requestStatusText: {
+    fontSize: 24,
+    color: Colors.navigatorBackgroudColor ,
+    fontWeight: "500"
   }
+
 });
