@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView, View,Text } from "react-native";
+import { StyleSheet, SafeAreaView, View, Text ,ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import {
@@ -31,6 +31,7 @@ import CustomerSubmittedRequestScreen from "./app/containers/customer/CustomerSu
 import CustomerRecievedRequestScreen from "./app/containers/customer/CustomerRecievedRequestScreen";
 // import CustomerRecievedRequestScreen from './app/containers/customer/CustomerRecievedRequestScreen';
 import CustomerRequestBigScreen from "./app/containers/customer/CustomerRequestBigScreen";
+import {CustomerDrawerContentComponent} from "./app/containers/customer/CustomerDrawerContentComponent";
 
 // import CustomerSecondScreen from './app/containers/customer/CustomerSubmittedRequestScreen';
 // import CustomerThirdScreen from './app/containers/customer/CustomerRecievedRequestScreen';
@@ -138,7 +139,19 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerSubmittedRequestScreen: {
       screen: CustomerSubmittedRequestScreen,
       navigationOptions: {
-        tabBarLabel: <Text style={{minHeight:50,alignItems: 'center',color:'white',fontSize:18, fontWeight:"400"}}>сдана</Text>,
+        tabBarLabel: (
+          <Text
+            style={{
+              minHeight: 50,
+              alignItems: "center",
+              color: "white",
+              fontSize: 18,
+              fontWeight: "400"
+            }}
+          >
+            сдана
+          </Text>
+        ),
         tabBarIcon: ({ tintColor }) => (
           <Icon2 size={20} name={"library-books"} color={tintColor} />
         )
@@ -148,7 +161,19 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerPausedRequestScreen: {
       screen: CustomerPausedRequestScreen,
       navigationOptions: {
-        tabBarLabel:<Text style={{minHeight:50,alignItems: 'center',color:'white',fontSize:18, fontWeight:"400"}}>пристановка</Text> ,
+        tabBarLabel: (
+          <Text
+            style={{
+              minHeight: 50,
+              alignItems: "center",
+              color: "white",
+              fontSize: 18,
+              fontWeight: "400"
+            }}
+          >
+            пристановка
+          </Text>
+        ),
         tabBarIcon: ({ tintColor }) => (
           <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
         )
@@ -157,7 +182,19 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerRecievedRequestScreen: {
       screen: CustomerRecievedRequestScreen,
       navigationOptions: {
-        tabBarLabel: <Text style={{minHeight:50,alignItems: 'center',color:'white',fontSize:18, fontWeight:"400"}}>получена</Text>,
+        tabBarLabel: (
+          <Text
+            style={{
+              minHeight: 50,
+              alignItems: "center",
+              color: "white",
+              fontSize: 18,
+              fontWeight: "400"
+            }}
+          >
+            получена
+          </Text>
+        ),
         tabBarIcon: ({ tintColor }) => (
           <Icon size={20} name={"send"} color={tintColor} />
         )
@@ -185,12 +222,36 @@ const CustomerStackNav = createStackNavigator(
       screen: CustomerGeneralScreen,
       navigationOptions: { header: null }
     },
-    CustomerMyRequestsScreen: { screen: CustomerTabNav,  navigationOptions: () => ({ title: `Мои заявки`, headerBackTitle: null }) },
-    CustomerRequestBigScreen: { screen: CustomerRequestBigScreen, navigationOptions: () => ({ title: `Заявка подробно`, headerBackTitle: null })  }
+    CustomerMyRequestsScreen: {
+      screen: CustomerTabNav,
+      navigationOptions: () => ({ title: `Мои заявки`, headerBackTitle: null })
+    },
+    CustomerRequestBigScreen: {
+      screen: CustomerRequestBigScreen,
+      navigationOptions: () => ({
+        title: `Заявка подробно`,
+        headerBackTitle: null
+      })
+    }
   },
   {
     initialRouteName: "CustomerGeneralScreen"
     // navigationOptions: { header: "Test header" }
+  }
+);
+
+
+const CustomerDrawerNav = createDrawerNavigator(
+  {
+    General: {
+      screen: CustomerStackNav
+    },
+    MyRequests: {
+      screen: CustomerTabNav
+    }
+  },
+  {
+    contentComponent: CustomerDrawerContentComponent
   }
 );
 
@@ -200,7 +261,8 @@ const PrimaryNav = createStackNavigator(
   {
     LoginStack: { screen: LoginStackNav },
     TabsNav: { screen: TabsNav },
-    CustomerStackNav: { screen: CustomerStackNav }
+    CustomerStackNav: { screen: CustomerStackNav },
+    CustomerDrawerNav: { screen: CustomerDrawerNav }
     // ChatStack :{screen: ChatStackNav}
   },
   {
