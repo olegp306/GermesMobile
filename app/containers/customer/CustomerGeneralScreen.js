@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Images } from "../../theme";
 import { Avatar, Card, Paragraph, Text } from "react-native-paper";
+import CustomerInfoCardContainer from "../../containers/customer/customerInfo/CustomerInfoCardContainer";
+
 import _ from "lodash";
 
 import { fetchRequests } from "../../store/germes/requests/actions";
@@ -64,21 +66,8 @@ export default class CustomerGeneralScreen extends Component {
       <View>
         <View style={{ height: "1%", width: "100%" }} />
         {/* Сведения о пользователе */}
-        <TouchableOpacity
-          style={{ alignItems: "center" }}
-          // onPress={this._handleShortPress}
-        >
-          <Card style={{ width: "95%" }}>
-            <Card.Title
-              title={session.employee.name}
-              subtitle={session.employee.contractor.name}
-              left={props => (
-                <Avatar.Image size={50} source={{uri:session.employee.avatar.url}} />
-              )}
-              // verified-user
-            />
-          </Card>
-        </TouchableOpacity>
+        <CustomerInfoCardContainer />
+       
         <View style={{ height: "1%", width: "100%" }} />
 
         <ScrollView contentContainerStyle={styles.contentContainer}>
