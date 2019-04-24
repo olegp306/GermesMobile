@@ -46,6 +46,7 @@ export default class RequestListComponent extends Component {
   //
 
   render() {
+    const { isFetching, items, refreshing } = this.props.requests;
     return(
       <View>
         <FlatList 

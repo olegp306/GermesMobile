@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import RequestListComponent from "./RequestListComponent";
+import { fetchRequests } from "../../../store/germes/requests/actions";
 import { connect } from "react-redux";
 import _ from "lodash";
 
@@ -11,7 +12,9 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    fetchRequests: () => dispatch(fetchRequests())
+  };
 };
 
 @connect(
@@ -24,8 +27,12 @@ export default class RequestListContainer extends Component {
     this.state = {};
   }
 
+  _handleOnRefreshList = () => {
+    this.props.fetchRequests();
+  };
+
   render() {
-    const { items, isFetching, fetched } = this.props.requests;
+    const { items, isFetching, fetched, refreshing } = this.props.requests;
     const allItemssArr = _.values(items);
 
     const filteredItemssArr = allItemssArr.filter(item => {
@@ -33,11 +40,15 @@ export default class RequestListContainer extends Component {
     });
 
     return (
-      <View style={{ flex: 1 , alignItems: 'center',}}>
+      <View style={{ flex: 1, alignItems: "center" }}>
         {isFetching ? (
           <Text>Загрузка заявок</Text>
         ) : (
-          <RequestListComponent requests={filteredItemssArr} />
+          <RequestListComponent
+            requests={filteredItemssArr}
+            refreshing={refreshing}
+            onRefresh={this._handleOnRefreshList}
+          />
         )}
       </View>
     );
