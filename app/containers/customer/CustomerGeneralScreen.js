@@ -12,6 +12,8 @@ import {
 } from "react-native-paper";
 import CustomerInfoCardContainer from "../../containers/customer/customerInfo/CustomerInfoCardContainer";
 import BigButtonWithBadgeComponent from "./BigButtonWithBadgeComponent";
+import FutureRequestComponent from "./FutureRequestComponent";
+
 
 import _ from "lodash";
 
@@ -158,7 +160,8 @@ export default class CustomerGeneralScreen extends Component {
           </View>
 
           <View style={{ height: "2%", width: "100%" }} />
-          <View style={{ alignItems: "center" }}>
+          <FutureRequestComponent requests={requests}/>
+          {/* <View style={{ alignItems: "center" }}>
             <Card style={{ width: "95%" }}>
               <Card.Title
                 title="Не работает Статистика сданных дел"
@@ -184,7 +187,7 @@ export default class CustomerGeneralScreen extends Component {
                 </View>
               </Card.Content>
             </Card>
-          </View>
+          </View> */}
 
           <View style={{ height: "12%", width: "100%" }} />
         </ScrollView>
