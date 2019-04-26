@@ -14,7 +14,6 @@ import CustomerInfoCardContainer from "../../containers/customer/customerInfo/Cu
 import BigButtonWithBadgeComponent from "./BigButtonWithBadgeComponent";
 import FutureRequestComponent from "./FutureRequestComponent";
 
-
 import _ from "lodash";
 
 import { fetchRequests } from "../../store/germes/requests/actions";
@@ -160,7 +159,18 @@ export default class CustomerGeneralScreen extends Component {
           </View>
 
           <View style={{ height: "2%", width: "100%" }} />
-          <FutureRequestComponent requests={requests}/>
+          <Button
+            style={{ width: "85%", margin: "4%" }}
+            contentStyle={{ height: 45 }}
+            mode="outlined "
+            onPress={()=>this.props.fetchRequests()}
+            loading={requests.isFetching}
+            
+          >
+            обновить данные
+          </Button>
+          <View style={{ height: "2%", width: "100%" }} />
+          <FutureRequestComponent requests={requests} />
           {/* <View style={{ alignItems: "center" }}>
             <Card style={{ width: "95%" }}>
               <Card.Title

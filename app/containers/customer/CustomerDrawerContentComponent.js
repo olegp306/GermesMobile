@@ -1,17 +1,25 @@
 import { DrawerItems } from "react-navigation";
 
 import React, { Component } from "react";
-import { View, Text, ScrollView, StyleSheet, SafeAreaView } from "react-native";
+import { View, ScrollView, StyleSheet, SafeAreaView } from "react-native";
 import CustomerInfoCardContainer from "../customer/customerInfo/CustomerInfoCardContainer";
 import { blue100 } from "../../theme/paperUicolors";
+import {
+  Avatar,
+  Card,
+  Paragraph,
+  Text,
+  Button,
+  Badge
+} from "react-native-paper";
 
 export const CustomerDrawerContentComponent = props => (
-  <View style={{ flex: 1 , justifyContent:"space-between"}}>
+  <View style={{ flex: 1, justifyContent: "space-between" }}>
     {/* <SafeAreaView style={{ flex: 1 ,backgroundColor:blue100}}> */}
 
     {/* </SafeAreaView> */}
-    <Text>боковое меню</Text>
-    
+    {/* <Text>боковое меню</Text> */}
+
     <CustomerInfoCardContainer />
     {/* <View
       style={{
@@ -20,15 +28,27 @@ export const CustomerDrawerContentComponent = props => (
         justifyContent: "space-between"
       }}
     > */}
-     
-      <View style={styles.bottomContainer}>
-        <Text style={styles.bottomText}>Юридические и кадастровые</Text>
+     <View style={{height:'40%'}}></View>
+    <Button
+      style={{ width: "85%", margin: "4%" }}
+      contentStyle={{ height: 45 }}
+      mode="contained "
+      onPress={() => {
+        concole.log("выход");
+      }}
+      // loading={requests.isFetching}
+    >
+      выход
+    </Button>
 
-        <Text style={styles.bottomText}>услуги в сфере недвижимости</Text>
-        <Text style={styles.bottomText}>Оллвин Груп © 2006 – 2019</Text>
+    <View style={styles.bottomContainer}>
+      <Text style={styles.bottomText}>Юридические и кадастровые</Text>
 
-        {/* <View style={{ height: "10%", width: "100%" }} /> */}
-      </View>
+      <Text style={styles.bottomText}>услуги в сфере недвижимости</Text>
+      <Text style={styles.bottomText}>Оллвин Груп © 2006 – 2019</Text>
+
+      {/* <View style={{ height: "10%", width: "100%" }} /> */}
+    </View>
     {/* </View> */}
   </View>
 );
@@ -37,12 +57,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  
+
   bottomContainer: {
     //flexDirection: "column",
     //justifyContent: "flex-end",
     //alignItems: "center",
-
     //width: "90%",
     //height: "25%"
     // backgroundColor: green300
