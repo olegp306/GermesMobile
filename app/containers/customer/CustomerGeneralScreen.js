@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
-import { Images } from "../../theme";
-import { Avatar, Card, Paragraph, Text } from "react-native-paper";
+import { Images, Colors } from "../../theme";
+import {
+  Avatar,
+  Card,
+  Paragraph,
+  Text,
+  Button,
+  Badge
+} from "react-native-paper";
 import CustomerInfoCardContainer from "../../containers/customer/customerInfo/CustomerInfoCardContainer";
+import BigButtonWithBadgeComponent from "./BigButtonWithBadgeComponent";
 
 import _ from "lodash";
 
 import { fetchRequests } from "../../store/germes/requests/actions";
+import { green100 } from "../../theme/paperUicolors";
 
 const mapStateToProps = store => {
   return {
@@ -37,6 +46,7 @@ export default class CustomerGeneralScreen extends Component {
     super(props);
     this.state = {};
   }
+
   _handleShortPress = () => {
     this.props.navigation.navigate("CustomerMyRequestsScreen");
   };
@@ -67,48 +77,50 @@ export default class CustomerGeneralScreen extends Component {
         <View style={{ height: "1%", width: "100%" }} />
         {/* Сведения о пользователе */}
         <CustomerInfoCardContainer />
-       
+
         <View style={{ height: "1%", width: "100%" }} />
 
         <ScrollView contentContainerStyle={styles.contentContainer}>
           <View style={{ height: "5%", width: "100%" }} />
-          {/* <Text> Вариант №1 </Text> */}
-          {/* Получено Замечания */}
+
+          {/* Сдана Приостановка */}
+
           <View
             style={{
               flexDirection: "row",
               justifyContent: "center"
             }}
           >
-            <TouchableOpacity
-              style={styles.smallContainerWithShadowStyle}
+            <BigButtonWithBadgeComponent
+              buttonText={"СДАНА"}
+              buttonSmallText={submittedRequests.length}
+              // bargeText={submittedRequests.length}
               onPress={() => {
-                this.props.navigation.navigate({
-                  routeName: "CustomerSubmittedRequestScreen"
-                });
+                {
+                  this.props.navigation.navigate({
+                    routeName: "CustomerSubmittedRequestScreen"
+                  });
+                }
               }}
-            >
-              <Text style={styles.h2}>Сдана</Text>
-              <Text style={{ color: "red", textAlign: "center" }}>
-                {submittedRequests.length}{" "}
-              </Text>
-            </TouchableOpacity>
+              buttonText={"СДАНА"}
+              // bargeText={submittedRequests.length}
+              buttonSmallText={submittedRequests.length}
+            />
 
             <View style={{ height: "100%", width: "1%" }} />
 
-            <TouchableOpacity
-              style={styles.smallContainerWithShadowStyle}
+            <BigButtonWithBadgeComponent
+              buttonText={"ПРИОСТАНОВКА"}
+              buttonSmallText={pausedRequests.length}
+              // bargeText={pausedRequests.length}
               onPress={() => {
-                this.props.navigation.navigate({
-                  routeName: "CustomerPausedRequestScreen"
-                });
+                {
+                  this.props.navigation.navigate({
+                    routeName: "CustomerPausedRequestScreen"
+                  });
+                }
               }}
-            >
-              <Text style={styles.h2}>Приостановка</Text>
-              <Text style={{ color: "red", textAlign: "center" }}>
-                {pausedRequests.length}{" "}
-              </Text>
-            </TouchableOpacity>
+            />
           </View>
           {/* Замечания Получено */}
           <View style={{ height: "1%", width: "100%" }} />
@@ -119,29 +131,30 @@ export default class CustomerGeneralScreen extends Component {
               justifyContent: "center"
             }}
           >
-            <TouchableOpacity style={styles.smallContainerWithShadowStyle}>
-              <Text style={styles.h2}>Замечания</Text>
-              <Text style={{ color: "red", textAlign: "center" }}>
-                нет данных{" "}
-              </Text>
-            </TouchableOpacity>
-
+            <BigButtonWithBadgeComponent
+              buttonText={"ЗАМЕЧАНИЯ"}
+              buttonSmallText={"нет данных"}
+              // bargeText={"нет данных"}
+              // onPress={()=>{{
+              //   this.props.navigation.navigate({
+              //     routeName: "CustomerPausedRequestScreen"
+              //   });
+              // }}}
+            />
             <View style={{ height: "100%", width: "1%" }} />
 
-            <TouchableOpacity
-              style={styles.smallContainerWithShadowStyle}
+            <BigButtonWithBadgeComponent
+              buttonText={"ПОЛУЧЕНА"}
+              buttonSmallText={recieviedRequests.length}
+              // bargeText={recieviedRequests.length}
               onPress={() => {
-                this.props.navigation.navigate({
-                  routeName: "CustomerRecievedRequestScreen"
-                });
+                {
+                  this.props.navigation.navigate({
+                    routeName: "CustomerRecievedRequestScreen"
+                  });
+                }
               }}
-            >
-              <Text style={styles.h2}>Получена</Text>
-              {/* <Text style={{ textAlign: "center",fontSize:'10', color:'gray'}}> ( сегодня )</Text> */}
-              <Text style={{ color: "red", textAlign: "center" }}>
-                {recieviedRequests.length}{" "}
-              </Text>
-            </TouchableOpacity>
+            />
           </View>
 
           <View style={{ height: "2%", width: "100%" }} />
@@ -182,6 +195,7 @@ export default class CustomerGeneralScreen extends Component {
 
 const styles = StyleSheet.create({
   contentContainer: {
+    alignItems: "center",
     paddingBottom: 250
   },
   smallContainerWithShadowStyle: {
@@ -189,7 +203,7 @@ const styles = StyleSheet.create({
     minHeight: 100,
     justifyContent: "space-evenly",
     borderRadius: 5,
-    backgroundColor: "white",
+    backgroundColor: Colors.navigatorBackgroudColor,
     shadowOpacity: 0.75,
     shadowRadius: 3,
     shadowColor: "gray",
@@ -208,9 +222,10 @@ const styles = StyleSheet.create({
   },
 
   h2: {
-    fontSize: 18,
+    fontSize: 16,
     textAlign: "center",
-    fontWeight: "400"
+    fontWeight: "400",
+    color: "white"
   },
   // containerWithShadowStyle2: {
   //   borderWidth: 1,
