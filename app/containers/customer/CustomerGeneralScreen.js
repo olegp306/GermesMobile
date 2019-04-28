@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { View, StyleSheet, ScrollView, TouchableOpacity, } from "react-native";
 import { Images, Colors } from "../../theme";
 import {
   Avatar,
@@ -159,45 +159,27 @@ export default class CustomerGeneralScreen extends Component {
           </View>
 
           <View style={{ height: "2%", width: "100%" }} />
-          <Button
-            style={{ width: "85%", margin: "4%" }}
+         
+          <View style={{ height: "2%", width: "100%" }} />
+          <FutureRequestComponent
+            requests={requests}
+            onPress={() => {
+              {
+                this.props.navigation.navigate({
+                  routeName: "CustomerRecievedRequestScreen"
+                });
+              }
+            }}
+          />
+           <Button
+            style={{ width: "85%", margin: "4%" , borderColor: "gray",}}
             contentStyle={{ height: 45 }}
             mode="outlined "
-            onPress={()=>this.props.fetchRequests()}
+            onPress={() => this.props.fetchRequests()}
             loading={requests.isFetching}
-            
           >
             обновить данные
-          </Button>
-          <View style={{ height: "2%", width: "100%" }} />
-          <FutureRequestComponent requests={requests} />
-          {/* <View style={{ alignItems: "center" }}>
-            <Card style={{ width: "95%" }}>
-              <Card.Title
-                title="Не работает Статистика сданных дел"
-                subtitle="Заявки которые будут скоро получены"
-                elevation={3}
-                left={props => <Avatar.Icon {...props} icon="update" />}
-                // verified-user
-              />
-              <Card.Content style={styles.cardContent}>
-                <View style={styles.rowContainer}>
-                  <Paragraph>27.03.2018</Paragraph>
-                  <Paragraph>3 шт.</Paragraph>
-                </View>
-
-                <View style={styles.rowContainer}>
-                  <Paragraph>28.03.2018</Paragraph>
-                  <Paragraph>9 шт.</Paragraph>
-                </View>
-
-                <View style={styles.rowContainer}>
-                  <Paragraph>29.03.2018</Paragraph>
-                  <Paragraph>22 шт.</Paragraph>
-                </View>
-              </Card.Content>
-            </Card>
-          </View> */}
+          </Button>          
 
           <View style={{ height: "12%", width: "100%" }} />
         </ScrollView>
