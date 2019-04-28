@@ -16,32 +16,6 @@ export default class BigButtonWithBadgeComponent extends Component {
         style={styles.smallContainerWithShadowStyle}
         onPress={onPress}
       >
-        {/* Badge */}
-        
-        {/* <View
-          style={{
-            backgroundColor: "white",
-            position: "absolute",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: "20",
-            transform: [{ translate: [0, 0, 1] }],
-            top: 2,
-            right: 2,
-            minWidth: 40,
-            height: 40
-          }}
-        >
-          <Text
-            style={{
-              fontWeight: "500",
-              color: "red"
-            }}
-          >
-            {bargeText}
-          </Text>
-        </View> */}
-        {/* buttonText */}
         <Text style={styles.buttonText}>{buttonText}</Text>
 
         <Text style={styles.buttonSmallText}>{buttonSmallText}</Text>
@@ -73,8 +47,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "white",
     textAlign: "right",
-    alignItems:"flex-end",
-    marginRight: 10,
-
+    alignItems: "flex-end",
+    marginRight: 10
   }
 });
