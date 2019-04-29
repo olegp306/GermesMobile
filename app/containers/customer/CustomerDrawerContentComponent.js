@@ -1,8 +1,14 @@
 import { DrawerItems } from "react-navigation";
 
 import React, { Component } from "react";
-import { View, ScrollView, StyleSheet, SafeAreaView } from "react-native";
-import CustomerInfoCardContainer from "../customer/customerInfo/CustomerInfoCardContainer";
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  SafeAreaView,
+  Image
+} from "react-native";
+import CustomerInfoCardContainer from "../customer/customerInfo/CustomerInfoCardContainerSm";
 import { blue100 } from "../../theme/paperUicolors";
 import {
   Avatar,
@@ -12,14 +18,22 @@ import {
   Button,
   Badge
 } from "react-native-paper";
+import { Colors, Images, Metrics } from "../../theme";
 
 export const CustomerDrawerContentComponent = props => (
-  <View style={{ flex: 1, justifyContent: "space-between" }}>
+  <View style={{ justifyContent: "space-between" }}>
     {/* <SafeAreaView style={{ flex: 1 ,backgroundColor:blue100}}> */}
 
     {/* </SafeAreaView> */}
     {/* <Text>боковое меню</Text> */}
-
+    <View style={{alignItems: 'center'}} >
+      <Image
+        source={Images.logo}
+        resizeMode="contain"
+        // style={[styles.logo, { height: this.imageHeight }]}
+        style={[styles.logo, { width: 200, height: 100 }]}
+      />
+    </View>
     <CustomerInfoCardContainer />
     {/* <View
       style={{
@@ -28,7 +42,7 @@ export const CustomerDrawerContentComponent = props => (
         justifyContent: "space-between"
       }}
     > */}
-     <View style={{height:'40%'}}></View>
+    <View style={{ height: "40%" }} />
     <Button
       style={{ width: "85%", margin: "4%" }}
       contentStyle={{ height: 45 }}

@@ -1,5 +1,6 @@
 const images = {
   logo: require('./images/logowithsite2.png'),
+  logoSmall: require('./images/logowithsite2sm.png'),
   businessman: require('./images/hand.png'),
   car: require('./images/car.png'),
   list: require('./images/list.png'),
