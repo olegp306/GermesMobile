@@ -65,7 +65,9 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowColor: "gray",
     shadowOffset: { height: 0, width: 0 },
-    margin: 7
+    marginRight: 3,
+    marginLeft: 3,
+    marginTop: 3,
   },
   smGrayText: {
     fontSize: 11,
