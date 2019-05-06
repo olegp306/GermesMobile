@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView, View, Text ,ScrollView } from "react-native";
+import { StyleSheet, SafeAreaView, View, Text, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import {
@@ -31,7 +31,7 @@ import CustomerSubmittedRequestScreen from "./app/containers/customer/CustomerSu
 import CustomerRecievedRequestScreen from "./app/containers/customer/CustomerRecievedRequestScreen";
 // import CustomerRecievedRequestScreen from './app/containers/customer/CustomerRecievedRequestScreen';
 import CustomerRequestBigScreen from "./app/containers/customer/CustomerRequestBigScreen";
-import {CustomerDrawerContentComponent} from "./app/containers/customer/CustomerDrawerContentComponent";
+import { CustomerDrawerContentComponent } from "./app/containers/customer/CustomerDrawerContentComponent";
 
 // import CustomerSecondScreen from './app/containers/customer/CustomerSubmittedRequestScreen';
 // import CustomerThirdScreen from './app/containers/customer/CustomerRecievedRequestScreen';
@@ -140,21 +140,24 @@ const CustomerTabNav = createMaterialTopTabNavigator(
       screen: CustomerSubmittedRequestScreen,
       navigationOptions: {
         tabBarLabel: (
-          <Text
-            style={{
-              minHeight: 50,
-              alignItems: "center",
-              color: "white",
-              fontSize: 18,
-              fontWeight: "400"
-            }}
-          >
-            сдана
-          </Text>
-        ),
-        tabBarIcon: ({ tintColor }) => (
-          <Icon2 size={20} name={"library-books"} color={tintColor} />
+          <View>
+            <Text
+              style={{
+                minHeight: 30,
+                alignItems: "center",
+                color: "white",
+                fontSize: 16,
+                fontWeight: "400"
+              }}
+            >
+              сдана
+            </Text>
+          </View>
         )
+        // ,
+        // tabBarIcon: ({ tintColor }) => (
+        //   <Icon2 size={20} name={"library-books"} color={tintColor} />
+        // )
       }
     },
 
@@ -162,42 +165,48 @@ const CustomerTabNav = createMaterialTopTabNavigator(
       screen: CustomerPausedRequestScreen,
       navigationOptions: {
         tabBarLabel: (
-          <Text
-            style={{
-              minHeight: 50,
-              alignItems: "center",
-              color: "white",
-              fontSize: 18,
-              fontWeight: "400"
-            }}
-          >
-            пристановка
-          </Text>
-        ),
-        tabBarIcon: ({ tintColor }) => (
-          <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
+          <View>
+            <Text
+              style={{
+                minHeight: 30,
+                alignItems: "center",
+                color: "white",
+                fontSize: 16,
+                fontWeight: "400"
+              }}
+            >
+              пристановка
+            </Text>
+          </View>
         )
+        // ,
+        // tabBarIcon: ({ tintColor }) => (
+        //   <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
+        // )
       }
     },
     CustomerRecievedRequestScreen: {
       screen: CustomerRecievedRequestScreen,
       navigationOptions: {
         tabBarLabel: (
-          <Text
-            style={{
-              minHeight: 50,
-              alignItems: "center",
-              color: "white",
-              fontSize: 18,
-              fontWeight: "400"
-            }}
-          >
-            получена
-          </Text>
-        ),
-        tabBarIcon: ({ tintColor }) => (
-          <Icon size={20} name={"send"} color={tintColor} />
+          <View>
+            <Text
+              style={{
+                minHeight: 30,
+                alignItems: "center",
+                color: "white",
+                fontSize: 16,
+                fontWeight: "400"
+              }}
+            >
+              получена
+            </Text>
+          </View>
         )
+        // ,
+        // tabBarIcon: ({ tintColor }) => (
+        //   <Icon size={20} name={"send"} color={tintColor} />
+        // )
       }
     }
   },
@@ -208,10 +217,16 @@ const CustomerTabNav = createMaterialTopTabNavigator(
       "CustomerRecievedRequestScreen"
     ],
     animationEnabled: true,
+
     tabBarOptions: {
-      activeTintColor: "white",
+      activeTintColor: "red", // Color of tab when pressed
+      inactiveTintColor: "#b5b5b5", // Color of tab when not pressed
+      showIcon: "true", // Shows an icon for both iOS and Android
+      showLabel: "true", //No label for Android
+
+      // activeTintColor: "white",
       inactiveBackgroundColor: Colors.navigatorBackgroudDarkColor,
-      activeBackgroundColor: Colors.navigatorBackgroudColor
+      activeBackgroundColor: "red"
     }
   }
 );
@@ -240,7 +255,6 @@ const CustomerStackNav = createStackNavigator(
   }
 );
 
-
 const CustomerDrawerNav = createDrawerNavigator(
   {
     General: {
@@ -254,8 +268,6 @@ const CustomerDrawerNav = createDrawerNavigator(
     contentComponent: CustomerDrawerContentComponent
   }
 );
-
-
 
 const PrimaryNav = createStackNavigator(
   {
