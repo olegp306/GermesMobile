@@ -98,7 +98,8 @@ export default class FutureRequestComponent extends Component {
         <Text style={styles.buttonSmallText}>
           Заявки которые скоро будут получены
         </Text>
-        <View style={{alignItems: 'center',}}> {contentItems}</View>>
+        {/* <View style={{alignItems: 'center',}}> </View> */}
+        {contentItems}
        
       </TouchableOpacity>
     );
@@ -120,6 +121,7 @@ const styles = StyleSheet.create({
   smallContainerWithShadowStyle: {
     width: "96%",
     minHeight: 100,
+    alignItems: 'center',
     justifyContent: "space-evenly",
     borderRadius: 5,
     backgroundColor: Colors.navigatorBackgroudColor,
@@ -132,7 +134,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     fontWeight: "400",
-    color: "white"
+    color: "white",
+    marginTop: 5
   },
   buttonSmallText: {
     fontSize: 14,
