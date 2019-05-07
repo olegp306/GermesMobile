@@ -91,7 +91,7 @@ export default class FutureRequestComponent extends Component {
     return (
       <TouchableOpacity
         style={styles.smallContainerWithShadowStyle}
-        onPress={this.props.onPress}
+        // onPress={this.props.onPress}
       >
         <Text style={styles.buttonText}>ПЛАН ПОЛУЧЕНИЯ ЗАЯВОК</Text>
 
@@ -115,16 +115,17 @@ const styles = StyleSheet.create({
     width: "50%",
     justifyContent: "space-between",
     alignItems: "center",
-    margin: '2%',
+    margin: '1%',
     // backgroundColor:"steelblue"
   },
+
   smallContainerWithShadowStyle: {
     width: "96%",
     minHeight: 100,
     alignItems: 'center',
     justifyContent: "space-evenly",
     borderRadius: 5,
-    backgroundColor: Colors.navigatorBackgroudColor,
+    //backgroundColor: Colors.whiteSmoke,
     shadowOpacity: 0.75,
     shadowRadius: 3,
     shadowColor: "gray",
@@ -134,23 +135,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     fontWeight: "400",
-    color: "white",
+    color: Colors.lightBlackTextColor,
     marginTop: 5
   },
   buttonSmallText: {
     fontSize: 14,
-    //fontWeight: "400",
-    color: "white",
+    fontWeight: "200",
+    color: Colors.lightBlackTextColor,
     textAlign: "center",
-    alignItems: "flex-end",
-    marginRight: 10
+    //alignItems: "flex-end",
+    //marginRight: 10
   },
   itemText: {
-    fontSize: 14,
-    fontWeight: "400",
-    color: "white",
+    fontSize: 15,
+    fontWeight: "200",
+    //color: "white",
     textAlign: "center",
-    alignItems: "flex-end",
-    marginRight: 10
+    //alignItems: "flex-end",
+    //marginRight: 10
   }
 });
