@@ -101,7 +101,7 @@ export default class FutureRequestComponent extends Component {
           будут получены в следующие 7 дней
         </Text>
         {/* <View style={{alignItems: 'center',}}> </View> */}
-                { contentAr.lenght ==0 ? contentItems :  <Text style={styles.messageText}> На ближайщие 7 дней нет запланированых на получение заявок  </Text>}
+                { contentAr.length !=0 ? contentItems :  <Text style={styles.messageText}> На ближайщие 7 дней нет запланированых на получение заявок  </Text>}
       </TouchableOpacity>
     );
   }
