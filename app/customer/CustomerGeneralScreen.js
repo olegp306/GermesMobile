@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { View, StyleSheet, ScrollView, Text, TouchableOpacity } from "react-native";
 import { Images, Colors } from "../theme";
 import {
   Avatar,
   Card,
   Paragraph,
-  Text,
+  
   Button,
   Badge
 } from "react-native-paper";
@@ -157,8 +157,22 @@ export default class CustomerGeneralScreen extends Component {
               }}
             />
           </View>
-
+          <View style={{ height: "1%", width: "100%" }} />
+          <Text style={styles.lastUpdateText}> последнее обновление в  {requests.lastSuccessFetch}</Text>
           <View style={{ height: "2%", width: "100%" }} />
+
+          <Button
+            style={{ width: "85%", margin: "4%", borderColor: "gray" }}
+            contentStyle={{ height: 45 }}
+            mode="outlined"
+            onPress={() => this.props.fetchRequests()}
+            loading={requests.isFetching}
+          >
+            обновить данные
+          </Button>
+
+          
+          
 
           <View style={{ height: "2%", width: "100%" }} />
           <FutureRequestComponent
@@ -171,15 +185,7 @@ export default class CustomerGeneralScreen extends Component {
               }
             }}
           />
-          <Button
-            style={{ width: "85%", margin: "4%", borderColor: "gray" }}
-            contentStyle={{ height: 45 }}
-            mode="outlined "
-            onPress={() => this.props.fetchRequests()}
-            loading={requests.isFetching}
-          >
-            обновить данные
-          </Button>
+         
 
           <View style={{ height: "12%", width: "100%" }} />
         </ScrollView>
@@ -232,21 +238,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "400",
     color: "white"
-  },
-  // containerWithShadowStyle2: {
-  //   borderWidth: 1,
-  //   borderRadius: 2,
-  //   borderColor: "#ddd",
-  //   borderBottomWidth: 0,
-  //   shadowColor: "#000",
-  //   shadowOffset: { width: 0, height: 2 },
-  //   shadowOpacity: 0.8,
-  //   shadowRadius: 2,
-  //   elevation: 1,
-  //   marginLeft: 5,
-  //   marginRight: 5,
-  //   marginTop: 10
-  // },
+  },  
 
   rowContainer: {
     flexDirection: "row",
@@ -259,5 +251,14 @@ const styles = StyleSheet.create({
   cardContent: {
     alignItems: "center"
     // backgroundColor:"yellow"
-  }
+  },
+  lastUpdateText: {
+    width:"100%",
+    fontSize: 12,
+    fontWeight: "200",
+    color: Colors.actionBackgroundColor,
+    textAlign: "right",
+    alignItems: "flex-end",
+    marginRight: 10
+  },
 });
