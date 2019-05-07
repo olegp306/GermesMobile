@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, StyleSheet, ScrollView, TouchableOpacity, } from "react-native";
-import { Images, Colors } from "../../theme";
+import { Images, Colors } from "../theme";
 import {
   Avatar,
   Card,
@@ -10,14 +10,14 @@ import {
   Button,
   Badge
 } from "react-native-paper";
-import CustomerInfoCardContainer from "../../containers/customer/customerInfo/CustomerInfoCardContainer";
+import CustomerInfoCardContainer from "./customerInfo/CustomerInfoCardContainer";
 import BigButtonWithBadgeComponent from "./BigButtonWithBadgeComponent";
 import FutureRequestComponent from "./FutureRequestComponent";
 
 import _ from "lodash";
 
-import { fetchRequests } from "../../store/germes/requests/actions";
-import { green100 } from "../../theme/paperUicolors";
+import { fetchRequests } from "../store/germes/requests/actions";
+import { green100 } from "../theme/paperUicolors";
 
 const mapStateToProps = store => {
   return {

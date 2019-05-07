@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Colors from "../../theme/Colors";
+import Colors from "../theme/Colors";
 
 export default class BigButtonWithBadgeComponent extends Component {
   constructor(props) {

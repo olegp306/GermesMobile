@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Linking } from "react-native";
 
 import { Caption, Button, withTheme } from "react-native-paper";
-import Colors from "../../theme/Colors";
+import Colors from "../theme/Colors";
 // in managed apps:
 // import { FileSystem } from "expo";
 

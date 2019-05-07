@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
 import RequestListComponent from "./RequestListComponent";
-import { fetchRequests } from "../../../store/germes/requests/actions";
+import { fetchRequests } from "../../store/germes/requests/actions";
 import { connect } from "react-redux";
 import _ from "lodash";
 

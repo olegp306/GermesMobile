@@ -8,8 +8,8 @@ import {
   SafeAreaView,
   Image
 } from "react-native";
-import CustomerInfoCardContainer from "../customer/customerInfo/CustomerInfoCardContainerSm";
-import { blue100 } from "../../theme/paperUicolors";
+import CustomerInfoCardContainer from "./customerInfo/CustomerInfoCardContainerSm";
+import { blue100 } from "../theme/paperUicolors";
 import {
   Avatar,
   Card,
@@ -18,7 +18,7 @@ import {
   Button,
   Badge
 } from "react-native-paper";
-import { Colors, Images, Metrics } from "../../theme";
+import { Colors, Images, Metrics } from "../theme";
 
 export const CustomerDrawerContentComponent = props => (
   <View style={{ justifyContent: "space-between" }}>

@@ -24,18 +24,18 @@ import NotifyOfficeScreen from "./app/containers/NotifyOfficeScreen";
 //import CameraScreen from './app/camera/CameraScreen';
 import ImagePickerComponent from "./app/camera/ImagePickerComponent";
 
-import CustomerGeneralScreen from "./app/containers/customer/CustomerGeneralScreen";
+import CustomerGeneralScreen from "./app/customer/CustomerGeneralScreen";
 
-import CustomerPausedRequestScreen from "./app/containers/customer/CustomerPausedRequestScreen";
-import CustomerSubmittedRequestScreen from "./app/containers/customer/CustomerSubmittedRequestScreen";
-import CustomerRecievedRequestScreen from "./app/containers/customer/CustomerRecievedRequestScreen";
-// import CustomerRecievedRequestScreen from './app/containers/customer/CustomerRecievedRequestScreen';
-import CustomerRequestBigScreen from "./app/containers/customer/CustomerRequestBigScreen";
-import { CustomerDrawerContentComponent } from "./app/containers/customer/CustomerDrawerContentComponent";
+import CustomerPausedRequestScreen from "./app/customer/CustomerPausedRequestScreen";
+import CustomerSubmittedRequestScreen from "./app/customer/CustomerSubmittedRequestScreen";
+import CustomerRecievedRequestScreen from "./app/customer/CustomerRecievedRequestScreen";
+// import CustomerRecievedRequestScreen from './app/customer/CustomerRecievedRequestScreen';
+import CustomerRequestBigScreen from "./app/customer/CustomerRequestBigScreen";
+import { CustomerDrawerContentComponent } from "./app/customer/CustomerDrawerContentComponent";
 
-// import CustomerSecondScreen from './app/containers/customer/CustomerSubmittedRequestScreen';
-// import CustomerThirdScreen from './app/containers/customer/CustomerRecievedRequestScreen';
-// import CustomerRequestListScreen from './app/containers/customer/CustomerPausedRequestScreen';
+// import CustomerSecondScreen from './app/customer/CustomerSubmittedRequestScreen';
+// import CustomerThirdScreen from './app/customer/CustomerRecievedRequestScreen';
+// import CustomerRequestListScreen from './app/customer/CustomerPausedRequestScreen';
 
 import Colors from "./app/theme/Colors.js";
 //import {colors as Colors2} from "./app/theme/colors2.js"
@@ -165,19 +165,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
           <View style={styles.tabNavContainerStyle}>
             <Text style={styles.tabNavTextStyle}>приостановка</Text>
           </View>
-          // <View>
-          //   <Text
-          //     style={{
-          //       // minHeight: 30,
-          //       alignItems: "center",
-          //       color: "white",
-          //       fontSize: 16,
-          //       fontWeight: "400"
-          //     }}
-          //   >
-          //     пристановка
-          //   </Text>
-          // </View>
+         
         )
         // ,
         // tabBarIcon: ({ tintColor }) => (
@@ -192,19 +180,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
           <View style={styles.tabNavContainerStyle}>
             <Text style={styles.tabNavTextStyle}>получена</Text>
           </View>
-          // <View>
-          //   <Text
-          //     style={{
-          //       // minHeight: 30,
-          //       alignItems: "center",
-          //       color: "white",
-          //       fontSize: 16,
-          //       fontWeight: "400"
-          //     }}
-          //   >
-          //     получена
-          //   </Text>
-          // </View>
+         
         )
         // ,
         // tabBarIcon: ({ tintColor }) => (
