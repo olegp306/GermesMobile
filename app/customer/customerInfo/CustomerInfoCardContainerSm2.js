@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, Text, TouchableOpacity, Image } from "react-native";
-import { Avatar, Card, Paragraph, Colors } from "react-native-paper";
-import { Images } from "../../theme";
+import { View, Text, TouchableOpacity, Image ,StyleSheet} from "react-native";
+import { Images,Colors } from "../../theme";
 
 const mapStateToProps = store => {
   return {
@@ -13,7 +12,6 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {};
 };
-
 
 @connect(
   mapStateToProps,
@@ -27,42 +25,43 @@ export default class CustomerInfoCardContainerSm extends Component {
 
   render() {
     const { logged, employee } = this.props.session;
-    const avatarUrlObj = employee.avatar.url
-      ? { uri: employee.avatar.url }
-      : Images.logo;
-
+    
     return logged ? (
       <TouchableOpacity
         style={{ alignItems: "center" }}
-        // onPress={this._handleShortPress}
+        onPress={this.props.onPress}
       >
-      
-      
         <Image
-          // source={avatarUrlObj}
-          //source={Images.noUserPhoto}
-          style={{height:60, width:60, borderRadius: 30, borderColor: "gray",borderWidth: 1,}}
-          
-          source={{ uri: employee.avatar.url }}
-          // resizeMode="contain"
-          // style={[styles.logo, { height: this.imageHeight }]}
-          //style={[styles.logo, }
+          style={{
+            height: 60,
+            width: 60,
+            borderRadius: 30,
+            borderColor: "gray",
+            borderWidth: 1
+          }}
+          source={ employee.avatar.physicalName ? {uri: employee.avatar.url } : Images.noUserPhoto}
         />
 
-        {/* <Image size={50} source={{ uri: employee.avatar.url }} /> */}
-        <Text>{employee.name}</Text>
-        <Text>{employee.contractor.name}</Text>
-        {/* <Card style={{ width: "80%" }}>
-          <Card.Title
-            title={employee.name}
-            subtitle={employee.contractor.name}
-            left={props => (
-              <Avatar.Image size={50} source={{ uri: employee.avatar.url }} />
-            )}
-            // verified-user
-          />
-        </Card> */}
+        <Text style={styles.nameText}>{employee.name}</Text>
+        <Text style={styles.companyText}>{employee.contractor.name}</Text>
+        
       </TouchableOpacity>
     ) : null;
   }
 }
+const styles=StyleSheet.create({
+  nameText:{
+    fontSize: 14,
+    textAlign: "center",
+    fontWeight: "200",
+    //color: Colors.lightBlackTextColor,
+    marginTop: 5
+  },
+  companyText:{
+    fontSize: 12,
+    textAlign: "center",
+    fontWeight: "100",
+    color: Colors.lightBlackTextColor,
+    marginTop: 5
+  },
+})

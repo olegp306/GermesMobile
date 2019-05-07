@@ -160,7 +160,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
       screen: CustomerPausedRequestScreen,
       navigationOptions: {
         tabBarLabel: (
-          "остановка"
+          "приостан"
         )
         // ,
         // tabBarIcon: ({ tintColor }) => (
