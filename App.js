@@ -63,6 +63,13 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignItems: "center"
+  },
+  tabNavContainerStyle: { alignItems: "center", justifyContent: "center" },
+  tabNavTextStyle: {
+    //alignItems: "center",
+    color: "white",
+    fontSize: 16,
+    fontWeight: "400"
   }
 });
 
@@ -140,18 +147,8 @@ const CustomerTabNav = createMaterialTopTabNavigator(
       screen: CustomerSubmittedRequestScreen,
       navigationOptions: {
         tabBarLabel: (
-          <View>
-            <Text
-              style={{
-                minHeight: 30,
-                alignItems: "center",
-                color: "white",
-                fontSize: 16,
-                fontWeight: "400"
-              }}
-            >
-              сдана
-            </Text>
+          <View style={styles.tabNavContainerStyle}>
+            <Text style={styles.tabNavTextStyle}>сдана</Text>
           </View>
         )
         // ,
@@ -165,19 +162,22 @@ const CustomerTabNav = createMaterialTopTabNavigator(
       screen: CustomerPausedRequestScreen,
       navigationOptions: {
         tabBarLabel: (
-          <View>
-            <Text
-              style={{
-                minHeight: 30,
-                alignItems: "center",
-                color: "white",
-                fontSize: 16,
-                fontWeight: "400"
-              }}
-            >
-              пристановка
-            </Text>
+          <View style={styles.tabNavContainerStyle}>
+            <Text style={styles.tabNavTextStyle}>приостановка</Text>
           </View>
+          // <View>
+          //   <Text
+          //     style={{
+          //       // minHeight: 30,
+          //       alignItems: "center",
+          //       color: "white",
+          //       fontSize: 16,
+          //       fontWeight: "400"
+          //     }}
+          //   >
+          //     пристановка
+          //   </Text>
+          // </View>
         )
         // ,
         // tabBarIcon: ({ tintColor }) => (
@@ -189,19 +189,22 @@ const CustomerTabNav = createMaterialTopTabNavigator(
       screen: CustomerRecievedRequestScreen,
       navigationOptions: {
         tabBarLabel: (
-          <View>
-            <Text
-              style={{
-                minHeight: 30,
-                alignItems: "center",
-                color: "white",
-                fontSize: 16,
-                fontWeight: "400"
-              }}
-            >
-              получена
-            </Text>
+          <View style={styles.tabNavContainerStyle}>
+            <Text style={styles.tabNavTextStyle}>получена</Text>
           </View>
+          // <View>
+          //   <Text
+          //     style={{
+          //       // minHeight: 30,
+          //       alignItems: "center",
+          //       color: "white",
+          //       fontSize: 16,
+          //       fontWeight: "400"
+          //     }}
+          //   >
+          //     получена
+          //   </Text>
+          // </View>
         )
         // ,
         // tabBarIcon: ({ tintColor }) => (
@@ -327,3 +330,5 @@ export default class HelloWorld extends Component {
     );
   }
 }
+
+
