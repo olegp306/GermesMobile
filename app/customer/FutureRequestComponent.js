@@ -51,16 +51,18 @@ export default class FutureRequestComponent extends Component {
       return dateA - dateB;
     });
 
-    let contentList = {};
+    const today = new Date();
+       let contentList = {};
     let nextDate = {};
     recieviedArOrdered.forEach(el => {
       let date = new Date(el.fromRegistrationPlanDate);
-
-      if (this._getStringDate(date) == nextDate) {
-        contentList[date].count = contentList[date].count + 1;
-      } else {
-        nextDate = this._getStringDate(date);
-        contentList[date] = { date: nextDate, fullDate: date, count: 1 };
+      if (date > today) { //дата выдачи позже чем сегодня
+        if (this._getStringDate(date) == nextDate) {
+          contentList[date].count = contentList[date].count + 1;
+        } else {
+          nextDate = this._getStringDate(date);
+          contentList[date] = { date: nextDate, fullDate: date, count: 1 };
+        }
       }
     });
     const contentAr = _.values(contentList).sort(function(a, b) {
@@ -96,11 +98,10 @@ export default class FutureRequestComponent extends Component {
         <Text style={styles.buttonText}>ПЛАН ПОЛУЧЕНИЯ ЗАЯВОК</Text>
 
         <Text style={styles.buttonSmallText}>
-          Заявки которые скоро будут получены
+          будут получены в следующие 7 дней
         </Text>
         {/* <View style={{alignItems: 'center',}}> </View> */}
-        {contentItems}
-       
+                { contentAr.lenght ==0 ? contentItems :  <Text style={styles.messageText}> На ближайщие 7 дней нет запланированых на получение заявок  </Text>}
       </TouchableOpacity>
     );
   }
@@ -115,16 +116,17 @@ const styles = StyleSheet.create({
     width: "50%",
     justifyContent: "space-between",
     alignItems: "center",
-    margin: '1%',
+    margin: "1%"
     // backgroundColor:"steelblue"
   },
 
   smallContainerWithShadowStyle: {
     width: "96%",
     minHeight: 100,
-    alignItems: 'center',
+    alignItems: "center",
     justifyContent: "space-evenly",
     borderRadius: 5,
+    borderWidth:1,
     //backgroundColor: Colors.whiteSmoke,
     shadowOpacity: 0.75,
     shadowRadius: 3,
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "200",
     color: Colors.lightBlackTextColor,
-    textAlign: "center",
+    textAlign: "center"
     //alignItems: "flex-end",
     //marginRight: 10
   },
@@ -150,8 +152,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "200",
     //color: "white",
-    textAlign: "center",
+    textAlign: "center"
     //alignItems: "flex-end",
     //marginRight: 10
+  },
+  messageText:{
+    fontSize: 14,
+    fontWeight: "200",
+    color: Colors.actionBackgroundColor,
+    textAlign: "center",
+    marginTop:4
   }
 });
