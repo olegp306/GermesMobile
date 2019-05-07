@@ -3,11 +3,6 @@ import { View, Text, StyleSheet, Linking } from "react-native";
 
 import { Caption, Button, withTheme } from "react-native-paper";
 import Colors from "../theme/Colors";
-// in managed apps:
-// import { FileSystem } from "expo";
-
-// in bare apps:
-//import * as FileSystem from 'expo-file-system';
 
 const statusList = {
   "95485390000": {
@@ -33,27 +28,6 @@ class CustomerRequestBigScreen extends Component {
     super(props);
     this.state = {};
   }
-
-  _downloadFile = () => {
-    const { navigation } = this.props;
-    const receiptUrl = navigation.getParam("receiptUrl", "");
-
-    const images = [
-      {
-        // Simplest usage.
-        url: receiptUrl,
-
-        // width: number
-        // height: number
-        // Optional, if you know the image size, you can set the optimization performance
-
-        // You can pass props to <Image />.
-        props: {
-          // headers: ...
-        }
-      }
-    ];
-  };
 
   _handleDocumentClick = bill => {
     const { navigation } = this.props;
@@ -108,15 +82,7 @@ class CustomerRequestBigScreen extends Component {
     const notice = navigation.getParam("notice", "");
     const fromRegistrationPlanDate = new Date(fromRegistrationPlanDateUTC);
     return (
-      <View
-        style={{
-          flex: 1,
-
-          // alignItems: "center",
-          justifyContent: "space-evenly",
-          margin: "5%"
-        }}
-      >
+      <View style={styles.screenContainer}>
         {/* <Text> {requestId} </Text> */}
         {/* <Text> {transactionParticipant} </Text> */}
         <Text style={styles.lable}> Участник сделки </Text>
@@ -170,6 +136,16 @@ class CustomerRequestBigScreen extends Component {
 export default withTheme(CustomerRequestBigScreen);
 
 const styles = new StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+
+    // alignItems: "center",
+    justifyContent: "space-evenly",
+    margin: "1%",
+    backgroundColor: Colors.baseBackgroundColor,
+    padding: '2%',
+    borderRadius: 3,
+  },
   lable: {
     fontSize: 10,
     color: "gray"

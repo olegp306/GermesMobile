@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, StyleSheet, ScrollView, TouchableOpacity, } from "react-native";
+import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Images, Colors } from "../theme";
 import {
   Avatar,
@@ -74,14 +74,14 @@ export default class CustomerGeneralScreen extends Component {
     });
 
     return (
-      <View>
+      <View style={styles.screenContainer}>
         <View style={{ height: "1%", width: "100%" }} />
         {/* Сведения о пользователе */}
         <CustomerInfoCardContainer />
 
         <View style={{ height: "1%", width: "100%" }} />
 
-        <ScrollView contentContainerStyle={styles.contentContainer}>
+        <ScrollView contentContainerStyle={styles.middleContainer}>
           <View style={{ height: "5%", width: "100%" }} />
 
           {/* Сдана Приостановка */}
@@ -159,7 +159,7 @@ export default class CustomerGeneralScreen extends Component {
           </View>
 
           <View style={{ height: "2%", width: "100%" }} />
-         
+
           <View style={{ height: "2%", width: "100%" }} />
           <FutureRequestComponent
             requests={requests}
@@ -171,15 +171,15 @@ export default class CustomerGeneralScreen extends Component {
               }
             }}
           />
-           <Button
-            style={{ width: "85%", margin: "4%" , borderColor: "gray",}}
+          <Button
+            style={{ width: "85%", margin: "4%", borderColor: "gray" }}
             contentStyle={{ height: 45 }}
             mode="outlined "
             onPress={() => this.props.fetchRequests()}
             loading={requests.isFetching}
           >
             обновить данные
-          </Button>          
+          </Button>
 
           <View style={{ height: "12%", width: "100%" }} />
         </ScrollView>
@@ -189,9 +189,20 @@ export default class CustomerGeneralScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
+  screenContainer: {
+    // flex: 1,
+    //flexDirection: "column",
+    //justifyContent: "flex-start",
+    //alignItems: "center",
+    //width: "100%",
+    //height: "100%",
+    backgroundColor: Colors.baseBackgroundColor
+  },
+
+  middleContainer: {
     alignItems: "center",
-    paddingBottom: 250
+    paddingBottom: 250,
+    backgroundColor: Colors.baseBackgroundColor
   },
   smallContainerWithShadowStyle: {
     width: "48%",
