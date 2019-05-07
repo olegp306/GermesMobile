@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text, } from "react-native";
 import Colors from "../theme/Colors";
 import _ from "lodash";
 
@@ -7,7 +7,7 @@ import {
   Avatar,
   Card,
   Paragraph,
-  Text,
+ 
   Button,
   Badge
 } from "react-native-paper";
@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     borderRadius: 5,
     borderWidth:1,
+    borderColor:Colors.lightGray,
     //backgroundColor: Colors.whiteSmoke,
     shadowOpacity: 0.75,
     shadowRadius: 3,
