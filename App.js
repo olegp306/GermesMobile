@@ -64,11 +64,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  tabNavContainerStyle: { alignItems: "center", justifyContent: "center" },
+  tabNavContainerStyle: {},
   tabNavTextStyle: {
     //alignItems: "center",
     color: "white",
-    fontSize: 16,
+    fontSize: 1,
     fontWeight: "400"
   }
 });
@@ -147,9 +147,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
       screen: CustomerSubmittedRequestScreen,
       navigationOptions: {
         tabBarLabel: (
-          <View style={styles.tabNavContainerStyle}>
-            <Text style={styles.tabNavTextStyle}>сдана</Text>
-          </View>
+          "сдана"
         )
         // ,
         // tabBarIcon: ({ tintColor }) => (
@@ -162,10 +160,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
       screen: CustomerPausedRequestScreen,
       navigationOptions: {
         tabBarLabel: (
-          <View style={styles.tabNavContainerStyle}>
-            <Text style={styles.tabNavTextStyle}>приостановка</Text>
-          </View>
-         
+          "остановка"
         )
         // ,
         // tabBarIcon: ({ tintColor }) => (
@@ -177,10 +172,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
       screen: CustomerRecievedRequestScreen,
       navigationOptions: {
         tabBarLabel: (
-          <View style={styles.tabNavContainerStyle}>
-            <Text style={styles.tabNavTextStyle}>получена</Text>
-          </View>
-         
+         "получена"
         )
         // ,
         // tabBarIcon: ({ tintColor }) => (
@@ -198,14 +190,19 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     animationEnabled: true,
 
     tabBarOptions: {
-      activeTintColor: "red", // Color of tab when pressed
-      inactiveTintColor: "#b5b5b5", // Color of tab when not pressed
-      showIcon: "true", // Shows an icon for both iOS and Android
-      showLabel: "true", //No label for Android
+      labelStyle: {
+        fontSize: 11,
+      },
+      tabStyle: {
+        // width: 33,
+      },
+      style: {
+        backgroundColor: Colors.navigatorBackgroudColor,
+      },
 
       // activeTintColor: "white",
-      inactiveBackgroundColor: Colors.navigatorBackgroudDarkColor,
-      activeBackgroundColor: "red"
+      // inactiveBackgroundColor: Colors.navigatorBackgroudDarkColor,
+      // activeBackgroundColor: Colors.navigatorBackgroudColor
     }
   }
 );
@@ -306,5 +303,3 @@ export default class HelloWorld extends Component {
     );
   }
 }
-
-
