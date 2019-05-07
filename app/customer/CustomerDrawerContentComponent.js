@@ -46,7 +46,7 @@ export const CustomerDrawerContentComponent = props => (
     <Button
       style={{ width: "85%", margin: "4%" }}
       contentStyle={{ height: 45 }}
-      mode="contained "
+      mode="contained"
       onPress={() => {
         concole.log("выход");
       }}
