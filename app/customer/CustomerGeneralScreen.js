@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, StyleSheet, ScrollView, Text, TouchableOpacity } from "react-native";
-import { Images, Colors } from "../theme";
 import {
-  Avatar,
-  Card,
-  Paragraph,
-  
-  Button,
-  Badge
-} from "react-native-paper";
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity
+} from "react-native";
+import { Images, Colors } from "../theme";
+import { Avatar, Card, Paragraph, Button, Badge } from "react-native-paper";
 import CustomerInfoCardContainer from "./customerInfo/CustomerInfoCardContainer";
 import BigButtonWithBadgeComponent from "./BigButtonWithBadgeComponent";
 import FutureRequestComponent from "./FutureRequestComponent";
@@ -158,7 +157,12 @@ export default class CustomerGeneralScreen extends Component {
             />
           </View>
           <View style={{ height: "1%", width: "100%" }} />
-          <Text style={styles.lastUpdateText}> последнее обновление в  {requests.lastSuccessFetch}</Text>
+          <Text style={styles.lastUpdateText}>
+            {" "}
+            {requests.lastSuccessFetch
+              ? "последнее обновление в " + requests.lastSuccessFetch
+              : null}
+          </Text>
           <View style={{ height: "2%", width: "100%" }} />
 
           <Button
@@ -171,9 +175,6 @@ export default class CustomerGeneralScreen extends Component {
             обновить данные
           </Button>
 
-          
-          
-
           <View style={{ height: "2%", width: "100%" }} />
           <FutureRequestComponent
             requests={requests}
@@ -185,7 +186,6 @@ export default class CustomerGeneralScreen extends Component {
               }
             }}
           />
-         
 
           <View style={{ height: "12%", width: "100%" }} />
         </ScrollView>
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "400",
     color: "white"
-  },  
+  },
 
   rowContainer: {
     flexDirection: "row",
@@ -253,12 +253,12 @@ const styles = StyleSheet.create({
     // backgroundColor:"yellow"
   },
   lastUpdateText: {
-    width:"100%",
+    width: "100%",
     fontSize: 12,
     fontWeight: "200",
     color: Colors.actionBackgroundColor,
     textAlign: "right",
     alignItems: "flex-end",
     marginRight: 10
-  },
+  }
 });
