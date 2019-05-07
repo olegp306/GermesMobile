@@ -13,6 +13,7 @@ import CustomerInfoCardContainer from "./customerInfo/CustomerInfoCardContainerS
 import BigButtonWithBadgeComponent from "./BigButtonWithBadgeComponent";
 import FutureRequestComponent from "./FutureRequestComponent";
 
+import { NavigationActions, StackActions } from "react-navigation";
 import _ from "lodash";
 
 import { fetchRequests } from "../store/germes/requests/actions";
@@ -50,6 +51,17 @@ export default class CustomerGeneralScreen extends Component {
   _handleShortPress = () => {
     this.props.navigation.navigate("CustomerMyRequestsScreen");
   };
+  _getStringDate = fullDate => {
+    return (
+      fullDate.getDate() +
+      "." +
+      (fullDate.getMonth() + 1 < 10
+        ? "0" + (fullDate.getMonth() + 1)
+        : fullDate.getMonth()) +
+      "." +
+      fullDate.getFullYear()
+    );
+  };
 
   componentDidMount() {
     this.props.fetchRequests();
@@ -65,7 +77,11 @@ export default class CustomerGeneralScreen extends Component {
     });
 
     const recieviedRequests = requestsAr.filter(item => {
-      return item.statusId == POLUCHENA;
+      return (
+        item.statusId == POLUCHENA &&
+        this._getStringDate(new Date(item.fromRegistrationPlanDate)) ==
+        this._getStringDate(new Date())
+      );
     });
 
     const pausedRequests = requestsAr.filter(item => {
@@ -76,7 +92,13 @@ export default class CustomerGeneralScreen extends Component {
       <View style={styles.screenContainer}>
         <View style={{ height: "1%", width: "100%" }} />
         {/* Сведения о пользователе */}
-        <CustomerInfoCardContainer />
+        <CustomerInfoCardContainer
+          onPress={() => {
+            //NavigationActions.navigate({ routeName: "CustomerDrawerNav" })
+            //this.props.navigate('CustomerDrawerNav')
+            //alert("sss");
+          }}
+        />
 
         <View style={{ height: "1%", width: "100%" }} />
 
@@ -87,8 +109,10 @@ export default class CustomerGeneralScreen extends Component {
 
           <View
             style={{
+              width: "100%",
               flexDirection: "row",
-              justifyContent: "center"
+              justifyContent: "space-evenly"
+              // backgroundColor: "green"
             }}
           >
             <BigButtonWithBadgeComponent
@@ -102,9 +126,6 @@ export default class CustomerGeneralScreen extends Component {
                   });
                 }
               }}
-              buttonText={"СДАНА"}
-              // bargeText={submittedRequests.length}
-              buttonSmallText={submittedRequests.length}
             />
 
             <View style={{ height: "100%", width: "1%" }} />
@@ -127,8 +148,9 @@ export default class CustomerGeneralScreen extends Component {
 
           <View
             style={{
+              width: "100%",
               flexDirection: "row",
-              justifyContent: "center"
+              justifyContent: "space-evenly"
             }}
           >
             <BigButtonWithBadgeComponent
@@ -145,7 +167,7 @@ export default class CustomerGeneralScreen extends Component {
 
             <BigButtonWithBadgeComponent
               buttonText={"ПОЛУЧЕНА"}
-              buttonSmallText={recieviedRequests.length}
+              buttonSmallText={"сегодня "+recieviedRequests.length}
               // bargeText={recieviedRequests.length}
               onPress={() => {
                 {
