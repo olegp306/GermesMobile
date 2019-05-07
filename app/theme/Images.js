@@ -7,6 +7,7 @@ const images = {
   ring: require('./images/events.png'),
   zhukovHeader: require('./images/zhukov-header.png'),
   avatarExample: require('./images/avatarExample.png'),
+  noUserPhoto: require('./images/noUserphoto.png'),
 }
 
 export default images;

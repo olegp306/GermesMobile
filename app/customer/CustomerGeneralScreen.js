@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Images, Colors } from "../theme";
 import { Avatar, Card, Paragraph, Button, Badge } from "react-native-paper";
-import CustomerInfoCardContainer from "./customerInfo/CustomerInfoCardContainer";
+import CustomerInfoCardContainer from "./customerInfo/CustomerInfoCardContainerSm2";
 import BigButtonWithBadgeComponent from "./BigButtonWithBadgeComponent";
 import FutureRequestComponent from "./FutureRequestComponent";
 

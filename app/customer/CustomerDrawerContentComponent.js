@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   Image
 } from "react-native";
-import CustomerInfoCardContainer from "./customerInfo/CustomerInfoCardContainerSm";
+import CustomerInfoCardContainer from "./customerInfo/CustomerInfoCardContainerSm2";
 import { blue100 } from "../theme/paperUicolors";
 import {
   Avatar,
