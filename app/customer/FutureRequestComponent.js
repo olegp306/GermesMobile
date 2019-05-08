@@ -48,7 +48,7 @@ export default class FutureRequestComponent extends Component {
     const today = new Date().setHours(0,0,0,0);
     
     let nextDate =new Date().setHours(0,0,0,0);
-    let contentList={[this._getStringDate(nextDate)]:{date:this._getStringDate(nextDate), count:1}};
+    let contentList={[this._getStringDate(nextDate)]:{date:this._getStringDate(nextDate), count:0}};
 
     recieviedArOrdered.forEach(el => {
 
@@ -58,11 +58,8 @@ export default class FutureRequestComponent extends Component {
 
       if (fromRegPlanDate <= nextDate) {
         contentList[nextDateString].count = contentList[nextDateString].count + 1;
-      }
-      else if (fromRegPlanDate == nextDate) {
-          contentList[fromRegPlanDateString].count = contentList[fromRegPlanDateString].count + 1;
-        }
-       else if (fromRegPlanDate > nextDate){
+      }     
+       else {
           nextDate = fromRegPlanDate;
 
           contentList[fromRegPlanDateString] = { date: fromRegPlanDateString, count: 1 };
