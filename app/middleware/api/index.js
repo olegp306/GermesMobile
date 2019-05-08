@@ -16,7 +16,7 @@ export const PROD_API_SERVER_URL = "https://service.allwingroup.ru/germes/v1";
 export const TEST_API_SERVER_URL = "https://apitest.allwingroup.ru/germes/v1";
 
 //Germes LOCAL Test apiservice url
-export const LOCAL_API_SERVER_URL = "http://192.168.1.67/ApiService/germes/v1";
+export const LOCAL_API_SERVER_URL = "http:/192.168.1.17/ApiService/germes/v1";
 
 const API_SERVER_URL = __DEV__ ? LOCAL_API_SERVER_URL : TEST_API_SERVER_URL;
 
