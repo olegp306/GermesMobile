@@ -7,6 +7,7 @@ export default class MessageComponent extends Component {
     super(props);
     this.state = {};
   }
+  
 
   render() {
     const isMyMessage = this.props.isMyMessage;
@@ -14,6 +15,7 @@ export default class MessageComponent extends Component {
     const text = this.props.text;
     const creationDate = this.props.creationDate;
     const type = this.props.type;
+    const url=this.props.fileUrl;
 
     let isNewMessage = !this.state.isNewMessage ? false : true;
 
@@ -30,10 +32,15 @@ export default class MessageComponent extends Component {
         </View>
 
         {
-         (type==2768777880000) //картинка
+         (type==2768654243000) //картинка
          ?
          //<Image style={{width: 50, height: 50}} source={text} />
-         <Image source={{ uri: text }} style={{ width: 100, height: 100 }} />
+         <Image
+          style={{width: 100, height: 100}}
+          source={{uri: url }}
+        />
+
+        //  <Image source={{ uri: url }} style={{ width: 100, height: 100 }} />
          :
          <Text style={styles.messageText}>{text}</Text>
         }

@@ -1,6 +1,6 @@
 {
   "name": "Germes",
-  "version": "1.6.1",
+  "version": "2.0.2",
   "devDependencies": {
     "jest-expo": "~27.0.0",
     "react-native-scripts": "1.14.0",
@@ -31,7 +31,9 @@
     "react-native-barcodescanner": "^3.1.1",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^0.19.1",
+    "react-native-paper": "^2.13.0",
     "react-navigation": "^2.17.0",
+    "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^0.16.2",
     "redux-thunk": "^2.3.0"
   }

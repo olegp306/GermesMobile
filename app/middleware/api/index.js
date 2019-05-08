@@ -1,6 +1,7 @@
+import { Colors, Images, Metrics } from "../../theme";
 import axios from "axios";
 import querystring from "querystring";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Platform } from "react-native";
 
 import {
   storeCredentials,
@@ -8,9 +9,19 @@ import {
   loadCredentials
 } from "../utils/AsyncStorage";
 
-//Germes real apiservice url
-//export const API_SERVER_URL = "https://service.allwingroup.ru/germes/v1";
- export const API_SERVER_URL = 'http://192.168.1.69/ApiService/germes/v1'
+//Germes Prod apiservice url
+export const PROD_API_SERVER_URL = "https://service.allwingroup.ru/germes/v1";
+
+//Germes Test apiservice url
+export const TEST_API_SERVER_URL = "https://apitest.allwingroup.ru/germes/v1";
+
+//Germes LOCAL Test apiservice url
+export const LOCAL_API_SERVER_URL = "http:/192.168.1.17/ApiService/germes/v1";
+
+const API_SERVER_URL = __DEV__ ? LOCAL_API_SERVER_URL : TEST_API_SERVER_URL;
+
+// export const API_SERVER_URL = 'http://192.168.1.69/ApiService/germes/v1'
+
 //export const API_CHAT_SERVER_URL = 'https://service.allwingroup.ru/germes/v1'
 
 //export const FILE_SERVER_URL = 'https://saas.claris.su/UserSettings/9323/Docs/'
@@ -22,6 +33,11 @@ const apiConf = {
 };
 
 const apiInstance = axios.create(apiConf);
+// 200 - OK
+// 400 - Bad Request (Client Error) - A json with error \ more details should return to the client.
+// 401 - Unauthorized
+// 500 - Internal Server Error - A json with an error should return to the client only when there is no security risk by doing that.
+//https://blog.restcase.com/rest-api-error-codes-101/
 
 const onError = error => {
   if (error.response) {
@@ -31,11 +47,13 @@ const onError = error => {
       throw Error("Неккоректное имя пользователя или пароль");
     } else if (error.response.status === 404) {
       //console.warn('нет данных' )
-    } else if (error.response.status > 401) {
+    } else if (error.response.status > 401 && error.response.status < 500) {
       throw Error(
         "При обработке запроса на сервере произошла ошибка, мы ее зафиксировали и уже разбираемся в причинах." +
           error.response.status
       );
+    } else if (error.response.status >= 500) {
+      throw Error(error.response.data);
     }
   } else if (error.request) {
     console.warn("axios onError" + error.request);
@@ -71,6 +89,14 @@ const fetchRequests = (fromRegistrationPlanDate, receptionId) => {
     .catch(onError);
 };
 
+const fetchCustomerRequests = () => {
+  return apiInstance
+    .get(
+      "requestsgermes/mobile/customer/onwork"
+    )
+    .catch(onError);
+};
+
 const changeRequestStatus = async requestsId => {
   const { user, password } = await loadCredentials();
   const url = `requestsgermes/mobile/changestatus/${requestsId}`;
@@ -98,6 +124,27 @@ const postMessage = message => {
   return apiInstance.post("/messages/", message);
 };
 
+const postFile = file => {
+  var bodyFormData = new FormData();
+  
+  bodyFormData.append("file", {
+    uri: file.uri,
+    type: "image/jpeg", // or photo.type
+    name: "fromMobApp.jpeg"
+  });
+
+  return apiInstance.post("/files", bodyFormData, {
+    headers: { "Content-Type": "multipart/form-data" }
+  });
+
+  // return axios({
+  //   method: "post",
+  //   url: url,
+  //   data: bodyFormData,
+  //   config: { headers: { "Content-Type": "multipart/form-data" } }
+  // });
+};
+
 const getChatsByRequestId = requestId => {
   return apiInstance.get(`chats?requestId=${requestId}`).catch(onError);
 };
@@ -111,6 +158,9 @@ const createRequestChatsByRequestId = requestId => {
 const addUsersToChat = users => {
   return apiInstance.post("/userschats", users).then(checkStatus);
 };
+const getReceptions = () => {
+  return apiInstance.get("/receptions").catch(onError);
+};
 
 export default {
   login,
@@ -118,11 +168,14 @@ export default {
   setAuthHeader,
   changeRequestStatus,
   fetchRequests,
+  fetchCustomerRequests,
+  getReceptions,
 
   getMessagesByChatId,
   getUsersByChatId,
   getCurrentUser,
   postMessage,
+  postFile,
   getChatsByRequestId,
   createRequestChatsByRequestId
 };

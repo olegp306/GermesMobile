@@ -41,7 +41,7 @@ export default class CustomPicker extends Component {
           }}
         >
           {/* Текущий выбор */}
-            <Text style={styles.selectedItemTextStyle}>{items[selectedItemId].text}</Text>
+            <Text style={styles.selectedItemTextStyle}>{ (Object.keys(items).length != 0 &&  selectedItemId != null)? items[selectedItemId].name: ""}</Text>
           
         </TouchableOpacity>
 
@@ -59,7 +59,7 @@ export default class CustomPicker extends Component {
             
               <View style={styles.headContainer}>
                 <Text style={styles.headText}> {pickerText +":"}</Text>
-                <Text style={styles.headNotice}> { " выбрано: " + items[selectedItemId].text }</Text>
+                <Text style={styles.headNotice}> {(Object.keys(items).length != 0 &&  selectedItemId != null )? " выбрано: " + items[selectedItemId].name: null}</Text>
                 
               </View>
 
@@ -78,7 +78,7 @@ export default class CustomPicker extends Component {
                           onPress={()=>{this._onSetValueHandler(item.id)}}                          
                         >
                         <View >
-                          <Text style={ item.id==selectedItemId ? styles.pickerSelectedItemText : styles.pickerItemText}>{item.text}</Text>
+                          <Text style={ item.id==selectedItemId ? styles.pickerSelectedItemText : styles.pickerItemText}>{item.name}</Text>
                           <View style={styles.horizontalDivider}></View>
                         </View>
                         
