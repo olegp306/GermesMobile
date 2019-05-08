@@ -33,6 +33,7 @@
     "react-native-elements": "^0.19.1",
     "react-native-paper": "^2.13.0",
     "react-navigation": "^2.17.0",
+    "redux-devtools-extension": "^2.13.8",
     "redux-saga": "^0.16.2",
     "redux-thunk": "^2.3.0"
   }
