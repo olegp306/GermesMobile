@@ -107,7 +107,7 @@ export default class FutureRequestComponent extends Component {
         <Text style={styles.buttonText}>ПЛАН ПОЛУЧЕНИЯ ЗАЯВОК</Text>
 
         <Text style={styles.buttonSmallText}>
-        заявки "СДАНА", получение по плану в следующие 7 дней
+        заявки "СДАНА", получение по плану в следующие дни
         </Text>
         {/* <View style={{alignItems: 'center',}}> </View> */}
         {contentAr.length != 0 ? (
@@ -115,7 +115,7 @@ export default class FutureRequestComponent extends Component {
         ) : (
           <Text style={styles.messageText}>
             {" "}
-            На ближайщие 7 дней нет запланированых на получение заявок{" "}
+            На ближайщие дни нет запланированых на получение заявок{" "}
           </Text>
         )}
       </TouchableOpacity>
