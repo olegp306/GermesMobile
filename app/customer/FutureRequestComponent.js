@@ -77,7 +77,7 @@ export default class FutureRequestComponent extends Component {
     const { isFetching, items, feched } = this.props.requests;
     const requestsAr = _.values(items);
     const recieviedRequests = requestsAr.filter(item => {
-      return item.statusId == 95486490000;
+      return item.statusId == 95485390000;
     });
 
     const contentAr = this._getFutureContainerContent(recieviedRequests);
@@ -107,7 +107,7 @@ export default class FutureRequestComponent extends Component {
         <Text style={styles.buttonText}>ПЛАН ПОЛУЧЕНИЯ ЗАЯВОК</Text>
 
         <Text style={styles.buttonSmallText}>
-          будут получены в следующие 7 дней
+        заявки "СДАНА", получение по плану в следующие 7 дней
         </Text>
         {/* <View style={{alignItems: 'center',}}> </View> */}
         {contentAr.length != 0 ? (
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   buttonSmallText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "200",
     color: Colors.lightBlackTextColor,
     textAlign: "center"
