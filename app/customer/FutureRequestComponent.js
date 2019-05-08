@@ -1,16 +1,9 @@
 import React, { Component } from "react";
-import { View, StyleSheet, TouchableOpacity, Text, } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import Colors from "../theme/Colors";
 import _ from "lodash";
 
-import {
-  Avatar,
-  Card,
-  Paragraph,
- 
-  Button,
-  Badge
-} from "react-native-paper";
+import { Avatar, Card, Paragraph, Button, Badge } from "react-native-paper";
 
 const statusList = {
   "95485390000": {
@@ -33,14 +26,15 @@ export default class FutureRequestComponent extends Component {
     this.state = {};
   }
   _getStringDate = fullDate => {
+    const date= new Date(fullDate)
     return (
-      fullDate.getDate() +
+      date.getDate() +
       "." +
-      (fullDate.getMonth() + 1 < 10
-        ? "0" + (fullDate.getMonth() + 1)
-        : fullDate.getMonth()) +
+      (date.getMonth() + 1 < 10
+        ? "0" + (date.getMonth() + 1)
+        : date.getMonth()) +
       "." +
-      fullDate.getFullYear()
+      date.getFullYear()
     );
   };
 
@@ -51,19 +45,29 @@ export default class FutureRequestComponent extends Component {
       return dateA - dateB;
     });
 
-    const today = new Date();
-       let contentList = {};
-    let nextDate = {};
+    const today = new Date().setHours(0,0,0,0);
+    
+    let nextDate =new Date().setHours(0,0,0,0);
+    let contentList={[this._getStringDate(nextDate)]:{date:this._getStringDate(nextDate), count:1}};
+
     recieviedArOrdered.forEach(el => {
-      let date = new Date(el.fromRegistrationPlanDate);
-      if (date > today) { //дата выдачи позже чем сегодня
-        if (this._getStringDate(date) == nextDate) {
-          contentList[date].count = contentList[date].count + 1;
-        } else {
-          nextDate = this._getStringDate(date);
-          contentList[date] = { date: nextDate, fullDate: date, count: 1 };
-        }
+
+      let fromRegPlanDate = new Date(el.fromRegistrationPlanDate).setHours(0,0,0,0);
+      let nextDateString=this._getStringDate(nextDate);
+      let fromRegPlanDateString = this._getStringDate(fromRegPlanDate);
+
+      if (fromRegPlanDate <= nextDate) {
+        contentList[nextDateString].count = contentList[nextDateString].count + 1;
       }
+      else if (fromRegPlanDate == nextDate) {
+          contentList[fromRegPlanDateString].count = contentList[fromRegPlanDateString].count + 1;
+        }
+       else if (fromRegPlanDate > nextDate){
+          nextDate = fromRegPlanDate;
+
+          contentList[fromRegPlanDateString] = { date: fromRegPlanDateString, count: 1 };
+        }
+      
     });
     const contentAr = _.values(contentList).sort(function(a, b) {
       return new Date(b.date) - new Date(a.date);
@@ -101,7 +105,14 @@ export default class FutureRequestComponent extends Component {
           будут получены в следующие 7 дней
         </Text>
         {/* <View style={{alignItems: 'center',}}> </View> */}
-                { contentAr.length !=0 ? contentItems :  <Text style={styles.messageText}> На ближайщие 7 дней нет запланированых на получение заявок  </Text>}
+        {contentAr.length != 0 ? (
+          contentItems
+        ) : (
+          <Text style={styles.messageText}>
+            {" "}
+            На ближайщие 7 дней нет запланированых на получение заявок{" "}
+          </Text>
+        )}
       </TouchableOpacity>
     );
   }
@@ -126,8 +137,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
     borderRadius: 5,
-    borderWidth:1,
-    borderColor:Colors.lightGray,
+    borderWidth: 1,
+    borderColor: Colors.lightGray,
     //backgroundColor: Colors.whiteSmoke,
     shadowOpacity: 0.75,
     shadowRadius: 3,
@@ -157,11 +168,11 @@ const styles = StyleSheet.create({
     //alignItems: "flex-end",
     //marginRight: 10
   },
-  messageText:{
+  messageText: {
     fontSize: 14,
     fontWeight: "200",
     color: Colors.actionBackgroundColor,
     textAlign: "center",
-    marginTop:4
+    marginTop: 4
   }
 });

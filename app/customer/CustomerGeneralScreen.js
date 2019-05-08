@@ -78,9 +78,7 @@ export default class CustomerGeneralScreen extends Component {
 
     const recieviedRequests = requestsAr.filter(item => {
       return (
-        item.statusId == POLUCHENA &&
-        this._getStringDate(new Date(item.fromRegistrationPlanDate)) ==
-        this._getStringDate(new Date())
+        item.statusId == POLUCHENA         
       );
     });
 
@@ -167,7 +165,7 @@ export default class CustomerGeneralScreen extends Component {
 
             <BigButtonWithBadgeComponent
               buttonText={"ПОЛУЧЕНА"}
-              buttonSmallText={"сегодня "+recieviedRequests.length}
+              buttonSmallText={recieviedRequests.length}
               // bargeText={recieviedRequests.length}
               onPress={() => {
                 {
