@@ -77,9 +77,7 @@ export default class CustomerGeneralScreen extends Component {
     });
 
     const recieviedRequests = requestsAr.filter(item => {
-      return (
-        item.statusId == POLUCHENA         
-      );
+      return item.statusId == POLUCHENA;
     });
 
     const pausedRequests = requestsAr.filter(item => {
@@ -151,7 +149,7 @@ export default class CustomerGeneralScreen extends Component {
               justifyContent: "space-evenly"
             }}
           >
-            <BigButtonWithBadgeComponent
+            {/* <BigButtonWithBadgeComponent
               buttonText={"ЗАМЕЧАНИЯ"}
               buttonSmallText={"нет данных"}
               // bargeText={"нет данных"}
@@ -160,7 +158,18 @@ export default class CustomerGeneralScreen extends Component {
               //     routeName: "CustomerPausedRequestScreen"
               //   });
               // }}}
-            />
+            /> */}
+
+            <TouchableOpacity
+              disabled={true}
+              style={styles.smallContainerWithShadowStyle}
+              //onPress={onPress}
+            >
+              <Text style={styles.buttonText}>ЗАМЕЧАНИЯ</Text>
+
+              <Text style={styles.buttonSmallText}>в разработке</Text>
+            </TouchableOpacity>
+
             <View style={{ height: "100%", width: "1%" }} />
 
             <BigButtonWithBadgeComponent
@@ -277,6 +286,31 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "200",
     color: Colors.actionBackgroundColor,
+    textAlign: "right",
+    alignItems: "flex-end",
+    marginRight: 10
+  },
+  smallContainerWithShadowStyle: {
+    width: "48%",
+    minHeight: 100,
+    justifyContent: "space-evenly",
+    borderRadius: 5,
+    backgroundColor: Colors.lightBlackTextColor,
+    shadowOpacity: 0.75,
+    shadowRadius: 3,
+    shadowColor: "gray",
+    shadowOffset: { height: 0, width: 0 }
+  },
+  buttonText: {
+    fontSize: 16,
+    textAlign: "center",
+    fontWeight: "400",
+    color: Colors.lightGray
+  },
+  buttonSmallText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: Colors.lightGray,
     textAlign: "right",
     alignItems: "flex-end",
     marginRight: 10
