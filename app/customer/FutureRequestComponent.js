@@ -83,7 +83,15 @@ export default class FutureRequestComponent extends Component {
     const contentAr = this._getFutureContainerContent(recieviedRequests);
 
     let contentItems = contentAr.map((item, index) => {
+      const isToday=(item.date == this._getStringDate(new Date))
+      
       return (
+        isToday?
+        <View style={styles.rowContainer}>
+          <Text style={styles.itemTodayText}>СЕГОДНЯ</Text>
+          <Text style={styles.itemTodayText}>{item.count}</Text>
+        </View>
+        :
         <View style={styles.rowContainer}>
           <Text style={styles.itemText}>{item.date}</Text>
           <Text style={styles.itemText}>{item.count}</Text>
@@ -159,8 +167,14 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 15,
-    fontWeight: "200",
-    //color: "white",
+    fontWeight: "200",    
+    textAlign: "center"
+   
+  },
+  itemTodayText: {
+    fontSize: 15,
+    fontWeight: "400",
+    color: Colors.actionBackgroundColor,
     textAlign: "center"
     //alignItems: "flex-end",
     //marginRight: 10
