@@ -1,6 +1,6 @@
 {
   "name": "Germes",
-  "version": "2.0.2",
+  "version": "3.0.2",
   "devDependencies": {
     "jest-expo": "~27.0.0",
     "react-native-scripts": "1.14.0",
