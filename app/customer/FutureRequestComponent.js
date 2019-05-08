@@ -28,7 +28,7 @@ export default class FutureRequestComponent extends Component {
   _getStringDate = fullDate => {
     const date= new Date(fullDate)
     return (
-      date.getDate() +
+      (date.getDate()<10 ? "0" +date.getDate():date.getDate())+
       "." +
       (date.getMonth() + 1 < 10
         ? "0" + (date.getMonth() + 1)
