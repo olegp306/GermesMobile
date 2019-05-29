@@ -31,16 +31,15 @@ class RequestComponent extends Component {
         style={styles.bigContainerWithShadowStyle}
         onPress={this._onPressHandler}
       >
-        <View style={{ flex: 1, margin: "2%" }}>
+        <View style={{  margin: 5 }}>
           <Text style={styles.transactionParticipantText}>
             
             {transactionParticipant}
           </Text>
-          <View style={{height:"2%"}}/>
-          {/* <Text> {customerName }</Text> */}
-          {/* <Text> {transactionParticipant} </Text> */}
+          <View style={{height:5}}/>
+         
           <Text style={styles.addressText}> {address}</Text>
-          <View style={{height:"2%"}}/>
+          <View style={{height:3}}/>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
@@ -65,9 +64,10 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     shadowColor: "gray",
     shadowOffset: { height: 0, width: 0 },
-    marginRight: 3,
-    marginLeft: 3,
+    marginRight: 1,
+    marginLeft: 1,
     marginTop: 5,
+    //minHeight: 75
   },
   smGrayText: {
     fontSize: 11,
