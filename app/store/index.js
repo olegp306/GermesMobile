@@ -14,7 +14,8 @@ import thunk from 'redux-thunk'
 
 let composseEnhancers=compose;
 
-if(__DEV__){
+
+if(!process.env.NODE_ENV === "production"){
     composseEnhancers=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 }
 export const store = Reactotron.createStore(rootReducer , composseEnhancers(applyMiddleware(thunk, logger)))
