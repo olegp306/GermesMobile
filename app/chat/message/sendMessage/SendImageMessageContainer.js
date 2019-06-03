@@ -1,59 +1,74 @@
 import React, { Component } from "react";
+import { MaterialIcons } from "@expo/vector-icons";
+import { View, StyleSheet, Modal } from "react-native";
+import ImagePickerComponent from "../../../camera/ImagePickerComponent";
 
-import SendImageMessageComponent from "./SendImageMessageComponent";
-
-import { connect } from "react-redux";
-//import { addNewMessage } from "../../../chat/messages/actions";
-//import { postMessage } from "../actions";
-//import { postRequestTypeChat } from "../../chat/actions";
-import { withNavigation } from "react-navigation";
-
-const mapStateToProps = store => {
-  return {
-    currentUser: store.currentUser.toJS(),
-    currentChat: store.currentChat.toJS()
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    //postMessage: message => dispatch(postMessage(message)),
-    //addNewMessage: message => dispatch(addNewMessage(message)), ///добавляет в список, чтобы сразу показать
-    //postRequestTypeChat: (message, requestId) =>
-    //  dispatch(postRequestTypeChat(message, requestId))
-  };
-};
-
-@connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-class SendImageMessageContainer extends Component {
+export default class SendNewMessageComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       text: "",
-      pickerDisaplayed: false
+      modalVisible: false,
     };
   }
 
-  _togglePicker = () => {
-    this.setState({
-      pickerDisaplayed: !this.state.pickerDisaplayed
-    });
+
+  showModal = () => {   
+    this.setState({modalVisible: true});
+    
   };
 
-  onPressIcon = () => {
-    this.props.navigation.navigate("ImagePicker");
-  };
+  closeModal=()=>
+  {
+    this.setState({modalVisible: false});
+  }
 
+  
   render() {
     return (
-      <SendImageMessageComponent        
-        onPressIcon={this.onPressIcon}
-      />
+      <View>
+        <View style={styles.inputFieldContainer}>
+          <View style={styles.iconContainer}>
+            <MaterialIcons
+              name="camera"
+              size={30}
+              color="#53565A"
+              onPress={this.showModal}
+            />
+
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={this.state.modalVisible}
+              onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+              }}
+            >
+              <ImagePickerComponent               
+                closePicker={this.closeModal}               
+              />
+            </Modal>
+          </View>
+        </View>
+      </View>
     );
   }
 }
+const styles = StyleSheet.create({
+  inputFieldContainer: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    width: "100%",
+    height: 50,
+    backgroundColor: "white",
+    borderRadius: 7
+  },
 
-export default withNavigation(SendImageMessageContainer);
+  iconContainer: {
+    width: 45,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+
+});

@@ -13,7 +13,6 @@ import {
   Image
 } from "react-native";
 import { ImagePicker, Permissions } from "expo";
-
 import PickerItem from "./PickerItem";
 import _ from "lodash";
 
@@ -41,7 +40,7 @@ const mapDispatchToProps = dispatch => {
     addNewMessageOnView: message => dispatch(addNewMessageOnView(message)), ///добавляет в список, чтобы сразу показать
     postRequestTypeChat: (message, requestId) =>
       dispatch(postRequestTypeChat(message, requestId)),
-      postFile: file => dispatch(postFile(file))
+    postFile: file => dispatch(postFile(file))
   };
 };
 @connect(
@@ -56,62 +55,45 @@ export default class ImagePickerComponent extends Component {
     };
   }
 
-  _cancelButtonHandler = () => {
-    //this.props.onTogglePicker();
-    this.props.navigation.popToTop (); 
+  cancelButtonHandler = () => {
+    this.props.closePicker();
   };
 
-  _pickImage = async () => {
-    this.props.navigation.goBack(); 
+  pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: false,
-      quality: 0.5
+      quality: 0.2
       //aspect: [4, 3],
     });
-    console.log(result);
     if (!result.cancelled) {
-      //this.setState({ image: result.uri });
-      // this.props.sendImageMessage(result);
-      this._sendImageMessage(result);
+      this.sendImageMessage(result);
+      this.props.closePicker();
     }
   };
 
-  _launchCamera = async () => {
-    this.props.navigation.goBack(); 
-    await this._askPermissionsAsync();
+  launchCamera = async () => {
+    await this.askPermissionsAsync();
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: false,
-      quality: 0.5,
+      quality: 0.2,
       exif: true
       //aspect: [4, 3],
     });
-    console.log(result);
-    //this.props.onTogglePicker();
-    
+
     if (!result.cancelled) {
-      //this.setState({ image: result.uri });
-      //this.props.sendImageMessage(result);
-      this._sendImageMessage(result);
+      this.sendImageMessage(result);
+      this.props.closePicker();
     }
   };
 
-  _askPermissionsAsync = async () => {
+  askPermissionsAsync = async () => {
     await Permissions.askAsync(Permissions.CAMERA);
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
     // you would probably do something to verify that permissions
     // are actually granted, but I'm skipping that for brevity
   };
 
-  _onSetValueHandler = item => {
-    if (item.id == 1) {
-      this._launchCamera();
-    }
-    if (item.id == 2) {
-      this._pickImage();
-    }
-  };
-
-  _sendImageMessage = file => {
+  sendImageMessage = file => {
     //сформировать с типом Image
     const { currentChat, currentUser } = this.props;
     const currentChatId = currentChat.item ? currentChat.item.id : "";
@@ -131,8 +113,7 @@ export default class ImagePickerComponent extends Component {
     if (currentChat.isRequestChatExist) {
       //отослать на сервер маленьккую картинку
       //отослать на сервер большую картинку
-      this.props.postFileMessage(fileMessage)
-      
+      this.props.postFileMessage(fileMessage);
 
       //добавить  на вью
       this.props.addNewMessageOnView(fileMessage);
@@ -144,47 +125,31 @@ export default class ImagePickerComponent extends Component {
 
     //добавить сообщение в список с крутилкой
     //как сообщение дойдет до сервера убрать крутилку
-  }
+  };
 
   render() {
-    const { image } = this.state;
-    const pickerItemsArr = _.values(this.props.photoSourceItems);
-    const arrLength = pickerItemsArr.length;
-
-    let pickerItemsList = pickerItemsArr.map((item, index) => {
-      return (
-        <View>
-          <PickerItem
-            key={item.id}
-            pickerItemText={item.text}
-            onPressItem={() => {
-              return this.props.onSetImageSource(item);
-            }}
-            isLastElement={arrLength == index + 1}
-          />
-          {(arrLength == index + 1) ? null : (
-            <View
-              style={{ width: "100%", height: 1, backgroundColor: "#D3D3D3" }}
-            />
-          )}
-        </View>
-      );
-    });
-
     return (
-      <View style={styles.screenContainer }>        
-        {/* <View style={{ flex: 1, backgroundColor: "#D3D3D3", opacity: 0.8 }} /> */}
-
+      <View style={styles.screenContainer}>
         <View style={styles.menuContainer}>
-          <View style={styles.horizontalBlockDivider} />
-
           <View style={styles.middleContainer}>
-            {pickerItemsList}
-            {/* {pickerItemsList[0]}
+            <View style={styles.pickerItemText}>
+              <PickerItem
+                key={photoSourceItems[1].id}
+                pickerItemText={photoSourceItems[1].text}
+                onPressItem={this.launchCamera}
+              />
+            </View>
             <View
               style={{ width: "100%", height: 1, backgroundColor: "#D3D3D3" }}
             />
-            {pickerItemsList[1]} */}
+
+            <View style={styles.pickerItemText}>
+              <PickerItem
+                key={photoSourceItems[2].id}
+                pickerItemText={photoSourceItems[2].text}
+                onPressItem={this.pickImage}
+              />
+            </View>
           </View>
 
           <View style={styles.horizontalBlockDivider} />
@@ -192,7 +157,7 @@ export default class ImagePickerComponent extends Component {
           <View style={styles.bottomContainer}>
             <TouchableOpacity
               style={{ width: "100%", alignItems: "center" }}
-              onPress={this._cancelButtonHandler}
+              onPress={this.cancelButtonHandler}
             >
               <View style={styles.bottomItemContainer}>
                 <Text style={styles.cancelText}> Отмена </Text>
@@ -206,19 +171,21 @@ export default class ImagePickerComponent extends Component {
 }
 
 const styles = StyleSheet.create({
-  screenContainer:{
+  screenContainer: {
     flex: 1,
     justifyContent: "flex-end",
-    alignItems: 'center',
+    alignItems: "center",
+    backgroundColor: "rgba(52, 52, 52, 0.8)"
+    //transparent: "80%"
   },
 
   menuContainer: {
-    height:'50%',
-    width:'95%',
+    height: "45%",
+    width: "90%",
     justifyContent: "flex-end",
-    //backgroundColor: 'blue'
+    margin: 20
   },
-  /*************** */
+
   headContainer: {
     height: "10%",
     justifyContent: "space-evenly",
@@ -226,7 +193,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10
   },
-  /*************** */
+
   middleContainer: {
     height: "55%",
     width: "100%",
@@ -236,13 +203,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10
   },
-  // middleItemContainer:{
-  //   width:'95%',
-  //   alignItems:"center",
 
-  //   //backgroundColor:"blue",
-  // },
-  /*************** */
   bottomContainer: {
     height: "30%",
     alignItems: "center",
