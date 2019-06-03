@@ -22,7 +22,10 @@ import ChatScreen from "./app/containers/ChatScreen";
 import BarcodeScannerScreen from "./app/containers/BarcodeScannerScreen.js";
 import NotifyOfficeScreen from "./app/containers/NotifyOfficeScreen";
 //import CameraScreen from './app/camera/CameraScreen';
-import ImagePickerComponent from "./app/camera/ImagePickerComponent";
+//import ImagePickerComponent from "./app/camera/ImagePickerComponent";
+//import {PopUpWindowComponent as ImagePickerComponent} from "./app/components/PopUpWindowComponent";
+
+
 
 import CustomerGeneralScreen from "./app/customer/CustomerGeneralScreen";
 
@@ -81,7 +84,7 @@ const ChatStackNav = createStackNavigator(
   {
     Chat: { screen: ChatScreen },
     //Camera:{ screen: CameraScreen },
-    ImagePicker: { screen: ImagePickerComponent }
+    //ImagePicker: { screen: ImagePickerComponent }
   },
   {
     initialRouteName: "Chat",
