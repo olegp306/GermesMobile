@@ -66,8 +66,9 @@ export default class ImagePickerComponent extends Component {
       //aspect: [4, 3],
     });
     if (!result.cancelled) {
-      this.sendImageMessage(result);
       this.props.closePicker();
+      this.sendImageMessage(result);
+      
     }
   };
 
@@ -81,8 +82,9 @@ export default class ImagePickerComponent extends Component {
     });
 
     if (!result.cancelled) {
-      this.sendImageMessage(result);
       this.props.closePicker();
+      this.sendImageMessage(result);
+      
     }
   };
 
