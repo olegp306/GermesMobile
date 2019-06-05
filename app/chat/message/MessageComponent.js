@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
-import Colors from "../../theme/Colors";
+import { Images, Colors } from "../../theme";
 
 export default class MessageComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  
 
   render() {
     const isMyMessage = this.props.isMyMessage;
@@ -15,7 +14,7 @@ export default class MessageComponent extends Component {
     const text = this.props.text;
     const creationDate = this.props.creationDate;
     const type = this.props.type;
-    const url=this.props.fileUrl;
+    const url = this.props.fileUrl;
 
     let isNewMessage = !this.state.isNewMessage ? false : true;
 
@@ -31,19 +30,16 @@ export default class MessageComponent extends Component {
           <Text style={styles.authorText}>{author}</Text>
         </View>
 
-        {
-         (type==2768654243000) //картинка
-         ?
-         //<Image style={{width: 50, height: 50}} source={text} />
-         <Image
-          style={{width: 100, height: 100}}
-          source={{uri: url }}
-        />
-
-        //  <Image source={{ uri: url }} style={{ width: 100, height: 100 }} />
-         :
-         <Text style={styles.messageText}>{text}</Text>
-        }
+        {type == 2768909676000 ? ( //картинка
+          //<Image style={{width: 50, height: 50}} source={text} />
+          <Image
+            style={{ width: 100, height: 100 }}
+            source={url ? { uri: url } : Images.noPicture}
+          />
+        ) : (
+          //  <Image source={{ uri: url }} style={{ width: 100, height: 100 }} />
+          <Text style={styles.messageText}>{text}</Text>
+        )}
 
         {/* <Text style={styles.messageText}>{text}</Text> */}
 

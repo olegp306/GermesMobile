@@ -8,6 +8,7 @@ const images = {
   zhukovHeader: require('./images/zhukov-header.png'),
   avatarExample: require('./images/avatarExample.png'),
   noUserPhoto: require('./images/noUserphoto.png'),
+  noPicture: require('./images/noPicture.png'),
 }
 
 export default images;
