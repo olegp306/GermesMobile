@@ -33,23 +33,7 @@ export function postFileMessage(fileMessage) {
     dispatch({ type: MESSAGE_POST });
     try {
       //отправляем новый файл на сервер
-      api.postFile(fileMessage.file).then(response => {
-        // let fileMessage = {
-        //   type: 2768654243000, //картинка
-        //   image: image,
-        //   text: "file message",
-        //   userId: currentUserId,
-        //   chatId: currentChatId,
-        //   tempFrontId: image.uri + new Date(),
-        //   creationDate: new Date()
-        // };
-        //забераем из data info о загруженной картинке и
-        //response.data.id
-        //добавляем данные в сообщение о картинке
-        //message.file.Id=response.data[0].id
-
-        //message.type= 2768842251000 // файл
-        //type: 2768777880000, //картинка
+      api.postFile(fileMessage.file).then(response => {        
 
         imageId = response.data[0].id;
         fileMessage.fileId = response.data[0].id;
