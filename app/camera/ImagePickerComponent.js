@@ -102,10 +102,10 @@ export default class ImagePickerComponent extends Component {
     const currentUserId = currentUser.item.id;
 
     let fileMessage = {
-      type: 2768654243000, //картинка
+      type: 2768909676000, //картинка
       file: file,
       fileUrl: file.uri,
-      text: "file message",
+      text: "добавлено изображение",
       userId: currentUserId,
       chatId: currentChatId,
       tempFrontId: file.uri + new Date(),
