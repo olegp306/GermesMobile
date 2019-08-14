@@ -27,6 +27,7 @@ export default class RequestComponent extends Component {
   writeToClipboard = async (text) => {
     await Clipboard.setString(text);
     console.warn('ошибка скопированна в буфер!', text ? text : "ошибок нет")
+    alert('ошибка скопированна в буфер!')
   };
 
   render() {
