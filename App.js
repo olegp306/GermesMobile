@@ -21,60 +21,22 @@ import RequestListScreen from "./app/containers/RequestListScreen.js";
 import ChatScreen from "./app/containers/ChatScreen";
 import BarcodeScannerScreen from "./app/containers/BarcodeScannerScreen.js";
 import NotifyOfficeScreen from "./app/containers/NotifyOfficeScreen";
-//import CameraScreen from './app/camera/CameraScreen';
-//import ImagePickerComponent from "./app/camera/ImagePickerComponent";
-//import {PopUpWindowComponent as ImagePickerComponent} from "./app/components/PopUpWindowComponent";
-
-
 
 import CustomerGeneralScreen from "./app/customer/CustomerGeneralScreen";
 
 import CustomerPausedRequestScreen from "./app/customer/CustomerPausedRequestScreen";
 import CustomerSubmittedRequestScreen from "./app/customer/CustomerSubmittedRequestScreen";
 import CustomerRecievedRequestScreen from "./app/customer/CustomerRecievedRequestScreen";
-// import CustomerRecievedRequestScreen from './app/customer/CustomerRecievedRequestScreen';
+
 import CustomerRequestBigScreen from "./app/customer/CustomerRequestBigScreen";
 import { CustomerDrawerContentComponent } from "./app/customer/CustomerDrawerContentComponent";
 
-// import CustomerSecondScreen from './app/customer/CustomerSubmittedRequestScreen';
-// import CustomerThirdScreen from './app/customer/CustomerRecievedRequestScreen';
-// import CustomerRequestListScreen from './app/customer/CustomerPausedRequestScreen';
-
 import Colors from "./app/theme/Colors.js";
-//import {colors as Colors2} from "./app/theme/colors2.js"
+
 import color from "color";
 import { black, white } from "./app/theme/paperUicolors.js";
 import fonts from "./app/theme/fonts";
 
-import "./ReactotronConfig";
-
-const styles = StyleSheet.create({
-  back: {
-    backgroundColor: "#047591"
-    //'#C9C8C7'
-  },
-  title: {
-    color: "white",
-    fontSize: 18
-  },
-  headButtonsContainer: {
-    flexDirection: "row"
-  },
-
-  iconContainer: {
-    width: 45,
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  tabNavContainerStyle: {},
-  tabNavTextStyle: {
-    //alignItems: "center",
-    color: "white",
-    fontSize: 1,
-    fontWeight: "400"
-  }
-});
 
 const LoginStackNav = createStackNavigator({
   Login: { screen: LoginScreen, navigationOptions: { header: null } }
@@ -82,7 +44,7 @@ const LoginStackNav = createStackNavigator({
 
 const ChatStackNav = createStackNavigator(
   {
-    Chat: { screen: ChatScreen },
+    Chat: { screen: ChatScreen }
     //Camera:{ screen: CameraScreen },
     //ImagePicker: { screen: ImagePickerComponent }
   },
@@ -149,9 +111,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerSubmittedRequestScreen: {
       screen: CustomerSubmittedRequestScreen,
       navigationOptions: {
-        tabBarLabel: (
-          "сдана"
-        )
+        tabBarLabel: "сдана"
         // ,
         // tabBarIcon: ({ tintColor }) => (
         //   <Icon2 size={20} name={"library-books"} color={tintColor} />
@@ -162,9 +122,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerPausedRequestScreen: {
       screen: CustomerPausedRequestScreen,
       navigationOptions: {
-        tabBarLabel: (
-          "приостан"
-        )
+        tabBarLabel: "приостан"
         // ,
         // tabBarIcon: ({ tintColor }) => (
         //   <Icon2 size={20} name={"barcode-scan"} color={tintColor} />
@@ -174,9 +132,7 @@ const CustomerTabNav = createMaterialTopTabNavigator(
     CustomerRecievedRequestScreen: {
       screen: CustomerRecievedRequestScreen,
       navigationOptions: {
-        tabBarLabel: (
-         "получена"
-        )
+        tabBarLabel: "получена"
         // ,
         // tabBarIcon: ({ tintColor }) => (
         //   <Icon size={20} name={"send"} color={tintColor} />
@@ -194,14 +150,14 @@ const CustomerTabNav = createMaterialTopTabNavigator(
 
     tabBarOptions: {
       labelStyle: {
-        fontSize: 11,
+        fontSize: 11
       },
       tabStyle: {
         // width: 33,
       },
       style: {
-        backgroundColor: Colors.navigatorBackgroudColor,
-      },
+        backgroundColor: Colors.navigatorBackgroudColor
+      }
 
       // activeTintColor: "white",
       // inactiveBackgroundColor: Colors.navigatorBackgroudDarkColor,
@@ -306,3 +262,31 @@ export default class HelloWorld extends Component {
     );
   }
 }
+
+// const styles = StyleSheet.create({
+//   back: {
+//     backgroundColor: "#047591"
+//     //'#C9C8C7'
+//   },
+//   title: {
+//     color: "white",
+//     fontSize: 18
+//   },
+//   headButtonsContainer: {
+//     flexDirection: "row"
+//   },
+
+//   iconContainer: {
+//     width: 45,
+//     height: "100%",
+//     justifyContent: "center",
+//     alignItems: "center"
+//   },
+//   tabNavContainerStyle: {},
+//   tabNavTextStyle: {
+//     //alignItems: "center",
+//     color: "white",
+//     fontSize: 1,
+//     fontWeight: "400"
+//   }
+// });

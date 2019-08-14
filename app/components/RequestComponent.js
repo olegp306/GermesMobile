@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator
 } from "react-native";
+import { Clipboard } from 'react-native';
 
 import { Colors } from "../theme";
 
@@ -23,11 +24,18 @@ export default class RequestComponent extends Component {
     this.props.onChangeRequestCheckBox(this.props.requestId);
   };
 
+  writeToClipboard = async (text) => {
+    await Clipboard.setString(text);
+    console.warn('ошибка скопированна в буфер!', text ? text : "ошибок нет")
+    alert('ошибка скопированна в буфер!')
+  };
+
   render() {
     return (
       <TouchableOpacity
         onPress={this._handleShortPress}
-        onLongPress={this._handleLongPress}
+        // onLongPress={()=>{this.writeToClipboard(this.props.errorText)}}
+        onLongPress={()=>{this.writeToClipboard(this.props.errorText)}}
       >
         {/* <ActivityIndicator size='large' /> */}
         <View
@@ -68,7 +76,7 @@ export default class RequestComponent extends Component {
           </View>
 
           <View style={styles.bottomStikersContainer}>
-            <View style={styles.bottomContainer}>
+            <View style={styles.bottomContainer} onPress={()=>{this.writeToClipboard(this.props.errorText)}}>
               {this.props.errorText ? (
                 <View style={styles.stikerError}>
                   {/* <Text> Ошибка: {this.props.errorText} </Text> */}

@@ -66,8 +66,9 @@ export default class ImagePickerComponent extends Component {
       //aspect: [4, 3],
     });
     if (!result.cancelled) {
-      this.sendImageMessage(result);
       this.props.closePicker();
+      this.sendImageMessage(result);
+      
     }
   };
 
@@ -81,8 +82,9 @@ export default class ImagePickerComponent extends Component {
     });
 
     if (!result.cancelled) {
-      this.sendImageMessage(result);
       this.props.closePicker();
+      this.sendImageMessage(result);
+      
     }
   };
 
@@ -100,10 +102,10 @@ export default class ImagePickerComponent extends Component {
     const currentUserId = currentUser.item.id;
 
     let fileMessage = {
-      type: 2768654243000, //картинка
+      type: 2768909676000, //картинка
       file: file,
       fileUrl: file.uri,
-      text: "file message",
+      text: "добавлено изображение",
       userId: currentUserId,
       chatId: currentChatId,
       tempFrontId: file.uri + new Date(),
