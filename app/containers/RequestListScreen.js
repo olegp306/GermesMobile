@@ -109,18 +109,18 @@ export default class RequestListScreen extends Component {
 
     return {
       title: "Заявки",
-      headerLeft: (
-        <View style={styles.headButtonsContainer}>
-          <View style={styles.iconContainer}>
-            <Icon
-              name="navicon"
-              size={40}
-              color={Colors.lightTextColor}
-              onPress={() => navigation.navigate("BarcodeScanner")}
-            />
-          </View>
-        </View>
-      )
+      // headerLeft: (
+      //   <View style={styles.headButtonsContainer}>
+      //     <View style={styles.iconContainer}>
+      //       <Icon
+      //         name="navicon"
+      //         size={40}
+      //         color={Colors.lightTextColor}
+      //         onPress={() => navigation.navigate("BarcodeScanner")}
+      //       />
+      //     </View>
+      //   </View>
+      // )
       // headerRight:
       //    <View style={styles.headButtonsContainer}>
       //         <View style={styles.iconContainer}>

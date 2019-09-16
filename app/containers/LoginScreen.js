@@ -63,7 +63,7 @@ export default class LoginScreen extends Component {
         actions: [
           isZayavitelRole
             ? NavigationActions.navigate({ routeName: "CustomerDrawerNav" })
-            : NavigationActions.navigate({ routeName: "TabsNav" })
+            : NavigationActions.navigate({ routeName: "CourierGeneral" })
         ],
         key: null
       });

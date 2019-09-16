@@ -15,7 +15,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
 import { store } from "./app/store/index.js";
 
-import HomeScreen from "./app/containers/HomeScreen.js";
+import CourierGeneralScreen from "./app/containers/CourierGeneralScreen.js";
 import LoginScreen from "./app/containers/LoginScreen";
 import RequestListScreen from "./app/containers/RequestListScreen.js";
 import ChatScreen from "./app/containers/ChatScreen";
@@ -57,7 +57,7 @@ const ChatStackNav = createStackNavigator(
 const RequestStackNav = createStackNavigator(
   {
     RequestList: { screen: RequestListScreen },
-    ChatStack: { screen: ChatStackNav }
+   // ChatStack: { screen: ChatStackNav }
   },
   {
     initialRouteName: "RequestList",
@@ -207,7 +207,9 @@ const CustomerDrawerNav = createDrawerNavigator(
 const PrimaryNav = createStackNavigator(
   {
     LoginStack: { screen: LoginStackNav },
+    CourierGeneral:{screen :CourierGeneralScreen},
     TabsNav: { screen: TabsNav },
+    ChatStack: { screen: ChatStackNav },
     CustomerStackNav: { screen: CustomerStackNav },
     CustomerDrawerNav: { screen: CustomerDrawerNav }
     // ChatStack :{screen: ChatStackNav}

@@ -8,15 +8,7 @@ export default class HomeScreen extends Component {
         this.state = {
         };
     }
-  
-    // static navigationOptions=({navigation})=>{
-    //     let headerTitle='Main';
-    //     let headerTitleStyle={color:'red'};
-
-    //     return{headerTitle, headerTitleStyle};
-    // }
-
-
+   
   render() {
     return (
         

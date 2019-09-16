@@ -1,4 +1,5 @@
-import { AsyncStorage } from 'react-native'
+// import { AsyncStorage } from '../../api/node_modules/react-native'
+import { AsyncStorage } from 'AsyncStorage'
 
 
 
