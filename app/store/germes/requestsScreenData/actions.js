@@ -6,7 +6,7 @@ export const REQUESTS_SCREEN_DATA_GET_FAIL = "REQUESTS_SCREEN_DATA_GET_FAIL";
 import { getReceptions,getReceptionsSuccess } from "../receptions/actions";
 import { fetchRequests } from "../requests/actions";
 import { setReception } from "../filter/actions";
-import api from "../../../middleware/api/index";
+import api from "../../../api/index";
 
 // export function getReqestsScreenData() {
 //   return  (dispatch, getState) => {

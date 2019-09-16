@@ -10,7 +10,7 @@ export const FETCH_CUSTOMER_REQUESTS = "FETCH_CUSTOMER_REQUESTS";
 // export const REQUESTS_STATUS_CHANGE_ERROR = 'REQUESTS_STATUS_CHANGE_ERROR'
 
 import { keyBy } from "lodash";
-import api from "../../../middleware/api";
+import api from "../../../api";
 
 
 const ZAYAVITEL_ROLE = "1317696000"; 

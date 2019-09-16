@@ -3,7 +3,7 @@ export const IS_LOGGING = "isLogging";
 export const LOGGED = "logged";
 export const LOGIN_FAILED = "loginFailed";
 
-import api from "../../middleware/api";
+import api from "../../api";
 
 export const login = (user, password) => {
   console.log("Action login");

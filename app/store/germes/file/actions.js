@@ -1,4 +1,4 @@
-import api from "../../../middleware/api";
+import api from "../../../api";
 import { keyBy } from "lodash";
 // https://medium.com/@kylpo/redux-best-practices-eef55a20cc72
 // action name: <NOUN>_<VERB>

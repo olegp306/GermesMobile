@@ -8,7 +8,7 @@ export const CHANGE_ITEM_STATUS_SUCCESS = "CHANGE_ITEM_STATUS_SUCCESS";
 export const CHANGE_ITEM_STATUS_ERROR = "CHANGE_ITEM_STATUS_ERROR";
 
 import _keyBy from "lodash";
-import api from "../../../middleware/api";
+import api from "../../../api";
 
 export const selectItem = requestId => {
   return {
