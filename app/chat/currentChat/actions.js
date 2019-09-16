@@ -4,7 +4,7 @@
 // action creator name: <verb><Noun>
 // selector name: get<Noun>
 
-import api from '../../middleware/api'
+import api from '../../api'
 import { setCurrent as setCurrentChat ,  } from '../chat/actions'
 //import { notFoundChatRequest } from '../chatScreen/actions'
 import { getUsers as getChatUsersByChatId  } from '../users/actions'

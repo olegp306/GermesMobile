@@ -1,4 +1,4 @@
-import api from "../../middleware/api";
+import api from "../../api";
 import { keyBy } from "lodash";
 import {
   addNewMessage,

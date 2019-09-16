@@ -4,7 +4,7 @@
 // action creator name: <verb><Noun>
 // selector name: get<Noun>
 
-import api from '../../middleware/api'
+import api from '../../api'
 import { postMessage }  from '../message/actions'
 import { getAllDataForChatByrequestId } from '../currentChat/actions';
 
