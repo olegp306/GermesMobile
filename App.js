@@ -16,6 +16,7 @@ import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { store } from "./app/store/index.js";
 
 import CourierGeneralScreen from "./app/containers/CourierGeneralScreen.js";
+import ChatsContainer from "./app/containers/ChatsContainer/ChatsContainer"
 import LoginScreen from "./app/containers/LoginScreen";
 import RequestListScreen from "./app/containers/RequestListScreen.js";
 import ChatScreen from "./app/containers/ChatScreen";
@@ -44,12 +45,13 @@ const LoginStackNav = createStackNavigator({
 
 const ChatStackNav = createStackNavigator(
   {
+    Chats:{screen:ChatsContainer},
     Chat: { screen: ChatScreen }
     //Camera:{ screen: CameraScreen },
     //ImagePicker: { screen: ImagePickerComponent }
   },
   {
-    initialRouteName: "Chat",
+    initialRouteName: "Chats",
     navigationOptions: { header: null }
   }
 );
