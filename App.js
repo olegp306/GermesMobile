@@ -13,7 +13,7 @@ import {
 import { Provider as StoreProvider } from "react-redux";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 
-import { store } from "./app/store/index.js";
+import { store } from "./app/redux/index";
 
 import CourierGeneralScreen from "./app/containers/CourierGeneralScreen.js";
 import ChatsContainer from "./app/containers/ChatsContainer/ChatsContainer"

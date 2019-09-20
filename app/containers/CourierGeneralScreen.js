@@ -15,7 +15,7 @@ import BigButtonWithBadgeComponent from "../components/BigButtonWithBadgeCompone
 import { NavigationActions, StackActions } from "react-navigation";
 import _ from "lodash";
 
-import { fetchRequests } from "../store/germes/requests/actions";
+import { fetchRequests } from "../redux/germes/requests/actions";
 import { green100 } from "../theme/paperUicolors";
 
 const mapStateToProps = store => {
@@ -128,7 +128,7 @@ export default class CourierGeneralScreen extends Component {
               onPress={() => {
                 {
                   this.props.navigation.navigate({
-                    routeName: "CustomerSubmittedRequestScreen"
+                    routeName: "Chats"
                   });
                 }
               }}
