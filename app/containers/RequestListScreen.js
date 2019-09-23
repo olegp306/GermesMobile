@@ -12,20 +12,20 @@ import Loader from "../components/Loader";
 
 import { connect } from "react-redux";
 
-import { setFilterDate, setReception } from "../redux/germes/filter/actions";
+import { setFilterDate, setReception } from "../store/germes/filter/actions";
 import {
   fetchRequests,
   startRequestsStatusChange
-} from "../redux/germes/requests/actions";
-import { getReceptions } from "../redux/germes/receptions/actions";
-import {getRequestsScreenData} from "../redux/germes/requestsScreenData/actions"
+} from "../store/germes/requests/actions";
+import { getReceptions } from "../store/germes/receptions/actions";
+import {getRequestsScreenData} from "../store/germes/requestsScreenData/actions"
 
 
 import {
   selectItem,
   unSelectItem,
   clearSelectedItems
-} from "../redux/germes/selectedItems/actions";
+} from "../store/germes/selectedItems/actions";
 import _ from "lodash";
 
 // const avtozavodskayaId=123906749000;

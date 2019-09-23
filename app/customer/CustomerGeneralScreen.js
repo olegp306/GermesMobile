@@ -16,7 +16,7 @@ import FutureRequestComponent from "./FutureRequestComponent";
 import { NavigationActions, StackActions } from "react-navigation";
 import _ from "lodash";
 
-import { fetchRequests } from "../redux/germes/requests/actions";
+import { fetchRequests } from "../store/germes/requests/actions";
 import { green100 } from "../theme/paperUicolors";
 
 const mapStateToProps = store => {

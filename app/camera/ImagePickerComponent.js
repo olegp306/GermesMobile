@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { postRequestTypeChat } from "../chat/chat/actions";
 import { postMessage, postFileMessage } from "../chat/message/actions";
 import { addNewMessage as addNewMessageOnView } from "../chat/messages/actions";
-import { postFile } from "../redux/germes/file/actions";
+import { postFile } from "../store/germes/file/actions";
 import {
   View,
   Text,

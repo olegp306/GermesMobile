@@ -12,8 +12,8 @@ import {
  import _ from 'lodash'
 
  import { Colors, Images, Metrics } from '../theme';
- import { addBarcode, clearBarcodes } from '../redux/germes/barcodes/actions.js'
- import { selectItem } from '../redux/germes/selectedItems/actions.js'
+ import { addBarcode, clearBarcodes } from '../store/germes/barcodes/actions.js'
+ import { selectItem } from '../store/germes/selectedItems/actions.js'
 
  import TotalRequestsContainer from './TotalRequestsContainer';
  import BarcodeItemComponent from '../components/BarcodeItemSmallComponent';

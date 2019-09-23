@@ -18,14 +18,14 @@ import Loader from "../components/Loader";
 
 import { connect } from "react-redux";
 
-import { setFilterDate, setReception } from "../redux/germes/filter/actions.js";
-import { fetchRequests } from "../redux/germes/requests/actions.js";
+import { setFilterDate, setReception } from "../store/germes/filter/actions.js";
+import { fetchRequests } from "../store/germes/requests/actions.js";
 import {
   selectItem,
   unSelectItem,
   clearSelectedItems,
   startRequestsStatusChange
-} from "../redux/germes/selectedItems/actions.js";
+} from "../store/germes/selectedItems/actions.js";
 import _ from "lodash";
 
 // const avtozavodskayaId = 123906749000;
