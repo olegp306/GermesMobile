@@ -21,6 +21,8 @@ import currentChatReducer  from '../chat/currentChat/reducer'
 import receptionReducer from './germes/receptions/reducer'
 import fileReducer from './germes/file/reducer'
 
+import chatAppReducers from "./chat/reducers/index"
+
 
 
 export const rootReducer = combineReducers({
@@ -38,7 +40,11 @@ export const rootReducer = combineReducers({
   message : messageReducer, 
   
   chat : chatReducer,
-  currentChat: currentChatReducer
+  currentChat: currentChatReducer,
+
+  chatAppReducers:chatAppReducers
+
+
 })
 
 
