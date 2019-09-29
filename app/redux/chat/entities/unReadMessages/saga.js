@@ -1,8 +1,8 @@
 import { call, put, select } from "redux-saga/effects";
 
-import { isFetching, fetchSuccess, fetchFail, isUpdating,updateSuccess,updateFail } from "../unReadMessages/actions";
-import api from "../../../api";
-import { getCurrentUserId , getCurrentChat, getUnreadMessages} from "../../selectors";
+import { isFetching, fetchSuccess, fetchFail, isUpdating,updateSuccess,updateFail } from "./actions";
+import api from "../../../../api";
+import { getCurrentUserId , getCurrentChat, getUnreadMessages} from "../../../selectors";
 import _ from "lodash"
 
 export function* fetchUnReadMessagesSaga(action) {

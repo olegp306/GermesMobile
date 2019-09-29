@@ -1,24 +1,21 @@
 import { createStore , applyMiddleware, compose } from 'redux'
-import { composeWithDevTools } from "redux-devtools-extension";
+import createSagaMiddleware from 'redux-saga'
 
-// import Reactotron from '../../ReactotronConfig.js'
+
 import { rootReducer  } from './reducers.js'
-import logger from 'redux-logger'
+import saga from './chat/saga' 
 import thunk from 'redux-thunk'
 
 
-//  сигнатура функции createStore:
-// первый аргумент - функция-обработчик изменений (редьюсер)
-// второй аргумент - начальное состояние
 
-// export const store = Reactotron.createStore(rootReducer , applyMiddleware(thunk, logger))
-
-// // let composseEnhancers=compose;
+const sagaMiddleware = createSagaMiddleware()
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const middlewares = [sagaMiddleware,  thunk]
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)))
 
 
+sagaMiddleware.run(saga)
 
-// if(!process.env.NODE_ENV === "production"){
-//     composseEnhancers=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// }
+// export const store = createStore(rootReducer , composeWithDevTools(applyMiddleware(thunk, logger)))
 
-export const store = createStore(rootReducer , composeWithDevTools(applyMiddleware(thunk, logger)))
+export { store }

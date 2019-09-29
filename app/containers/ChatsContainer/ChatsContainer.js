@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 import ChatsList from "../../components/ChatsList/ChatList";
 
-import { fetch as fetchChats } from "../../redux/entities/chats/actions";
+import { fetch as fetchChats } from "../../redux/chat/entities/chats/actions";
 
 export default class ChatsContainer extends Component {
   constructor(props) {

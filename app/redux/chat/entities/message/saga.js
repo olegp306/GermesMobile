@@ -1,6 +1,6 @@
 import { call, put, select } from "redux-saga/effects";
 
-import { add, isAdding, addSuccess, addFail } from "../message/actions";
+import { add, isAdding, addSuccess, addFail } from "./actions";
 import {
   cleanNewMessage,
   add as addNewMessage,
@@ -12,12 +12,12 @@ import { addNewMessageInMesssageList } from "../messages/actions";
 import imageCompression from "browser-image-compression";
 import { messageType } from "../../../const/const";
 
-import api from "../../../api";
+import api from "../../../../api";
 import {
   getCurrentUserId,
   getCurrentChat,
   getNewMessages
-} from "../../selectors";
+} from "../../../selectors";
 
 function imageCompressionHandler(imageFile, options) {
   return imageCompression(imageFile, options)

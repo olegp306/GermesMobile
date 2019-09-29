@@ -1,7 +1,7 @@
 import { call, put ,select} from "redux-saga/effects";
 
 import {fetch as fetchChats} from "../chats/actions"
-import {getCurrentChat} from "../../selectors/index"
+import {getCurrentChat} from "../../../selectors/index"
 
 import {
   isUpdating,
@@ -14,7 +14,7 @@ import {
   removingFailed,
   removed
 } from "./actions";
-import api from "../../../api/index";
+import api from "../../../../api/index";
 
 export function* updateChatSaga(action) {
   yield put(isUpdating());

@@ -10,7 +10,7 @@ import {
   IS_UPDATING_MESSAGES_READ_STATUS,
   UPDATED_MESSAGES_READ_STATUS,
   UPDATE_MESSAGES_READ_STATUS_FAIL
-} from "../unReadMessages/actions";
+} from "./actions";
 
 const initialState = Map({
   items: [],

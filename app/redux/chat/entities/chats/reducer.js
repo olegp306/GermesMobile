@@ -7,7 +7,7 @@ import {
   FETCH_CHATS_FAIL,
   UPDATE_DATA_VIEW_CHATS,
   RESET_CHATS
-} from "../chats/actions";
+} from "./actions";
 
 const initialState = Map({
   items: [],

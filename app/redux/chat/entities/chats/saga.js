@@ -5,9 +5,9 @@ import {
   fetchSuccess,
   fetchFail,
   updateDataViewChats
-} from "../chats/actions";
-import api from "../../../api";
-import { getSession, getChats } from "../../selectors";
+} from "./actions";
+import api from "../../../../api";
+import { getSession, getChats } from "../../../selectors";
 
 function* fetchChatsSaga(action) {
   yield put(isFetching());

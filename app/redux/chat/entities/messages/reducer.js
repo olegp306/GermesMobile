@@ -8,7 +8,7 @@ import {
   FETCH_MESSAGES_FAIL,
   ADD_NEW_MESSAGE_IN_MESSAGES_LIST,
   RESET_MESSAGES
-} from "../messages/actions";
+} from "./actions";
 
 const initialState = Map({
   items: List(),

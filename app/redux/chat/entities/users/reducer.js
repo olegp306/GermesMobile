@@ -6,7 +6,7 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_FAIL,
   RESET_USERS
-} from "../users/actions";
+} from "./actions";
 
 const initialState = Map({
   items: [],

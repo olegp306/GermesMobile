@@ -1,8 +1,8 @@
 import { call, put, select } from "redux-saga/effects";
 
-import { isFetching, fetchSuccess, fetchFail } from "../users/actions";
-import api from "../../../api";
-import { getCurrentUserId } from "../../selectors";
+import { isFetching, fetchSuccess, fetchFail } from "./actions";
+import api from "../../../../api";
+import { getCurrentUserId } from "../../../selectors";
 
 function* fetchUsersSaga(action) {
   yield put(isFetching());

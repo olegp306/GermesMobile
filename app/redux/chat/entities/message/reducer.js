@@ -6,7 +6,7 @@ import {
     ADDED_MESSAGE,
     ADD_MESSAGE_FAIL,
   
-} from "../message/actions";
+} from "./actions";
 
 const initialState =new Map({
     item:{},        
