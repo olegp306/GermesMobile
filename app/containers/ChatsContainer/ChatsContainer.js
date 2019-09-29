@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
+import ChatsList from "../../components/ChatsList/ChatList";
+
+import { fetch as fetchChats } from "../../redux/entities/chats/actions";
+
 export default class ChatsContainer extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +15,9 @@ export default class ChatsContainer extends Component {
   render() {
     return (
       <View>
-        <Text> `` </Text>
+        <Text> ChatsContainer </Text>
+        <ChatsList />
+
       </View>
     );
   }
