@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import session from "./Session";
+// import session from "./Session";
 import chats from "../entities/chats/reducer";
 import currentChat from "./currentChat";
 import messages from "../entities/messages/reducer";
@@ -17,7 +17,7 @@ import chatsFilter from "./chatsFilter";
 
 
 const root = combineReducers({
-  session,
+  // session,
   chats,
   chat,
   users,
