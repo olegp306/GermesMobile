@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { NavigationActions, StackActions } from "react-navigation";
 //import OneSignal from 'react-native-onesignal'
 
-import { login } from "../store/session/actions";
+import { login } from "../redux/session/actions";
 //import { getSession } from '../store/selectors/index.js'
 import {
   storeCredentials,

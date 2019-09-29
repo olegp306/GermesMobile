@@ -2,7 +2,7 @@ import {
   REQUESTS_SCREEN_DATA_GET,
   REQUESTS_SCREEN_DATA_GET_SUCCESS,
   REQUESTS_SCREEN_DATA_GET_FAIL
-} from "./actions.js.js.js";
+} from "./actions.js..js";
 
 import { Map } from "immutable";
 

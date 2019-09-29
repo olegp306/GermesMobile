@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import RequestListComponent from "./RequestListComponent";
 import { Images, Colors } from "../../theme";
-import { fetchRequests } from "../../store/germes/requests/actions";
+import { fetchRequests } from "../../redux/germes/requests/actions";
 import { connect } from "react-redux";
 import _ from "lodash";
 
