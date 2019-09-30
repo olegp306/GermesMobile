@@ -12,15 +12,15 @@ import { FETCH_USERS } from "../entities/users/actions";
 
 // import { UPDATE_MESSAGES_READ_STATUS } from "../entities/unReadMessages/actions";
 
-// import {
-//   FETCH_APPCHAT_DATA,
-//   SET_CURRENT_CHAT,
-//   UPDATE_CURRENT_CHAT,
-//   NEW_MESSAGE_RECIEVED,
-//   NEW_CHAT_RECIEVED,
-//   NEW_USERS_IN_CHAT_RECIEVED,
-//   NEW_MESSAGE_STATUS_INFO_RECIEVED
-// // } from "../actions/chatApp";
+import {
+  FETCH_APPCHAT_DATA,
+  SET_CURRENT_CHAT,
+  // UPDATE_CURRENT_CHAT,
+  // NEW_MESSAGE_RECIEVED,
+  // NEW_CHAT_RECIEVED,
+  // NEW_USERS_IN_CHAT_RECIEVED,
+  // NEW_MESSAGE_STATUS_INFO_RECIEVED
+} from "../actions/chatApp";
 // import { ADD_SELECTED_USERS_TO_CHAT } from "../actions/usersListWithSelect";
 
 // import loginSaga from "./Session.js.js";
@@ -40,11 +40,11 @@ import {
 
 // import addSelectesUsersToChat from "./usersListWithSelect";
 
-// import {
-//   fetchChatAppDataSaga,
-//   setCurrentChatSaga,
-//   updateCurrentChatSaga
-// } from "./chatApp";
+import {
+  fetchChatAppDataSaga,
+  setCurrentChatSaga,
+  // updateCurrentChatSaga
+} from "./chatApp";
 // import { getCurrentChat, getChats } from "../selectors";
 
 function* sagaWatcher() {
@@ -55,8 +55,8 @@ function* sagaWatcher() {
   // yield takeLatest(FETCH_USERS, usersSaga);
   // yield takeLatest(FETCH_MESSAGES, messagesSaga);
 
-  //   yield takeLatest(FETCH_APPCHAT_DATA, fetchChatAppDataSaga);
-  //   yield takeLatest(SET_CURRENT_CHAT, setCurrentChatSaga);
+     yield takeLatest(FETCH_APPCHAT_DATA, fetchChatAppDataSaga);
+     yield takeLatest(SET_CURRENT_CHAT, setCurrentChatSaga);
 
   //   yield takeLatest(UPDATE_CURRENT_CHAT, updateCurrentChatSaga);
 

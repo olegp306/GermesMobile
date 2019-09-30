@@ -19,7 +19,7 @@ import chatUsersSaga from "./chatUsers";
 import messagesSaga from "../entities/messages/saga";
 
 import { fetchUnReadMessagesSaga as unReadmessagesSaga } from "../entities/unReadMessages/saga";
-import { changeNewMessage as changeDraftMessage } from "../../redux/actions/newMessages";
+// import { changeNewMessage as changeDraftMessage } from "../../redux/actions/newMessages";
 import { add as addNewMessage } from "../entities/message/actions";
 
 import { updateCurrentChat } from "../actions/chatApp";
@@ -30,13 +30,13 @@ import _ from "lodash";
 
 function* fetchChatAppDataSaga(action) {
   try {
-    yield* loginSaga(action);
+    // yield* loginSaga(action);
     yield* chatsSaga();
-    yield* usersSaga();
-    yield* setInitialCurrentChatSaga();
-    yield* messagesSaga();
-    yield* unReadmessagesSaga();
-    yield* chatUsersSaga();
+    // yield* usersSaga();
+    // yield* setInitialCurrentChatSaga();
+    // yield* messagesSaga();
+    // yield* unReadmessagesSaga();
+    // yield* chatUsersSaga();
 
     yield put(fetchSuccess());
   } catch (error) {

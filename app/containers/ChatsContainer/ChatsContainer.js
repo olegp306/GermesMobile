@@ -10,9 +10,9 @@ import {
   getChats,
   //getCurrentChat,
   // getChatApp,
-  getChatsFilter,
+  //getChatsFilter,
   getCurrentUserId,
-  getUnreadMessages
+  //getUnreadMessages
 } from "../../redux/chat/selectors/index";
 import { connect } from "react-redux";
 
@@ -25,9 +25,9 @@ const mapStateToProps = store => {
   return {
     // chatApp: getChatApp(store),
     chats: getChats(store),
-    chatsFilter: getChatsFilter(store),
+    // chatsFilter: getChatsFilter(store),
     currentUserId: getCurrentUserId(store),
-    unreadMessages: getUnreadMessages(store)
+    // unreadMessages: getUnreadMessages(store)
   };
 };
 
@@ -35,8 +35,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchChats: userId => dispatch(fetchChats(userId)),
     onClickChat: chat => dispatch(setCurrentChat(chat)),
-    setChatsFilter: filter => dispatch(setChatsFilter(filter)),
-    resetChatsFilter: () => dispatch(resetChatsFilter()),
+    // setChatsFilter: filter => dispatch(setChatsFilter(filter)),
+    // resetChatsFilter: () => dispatch(resetChatsFilter()),
     fetchChatAppData: userId => dispatch(fetchChatAppData(userId))
   };
 };
