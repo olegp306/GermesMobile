@@ -1,6 +1,8 @@
 export const getSession = store => store.session.toJS();
 
-export const getCurrentUserId = store => store.session.get("userId");
+export const getCurrentUserId = store => store.session.userId;
+export const getChats = store => store.chatAppStore.chats.toJS();
+
 
 export const getContractorId = store => store.session.get("contractorId");
 
@@ -17,7 +19,6 @@ export const getUsersListFilter = store =>
   store.usersListWithSelect.get("filter");
 
 export const getMessages = store => store.messages.toJS();
-export const getChats = store => store.chats.toJS();
 
 export const getUnreadMessages=store=>store.unReadMessages.toJS();
 
