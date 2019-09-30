@@ -16,6 +16,7 @@ export const login = (user, password) => {
       .then(data => {
         const session = {
           token: data.data.accessToken,
+          userId: data.data.employee.id,
           contractorId: data.data.contractorId,
           roles:data.data.employee.extInfo,
           employee:data.data.employee
