@@ -50,10 +50,12 @@ const mapDispatchToProps = dispatch => {
   }
 
   render() {
+    
+    const{chats}=this.props
     return (
       <View>
         <Text> ChatsContainer </Text>
-        <ChatsList />
+        <ChatsList chats={chats} />
 
       </View>
     );
