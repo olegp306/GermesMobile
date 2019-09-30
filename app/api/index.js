@@ -161,39 +161,53 @@ const getReceptions = () => {
 
 
 ////chatsApp API
+const checkStatus = response => {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  }
+
+  if (response.status == 401) {
+    return response;
+  }
+
+  const error = new Error(response.statusText);
+  error.response = response;
+  throw error;
+};
+
 const getChatByChatId = chatId => {
-  return axios.get("/chats/chat/" + chatId).then(checkStatus);
+  return apiInstance.get("/chats/chat/" + chatId).then(checkStatus);
 };
 
 const fetchUserChats = userId => {
-  return axios.get("/chats/user/" + userId).then(checkStatus);
+  return apiInstance.get("/chats/user/" + userId).then(checkStatus);
 };
 
 const addUsersToChat = users => {
-  return axios.post("/userschats", users).then(checkStatus);
+  return apiInstance.post("/userschats", users).then(checkStatus);
 };
 
 const fetchChatUsers = chatId => {
-  return axios.get("/users/chatId/" + chatId).then(checkStatus);
+  return apiInstance.get("/users/chatId/" + chatId).then(checkStatus);
 };
 
 const fetchUsers = chatId => {
-  return axios.get("/users/availabletoadd/" + chatId).then(checkStatus);
+  return apiInstance.get("/users/availabletoadd/" + chatId).then(checkStatus);
 };
 
 const fetchMessages = chatId => {
-  return axios.get("/messages/chatid/" + chatId).then(checkStatus);
+  return apiInstance.get("/messages/chatid/" + chatId).then(checkStatus);
 };
 const addMessage = message => {
-  return axios.post("/messages/", message).then(checkStatus);
+  return apiInstance.post("/messages/", message).then(checkStatus);
 };
 
 const fetchUnreadMessage = userId => {
-  return axios.get("/messsagesreadstatuses/userId/" + userId).then(checkStatus);
+  return apiInstance.get("/messsagesreadstatuses/userId/" + userId).then(checkStatus);
 };
 
 const updateMessagesReadStatus = readMessages => {
-  return axios.put("/messsagesreadstatuses", readMessages).then(checkStatus);
+  return apiInstance.put("/messsagesreadstatuses", readMessages).then(checkStatus);
 };
 
 // const postFile = file => {
@@ -209,7 +223,7 @@ const updateMessagesReadStatus = readMessages => {
 
 const  updateChat=updateParams=>{
   //const updateParams ={ id:currentChat.id ,changeData:action.payload };
-  return axios.post("/chats/chat/"+updateParams.id, updateParams.changeData).then(checkStatus);
+  return apiInstance.post("/chats/chat/"+updateParams.id, updateParams.changeData).then(checkStatus);
 }
 const  addChat=chat=>{
   
