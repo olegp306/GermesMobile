@@ -28,37 +28,6 @@ import {
 } from "../redux/germes/selectedItems/actions";
 import _ from "lodash";
 
-// const avtozavodskayaId=123906749000;
-// const obruchevaId=754498388000;
-// const nagatinskayaId=2157440701000;
-// const orlikov17Id=2768516261000;
-
-const receptionItems = {
-  754498388000: {
-    id: 754498388000,
-    name: "Обручева"
-  },
-  123906749000: {
-    id: 123906749000,
-    name: "Автозаводская"
-  },
-  2157440701000: {
-    id: 2157440701000,
-    name: "Нагатинская"
-  },
-  2768516261000: {
-    id: 2768516261000,
-    name: "Орликов"
-  },
-  2635401955000: {
-    id: 2635401955000,
-    name: "МФЦ"
-  },
-  2767770302000: {
-    id: 2767770302000,
-    name: "МФЦ Обл."
-  }
-};
 
 Date.prototype.formatDDMMYYYY = function() {
   return (
@@ -66,8 +35,6 @@ Date.prototype.formatDDMMYYYY = function() {
   );
 };
 
-// если @connect наверху то mapStateToProps уже должен быть объявлен перед @connect
-// приклеиваем данные из store
 const mapStateToProps = store => {
   return {
     filterDate: store.filter.get("filterDate"),
@@ -197,16 +164,6 @@ export default class RequestListScreen extends Component {
         .startRequestsStatusChangeAction
     });
   }
-
-//   componentWillReceiveProps() {
-//     if (!this.props.receptions.isFetching) {
-//       this.props.receptions.items["123906749000"]
-//         ? this.props.setReceptionIdAction("123906749000")
-//         : this.props.setReceptionIdAction(this.props.receptions.items.keys[0]);
-        
-//       this.props.fetchRequestsAction();
-//     }
-//   }
 
   render() {
     const { isFetching, items, refreshing } = this.props.requests;
