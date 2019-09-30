@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import {
   View,
   StyleSheet,
-  ScrollView,
   
 } from "react-native";
 import { Colors } from "../theme";
@@ -11,25 +10,23 @@ import { Colors } from "../theme";
 import UserInfoCardContainerSm2 from "../components/UserInfoCardContainerSm2";
 import BigButtonWithBadgeComponent from "../components/BigButtonWithBadgeComponent";
 
-
-import { NavigationActions, StackActions } from "react-navigation";
+import { fetchRequests } from "../redux/germes/requests/actions";
+import {fetch as fetchInitialChatAppData } from "../redux/chat/actions/chatApp"
 import _ from "lodash";
 
-// import { fetchRequests } from "../store/germes/requests/actions";
-import { fetchRequests } from "../redux/germes/requests/actions";
-
-import { green100 } from "../theme/paperUicolors";
 
 const mapStateToProps = store => {
   return {
     requests: store.requests.toJS(),
-    session: store.session.toJS()
+    session: store.session.toJS(),
+    
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchRequests: () => dispatch(fetchRequests())
+    fetchRequests: () => dispatch(fetchRequests()),
+    fetchInitialChatAppData: (userId)=> dispatch(fetchInitialChatAppData(userId))
   };
 };
 
@@ -66,6 +63,7 @@ export default class CourierGeneralScreen extends Component {
 
   componentDidMount() {
     this.props.fetchRequests();
+    this.props.fetchInitialChatAppData();
   }
 
   render() {
