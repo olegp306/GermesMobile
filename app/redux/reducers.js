@@ -42,7 +42,7 @@ export const rootReducer = combineReducers({
   chat : chatReducer,
   currentChat: currentChatReducer,
 
-  chatAppReducers:chatAppReducers
+  chatAppStore:chatAppReducers
 
 
 })
