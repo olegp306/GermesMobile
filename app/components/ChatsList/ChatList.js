@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import {
   View,
   Text,
@@ -7,13 +9,32 @@ import {
   TouchableOpacity
 } from "react-native";
 
-export default class ChatList extends Component {
+const mapStateToProps = store => {
+  return {
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+  };
+};
+@connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+export default  class ChatList extends Component {
+ 
   constructor(props) {
     super(props);
     this.state = {};
   }
-  _onPressHandler = () => {
-    console.log("открыть чат");
+
+
+  _onPressHandler = (request) => {
+    const requestId = request.id;
+    //(this.props.selectedItems.hasOwnProperty(requestId)) ? this.props.unSelectItemAction(requestId) : this.props.selectItemAction(requestId)
+
+    this.props.navigation.navigate("ChatStack", request);
   };
 
   sortChats = chatItems => {
@@ -49,7 +70,7 @@ export default class ChatList extends Component {
             return (
               <TouchableOpacity
                 style={styles.bigContainerWithShadowStyle}
-                onPress={this._onPressHandler}
+                onPress={()=>this._onPressHandler(item)}
               >
                 <View style={{ margin: 5 }}>
                   <Text style={styles.transactionParticipantText}>
