@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: 40,
     backgroundColor: '#ecf0f1',
   },
   paragraph: {
