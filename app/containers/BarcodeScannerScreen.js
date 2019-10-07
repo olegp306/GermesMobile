@@ -56,12 +56,7 @@ export default class BarcodeScannerScreen extends Component {
     const { params } = navigation.state;
 
     return {
-      title: 'Сканирование штрихкодов',      
-      // headerRight: 
-      //   <View style={styles.headButtonsContainer}>                
-      //     <View style={styles.iconContainer}>
-      //     </View>     
-      //   </View>                  
+      title: 'Сканирование штрихкодов',                 
     }
             
   }
@@ -160,7 +155,6 @@ export default class BarcodeScannerScreen extends Component {
     const {requests} = this.props; 
     return (
       <View style={styles.screenContainer}>
-
         <View style={styles.barCodeScannerContainer}>
           <BarcodeScannerComponent onScanBarCode={this._handlerScanBarcode} />
         </View>
