@@ -21,7 +21,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "browser-image-compression": "^1.0.6",
     "expo": "^34.0.1",
     "expo-barcode-scanner": "~6.0.0",
