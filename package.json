@@ -26,7 +26,7 @@
     "expo": "^34.0.1",
     "expo-barcode-scanner": "~6.0.0",
     "immutable": "^3.8.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "moment": "^2.23.0",
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
