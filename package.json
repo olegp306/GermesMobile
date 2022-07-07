@@ -27,7 +27,7 @@
     "expo-barcode-scanner": "~6.0.0",
     "immutable": "^3.8.2",
     "lodash": "^4.17.11",
-    "moment": "^2.23.0",
+    "moment": "^2.29.4",
     "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
     "react-native-barcodescanner": "^3.1.1",
